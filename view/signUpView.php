@@ -13,7 +13,7 @@
             <input type="text" name="email" id="email" placeholder="Email"> <br><br>
             <input type="password" name="password"  id="password" placeholder="Password"> <br><br>
             <input type="password" name="passwordConfirm"  id="passwordConfirm" placeholder="Password confirm"> <br><br>
-            <button type="submit" name="signUp" class="button">Create Account</button> <br>
+            <button type="submit" name="signUp" class="button">Create Account</button> <br><br>
         </form>
         <button type="submit" name="googleSignup" class="button" onclick="view/googleLoginButton">Log in using Google</button>
     </div>
