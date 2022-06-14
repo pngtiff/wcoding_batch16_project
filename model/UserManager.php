@@ -12,7 +12,7 @@ $email = addslashes(htmlspecialchars(htmlentities(trim($_POST['email']))));
 $password =  $_POST['password'];
 $passwordConfirm = $_POST['passwordConfirm'];
 
-if(preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $firstName, $lastName, $email)  AND !empty($_POST['firstName']) AND !empty($_POST['lastName']) AND !empty($_POST['password']) AND !empty($_POST['passwordConfirm']) AND $_POST['passwordConfirm']==$_POST['password']) {
+if(preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $email)  AND !empty($_POST['firstName']) AND !empty($_POST['lastName']) AND !empty($_POST['password']) AND !empty($_POST['passwordConfirm']) AND $_POST['passwordConfirm']==$_POST['password']) {
     $password =  password_hash(htmlspecialchars($_POST['password']), PASSWORD_DEFAULT);
     $response = $db->query("SELECT email, first_name, last_name FROM users WHERE email='$email'");
     if ($response->fetch(PDO::FETCH_ASSOC)) {
