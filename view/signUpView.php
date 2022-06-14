@@ -10,6 +10,8 @@
     <div class="create">
         <h1>Create Account</h1>
         <form action="model/UserManager.php" method="post">
+            <input type="text" name="firstName" id="firstName" placeholder="First Name"> <br><br>
+            <input type="text" name="lastName" id="lastName" placeholder="Last Name"> <br><br>
             <input type="text" name="email" id="email" placeholder="Email"> <br><br>
             <input type="password" name="password"  id="password" placeholder="Password"> <br><br>
             <input type="password" name="passwordConfirm"  id="passwordConfirm" placeholder="Password confirm"> <br><br>
