@@ -9,8 +9,7 @@
 <body>
 <div class="create">
     <h1>Create Account</h1>
-    <form action="UserManager.php" method="post">
-        <input type="text" name="login" value="" id="login" placeholder="Login"> <br><br>
+    <form action="model/UserManager.php" method="post">
         <input type="text" name="email" id="email" placeholder="Email"> <br><br>
         <input type="password" name="password"  id="password" placeholder="Password"> <br><br>
         <input type="password" name="passwordConfirm"  id="passwordConfirm" placeholder="Password confirm"> <br><br>
