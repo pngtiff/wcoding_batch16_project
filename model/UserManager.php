@@ -18,7 +18,9 @@ if(preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $email)  AND !empt
     if ($response->fetch(PDO::FETCH_ASSOC)) {
         header('Location:index.php');
     } else {
-        $response=$db->prepare("INSERT INTO users (password, email, firstName, lastName, date_created) VALUES (:password, :email, :first_name, :last_name, NOW())");
+        $response=$db->prepare("INSERT INTO users (password, email, firstName, lastName) VALUES (:password, :email, :first_name, :last_name)");
+        $response->bindParam("firstName",$firstName, PDO::PARAM_STR);
+        $response->bindParam("lastName",$lastName, PDO::PARAM_STR);
         $response->bindParam("email",$email, PDO::PARAM_STR);
         $response->bindParam("password",$password, PDO::PARAM_STR);
         $response->execute();
