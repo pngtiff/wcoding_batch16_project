@@ -15,6 +15,7 @@
         <input type="password" name="passwordConfirm"  id="passwordConfirm" placeholder="Password confirm"> <br><br>
         <button type="submit" name="signUp" class="button">Create Account</button> <br>
     </form>
+    <button type="submit" name="googleSignup" class="button" onclick="view/googleLoginButton">Log in using Google</button>
 </div>
 </body>
 </html>
