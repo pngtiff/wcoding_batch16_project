@@ -16,7 +16,7 @@ if(preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $email) AND !empty
     $password =  password_hash(htmlspecialchars($_POST['password']), PASSWORD_DEFAULT);
     $response = $db->query("SELECT email, login FROM users WHERE email='$email'");
     if ($response->fetch(PDO::FETCH_ASSOC)) {
-        header('Location:signUpView.php');
+        header('Location:index.php');
         $response->closeCursor();
     } else {
         $response->closeCursor();
