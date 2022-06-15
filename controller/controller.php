@@ -1,9 +1,9 @@
 <?php
 require('./model/UserManager.php');
-require('./model/PropertyManager.php');
+// require('./model/PropertyManager.php');
 
 use \wcoding\batch16\finalproject\Model\UserManager;
-use \wcoding\batch16\finalproject\Model\PropertyManager;
+// use \wcoding\batch16\finalproject\Model\PropertyManager;
 
 
 function showUserInfo($user) {
@@ -14,12 +14,12 @@ function showUserInfo($user) {
 }
 
 // TODO: figure out the function with the PropertyManager.php
-function listProperties($user) {
-    $propertyM = new PropertyManager($user);
-    $properties = $propertyM->getProperties();
+// function listProperties($user) {
+//     $propertyM = new PropertyManager($user);
+//     $properties = $propertyM->getProperties();
 
-    require('./view/propertyCard.php');
-}
+//     require('./view/propertyCard.php');
+// }
 
 function googleOauth($params) {
     $oauth = new UserManager();
