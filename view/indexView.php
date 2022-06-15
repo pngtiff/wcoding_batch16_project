@@ -1,4 +1,4 @@
-<?php $title = "Better Title Needed";?>
+<?php $title = "ROOM EZ !!";?>
 
 <?php ob_start();?>
 

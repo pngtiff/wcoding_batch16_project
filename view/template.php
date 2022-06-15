@@ -11,6 +11,5 @@
     <?php require "header.php"; ?>
     <?=$content;?>
     <?php require "footer.php"; ?>
-    <script src="./public/js/script.js"></script>
 </body>
 </html> 
