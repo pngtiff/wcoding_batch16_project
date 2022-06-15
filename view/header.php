@@ -1,5 +1,5 @@
 <header> 
-    <h1>BATCH 16 (awesome) PROJECT</h1>
+    <h1>Welcome to ROOM EZ !</h1>
     <h2>header</h2> 
     
     <div class="menu">

@@ -27,12 +27,12 @@ header, footer
     justify-content: center;
 }
 
-/* header
+header
 {
     position : fixed;
-    top: 0;
-    left: 0;
-} */
+    top :0;
+
+}
 
 
 input
@@ -138,13 +138,13 @@ main {
 section
 {
     width: 100%;
-    height: calc(100vh - 300px);
+    /* height: calc(100vh - 300px); */
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* justify-content: space-evenly; */
 
-    /* overflow-y: scroll; */
+    /* fill the space underneath the top header  */
+    padding-top: 150px; 
 }
 
 .searchBarContainer
@@ -173,7 +173,7 @@ section
     height: 100%;
     background-color: rgba(0,0,0,0.5); 
     opacity: 0;
-    transition: all 2s; 
+    transition: all 0.5s; 
   }
 
   .modal-content {
