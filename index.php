@@ -7,10 +7,13 @@ try {
     switch ($action){
         case 'googleOauth':
             googleOauth($_REQUEST);
-        break;
+            break;
+        case 'profile':
+            showUserInfo($_REQUEST['user']);
+            break;
         default: 
             require "./view/indexView.php";
-        break;
+            break;
     }
 } catch (Exception $e) {
     die('error' . $e->getMessage());
