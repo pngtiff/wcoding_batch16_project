@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <link rel="stylesheet" href="members.css">
+</head>
+<body>
+/////////////////////////////    FORM   ///////////////////////////////////////
+    <div class="gridContainer">
+        <div class="signIn">
+            <form action="connected.php" method="post">
+                <input type="text" name="login" value="" id="login" placeholder="Login"> <br><br>
+                <input type="password" name="password"  id="password" placeholder="Password"> <br><br>
+                <input type="checkbox" class="checkbox">Remember Me?</input> <br><br>
+                <a>Forgot your password?</a> <br><br>
+                <button class="button" type="submit">Sign In</button>
+            </form>
+        </div>
+    </div>
+    
+    <form action="signUp.php" method="post">
+            <h1>Welcome Back!</h1>
+            <p>Already an account? Sign in and start to chat with your friends</p>                       
+            <button type="submit" id="signIn">SIGN IN</button>
+
+        </form>
+
+/////////////////////////////  CHECKING FOR EMAIL & PASSWORD MATCHING  ///////////////////////
+
+    <?php 
+    if (!empty($_POST['login']) AND !empty($_POST['password'])){
+    $login = htmlspecialchars($_POST['login']);
+    $password = htmlspecialchars($_POST['password']);
+    try
+    {
+        $db = new PDO('mysql:host=localhost;dbname=members_login;charset=utf8', 'root', '');
+    }
+    catch(Exception $e)
+    {
+        die('Error : ' . $e->getMessage());
+    }
+    $response = $db->query("SELECT id, password FROM members_table WHERE login = '$login'");
+    $userInfo = $response->fetch(PDO::FETCH_ASSOC);
+    $passwordHashed=$userInfo['password'];   
+    $response->closeCursor();
+    
+    $check = password_verify(htmlspecialchars($password), $passwordHashed);
+
+    if ($check){
+        session_start();
+        $_SESSION['login'] = $login;
+        $_SESSION['user_id'] = $userInfo['id'];
+
+        header("Location:logOutAndChat.php");
+    }
+    else {
+        header("Location:signUp.php");
+    }           
+    }else {
+    header("Location:signUp.php");
+    }  
+    ?>
+
+</body>
+</html>
+//////////////////////////////  JS     //////////////////////////////////////
+
+
+let lname = document.querySelector("#lastName");
+lname.addEventListener('input', checkLastName);
+
+function checkLastName(){
+    if (lname.value.length>1){
+        lname.classList.add("greenBox");
+        lname.classList.remove("redBox");
+        lname.nextElementSibling.classList.add('errorText')
+         
+        // console.log("true")
+    } else {
+        lname.classList.add("redBox");
+        lname.classList.remove("greenBox");
+        lname.nextElementSibling.classList.remove('errorText') 
+        // console.log("false")
+    }       
+}
+
+let fname = document.querySelector("#firstName");
+fname.addEventListener("input", checkFirstName);
+
+function checkFirstName(){
+    if(fname.value.length>1){
+        fname.classList.add("greenBox");
+        fname.classList.remove("redBox");
+        fname.nextElementSibling.classList.add('errorText') 
+    }else {
+        fname.classList.add("redBox");
+        fname.classList.remove("greenBox");
+        fname.nextElementSibling.classList.remove('errorText') 
+
+    }
+}
+
+let age = document.querySelector("#age");
+age.addEventListener("input", checkAge);
+
+function checkAge(){
+    if(age.value>=5 && age.value<=140){
+        age.classList.add("greenBox");
+        age.classList.remove("redBox");
+        age.nextElementSibling.classList.add('errorText') 
+
+    }else {
+        age.classList.add("redBox");
+        age.classList.remove("greenBox");
+        age.nextElementSibling.classList.remove('errorText') 
+
+    }
+}
+
+let login = document.querySelector("#login");
+login.addEventListener("input", checkLogin);
+
+function checkLogin(){
+    if (login.value.length>3){
+        login.classList.add("greenBox");
+        login.classList.remove("redBox");
+        login.nextElementSibling.classList.add('errorText') 
+
+    }else {
+        login.classList.add("redBox");
+        login.classList.remove("greenBox");
+        login.nextElementSibling.classList.remove('errorText') 
+
+    }
+}
