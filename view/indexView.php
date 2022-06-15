@@ -19,7 +19,8 @@
   <!-- Modal content -->
   <div class="modal-content">
     <span class="close">&times;</span>
-    <p>Insert SIGN UP / SIGN IN VIEW</p>
+    <!-- Sign In view -->
+    <p><?php include("view/signInView.php")?> </p>
   </div>
 
 </div>

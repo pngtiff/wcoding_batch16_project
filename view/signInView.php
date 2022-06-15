@@ -9,6 +9,7 @@
             <input type="hidden" name="action" value="signIn">
             <span class="errorText">Please try again</span>    
         </form>
+        <?php include("view/googleLoginButton.php")?>
     </div>
 </div>
 
@@ -18,4 +19,4 @@
     }
 </style>
 
-<script src="signInCheck.js"></script>
+<script src="public/js/signInCheck.js"></script>
