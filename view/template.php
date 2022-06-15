@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="public/style/style.css">
 </head>
 <body>
-    <main>
-        <?=$content;?>
-    </main>
+    <?php require "header.php"; ?>
+    <?=$content;?>
+    <?php require "footer.php"; ?>
+    <script src="./public/js/script.js"></script>
 </body>
-</html>
+</html> 

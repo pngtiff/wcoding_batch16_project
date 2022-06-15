@@ -14,10 +14,14 @@ function showUserInfo($user) {
 }
 
 // TODO: figure out the function with the PropertyManager.php
-
 function listProperties($user) {
     $propertyM = new PropertyManager($user);
     $properties = $propertyM->getProperties();
 
     require('./view/propertyCard.php');
+}
+
+function googleOauth($params) {
+    $oauth = new UserManager();
+    $oauth->googleOauth($params['credential']);
 }

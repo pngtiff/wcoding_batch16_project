@@ -1,8 +1,9 @@
 <?php $title = "User Profile";?>
 
 <?php ob_start();?>
+<main>
 <div>
-    <button id='homeButton'>Home</button>
+    <button id='homeButton'><a href='index.php'>Home</a></button>
 </div>
 <div id="profileContainer">
     <div id='userInfo'>
@@ -44,5 +45,6 @@
     <!-- <?php include('propertyCard.php'); ?>  -->
     <!-- TODO: uncomment above include and work on propertyCard.php & PropertyManager.php  -->
 </div>
+</main>
 <?php $content = ob_get_clean();?>
 <?php require('template.php');?>
