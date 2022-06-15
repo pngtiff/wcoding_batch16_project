@@ -27,6 +27,13 @@ header, footer
     justify-content: center;
 }
 
+/* header
+{
+    position : fixed;
+    top: 0;
+    left: 0;
+} */
+
 
 input
 {
@@ -128,13 +135,6 @@ main {
     width: 90%;
 }
 
-footer
-{
-    position: absolute;
-    bottom: 0;
-    display: none;
-}
-
 section
 {
     width: 100%;
@@ -144,7 +144,7 @@ section
     align-items: center;
     /* justify-content: space-evenly; */
 
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
 }
 
 .searchBarContainer
