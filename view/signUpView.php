@@ -33,9 +33,9 @@
             </div>
             <button id="submit "type="submit" name="signUp" class="button">Create Account</button> <br><br>
             <input type="hidden" name="action" value="signUp">
+            <button id="reset" type="reset">Reset the form</button>
         </form>
-        <button id="submit" type="submit" name="googleSignup" class="button" onclick="view/googleLoginButton">Sign in using Google</button> <br><br>
-        <button id="reset" type="reset" onclick="resetForm()">Reset the form</button>
+        <?php include ('view/googleLoginButton.php'); ?>
     </div>
 
     <script src="public/js/signUp.js"></script>

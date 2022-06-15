@@ -1,6 +1,5 @@
 <?php
 require('controller/controller.php');
-include('view/signUpView.php');
 
 //TODO put in password conditions
 
