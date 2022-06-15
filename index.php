@@ -1,14 +1,20 @@
 <?php
 require('controller/controller.php');
-include('view/signInView.php');
-// print_r($_SESSION);
+
+session_start();
 try {
     $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : null;
     switch ($action){
+        case 'googleOauth':
+            googleOauth($_REQUEST);
+        break;
         case 'wrongPassword':
             
         case 'signIn':
             signIn($_REQUEST);
+        break;
+        default: 
+            require "./view/indexView.php";
         break;
     }
 } catch (Exception $e) {

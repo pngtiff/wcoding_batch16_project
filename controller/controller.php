@@ -5,3 +5,7 @@ function signIn($params) {
     $signIn = new UserManager();
     $signIn->signIn($params['email'], $params['password']);
 }
+function googleOauth($params) {
+    $oauth = new UserManager();
+    $oauth->googleOauth($params['credential']);
+}
