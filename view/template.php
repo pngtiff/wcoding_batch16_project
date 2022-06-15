@@ -10,7 +10,6 @@
 <body>
     <?php require "header.php"; ?>
     <?=$content;?>
-    
     <?php require "footer.php"; ?>
 </body>
 </html> 
