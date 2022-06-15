@@ -1,4 +1,6 @@
+
 <?php $title = "Welcome to Room-EZ";?>
+
 
 <?php ob_start();?>
 
