@@ -1,5 +1,4 @@
 <?php
-
 namespace wcoding\batch16\finalproject\Model;
 
 class Manager {

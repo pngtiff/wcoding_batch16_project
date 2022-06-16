@@ -1,0 +1,10 @@
+#newProfile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: centers;
+}
+
+#file {
+    color: transparent;
+}
