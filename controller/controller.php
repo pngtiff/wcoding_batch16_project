@@ -26,7 +26,7 @@ function showUserInfo($user) {
 
 // TODO: figure out the function with the PropertyManager.php
 // function listProperties($user) {
-//     $propertyM = new PropertyManager($user);
+    //     $propertyM = new PropertyManager($user);
 //     $properties = $propertyM->getProperties();
 
 //     require('./view/propertyCard.php');
@@ -35,4 +35,9 @@ function showUserInfo($user) {
 function googleOauth($params) {
     $oauth = new UserManager();
     $oauth->googleOauth($params['credential']);
+}
+
+function signUp($params) {
+    $signUp = new UserManager();
+    $signUp->signUp($params ['firstName'], $params['lastName'], $params['email'], $params['password']);
 }

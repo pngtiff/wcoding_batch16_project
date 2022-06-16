@@ -18,6 +18,7 @@ document.getElementById("signInButton").addEventListener("click", function(e) {
 // close the modal when click X
 document.querySelector(".close").addEventListener("click", function() {
     document.getElementById("modalBox").style.display = "none";
+    document.querySelector("body").style.overflowY = "visible";
     opacity(0);
 })
 
@@ -25,6 +26,7 @@ document.querySelector(".close").addEventListener("click", function() {
 window.addEventListener("click", function(e) {
   if (e.target == document.getElementById("modalBox")) {
     document.getElementById("modalBox").style.display = "none";
+    document.querySelector("body").style.overflowY = "visible";
     opacity(0);
   }
 })
