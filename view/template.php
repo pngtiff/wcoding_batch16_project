@@ -7,7 +7,7 @@
     <title><?=$title;?></title>
     <link rel="stylesheet" href="public/style/style.css">
 </head>
-<body>
+<body class="flexColumn">
     <?php require "header.php"; ?>
     <?=$content;?>
     <?php require "footer.php"; ?>
