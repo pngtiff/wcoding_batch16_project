@@ -38,6 +38,13 @@ try {
                 signUp($_REQUEST);
             }
         break;
+        case 'createProfile':
+            createProfile();
+            break;
+
+        case 'checkProfile':
+            checkProfile();
+            break;
         default: 
             getLanding();
             break;

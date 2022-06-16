@@ -1,4 +1,6 @@
 <?php
+require_once('userController.php');
+
 require('model/UserManager.php');
 require('model/PropertyManager.php');
 
@@ -32,6 +34,10 @@ function googleOauth($params) {
     $oauth->googleOauth($params['credential']);
 }
 
+function signUp($params) {
+    $signUp = new UserManager();
+    $signUp->signUp($params ['firstName'], $params['lastName'], $params['email'], $params['password']);
+}
 
 function showUserInfo($action, $userId) {
     $userM = new UserManager($userId);
