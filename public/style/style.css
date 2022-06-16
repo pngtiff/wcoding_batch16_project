@@ -49,7 +49,7 @@ header
 
 
 .dropbtn, .dropbtn2, .dropbtn3, .dropbtn4 {
-    background-color: aliceblue;
+    background: none;
     color: black;
     padding: 10px;
     font-size: 16px;
