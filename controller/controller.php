@@ -1,9 +1,20 @@
 <?php
-require('./model/UserManager.php');
-// require('./model/PropertyManager.php');
+require('model/UserManager.php');
+use wcoding\batch16\finalproject\Model\UserManager;
+function signIn($params) {
+    $signIn = new UserManager();
+    $signIn->signIn($params['email'], $params['password']);
+}
 
-use \wcoding\batch16\finalproject\Model\UserManager;
-// use \wcoding\batch16\finalproject\Model\PropertyManager;
+function checkSignIn($params){
+    $signIn = new UserManager();
+    $signIn->checkSignIn($params['email'], $params['password']);
+}
+
+function signOut(){
+    $signOut = new UserManager();
+    $signOut->signOut();
+}
 
 
 function showUserInfo($user) {
