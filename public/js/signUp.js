@@ -3,7 +3,7 @@ let lastName = document.querySelector('#lastName');
 let email = document.querySelector('#email'); 
 let password = document.querySelector('#password');
 let passwordConfirm = document.querySelector('#passwordConfirm');
-let form = document.querySelector('#signUpForm'); 
+let signUpForm = document.querySelector('#signUpForm'); 
 let reset = document.querySelector('#reset'); 
 
 lastName.addEventListener('keyup', checkLastName);
@@ -11,7 +11,7 @@ firstName.addEventListener('keyup', checkFirstName);
 email.addEventListener('keyup', checkEmail)
 password.addEventListener('keyup', checkPassword);
 passwordConfirm.addEventListener('keyup', checkPasswordConfirm); 
-form.addEventListener('submit', submitForm); 
+signUpForm.addEventListener('submit', submitForm); 
 reset.addEventListener('click', resetForm)
 
 function checkFirstName() {
@@ -95,7 +95,7 @@ function checkPasswordConfirm() {
 
 function submitForm(e) {
     if(checkLastName() && checkFirstName() && checkEmail() && checkPassword() && checkPasswordConfirm()) {
-        form.submit()
+        signUpForm.submit()
     } else {
         e.preventDefault();
     }

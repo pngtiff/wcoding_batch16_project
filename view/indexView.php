@@ -21,16 +21,24 @@
   </section>
 
   <!-- Modal section -->
-<div id="modalBox" class="modal">
-  
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <!-- Sign In view -->
-    <p><?php include("view/signInView.php")?> </p>
+<?php if (empty($_SESSION['email'])) {?>
+  <div id="modalBox" class="modal">
+    
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div id="banner-container"></div>
+      <span class="close">&times;</span>
+      <div class="form-container">
+        <div id="signIn-container">
+          <?php include('view/signInView.php');?>
+        </div>
+        <div id="signUp-container">
+          <?php include('view/signUpView.php');?>
+        </div>
+      </div>
+    </div>
   </div>
-
-</div>
+<?php } ?>
 
 <?php $content = ob_get_clean(); ?>
 

@@ -164,7 +164,7 @@ section
     display: none; 
     position: fixed; 
     z-index: 1; 
-    padding-top: 150px; 
+    /* padding-top: 150px;  */
     left: 0;
     top: 0;
     width: 100%; 
@@ -172,24 +172,63 @@ section
     background-color: rgba(0,0,0,0.5); 
     opacity: 0;
     transition: all 0.5s; 
-  }
+}
 
-  .modal-content {
+.modal-content {
+    position: relative;
     background-color: white;
     margin: auto;
     width: 80%;
     height: 600px;
-    padding: 20px;
     border: 1px solid #888;
     border-radius: 20px;
-  }
+    overflow: hidden;
+}
+
+.form-container {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 5%;
+}
+
+
+#banner-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+    left: 50%;
+    color: white;
+    background-color: rgb(225, 26, 86);
+    z-index: 2;
+}
+
+#banner-container h2{
+    font-size: .7rem;
+}
+
+#banner-container button{
+    border: 2px white solid;
+}
+
+
+#signIn-container, #signUp-container {
+    flex: 1;
+    padding: 20px;
+}
 
 .close 
 {
     color: #aaaaaa;
-    float: right;
+    position: absolute;
     font-size: 28px;
     font-weight: bold;
+    z-index: 2;
+    right: 10px;
+    top: 10px;
 }
   
 .close:hover,
@@ -235,5 +274,9 @@ textarea:focus, input:focus{
 }
 
 .passwordConfirmError {
+    visibility: hidden;
+}
+
+.errorText {
     visibility: hidden;
 }
