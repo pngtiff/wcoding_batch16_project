@@ -12,6 +12,53 @@ class UserManager extends Manager {
         $this->_user_id = $user;
     }
 
+    public function signIn($email, $password){
+
+        $email = htmlspecialchars($email);
+        $password = htmlspecialchars($password);
+        
+        $response = $this->_connection->query("SELECT email, password, dob, first_name FROM users WHERE email = '$email'");
+        $userInfo = $response->fetch(\PDO::FETCH_ASSOC);
+        $passwordHashed=$userInfo['password'];   
+        $response->closeCursor();
+        
+        $check = password_verify(htmlspecialchars($password), $passwordHashed);
+
+        if ($check){
+            session_start();
+            $_SESSION['firstName'] = $userInfo['first_name'];
+            $_SESSION['email'] = $email;
+
+            if ($userInfo['dob']){
+                header("Location:index.php");
+            } else {
+                header("Location:index.php?action=createProfile");
+            }
+        }
+        else {
+            header("Location:index.php?action=wrongPassword");
+        }  
+    }
+    public function checkSignIn($email, $password){
+
+        $email = htmlspecialchars($email);
+        $password = htmlspecialchars($password);
+        
+        $response = $this->_connection->query("SELECT email, password, dob, first_name FROM users WHERE email = '$email'");
+        $userInfo = $response->fetch(\PDO::FETCH_ASSOC);
+        $passwordHashed=$userInfo['password'];   
+        $response->closeCursor();
+        
+        $check = password_verify(htmlspecialchars($password), $passwordHashed);
+
+        if ($check){
+            echo 1;
+        }
+        else {
+            echo '';
+        }  
+    }
+    
     protected function createUID() {
         $uid = bin2hex(random_bytes(4));
         $isUnique = $this->_connection->query("SELECT * FROM users WHERE uid='$uid'")->fetch(\PDO::FETCH_ASSOC) ? false : true;
@@ -64,6 +111,12 @@ class UserManager extends Manager {
             $this->_connection->exec("INSERT INTO users (email, first_name, last_name, uid) VALUES ('$response->email','$response->given_name','$response->family_name', '$uid')");
             header('Location:index.php?action="createProfile"');
         }
+    }
+
+    public function signOut() {
+        session_destroy();
+        setcookie(session_name(), '', time()-3600,'/');
+        header('Location:index.php');
     }
 
     public function getUserInfo () {
