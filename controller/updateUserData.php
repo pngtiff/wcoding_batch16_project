@@ -36,12 +36,6 @@ if(!empty($_POST)){
     $req2->execute();
 
     
-    // ==== update profile photo address =======//
-    //==========================================//
-    //==========================================//
-
-    // include("uploadImg.php");
-    
     
     //=Insert the modified + inherited data=====//
     //==========================================//
