@@ -1,5 +1,12 @@
 <?php
 
+// Action required to test the profile modification feature code after merging them:
+//     - create a file "profile_images " as a child of 'batch16project' file (just for the current code to work)
+//     - right click the file that you created ->click 'get info'
+//     - click the bottom right corner to unlock the file and provide the privilege 'Read & Write' to all 
+//     - if the code works, the profile photo file that you have uploaded should appear on the "profile_images" file
+
+
 if(!empty($_POST)){
         
     try 

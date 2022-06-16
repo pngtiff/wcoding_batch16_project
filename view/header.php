@@ -1,4 +1,4 @@
-<header> 
+<header class="flexColumn"> 
     <h1>BATCH 16 (awesome) PROJECT : ROOM EZ !</h1>
     <h2>header</h2> 
     
