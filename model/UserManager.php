@@ -1,9 +1,10 @@
-<?php 
+<?php
+
 namespace wcoding\batch16\finalproject\Model;
+require_once('./model/Manager.php');
 
 use Exception;
 
-require_once('Manager.php');
 class UserManager extends Manager {
     public function __construct($user=0)
     {
@@ -11,6 +12,53 @@ class UserManager extends Manager {
         $this->_user_id = $user;
     }
 
+    public function signIn($email, $password){
+
+        $email = htmlspecialchars($email);
+        $password = htmlspecialchars($password);
+        
+        $response = $this->_connection->query("SELECT email, password, dob, first_name FROM users WHERE email = '$email'");
+        $userInfo = $response->fetch(\PDO::FETCH_ASSOC);
+        $passwordHashed=$userInfo['password'];   
+        $response->closeCursor();
+        
+        $check = password_verify(htmlspecialchars($password), $passwordHashed);
+
+        if ($check){
+            session_start();
+            $_SESSION['firstName'] = $userInfo['first_name'];
+            $_SESSION['email'] = $email;
+
+            if ($userInfo['dob']){
+                header("Location:index.php");
+            } else {
+                header("Location:index.php?action=createProfile");
+            }
+        }
+        else {
+            header("Location:index.php?action=wrongPassword");
+        }  
+    }
+    public function checkSignIn($email, $password){
+
+        $email = htmlspecialchars($email);
+        $password = htmlspecialchars($password);
+        
+        $response = $this->_connection->query("SELECT email, password, dob, first_name FROM users WHERE email = '$email'");
+        $userInfo = $response->fetch(\PDO::FETCH_ASSOC);
+        $passwordHashed=$userInfo['password'];   
+        $response->closeCursor();
+        
+        $check = password_verify(htmlspecialchars($password), $passwordHashed);
+
+        if ($check){
+            echo 1;
+        }
+        else {
+            echo '';
+        }  
+    }
+    
     protected function createUID() {
         $uid = bin2hex(random_bytes(4));
         $isUnique = $this->_connection->query("SELECT * FROM users WHERE uid='$uid'")->fetch(\PDO::FETCH_ASSOC) ? false : true;
@@ -20,6 +68,28 @@ class UserManager extends Manager {
         }
         return $uid;
     }
+    public function signUp($firstName, $lastName, $email, $password){
+        $firstName = addslashes(htmlspecialchars(htmlentities(trim($firstName))));
+        $lastName = addslashes(htmlspecialchars(htmlentities(trim($lastName))));
+        $email = addslashes(htmlspecialchars(htmlentities(trim($email))));
+        $password =  password_hash(htmlspecialchars($password), PASSWORD_DEFAULT);
+        $uid = $this->createUID(); 
+
+            $response = $this->_connection->query("SELECT email, first_name, last_name FROM users WHERE email='$email'");
+            if ($response->fetch(\PDO::FETCH_ASSOC)) {
+                header('Location:index.php');
+            } else {
+                $response=$this->_connection->prepare("INSERT INTO users (password, email, first_name, last_name, uid) VALUES (:password, :email, :firstName, :lastName, :uid)");
+                $response->bindParam("firstName",$firstName, \PDO::PARAM_STR);
+                $response->bindParam("lastName",$lastName, \PDO::PARAM_STR);
+                $response->bindParam("email",$email, \PDO::PARAM_STR);
+                $response->bindParam("password",$password, \PDO::PARAM_STR);
+                $response->bindParam("uid",$uid, \PDO::PARAM_STR); 
+                $response->execute();
+                header('Location:index.php');
+            }
+        
+    } 
 
     // 'createProfile' - action to redirect to createProfile page
     public function googleOauth($credential) {
@@ -41,6 +111,12 @@ class UserManager extends Manager {
             $this->_connection->exec("INSERT INTO users (email, first_name, last_name, uid) VALUES ('$response->email','$response->given_name','$response->family_name', '$uid')");
             header('Location:index.php?action="createProfile"');
         }
+    }
+
+    public function signOut() {
+        session_destroy();
+        setcookie(session_name(), '', time()-3600,'/');
+        header('Location:index.php');
     }
 
     // getUserInfo to display on viewProfile page

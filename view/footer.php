@@ -1,4 +1,4 @@
-<footer>
+<footer class="flexColumn">
     <h2>footer</h2>
     <ul>
         <li>Link</li>
