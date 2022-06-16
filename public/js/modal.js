@@ -3,16 +3,16 @@ function opacity (opacity) {
 }
 
 //// open the modal on SignUp/Sign In button click
-document.getElementById("signUpButton").addEventListener("click", function() {
+document.getElementById("signUpButton").addEventListener("click", function(e) {
+    e.preventDefault()
     document.getElementById("modalBox").style.display = "block";
-    document.querySelector("body").style.overflowY = "hidden";
-    setTimeout(opacity, 200, 1)
+    setTimeout(opacity, 50, 1)
 })
 
-document.getElementById("signInButton").addEventListener("click", function() {
+document.getElementById("signInButton").addEventListener("click", function(e) {
+    e.preventDefault()
     document.getElementById("modalBox").style.display = "block";
-    document.querySelector("body").style.overflowY = "hidden";
-    setTimeout(opacity, 200, 1)
+    setTimeout(opacity, 50, 1)
 })
 
 // close the modal when click X
