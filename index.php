@@ -13,7 +13,6 @@ try {
         // catching users trying to bypass front-end check
         case 'wrongPassword':
             throw(new Exception('You tried to sign in using wrong password.'));
-        break;
         case 'signIn':
             if(!empty($_REQUEST['password']) AND !empty($_REQUEST['email'])) {
                 signIn($_REQUEST);
@@ -28,7 +27,6 @@ try {
         case 'signOut':
             signOut();
         break;
-            break;
         case 'profile':
             showUserInfo($_REQUEST['user']);
             break;
