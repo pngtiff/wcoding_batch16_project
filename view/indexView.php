@@ -10,8 +10,8 @@
     <div class="slideshow">slideshow</div>
 
     <p>Lorem ipsum dolor iod tempor incididunt ut officia deserunt molliiod tempor incididunt ut officia deserunt molliiod tempor incididunt ut officia deserunt molliiod tempor incididunt ut officia deserunt molliiod tempor incididunt ut officia deserunt molliiod tempor incididunt ut officia deserunt molliiod tempor incididunt ut officia deserunt mollisiod tempor incididunt ut officia deserunt mollit anim id est laborum.</p>
-
-</section>
+  </section>
+  <?php include('listPropertiesView.php'); ?> 
 
   <!-- Modal section -->
 <div id="modalBox" class="modal">

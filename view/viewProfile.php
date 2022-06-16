@@ -35,15 +35,14 @@
                 <button id='contact'>Contact</button>
             </div>
             <div>
-                <p><?= $user['bio'];?></p>
+                <p><?= nl2br($user['bio']);?></p>
                 <div>
                     <button id='editProfileButton'>Edit Profile</button>
                 </div>
             </div>
         </div>
     </div>
-    <!-- <?php include('propertyCard.php'); ?>  -->
-    <!-- TODO: uncomment above include and work on propertyCard.php & PropertyManager.php  -->
+    <?php include('listPropertiesView.php'); ?> 
 </div>
 </main>
 <?php $content = ob_get_clean();?>

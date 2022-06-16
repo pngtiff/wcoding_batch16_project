@@ -9,10 +9,13 @@ try {
             googleOauth($_REQUEST);
             break;
         case 'profile':
-            showUserInfo($_REQUEST['user']);
+            showUserInfo($_REQUEST['action'], $_REQUEST['user']);
+            break;
+        case 'listProperties':
+            listProperties();
             break;
         default: 
-            require "./view/indexView.php";
+            getLanding();
             break;
     }
 } catch (Exception $e) {

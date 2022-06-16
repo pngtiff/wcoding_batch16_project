@@ -6,22 +6,30 @@ use \wcoding\batch16\finalproject\Model\UserManager;
 use \wcoding\batch16\finalproject\Model\PropertyManager;
 
 
-function showUserInfo($user) {
-    $userM = new UserManager($user);
+function googleOauth($params) {
+    $oauth = new UserManager();
+    $oauth->googleOauth($params['credential']);
+}
+
+function showUserInfo($action, $userId) {
+    $userM = new UserManager($userId);
     $user = $userM->getUserInfo();
+    
+    $propertyM = new PropertyManager($userId);
+    $properties = $propertyM->getProperties($action);
 
     require('./view/viewProfile.php');
 }
 
-// TODO: figure out the function with the PropertyManager.php
-function listProperties($user) {
-    $propertyM = new PropertyManager($user);
+function listProperties() {
+    $propertyM = new PropertyManager();
     $properties = $propertyM->getProperties();
 
-    require('./view/propertyCard.php');
+    return $properties;
 }
 
-function googleOauth($params) {
-    $oauth = new UserManager();
-    $oauth->googleOauth($params['credential']);
+function getLanding() {
+    $properties = listProperties();
+
+    require('./view/indexView.php');
 }
