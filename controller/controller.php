@@ -16,6 +16,22 @@ function signOut(){
     $signOut->signOut();
 }
 
+
+function showUserInfo($user) {
+    $userM = new UserManager($user);
+    $user = $userM->getUserInfo();
+
+    require('./view/viewProfile.php');
+}
+
+// TODO: figure out the function with the PropertyManager.php
+// function listProperties($user) {
+//     $propertyM = new PropertyManager($user);
+//     $properties = $propertyM->getProperties();
+
+//     require('./view/propertyCard.php');
+// }
+
 function googleOauth($params) {
     $oauth = new UserManager();
     $oauth->googleOauth($params['credential']);
