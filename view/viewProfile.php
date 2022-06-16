@@ -1,12 +1,12 @@
-<?php $title = "User Profile";?>
+<?php $title = 'User Profile';?>
 
 <?php ob_start();?>
-<main>
+<section>
 <div>
     <button id='homeButton'><a href='index.php'>Home</a></button>
 </div>
-<div id="profileContainer">
-    <div id='userInfo'>
+<div id='profileContainer' class='flexColumn'>
+    <div id='userInfo' class='flexColumn'>
         <div id='userMain'>
             <div><div id='userImgContainer'><img id='userImg' src="<?= $user['profile_img'];?>" alt="<?= $user['id'].'profile image';?>"></div></div>
             <div>
@@ -44,6 +44,6 @@
     </div>
     <?php include('listPropertiesView.php'); ?> 
 </div>
-</main>
+</section>
 <?php $content = ob_get_clean();?>
 <?php require('template.php');?>
