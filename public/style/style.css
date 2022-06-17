@@ -40,6 +40,7 @@ button, input[type=submit] {
     border: 2px solid gray;
     border-radius: 5px;
     margin: 20px 0;
+    cursor: pointer;
 }
 
 a {
