@@ -11,7 +11,11 @@
     <link rel="stylesheet" href="public/style/signUp.css">
     <link rel="stylesheet" href="public/style/modal.css">
     <link rel="stylesheet" href="public/style/indexView.css">
+<<<<<<< HEAD
     <link rel="stylesheet" href="public/style/modifyProfile.css">
+=======
+    <link rel="stylesheet" href="public/style/header.css">
+>>>>>>> master
     <!-- <script src="https://accounts.google.com/gsi/client"></script> -->
 </head>
 <body class="flexColumn">
