@@ -1,0 +1,31 @@
+/*** CSS for listPropertiesView and propertyCard pages ***/
+#properties {
+    width: 95%;
+    margin-top: 20px;
+}
+
+#propertiesContainer {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.property {
+    padding: 10px 0;
+    border-bottom: 1px solid grey;
+    margin: 20px;
+}
+
+.propertyImgContainer {
+    width: 300px;
+    height: 250px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.propertyImgContainer img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}

@@ -109,7 +109,7 @@ class UserManager extends Manager {
             $_SESSION['picture'] = $response->picture;
             $uid = $this->createUID();
             $this->_connection->exec("INSERT INTO users (email, first_name, last_name, uid) VALUES ('$response->email','$response->given_name','$response->family_name', '$uid')");
-            header('Location:index.php?action="createProfile"');
+            header('Location:index.php?action=createProfile');
         }
     }
 
@@ -223,6 +223,11 @@ class UserManager extends Manager {
         $req->execute(array($this->_user_id));
         $user = $req->fetch(\PDO::FETCH_ASSOC);
         $req->closeCursor();
+        $languages = explode(',', $user['languages']);
+        foreach($languages as &$language) {
+            $language = $this->getLangauges($language);
+        }
+        $user['languages'] = $languages;
         return $user;
     }
 }
