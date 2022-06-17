@@ -24,10 +24,7 @@ function signOut(){
 
 
 
-function signUp($params) {
-    $signUp = new UserManager();
-    $signUp->signUp($params ['firstName'], $params['lastName'], $params['email'], $params['password']);
-}
+
 
 function googleOauth($params) {
     $oauth = new UserManager();
