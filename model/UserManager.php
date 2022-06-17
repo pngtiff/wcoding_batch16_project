@@ -109,7 +109,7 @@ class UserManager extends Manager {
             $_SESSION['picture'] = $response->picture;
             $uid = $this->createUID();
             $this->_connection->exec("INSERT INTO users (email, first_name, last_name, uid) VALUES ('$response->email','$response->given_name','$response->family_name', '$uid')");
-            header('Location:index.php?action="createProfile"');
+            header('Location:index.php?action=createProfile');
         }
     }
 
@@ -191,7 +191,7 @@ class UserManager extends Manager {
             $fileLocation = $_FILES["uploadFile"]["tmp_name"];
             $bytes = bin2hex(random_bytes(16));
             $newName = rename($fileName, $bytes);
-            $folder = "./public/images/profile_images" . basename($newName);
+            $folder = "./public/images/profile_images/" . basename($newName);
 
             move_uploaded_file($fileLocation, $folder);
 
@@ -200,7 +200,7 @@ class UserManager extends Manager {
             $folder = "./public/images/profile_images/defaultUser.png";
         }
 
-        $req = $this->_connection->prepare("UPDATE users SET phone_number=:phoneNum, dob=:dob, gender=:gender, languages=:lang, bio=:bio, profile_img=:userImg WHERE email=" . $_SESSION['email']);
+        $req = $this->_connection->prepare("UPDATE users SET phone_number=:phoneNum, dob=:dob, gender=:gender, languages=:lang, bio=:bio, profile_img=:userImg WHERE email='{$_SESSION['email']}'");
         $req->bindParam('phoneNum', $phoneNum, \PDO::PARAM_STR);
         $req->bindParam('dob', $dob, \PDO::PARAM_STR);
         $req->bindParam('gender', $gender, \PDO::PARAM_STR);
@@ -223,6 +223,11 @@ class UserManager extends Manager {
         $req->execute(array($this->_user_id));
         $user = $req->fetch(\PDO::FETCH_ASSOC);
         $req->closeCursor();
+        $languages = explode(',', $user['languages']);
+        foreach($languages as &$language) {
+            $language = $this->getLangauges($language);
+        }
+        $user['languages'] = $languages;
         return $user;
     }
 }

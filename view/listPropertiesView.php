@@ -13,5 +13,8 @@
         </div>
     <?php
     }else {
-        echo "No properties yet :)";
+        ?>
+        <p>No properties yet :)</p>
+        <?php
     }
+    ?>
