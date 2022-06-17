@@ -20,7 +20,7 @@
                 <button class="dropbtn2">Browse</button>
                 <div class="dropdown-content2">
                     <a href="#propertiesContainer">Search Most Recent Listings</a>
-                    <a href="">Search All Listings</a>
+                    <a href="#propertiesContainer">Search All Listings</a>
                     <a href="">Search for a renter</a>
                     <a href="">Find a Roommate</a>
                 </div>
@@ -35,7 +35,7 @@
             <div class="dropdown4">
                 <button class="dropbtn4">Account</button>
                 <div class="dropdown-content4">
-                    <a href="">View My Profile</a>
+                    <a href="view/viewProfile.php">View My Profile</a>
                     <a href="view/profileFormView.php">Edit My Profile</a>
                     <a href="">Logout</a>
                 </div>
