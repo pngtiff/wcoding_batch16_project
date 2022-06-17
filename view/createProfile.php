@@ -1,8 +1,8 @@
 <?php $title = "Create profile"; ?>
 
 <?php ob_start(); ?>
-    <section>
-    <form action="index.php?action=checkProfile" method="POST" id="newProfile" enctype="multipart/form-data">
+<section>
+<form action="index.php?action=checkProfile" method="POST" id="newProfile" enctype="multipart/form-data">
     <h1>Let's create a profile for you</h1>
     <div id="profilePhoto">
         <div>
@@ -30,11 +30,11 @@
         <select id="day" name="day"></select>
     </div>
     <div>
-        <label for="male">M</label>
+        <label for="male">Male</label>
         <input type="radio" id="male" name="gender" value="M">
-        <label for="female">F</label>
+        <label for="female">Female</label>
         <input type="radio" id="female" name="gender" value="F">
-        <label for="non-binary">NB</label>
+        <label for="non-binary">Non-binary</label>
         <input type="radio" id="non-binary" name="gender" value="Nb">
     </div>
     <label for="language">Which languages do you speak? (hold CMD/Ctrl to select multiple)</label>
@@ -59,8 +59,7 @@
     <input type="submit" id="create" name="create" value="Create profile">
     <p></p>
 </form>
-
-    </section>
+</section>
 <script src="./public/js/createProfile.js"></script>
 <?php $content = ob_get_clean(); ?>
 <?php require('template.php'); ?>
