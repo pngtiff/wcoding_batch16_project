@@ -1,10 +1,7 @@
 <?php
 require_once('userController.php');
-<<<<<<< HEAD
-=======
 require_once('model/PropertyManager.php');
 
->>>>>>> master
 use wcoding\batch16\finalproject\Model\UserManager;
 use wcoding\batch16\finalproject\Model\PropertyManager;
 
@@ -23,11 +20,14 @@ function signOut(){
     $signOut->signOut();
 }
 
-
-
 function googleOauth($params) {
     $oauth = new UserManager();
     $oauth->googleOauth($params['credential']);
+}
+
+function signUp($params) {
+    $signUp = new UserManager();
+    $signUp->signUp($params ['firstName'], $params['lastName'], $params['email'], $params['password']);
 }
 
 function showUserInfo($action, $userId) {

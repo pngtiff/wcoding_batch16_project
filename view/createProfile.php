@@ -1,13 +1,8 @@
 <?php $title = "Create profile"; ?>
 
 <?php ob_start(); ?>
-<<<<<<< HEAD
 <section>
 <form action="index.php?action=checkProfile" method="POST" id="newProfile" enctype="multipart/form-data">
-=======
-    <section>
-    <form action="index.php?action=checkProfile" method="POST" id="newProfile" enctype="multipart/form-data">
->>>>>>> master
     <h1>Let's create a profile for you</h1>
     <div id="profilePhoto">
         <div>
