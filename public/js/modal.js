@@ -1,5 +1,5 @@
-function opacity (opacity) {
-    modalBox.style.opacity = opacity;
+function opacity (opacity, modalContainer) {
+    modalContainer.style.opacity = opacity;
 }
 
 let modalBox = document.getElementById("modalBox");
@@ -72,7 +72,7 @@ document.getElementById("signUpButton").addEventListener("click", function(e) {
 	e.preventDefault()
 	showSignup();
 	modalBox.style.display = "block";
-	setTimeout(opacity, 50, 1);
+	setTimeout(opacity, 50, 1, modalBox);
 })
 
 document.getElementById("signInButton").addEventListener("click", function(e) {
@@ -80,14 +80,14 @@ document.getElementById("signInButton").addEventListener("click", function(e) {
 	e.preventDefault();
 	showSignin();
 	modalBox.style.display = "block";
-	setTimeout(opacity, 50, 1);
+	setTimeout(opacity, 50, 1, modalBox);
 })
 
 // close the modal when click X
 document.querySelector(".close").addEventListener("click", function() {
 	modalBox.style.display = "none";
 	document.body.style.overflowY = "visible";
-	opacity(0);
+	opacity(0, modalBox);
 })
 
 // close the modal when click outside modal
@@ -95,6 +95,6 @@ window.addEventListener("click", function(e) {
 	if (e.target == modalBox) {
 		modalBox.style.display = "none";
 		document.body.style.overflowY = "visible";
-		opacity(0);
+		opacity(0, modalBox);
 	}
 })
