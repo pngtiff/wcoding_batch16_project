@@ -37,6 +37,10 @@ try {
                 signUp($_REQUEST);
             }
         break;
+        case 'modifyProfile':
+            if (!empty($_SESSION['email'])) {
+                modifyProfile();
+            }
         default: 
             require "./view/indexView.php";
             break;
