@@ -8,6 +8,11 @@ html {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+body{
+    margin: auto;
+    display: flex;
+}
+
 
 header, footer
 {
@@ -23,7 +28,11 @@ header
     color: #fff;
 }
 
-button {
+input, select {
+    font-family: inherit;
+}
+
+button, input[type=submit] {
     font-family: inherit;
     background-color: #fff;
     color: gray;

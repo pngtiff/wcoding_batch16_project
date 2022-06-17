@@ -12,6 +12,7 @@
     </div>
     <input type="text" id="phoneNum" name="phoneNum" placeholder="Phone number ex) +8201031837065">
     <div>
+        <p>Birthdate:</p>
         <select id="year" name="year"></select>
         <select id="month" name="month">
             <option value=1>Jan</option>
@@ -30,12 +31,13 @@
         <select id="day" name="day"></select>
     </div>
     <div>
-        <label for="male">M</label>
+        <p>Gender:</p>
         <input type="radio" id="male" name="gender" value="M">
-        <label for="female">F</label>
+        <label for="male">Male</label>
         <input type="radio" id="female" name="gender" value="F">
-        <label for="non-binary">NB</label>
+        <label for="female">Female</label>
         <input type="radio" id="non-binary" name="gender" value="Nb">
+        <label for="non-binary">Non-Binary</label>
     </div>
     <label for="language">Which languages do you speak? (hold CMD/Ctrl to select multiple)</label>
     <select id="language" name="language[]" multiple>
