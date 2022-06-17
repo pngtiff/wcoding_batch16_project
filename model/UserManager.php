@@ -109,8 +109,106 @@ class UserManager extends Manager {
             $_SESSION['picture'] = $response->picture;
             $uid = $this->createUID();
             $this->_connection->exec("INSERT INTO users (email, first_name, last_name, uid) VALUES ('$response->email','$response->given_name','$response->family_name', '$uid')");
-            header('Location:index.php?action="createProfile"');
+            header('Location:index.php?action=createProfile');
         }
+    }
+
+    public function validateProfile()
+    {
+        // Check phone number
+        !empty($_REQUEST['phoneNum']) and preg_match("/^\+?[0-9]{7,14}$/", $_REQUEST['phoneNum']) ? $phoneNum = ($_REQUEST['phoneNum']) : $phoneNum = null;
+
+        // Check birthday
+        $days30 = array(4, 6, 9, 11);
+        $days31 = array(1, 3, 5, 7, 8, 10, 12);
+
+        // Check year
+        !empty($_REQUEST['year']) and $_REQUEST['year'] >= intval(date('Y')) - 120 and $_REQUEST['year'] <= intval(date('Y')) ? $year = ($_REQUEST['year']) : $year = null;
+
+        //Check month
+        !empty($_REQUEST['month']) and (preg_match("/[1-9]|1[0-2]/", $_REQUEST['month'])) ? $month = $_REQUEST['month'] : $month = null;
+
+        // Check day
+        if (!empty($_REQUEST['day']) and $month === 2) {
+            if (($year % 100 === 0 and $year % 400 === 0) or ($year % 100 !== 0 and $year % 4 === 0)) {
+                if ($_REQUEST['day'] >= 1 and $_REQUEST['day'] <= 29) {
+                    $day = $_REQUEST['day'];
+                }
+            } else if ($_REQUEST['day'] >= 1 and $_REQUEST['day'] <= 28) {
+                $day = $_REQUEST['day'];
+            }
+        } else if (!empty($_REQUEST['day']) and in_array($month, $days30)) {
+            if ($_REQUEST['day'] >= 1 and $_REQUEST['day'] <= 30) {
+                $day = $_REQUEST['day'];
+            }
+        } else if (!empty($_REQUEST['day']) and in_array($month, $days31)) {
+            if ($_REQUEST['day'] >= 1 and $_REQUEST['day'] <= 31) {
+                $day = $_REQUEST['day'];
+            }
+        } else {
+            $day = null;
+        }
+
+        $month < 10 ? $month = "0$month" : $month = "$month";
+        $dob = $year . '-' . $month . '-' . $day;
+
+        // Check gender
+        !empty($_REQUEST['gender']) and ($_REQUEST['gender'] === 'M' or $_REQUEST['gender'] === 'F' or $_REQUEST['gender'] === 'NB') ? $gender = $_REQUEST['gender'] : $gender = null;
+
+        // Check languages (add languages to array as necessary)
+        $languages = array(
+            'Cantonese' => 'HK', 'Chinese(Mandarin)' => 'ZH', 'Dutch' => 'NL', 'English' => 'EN',
+            'French' => 'FR', 'German' => 'DE', 'Hindi' => 'HI', 'Indonesian' => 'IN', 'Italian' => 'IT', 'Japanese' => 'JA',
+            'Korean' => 'KO', 'Vietnamese' => 'VI', 'Portuguese' => 'PT', 'Russian' => 'RU', 'Spanish' => 'ES'
+        );
+
+        !empty($_REQUEST['language']) and array_diff($_REQUEST['language'], $languages) === array() ? $language = implode(',', $_REQUEST['language']) : $language = null;
+
+        // Check bio
+        !empty($_REQUEST['bio']) ? $bio = $_REQUEST['bio'] : $bio = null;
+
+        //Check form
+        if ($phoneNum and $dob and $gender and $language and $bio) {
+            $this->newProfile();
+        } else {
+            header('Location:index.php?action=createProfile&createAccount=error');
+        }
+    }
+
+    // creates new user profile that will be inserted into users table
+    public function newProfile()
+    {
+        $phoneNum = strval(strip_tags($_POST['phoneNum']));
+        $dob = strip_tags($_POST['year']) . '-' . strip_tags($_POST['month']) . '-' . strip_tags($_POST['day']);
+        $gender = strip_tags($_POST['gender']);
+        $language = strip_tags(implode(',', $_REQUEST['language']));
+        $bio = strip_tags($_POST['bio']);
+
+        if (!empty($_FILES["uploadFile"]["name"])) {
+
+            // Get file info 
+            $fileName = $_FILES["uploadFile"]["name"];
+            $fileLocation = $_FILES["uploadFile"]["tmp_name"];
+            $bytes = bin2hex(random_bytes(16));
+            $newName = rename($fileName, $bytes);
+            $folder = "./public/images/profile_images/" . basename($newName);
+
+            move_uploaded_file($fileLocation, $folder);
+
+        } else {
+
+            $folder = "./public/images/profile_images/defaultUser.png";
+        }
+
+        $req = $this->_connection->prepare("UPDATE users SET phone_number=:phoneNum, dob=:dob, gender=:gender, languages=:lang, bio=:bio, profile_img=:userImg WHERE email='{$_SESSION['email']}'");
+        $req->bindParam('phoneNum', $phoneNum, \PDO::PARAM_STR);
+        $req->bindParam('dob', $dob, \PDO::PARAM_STR);
+        $req->bindParam('gender', $gender, \PDO::PARAM_STR);
+        $req->bindParam('lang', $language, \PDO::PARAM_STR);
+        $req->bindParam('bio', $bio, \PDO::PARAM_STR);
+        $req->bindParam('userImg', $folder, \PDO::PARAM_STR);
+        $req->execute();
+        header('Location:index.php');
     }
 
     public function signOut() {
@@ -119,23 +217,98 @@ class UserManager extends Manager {
         header('Location:index.php');
     }
 
+    // getUserInfo to display on viewProfile page
     public function getUserInfo () {
         $req = $this->_connection->prepare('SELECT * FROM users WHERE id = ?');
         $req->execute(array($this->_user_id));
         $user = $req->fetch(\PDO::FETCH_ASSOC);
         $req->closeCursor();
-        // print_r($user);
+        $languages = explode(',', $user['languages']);
+        foreach($languages as &$language) {
+            $language = $this->getLangauges($language);
+        }
+        $user['languages'] = $languages;
         return $user;
     }
 
-    // public function getAge () {
-    //     $req = $this->_connection->prepare('SELECT * FROM users WHERE id = ?');
-    //     $req->execute(array($this->_user_id));
-    //     $user = $req->fetch(\PDO::FETCH_ASSOC);
-    //     $dob = $user['dob'];
-    //     $today = date('Y-m-d');
-    //     $diff = date_diff(date_create($dob), date_create($today));
-    //     $age = $diff->format('%y');
-    //     return $age;
-    // }
+    public function uploadImg($file) {
+        // Get file info 
+        $fileName = $file["name"]; 
+        $fileLocation = $file["tmp_name"];
+        $folder = "./profile_images/" . basename($fileName);
+        
+        if (move_uploaded_file($fileLocation, $folder)) {
+            header("Location: index.php?action=modifyProfile");
+        } else {
+            throw(new Exception('Failed to upload a file'));
+        }
+
+        session_start();
+        $_SESSION['folder'] = $folder;
+        $_SESSION['fileName'] = $fileName;
+    }
+
+    public function updateUserData() {
+
+        // copy the information of the current profile //
+        //==========================================//
+        //==========================================//
+        $req = $this->_connection->prepare("SELECT * FROM users WHERE email='{$_SESSION['email']}' ");
+        $req->execute();
+
+        $data = $req->fetch(\PDO::FETCH_ASSOC);
+
+        $firstName = $data['first_name'];
+        $lastName = $data['last_name'];
+        $email = $data['email'];
+        $password = $data['password'];
+        $dob = $data['dob'];
+        $gender = $data['gender'];
+        $dateCreated = $data['date_created'];
+
+        // update is_active status from 1 -> 0 =====//
+        //==========================================//
+        $req2 = $this->_connection->prepare("UPDATE users SET is_active = 0 WHERE email = '{$_SESSION['email']}' ");
+        $req2->execute();
+
+
+        //=Insert the modified + inherited data=====//
+        //==========================================//
+        //==========================================//
+
+        // modified profile
+        $languages = ($_REQUEST['languages'] = null) ?  $data['languages'] : $_POST['languages'];
+        $phoneNumber = ($_REQUEST['phone_number'] = null) ?  $data['phone_number'] : $_POST['phone_number'];
+        $bio = ($_REQUEST['bio'] = null) ?  $data['bio'] : $_POST['bio'];
+        $status = 1;
+        $uid = "random"; 
+        session_start();
+        $profileImg =  $_SESSION['folder'];
+        
+        $reqInsert = $this->_connection->prepare("INSERT INTO users (uid, first_name, last_name, email, password, dob, gender, languages, bio, phone_number, profile_img, is_active, date_created)
+        VALUES ( :inuid, :infirst, :inlast, :inemail, :inpassword, :indob, :ingender, :inlanguages, :inbio, :inphoneNumber, :inprofileImg, :inactiveStatus, '$dateCreated') ");
+
+        // insert modified content
+        $reqInsert->bindParam("inlanguages", $languages, \PDO::PARAM_STR);
+        $reqInsert->bindParam("inphoneNumber", $phoneNumber, \PDO::PARAM_STR);
+        $reqInsert->bindParam("inbio", $bio, \PDO::PARAM_STR);
+        $reqInsert->bindParam("inactiveStatus", $status, \PDO::PARAM_INT);
+        $reqInsert->bindParam("inprofileImg", $profileImg, \PDO::PARAM_STR);
+        $reqInsert->bindParam("inuid", $uid, \PDO::PARAM_STR);
+
+        // insert inherited from the previous data
+        $reqInsert->bindParam("infirst", $firstName, \PDO::PARAM_STR);
+        $reqInsert->bindParam("inlast", $lastName, \PDO::PARAM_STR);
+        $reqInsert->bindParam("inemail", $email, \PDO::PARAM_STR);
+        $reqInsert->bindParam("inpassword", $password, \PDO::PARAM_STR);
+        $reqInsert->bindParam("indob", $dob, \PDO::PARAM_STR);
+        $reqInsert->bindParam("ingender", $gender, \PDO::PARAM_STR);
+
+        $reqInsert->execute();
+
+        header("Location: index.php?action=modifyProfile");
+
+
+        // array_diff($_REQUEST['language'], $this::LANGUAGES) === array() ? $language = implode(',', $_REQUEST['language']) : $language = null;
+    }
 }
