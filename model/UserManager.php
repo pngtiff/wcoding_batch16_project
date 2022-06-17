@@ -187,17 +187,15 @@ class UserManager extends Manager {
         if (!empty($_FILES["uploadFile"]["name"])) {
 
             // Get file info 
-            $fileName = $_FILES["uploadFile"]["name"];
+            $file = $_FILES["uploadFile"]["name"];
+            $fileName = pathinfo($_FILES["uploadFile"]["name"]);
+            $extension  = $fileName['extension'];
             $fileLocation = $_FILES["uploadFile"]["tmp_name"];
-            $bytes = bin2hex(random_bytes(16));
-            $newName = rename($fileName, $bytes);
-            $folder = "./public/images/profile_images/" . basename($newName);
-
-            move_uploaded_file($fileLocation, $folder);
-
+            $bytes = bin2hex(random_bytes(16)); // generates secure pseudo random bytes and bin2hex converts to hexadecimal string
+            $imgName = $bytes.".".$extension;
+            move_uploaded_file($fileLocation, "./public/images/profile_images/" . $imgName);
         } else {
-
-            $folder = "./public/images/profile_images/defaultUser.png";
+             $imgName = "defaultUser.png";
         }
 
         $req = $this->_connection->prepare("UPDATE users SET phone_number=:phoneNum, dob=:dob, gender=:gender, languages=:lang, bio=:bio, profile_img=:userImg WHERE email='{$_SESSION['email']}'");
@@ -206,7 +204,7 @@ class UserManager extends Manager {
         $req->bindParam('gender', $gender, \PDO::PARAM_STR);
         $req->bindParam('lang', $language, \PDO::PARAM_STR);
         $req->bindParam('bio', $bio, \PDO::PARAM_STR);
-        $req->bindParam('userImg', $folder, \PDO::PARAM_STR);
+        $req->bindParam('userImg', $imgName, \PDO::PARAM_STR);
         $req->execute();
         header('Location:index.php');
     }

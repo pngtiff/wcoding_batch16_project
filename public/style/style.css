@@ -286,6 +286,8 @@ textarea:focus, input:focus{
 }
 
 
+/*Create Profile Page */
+
 #newProfile {
     display: flex;
     flex-direction: column;
@@ -295,7 +297,12 @@ textarea:focus, input:focus{
 
 #file {
     color: transparent;
+}
 
+#profilePhoto div img {
+    width: 15rem;
+    height: 15rem;
+    border-radius: 50%; 
 }
 
 /* PROFILE VIEW */
