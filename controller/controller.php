@@ -1,7 +1,5 @@
 <?php
 require_once('userController.php');
-
-require('model/UserManager.php');
 require('model/PropertyManager.php');
 
 use wcoding\batch16\finalproject\Model\UserManager;
