@@ -49,7 +49,7 @@ class UserManager extends Manager {
         $passwordHashed=$userInfo['password'];   
         $response->closeCursor();
         
-        $check = password_verify(htmlspecialchars($password), $passwordHashed);
+        $check = password_verify($password, $passwordHashed);
 
         if ($check){
             echo 1;

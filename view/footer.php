@@ -18,6 +18,7 @@
 
         .contact{
             line-height: 0.5;
+            width: 30%;
         }
 
         .termsContent, .privacyContent{
