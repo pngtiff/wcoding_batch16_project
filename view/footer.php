@@ -12,15 +12,26 @@
         footer{
             display:flex;
             width: 100%;
-            height: 15vh;
+            /* height: 15vh; */
+            margin-top: 50px;
+            align-items: center;
+            float: left;
+            padding-top: 20px;
+            padding-bottom: none;
+            margin-bottom: 50px;
         }
         .contact{
             line-height: 0.5;
+            width: 30%;
         }
-
-        /* .footerRight{
+        
+        .footerRight{
             word-spacing: 5px;
-        } */
+            width: 30%;
+        } 
+        .footer {
+        background-color: rgb(215, 215, 244);
+        }
     </style>
 
     <footer class="footer">
