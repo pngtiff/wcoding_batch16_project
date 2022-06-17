@@ -1,6 +1,7 @@
 <?php $title = "Create profile"; ?>
 
 <?php ob_start(); ?>
+<section>
 <form action="index.php?action=checkProfile" method="POST" id="newProfile" enctype="multipart/form-data">
     <h1>Let's create a profile for you</h1>
     <div id="profilePhoto">
@@ -58,7 +59,7 @@
     <input type="submit" id="create" name="create" value="Create profile">
     <p></p>
 </form>
-
+</section>
 <script src="./public/js/createProfile.js"></script>
 <?php $content = ob_get_clean(); ?>
 <?php require('template.php'); ?>
