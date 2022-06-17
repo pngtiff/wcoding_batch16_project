@@ -79,7 +79,6 @@
     </div>
     <input type="submit" id="create" name="create" value="Create profile">
 </form>
-
 </section>
 <script src="./public/js/createProfile.js"></script>
 <?php $content = ob_get_clean(); ?>

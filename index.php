@@ -38,6 +38,7 @@ try {
                 signUp($_REQUEST);
             }
         break;
+        
         case 'createProfile':
             createProfile();
             break;
@@ -45,6 +46,27 @@ try {
         case 'checkProfile':
             checkProfile();
             break;
+
+            // loads prifileFormView
+        case 'modifyProfile':
+            
+                modifyProfile();
+            
+            break;
+
+            // trigger image uplodaing
+        case 'uploadImg': 
+            if (!empty($_FILES["uploadFile"]['name'])) {
+                uploadImg($_FILES['uploadFile']);
+                // if the upload button is clicked again, leads to the break page
+            }
+            break;
+
+            // trigger updating data
+        case 'updateUserData':
+            if (!empty($_REQUEST['language']) OR !empty($_REQUEST['phone_number']) OR !empty($_REQUEST['bio'])) {
+                updateUserData();
+            }
         default: 
             getLanding();
             break;

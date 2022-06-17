@@ -1,7 +1,5 @@
 <?php
 require_once('userController.php');
-
-require_once('model/UserManager.php');
 require_once('model/PropertyManager.php');
 
 use wcoding\batch16\finalproject\Model\UserManager;
@@ -21,8 +19,6 @@ function signOut(){
     $signOut = new UserManager();
     $signOut->signOut();
 }
-
-
 
 function googleOauth($params) {
     $oauth = new UserManager();
@@ -55,4 +51,18 @@ function getLanding() {
     $properties = listProperties();
 
     require('./view/indexView.php');
+}
+
+function modifyProfile() {
+    require('./view/modifyProfileView.php');
+}
+
+function uploadImg ($file) {
+    $userM = new UserManager();
+    $userM->uploadImg($file);
+}
+
+function updateUserData () {
+    $userM = new UserManager();
+    $userM->updateUserData();
 }
