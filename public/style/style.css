@@ -67,72 +67,6 @@ section
 }
 
 
-
-
-
-
-/* PROFILE VIEW */
-
-#profileContainer { 
-    justify-content: center;
-}
-
-#userImgContainer {
-    width: 150px;
-    height: 150px;
-    border-radius: 100px;
-    overflow: hidden;
-}
-
-#userImg {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-}
-
-#userInfo {
-    width: 100%;
-    min-width: 550px;
-    justify-content: center;
-    border: 2px solid powderblue;
-    border-radius: 20px;
-}
-
-#userName {
-    font-size: 1.8rem;
-}
-
-#userInfo>div {
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 20px;
-    /* margin: 0 10px; */
-    width: 90%;
-}
-
-#userMain {
-    border-bottom: 1px solid gray;
-}
-
-#userInfo>div>div:first-child {
-    min-width: 200px;
-}
-
-#userInfo>div>div:last-child {
-    width: 75%;
-    min-width: 300px;
-}
-
-#userDetails ul {
-    padding-left: 40px;
-}
-
-#properties {
-    width: 90%;
-}
-
 /* INDEX VIEW */
 
 .landingHeader
@@ -176,6 +110,7 @@ section
     background-image: url("https://www.singaporetravellers.info/wp-content/uploads/2018/08/seoul.jpg");
 }
 
+
 /* MODAL CSS */
 
 .modal {
@@ -212,10 +147,7 @@ section
 
 #banner-container {
     position: absolute;
-    display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
     width: 50%;
     height: 100%;
     left: 50%;
@@ -297,4 +229,107 @@ textarea:focus, input:focus{
 
 .errorText {
     visibility: hidden;
+}
+
+
+#newProfile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: centers;
+}
+
+#file {
+    color: transparent;
+
+
+/* PROFILE VIEW */
+
+#profileContainer { 
+    justify-content: center;
+}
+
+#userImgContainer {
+    width: 150px;
+    height: 150px;
+    border-radius: 100px;
+    overflow: hidden;
+}
+
+#userImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+#userInfo {
+    width: 100%;
+    min-width: 550px;
+    justify-content: center;
+    border: 2px solid powderblue;
+    border-radius: 20px;
+}
+
+#userName {
+    font-size: 1.8rem;
+}
+
+#userInfo>div {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 20px;
+    /* margin: 0 10px; */
+    width: 90%;
+}
+
+#userMain {
+    border-bottom: 1px solid gray;
+}
+
+#userInfo>div>div:first-child {
+    min-width: 200px;
+}
+
+#userInfo>div>div:last-child {
+    width: 75%;
+    min-width: 300px;
+}
+
+#userDetails ul {
+    padding-left: 40px;
+}
+
+
+/*** CSS for listPropertiesView and propertyCard pages ***/
+#properties {
+    width: 95%;
+    margin-top: 20px;
+}
+
+#propertiesContainer {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.property {
+    padding: 10px 0;
+    border-bottom: 1px solid grey;
+    margin: 20px;
+}
+
+.propertyImgContainer {
+    width: 300px;
+    height: 250px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.propertyImgContainer img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
