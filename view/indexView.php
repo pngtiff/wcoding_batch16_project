@@ -19,11 +19,8 @@
   </div>
 
 
-  
-
   <?php include('listPropertiesView.php'); ?> 
 
-  </section>
   <div id="intro">
     <h3>About Us</h3>
     <p>Room E-Z is a no-frills service linking hosts with housing or rooms to rent and renters looking for a place in Korea anywhere from a month to a year</p>
