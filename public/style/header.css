@@ -13,10 +13,67 @@ html {
     display: flex;
 }
 
+
+
+input
+{
+    width: 100%;
+    height: 80px;
+    font-size: 2rem;
+} */
+
+button {
+    font-family: inherit;
+    background-color: #fff;
+    color: gray;
+    padding: 5px 10px;
+    border: 2px solid gray;
+    border-radius: 5px;
+    margin: 20px 0;
+}
+
+a {
+    text-decoration: none;
+    color: gray;
+}
+
+p
+{
+    margin: 10px 0px;
+}
+
+section
+{
+    margin: auto;
+    width: 80vw;
+    min-height: 85vh;
+    /* height: calc(100vh - 300px); */
+    padding-top: 150px;  /* fill the space underneath the top header  */
+}
+
+.flexColumn
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* INDEX VIEW */
+
+.landingHeader
+{
+    margin-top: 240px;
+    height: 100px;
+    color: white;
+    text-align: right;
+    text-overflow:ellipsis;
+}
 .headerContainer {
     width: 100%;
     display: flex;
     flex-direction: row;
+    margin-top: 20px;
 }
 
 /* header stuff */
@@ -154,175 +211,6 @@ header
     background-color:aliceblue;
 }
 
-
-input
-{
-    width: 100%;
-    height: 80px;
-    font-size: 2rem;
-}
-
-button {
-    font-family: inherit;
-    background-color: #fff;
-    color: gray;
-    padding: 5px 10px;
-    border: 2px solid gray;
-    border-radius: 5px;
-    margin: 20px 0;
-}
-
-a {
-    text-decoration: none;
-    color: gray;
-}
-
-p
-{
-    margin: 10px 0px;
-}
-
-section
-{
-    margin: auto;
-    width: 80vw;
-    min-height: 85vh;
-    /* height: calc(100vh - 300px); */
-    padding-top: 150px;  /* fill the space underneath the top header  */
-}
-
-.flexColumn
-{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-
-/* INDEX VIEW */
-
-.landingHeader
-{
-    margin-top: 240px;
-    height: 100px;
-    color: white;
-    text-align: right;
-    text-overflow:ellipsis;
-}
-
-.searchBarContainer
-{
-    background-color: white;
-    width: 100%;
-    height: 100px;
-    margin-top: 80px;
-}
-
-.slideshow
-{
-    background-color: beige;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 40%;
-
-    z-index: -1;
-}
-
-.slide
-{
-    width: 100%;
-    min-height: 100%;
-    background-size: cover;
-}
-
-#slide1
-{
-    background-image: url("https://www.singaporetravellers.info/wp-content/uploads/2018/08/seoul.jpg");
-}
-
-
-/* MODAL CSS */
-
-.modal {
-    display: none; 
-    position: fixed; 
-    z-index: 1; 
-    /* padding-top: 150px;  */
-    left: 0;
-    top: 0;
-    width: 100%; 
-    height: 100%;
-    background-color: rgba(0,0,0,0.5); 
-    opacity: 0;
-    transition: all 0.5s; 
-}
-
-.modal-content {
-    position: relative;
-    background-color: white;
-    margin: auto;
-    width: 80%;
-    height: 600px;
-    border: 1px solid #888;
-    border-radius: 20px;
-    overflow: hidden;
-}
-
-.form-container {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 5%;
-}
-
-
-#banner-container {
-    position: absolute;
-    justify-content: center;
-    width: 50%;
-    height: 100%;
-    left: 50%;
-    color: white;
-    background-color: rgb(225, 26, 86);
-    z-index: 2;
-}
-
-#banner-container h2{
-    font-size: .7rem;
-}
-
-#banner-container button{
-    border: 2px white solid;
-}
-
-
-#signIn-container, #signUp-container {
-    flex: 1;
-    padding: 20px;
-}
-
-.close 
-{
-    color: #aaaaaa;
-    position: absolute;
-    font-size: 28px;
-    font-weight: bold;
-    z-index: 2;
-    right: 10px;
-    top: 10px;
-}
-  
-.close:hover,
-.close:focus 
-{
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/* stylesheet for signUpView.php */
-
 textarea {
     outline: none;
 }
@@ -364,6 +252,16 @@ textarea:focus, input:focus{
 }
 
 
+#newProfile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: centers;
+}
+
+#file {
+    color: transparent;
+}
 
 /* PROFILE VIEW */
 
