@@ -34,10 +34,6 @@ function googleOauth($params) {
     $oauth->googleOauth($params['credential']);
 }
 
-function signUp($params) {
-    $signUp = new UserManager();
-    $signUp->signUp($params ['firstName'], $params['lastName'], $params['email'], $params['password']);
-}
 
 function showUserInfo($action, $userId) {
     $userM = new UserManager($userId);
