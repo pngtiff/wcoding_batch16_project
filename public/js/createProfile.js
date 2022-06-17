@@ -85,12 +85,12 @@ years.addEventListener('change', () => {
     checkDays();
 })
 
-if (!contact || !gender || !languages.value || !bio.value) {
-    profileForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        let alert = document.querySelector('#newProfile p');
-        if (!alert.textContent) {
-            alert.textContent = "Please fill out all fields";
-        }
-    })
-}
+// if (!contact || !gender || !languages.value || !bio.value) {
+//     profileForm.addEventListener('submit', (e) => {
+//         e.preventDefault();
+//         let alert = document.querySelector('#newProfile p');
+//         if (!alert.textContent) {
+//             alert.textContent = "Please fill out all fields";
+//         }
+//     })
+// }
