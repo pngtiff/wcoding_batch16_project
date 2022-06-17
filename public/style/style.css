@@ -23,12 +23,12 @@ header
     color: #fff;
 }
 
-input
+/* input
 {
     width: 100%;
     height: 80px;
     font-size: 2rem;
-}
+} */
 
 button {
     font-family: inherit;
@@ -232,6 +232,16 @@ textarea:focus, input:focus{
 }
 
 
+#newProfile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: centers;
+}
+
+#file {
+    color: transparent;
+}
 
 /* PROFILE VIEW */
 
