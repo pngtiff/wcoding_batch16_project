@@ -58,6 +58,7 @@ try {
         case 'uploadImg': 
             if (!empty($_FILES["uploadFile"]['name'])) {
                 uploadImg($_FILES['uploadFile']);
+                // if the upload button is clicked again, leads to the break page
             }
             break;
 

@@ -36,7 +36,7 @@
                 <button class="dropbtn4">Account</button>
                 <div class="dropdown-content4">
                     <a href="view/viewProfile.php">View My Profile</a>
-                    <a href="view/profileFormView.php">Edit My Profile</a>
+                    <a href="index.php?action=modifyProfile">Edit My Profile</a>
                     <a href="">Logout</a>
                 </div>
             </div>

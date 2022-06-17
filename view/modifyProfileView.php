@@ -8,7 +8,7 @@
 
     <form action="index.php" method = "POST" id = "photoForm" enctype="multipart/form-data">
         <div id = "profilePhoto">
-            <img src= "../profile_images/ <?php echo $_SESSION['fileName']; ?>" id = "photo" />
+            <img src= "./profile_images/<?php echo $_SESSION['fileName']; ?>" id = "photo" />
             <input type="file" id = "file" name = "uploadFile">
             <label for="file" id = "uploadButton">Choose Photo</label>
         </div>
@@ -60,3 +60,5 @@
 <script src="public/js/modifyProfile.js"></script>
 <?php $content = ob_get_clean();?>
 <?php require('template.php');?>
+
+<!-- /Applications/XAMPP/xamppfiles/htdocs/sites/batch16_project/view/modifyProfileView.php on line 11" id = "photo" /> -->

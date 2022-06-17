@@ -229,7 +229,7 @@ class UserManager extends Manager {
         }
         $user['languages'] = $languages;
         return $user;
-    }
+    } 
 
     public function uploadImg($file) {
         // Get file info 
