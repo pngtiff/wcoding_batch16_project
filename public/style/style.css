@@ -364,6 +364,16 @@ textarea:focus, input:focus{
 }
 
 
+#newProfile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: centers;
+}
+
+#file {
+    color: transparent;
+
 
 /* PROFILE VIEW */
 
