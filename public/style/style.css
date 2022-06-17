@@ -17,6 +17,7 @@ html {
     width: 100%;
     display: flex;
     flex-direction: row;
+    background-image: url(public/images/headerPhoto.JPG)
 }
 
 /* header stuff */
@@ -37,7 +38,6 @@ header
     color: #fff;
 }
 
-<<<<<<< HEAD
 .logo {
     width: 10%;
 }
@@ -163,8 +163,6 @@ input
     font-size: 2rem;
 }
 
-=======
->>>>>>> master
 button {
     font-family: inherit;
     background-color: #fff;
@@ -201,7 +199,6 @@ section
     align-items: center;
 }
 
-<<<<<<< HEAD
 
 /* INDEX VIEW */
 
@@ -459,5 +456,3 @@ textarea:focus, input:focus{
     object-fit: cover;
     object-position: center;
 }
-=======
->>>>>>> master

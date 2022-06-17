@@ -35,8 +35,8 @@
             <div class="dropdown4">
                 <button class="dropbtn4">Account</button>
                 <div class="dropdown-content4">
-                    <a href="view/profileFormView.php">View My Profile</a>
-                    <a href="">Edit My Profile</a>
+                    <a href="">View My Profile</a>
+                    <a href="view/profileFormView.php">Edit My Profile</a>
                     <a href="">Logout</a>
                 </div>
             </div>
