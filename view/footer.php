@@ -42,7 +42,7 @@
             </div>
     
             <div class="services">
-            <a href="#"><h3>Services</h3></a>
+            <a href="#searchBarContainer"><h3>Services</h3></a>
                 <!-- <a href="#">Advertise whole property or a room</a>
                 <a href="#">Search for a whole property or a room</a>
                 <a href="#">Roommate finder</a> -->
