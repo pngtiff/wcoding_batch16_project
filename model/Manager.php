@@ -11,6 +11,12 @@ class Manager {
     const LOGIN = "root";
     const PWD = "";
 
+    const LANGUAGES = array(
+        'Cantonese' => 'HK', 'Chinese(Mandarin)' => 'ZH', 'Dutch' => 'NL', 'English' => 'EN',
+        'French' => 'FR', 'German' => 'DE', 'Hindi' => 'HI', 'Indonesian' => 'IN', 'Italian' => 'IT', 'Japanese' => 'JA',
+        'Korean' => 'KO', 'Vietnamese' => 'VI', 'Portuguese' => 'PT', 'Russian' => 'RU', 'Spanish' => 'ES'
+    );
+
     protected $_user_id;
 
     protected function __construct() {
@@ -23,5 +29,13 @@ class Manager {
 
     public function setUserId($userId) {
         $this->_user_id = $userId;
+    }
+    
+    public function getLangauges($langCode) {
+        foreach($this::LANGUAGES as $key=>$language) {
+            if ($language == $langCode) {
+                return $key;
+            }
+        }
     }
 }
