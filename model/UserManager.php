@@ -191,7 +191,7 @@ class UserManager extends Manager {
             $fileLocation = $_FILES["uploadFile"]["tmp_name"];
             $bytes = bin2hex(random_bytes(16));
             $newName = rename($fileName, $bytes);
-            $folder = "./public/images/profile_images" . basename($newName);
+            $folder = "./public/images/profile_images/" . basename($newName);
 
             move_uploaded_file($fileLocation, $folder);
 
@@ -200,7 +200,7 @@ class UserManager extends Manager {
             $folder = "./public/images/profile_images/defaultUser.png";
         }
 
-        $req = $this->_connection->prepare("UPDATE users SET phone_number=:phoneNum, dob=:dob, gender=:gender, languages=:lang, bio=:bio, profile_img=:userImg WHERE email=" . $_SESSION['email']);
+        $req = $this->_connection->prepare("UPDATE users SET phone_number=:phoneNum, dob=:dob, gender=:gender, languages=:lang, bio=:bio, profile_img=:userImg WHERE email='{$_SESSION['email']}'");
         $req->bindParam('phoneNum', $phoneNum, \PDO::PARAM_STR);
         $req->bindParam('dob', $dob, \PDO::PARAM_STR);
         $req->bindParam('gender', $gender, \PDO::PARAM_STR);
