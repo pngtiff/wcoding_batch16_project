@@ -37,7 +37,7 @@
 
         <div class="footerRight">
             <div class="aboutUs">
-            <a href="#"> <h3>About Us</h3></a>
+            <a href="#intro"> <h3>About Us</h3></a>
                 <!-- <p>introduction  of ROOM-EZ</p> -->
             </div>
     
