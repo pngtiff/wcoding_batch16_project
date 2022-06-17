@@ -19,13 +19,15 @@ html {
     flex-direction: row;
 }
 
+/* header stuff */
+
 header, footer
 {
     width: 100%;
     height: 20vh;
     /* justify-content: center; */
     /* margin-top: 40px; */
-    margin-bottom: 100px;
+    margin-bottom: 500px;
 }
 
 header
@@ -35,6 +37,13 @@ header
     color: #fff;
 }
 
+.logo {
+    width: 10%;
+}
+
+.nav {
+    width: 80%;
+}
 
 /* nav {
     margin-top: 0px;

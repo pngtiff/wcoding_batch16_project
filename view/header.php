@@ -1,11 +1,16 @@
 <header class="flexColumn"> 
     <!-- <h2>BATCH 16 (awesome) PROJECT : ROOM EZ !</h2> -->
     <div class="headerContainer"> 
+        <div class="logo">
+            <a href="#">
+            <img src="public/images/output-onlinepngtools.png" alt="logo" width="90px" height="90px">
+            </a>
+        </div>
         <nav class="nav">
             <div class="dropdown">
                 <button class="dropbtn">About Us</button>
                 <div class="dropdown-content">
-                    <a href="">Who are we?</a>
+                    <a href="#intro">Who are we?</a>
                     <a href="">What do we do?</a>
                     <a href="">Contact us</a>
                 </div>
