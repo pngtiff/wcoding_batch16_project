@@ -227,5 +227,86 @@ class UserManager extends Manager {
         }
         $user['languages'] = $languages;
         return $user;
+    } 
+
+    public function uploadImg($file) {
+        // Get file info 
+        $fileName = $file["name"]; 
+        $fileLocation = $file["tmp_name"];
+        $folder = "./profile_images/" . basename($fileName);
+        
+        if (move_uploaded_file($fileLocation, $folder)) {
+            header("Location: index.php?action=modifyProfile");
+        } else {
+            throw(new Exception('Failed to upload a file'));
+        }
+
+        session_start();
+        $_SESSION['folder'] = $folder;
+        $_SESSION['fileName'] = $fileName;
+    }
+
+    public function updateUserData() {
+
+        // copy the information of the current profile //
+        //==========================================//
+        //==========================================//
+        $req = $this->_connection->prepare("SELECT * FROM users WHERE email='{$_SESSION['email']}' ");
+        $req->execute();
+
+        $data = $req->fetch(\PDO::FETCH_ASSOC);
+
+        $firstName = $data['first_name'];
+        $lastName = $data['last_name'];
+        $email = $data['email'];
+        $password = $data['password'];
+        $dob = $data['dob'];
+        $gender = $data['gender'];
+        $dateCreated = $data['date_created'];
+
+        // update is_active status from 1 -> 0 =====//
+        //==========================================//
+        $req2 = $this->_connection->prepare("UPDATE users SET is_active = 0 WHERE email = '{$_SESSION['email']}' ");
+        $req2->execute();
+
+
+        //=Insert the modified + inherited data=====//
+        //==========================================//
+        //==========================================//
+
+        // modified profile
+        $languages = ($_REQUEST['languages'] = null) ?  $data['languages'] : $_POST['languages'];
+        $phoneNumber = ($_REQUEST['phone_number'] = null) ?  $data['phone_number'] : $_POST['phone_number'];
+        $bio = ($_REQUEST['bio'] = null) ?  $data['bio'] : $_POST['bio'];
+        $status = 1;
+        $uid = "random"; 
+        session_start();
+        $profileImg =  $_SESSION['folder'];
+        
+        $reqInsert = $this->_connection->prepare("INSERT INTO users (uid, first_name, last_name, email, password, dob, gender, languages, bio, phone_number, profile_img, is_active, date_created)
+        VALUES ( :inuid, :infirst, :inlast, :inemail, :inpassword, :indob, :ingender, :inlanguages, :inbio, :inphoneNumber, :inprofileImg, :inactiveStatus, '$dateCreated') ");
+
+        // insert modified content
+        $reqInsert->bindParam("inlanguages", $languages, \PDO::PARAM_STR);
+        $reqInsert->bindParam("inphoneNumber", $phoneNumber, \PDO::PARAM_STR);
+        $reqInsert->bindParam("inbio", $bio, \PDO::PARAM_STR);
+        $reqInsert->bindParam("inactiveStatus", $status, \PDO::PARAM_INT);
+        $reqInsert->bindParam("inprofileImg", $profileImg, \PDO::PARAM_STR);
+        $reqInsert->bindParam("inuid", $uid, \PDO::PARAM_STR);
+
+        // insert inherited from the previous data
+        $reqInsert->bindParam("infirst", $firstName, \PDO::PARAM_STR);
+        $reqInsert->bindParam("inlast", $lastName, \PDO::PARAM_STR);
+        $reqInsert->bindParam("inemail", $email, \PDO::PARAM_STR);
+        $reqInsert->bindParam("inpassword", $password, \PDO::PARAM_STR);
+        $reqInsert->bindParam("indob", $dob, \PDO::PARAM_STR);
+        $reqInsert->bindParam("ingender", $gender, \PDO::PARAM_STR);
+
+        $reqInsert->execute();
+
+        header("Location: index.php?action=modifyProfile");
+
+
+        // array_diff($_REQUEST['language'], $this::LANGUAGES) === array() ? $language = implode(',', $_REQUEST['language']) : $language = null;
     }
 }
