@@ -6,6 +6,9 @@ require('controller/controller.php');
 session_start();
 try {
     $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : null;
+    if (!empty($_SESSION['email'])) {
+        updateLastActive();
+    }
     switch ($action){
         case 'googleOauth':
             googleOauth($_REQUEST);
@@ -67,6 +70,10 @@ try {
             if (!empty($_REQUEST['language']) OR !empty($_REQUEST['phone_number']) OR !empty($_REQUEST['bio'])) {
                 updateUserData();
             }
+            //Search//
+        case 'search':
+            search($_REQUEST['city']);
+            break;
         default: 
             getLanding();
             break;

@@ -35,18 +35,25 @@
             <div class="dropdown4">
                 <button class="dropbtn4">Account</button>
                 <div class="dropdown-content4">
-                    <a href="index.php?action=profile&user=2">View My Profile</a>
+                    <a href="index.php?action=profile&user=2">View My Profile</a> 
+                    <!-- TODO: change to action -->
                     <a href="view/profileFormView.php">Edit My Profile</a>
                     <a href="">Logout</a>
                 </div>
             </div>
-            <form action="public/view/listPropertiesView.php" method="POST" class="form">
+
+            <div id="searchBarContainer">
+                <input type="search" name="searchbar" id="searchBar" placeholder="Start your search here">
+                <button class="searchButton"><img src="public/images/magnifying_glass.png" id="magnifying"></button>
+             </div>
+
+            <!-- <form action="" method="POST" class="form">
               <input type="search" placeholder="Enter your search here" class="searchField" />
               <button type="submit" class="searchButton">
                     <img src="public/images/magnifying_glass.png" id="magnifying">
             
               </button>
-            </form>
+            </form> -->
             
         </nav>
         <div class="signInUp">
