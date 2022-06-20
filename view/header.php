@@ -35,13 +35,9 @@
             <div class="dropdown4">
                 <button class="dropbtn4">Account</button>
                 <div class="dropdown-content4">
-<<<<<<< HEAD
-                    <a href="view/viewProfile.php">View My Profile</a>
-                    <a href="index.php?action=modifyProfile">Edit My Profile</a>
-=======
-                    <a href="index.php?action=profile&user=2">View My Profile</a>
+                    <a href="index.php?action=profile&user=2">View My Profile</a> 
+                    <!-- TODO: change to action -->
                     <a href="view/profileFormView.php">Edit My Profile</a>
->>>>>>> master
                     <a href="">Logout</a>
                 </div>
             </div>

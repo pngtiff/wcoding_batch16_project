@@ -1,4 +1,4 @@
-#newProfile {
+.profileFormsBorder {
     border: 2px solid #FFBD00;
     border-radius: 20px;
     padding: 30px;
@@ -34,7 +34,7 @@
     justify-content: space-between;
 }
 
-#createProfileDetails>div, #rightDetails>div {
+#createProfileDetails>div, #langDetails>div {
     margin: 20px 0;
     display: flex;
     flex-direction: column;
@@ -59,7 +59,7 @@
     font-size: 1rem;
 }
 
-#rightDetails span {
+#langDetails span {
     display: block;
     font-size: 0.8rem;
 }
