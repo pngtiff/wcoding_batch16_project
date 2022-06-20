@@ -24,15 +24,7 @@
                     <a href="">Post a New Listing</a>
                 </div>
             </div>
-            <div class="dropdown4">
-                <button class="dropbtn4">Account</button>
-                <div class="dropdown-content4">
-                    <a href="index.php?action=profile&user=2">View My Profile</a> 
-                    <!-- TODO: change to action -->
-                    <a href="view/profileFormView.php">Edit My Profile</a>
-                    <a href="">Logout</a>
-                </div>    
-            </div>    
+            
             <div class="dropdown">
                 <button class="dropbtn">About Us</button>
                 <div class="dropdown-content">
