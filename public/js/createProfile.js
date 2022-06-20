@@ -32,6 +32,7 @@ const file = document.querySelector('#file');
 const uploadButton = document.querySelector('#uploadButton');
 let profileForm = document.querySelector('#newProfile');
 let contact;
+let profilePic = document.querySelector('#file');
 let phoneNum = document.querySelector('#phoneNum');
 let years = document.querySelector('#year');
 let months = document.querySelector('#month');
@@ -39,13 +40,16 @@ let days = document.querySelector('#day');
 let gender = document.querySelector('input[name="gender"]:checked');
 let languages = document.querySelector('#language');
 let bio = document.querySelector('#bio');
+let imgContainer = document.querySelector('#profilePhoto div');
 
 
 // change the photo by choosing the different files
 file.addEventListener('change', function(){   
-    // refers to the file
-    let imgContainer = document.querySelector('#profilePhoto div');
     imgContainer.innerHTML="";
+    let fileSize = this.files[0].size;
+    if (fileSize > 500000) {
+        return imgContainer.textContent = "Sorry, your file is too large.";
+    }
     const chosenFile = this.files[0];
     let img = document.createElement('img');
 
