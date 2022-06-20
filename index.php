@@ -47,26 +47,26 @@ try {
             checkProfile();
             break;
 
-            // loads prifileFormView
+            // loads modifyProfileView
         case 'modifyProfile':
-            
-                modifyProfile();
-            
+            modifyProfile();
             break;
 
             // trigger image uplodaing
         case 'uploadImg': 
             if (!empty($_FILES["uploadFile"]['name'])) {
                 uploadImg($_FILES['uploadFile']);
-                // if the upload button is clicked again, leads to the break page
+                // issue: if the upload button is clicked again, leads to the break page
             }
             break;
 
-            // trigger updating data
+            // trigger updating data - working without any issue at the moment
         case 'updateUserData':
             if (!empty($_REQUEST['language']) OR !empty($_REQUEST['phone_number']) OR !empty($_REQUEST['bio'])) {
                 updateUserData();
             }
+            break;
+            
         default: 
             getLanding();
             break;

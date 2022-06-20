@@ -49,7 +49,7 @@ class UserManager extends Manager {
         $passwordHashed=$userInfo['password'];   
         $response->closeCursor();
         
-        $check = password_verify($password, $passwordHashed);
+        $check = password_verify(htmlspecialchars($password), $passwordHashed);
 
         if ($check){
             echo 1;
@@ -187,15 +187,17 @@ class UserManager extends Manager {
         if (!empty($_FILES["uploadFile"]["name"])) {
 
             // Get file info 
-            $file = $_FILES["uploadFile"]["name"];
-            $fileName = pathinfo($_FILES["uploadFile"]["name"]);
-            $extension  = $fileName['extension'];
+            $fileName = $_FILES["uploadFile"]["name"];
             $fileLocation = $_FILES["uploadFile"]["tmp_name"];
-            $bytes = bin2hex(random_bytes(16)); // generates secure pseudo random bytes and bin2hex converts to hexadecimal string
-            $imgName = $bytes.".".$extension;
-            move_uploaded_file($fileLocation, "./public/images/profile_images/" . $imgName);
+            $bytes = bin2hex(random_bytes(16));
+            $newName = rename($fileName, $bytes);
+            $folder = "./public/images/profile_images/" . basename($newName);
+
+            move_uploaded_file($fileLocation, $folder);
+
         } else {
-             $imgName = "defaultUser.png";
+
+            $folder = "./public/images/profile_images/defaultUser.png";
         }
 
         $req = $this->_connection->prepare("UPDATE users SET phone_number=:phoneNum, dob=:dob, gender=:gender, languages=:lang, bio=:bio, profile_img=:userImg WHERE email='{$_SESSION['email']}'");
@@ -204,7 +206,7 @@ class UserManager extends Manager {
         $req->bindParam('gender', $gender, \PDO::PARAM_STR);
         $req->bindParam('lang', $language, \PDO::PARAM_STR);
         $req->bindParam('bio', $bio, \PDO::PARAM_STR);
-        $req->bindParam('userImg', $imgName, \PDO::PARAM_STR);
+        $req->bindParam('userImg', $folder, \PDO::PARAM_STR);
         $req->execute();
         header('Location:index.php');
     }
@@ -275,7 +277,8 @@ class UserManager extends Manager {
         //==========================================//
 
         // modified profile
-        $languages = ($_REQUEST['languages'] = null) ?  $data['languages'] : $_POST['languages'];
+        // $languages = ($_REQUEST['languages'] = null) ?  $data['languages'] : $_POST['languages'];
+        $language = strip_tags(implode(',', $_REQUEST['language']));
         $phoneNumber = ($_REQUEST['phone_number'] = null) ?  $data['phone_number'] : $_POST['phone_number'];
         $bio = ($_REQUEST['bio'] = null) ?  $data['bio'] : $_POST['bio'];
         $status = 1;
@@ -287,7 +290,7 @@ class UserManager extends Manager {
         VALUES ( :inuid, :infirst, :inlast, :inemail, :inpassword, :indob, :ingender, :inlanguages, :inbio, :inphoneNumber, :inprofileImg, :inactiveStatus, '$dateCreated') ");
 
         // insert modified content
-        $reqInsert->bindParam("inlanguages", $languages, \PDO::PARAM_STR);
+        $reqInsert->bindParam("inlanguages", $language, \PDO::PARAM_STR);
         $reqInsert->bindParam("inphoneNumber", $phoneNumber, \PDO::PARAM_STR);
         $reqInsert->bindParam("inbio", $bio, \PDO::PARAM_STR);
         $reqInsert->bindParam("inactiveStatus", $status, \PDO::PARAM_INT);

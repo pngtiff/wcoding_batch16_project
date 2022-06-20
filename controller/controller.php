@@ -49,7 +49,6 @@ function listProperties() {
 
 function getLanding() {
     $properties = listProperties();
-
     require('./view/indexView.php');
 }
 

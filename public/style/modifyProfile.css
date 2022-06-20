@@ -6,13 +6,26 @@
     justify-content: center;
 }
 
-/* form{
+section{
     width: 70%;
     display: flex;
     flex-direction: column;
-} */
+}
 
-form div{
+#photoForm{
+    display: flex;
+    flex-direction: column;
+
+}
+
+#modifyForm{
+    display: flex;
+    flex-direction: column;
+
+}
+
+#photoForm div,
+#modifyForm div{
     margin-bottom: 30px;
     position: relative;
     display: flex;
@@ -20,14 +33,12 @@ form div{
 }
 
 
+
 /* profile photo */
 #photoForm{
     margin-bottom: 50px;
 }
 
-/* img{
-    height: 200px;
-} */
 
 #profilePhoto{
     height: 200px;
@@ -66,11 +77,10 @@ form div{
     display: none;
 }
 
-#submitButton{
-    position: absolute;
-    left: 5%;
-    top: 280px;
-    width: 150px;
+#sendPhotoButton{
+    width: 100px;
+    height: 30px;
+    font-size: 18px;
 }
 
 .box{
