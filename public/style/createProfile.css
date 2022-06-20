@@ -1,0 +1,76 @@
+.profileFormsBorder {
+    border: 2px solid #FFBD00;
+    border-radius: 20px;
+    padding: 30px;
+}
+
+#profilePhoto {
+    margin: 20px 0;
+}
+
+#profilePhoto div {
+    margin: 20px 0;
+}
+
+#file {
+    display: none;
+}
+
+.customFileButton {
+    color: gray;
+    padding: 5px 10px;
+    border: 2px solid gray;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+#newProfile label {
+    margin-bottom: 5px;
+}
+
+.flexRow {
+    display: flex;
+    justify-content: space-between;
+}
+
+#createProfileDetails>div, #langDetails>div {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#phoneNum {
+    width: 250px;
+    padding: 5px 10px;
+    font-size: 1rem;
+}
+
+#birthdate select {
+    font-size: 1rem;
+    padding: 5px 10px;
+    width: 80px;
+}
+
+#language {
+    height: 6.5rem;
+    width: 250px;
+    padding: 5px 10px;
+    font-size: 1rem;
+}
+
+#langDetails span {
+    display: block;
+    font-size: 0.8rem;
+}
+
+#bio {
+    height: 4rem;
+    width: 100%;
+    padding: 5px 10px;
+    font-size: 1rem;
+}
+
+#create {
+    font-size: 1.1rem;
+}

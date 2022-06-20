@@ -65,3 +65,8 @@ function updateUserData () {
     $userM = new UserManager();
     $userM->updateUserData();
 }
+
+function updateLastActive() {
+    $userM = new UserManager();
+    $userM -> updateLastActive();
+}

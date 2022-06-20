@@ -1,6 +1,5 @@
-
 .personalInformationContainer{
-    width: 70%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -18,14 +17,7 @@ section{
 
 }
 
-#modifyForm{
-    display: flex;
-    flex-direction: column;
-
-}
-
-#photoForm div,
-#modifyForm div{
+.personalInformationContainer form div{
     margin-bottom: 30px;
     position: relative;
     display: flex;
