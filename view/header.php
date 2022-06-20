@@ -31,6 +31,8 @@
                     <!-- TODO: change to action -->
                     <a href="view/profileFormView.php">Edit My Profile</a>
                     <a href="">Logout</a>
+                </div>    
+            </div>    
             <div class="dropdown">
                 <button class="dropbtn">About Us</button>
                 <div class="dropdown-content">
