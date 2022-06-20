@@ -7,6 +7,7 @@
     <title><?=$title;?></title>
     <link rel="stylesheet" href="public/style/style.css">
     <link rel="stylesheet" href="public/style/properties.css">
+    <link rel="stylesheet" href="public/style/searchResults.css">
     <link rel="stylesheet" href="public/style/profile.css">
     <link rel="stylesheet" href="public/style/signUp.css">
     <link rel="stylesheet" href="public/style/modal.css">

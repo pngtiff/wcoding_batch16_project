@@ -2,9 +2,27 @@
 
 <?php ob_start(); ?>
 
-<section>
-    <!-- <?php echo $city; ?> -->
-    <?php print_r($properties) ?>
+<section id='searchResults'>
+<?php
+    if(count($properties)>0){
+        ?>
+        
+        <h2>Search Results</h2>
+        <div id='propertiesSearchList'>
+            <?php
+            foreach($properties as $property)
+            {
+                include('propertyCard.php');
+            } ?>
+        </div>
+        
+    <?php
+    }else {
+        ?>
+        <p>No Search Results Yet :)</p>
+        <?php
+    } ?>
+
 </section>
 
 <?php $content = ob_get_clean();?>
