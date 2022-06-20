@@ -72,7 +72,7 @@ class UserManager extends Manager {
         $firstName = addslashes(htmlspecialchars(htmlentities(trim($firstName))));
         $lastName = addslashes(htmlspecialchars(htmlentities(trim($lastName))));
         $email = addslashes(htmlspecialchars(htmlentities(trim($email))));
-        $password =  password_hash(htmlspecialchars($password), PASSWORD_DEFAULT);
+        $password = password_hash(htmlspecialchars($password), PASSWORD_DEFAULT);
         $uid = $this->createUID(); 
 
             $response = $this->_connection->query("SELECT email, first_name, last_name FROM users WHERE email='$email'");
