@@ -52,7 +52,8 @@
                     <?php 
                         if (!empty($_SESSION['firstName'])){
                             echo '<a href="index.php?action=profile&user=2">View My Profile</a>';
-                            echo '<a href="view/profileFormView.php">Edit My Profile</a>';
+                            <-- TODO: change to action for specific user -->
+                            echo '<a href="index.php?action=modifyProfile">Edit My Profile</a>';
 
                         }
                     ?>
