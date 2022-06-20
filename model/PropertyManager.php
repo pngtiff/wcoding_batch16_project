@@ -42,4 +42,17 @@ class PropertyManager extends Manager {
         $req->closeCursor();
         return $properties;
     }
+
+    public function searchProperties($city) {
+
+        $req = $this->_connection->prepare('SELECT * FROM properties WHERE city = :inCity');
+        $req->bindParam('inCity', $city);
+        $req->execute();
+
+        $properties = $req->fetchAll(\PDO::FETCH_ASSOC);
+
+        $req->closeCursor();
+
+        return $properties;
+    }
 }
