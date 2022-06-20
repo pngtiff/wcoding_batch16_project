@@ -16,8 +16,13 @@ class PropertyManager extends Manager {
             $req->bindParam('uid', $this->_user_id);
             $req->execute();
             
+        } elseif($action=='property') {
+            $req = $this->_connection->prepare('SELECT * FROM properties WHERE id = :propId');
+            $req->bindParam('propId', $this->_prop_id);
+            $req->execute();
+
         } else {
-            $req = $this->_connection->query('SELECT * FROM properties ORDER BY date_created DESC LIMIT 0,6');
+            $req = $this->_connection->query('SELECT * FROM properties ORDER BY date_created DESC LIMIT 0,8');
         }
         $properties = $req->fetchAll(\PDO::FETCH_ASSOC);
 
@@ -42,4 +47,13 @@ class PropertyManager extends Manager {
         $req->closeCursor();
         return $properties;
     }
+
+    // public function getProperty() {
+    //     $req = $this->_connection->prepare('SELECT * FROM properties WHERE id = ?');
+    //     $req->execute(array($this->_user_id));
+    //     $propDetails = $req->fetch(\PDO::FETCH_ASSOC);
+    //     $req->closeCursor();
+    //     print_r($propDetails);
+    //     return $propDetails;        
+    // }
 }

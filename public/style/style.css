@@ -33,11 +33,23 @@ input, select {
     font-family: inherit;
 }
 
-.flexColumn {
-    width: 100%;
-    display: flex;
+
+section
+{
+    margin: auto;
+    width: 80vw;
+    min-height: 85vh;
+    /* height: calc(100vh - 300px); */
+    padding-top: 150px;  /* fill the space underneath the top header  */
 }
 
+.flexColumn
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
 
 button, input[type=submit] {
     font-family: inherit;
@@ -58,20 +70,4 @@ a {
 p
 {
     margin: 10px 0px;
-}
-
-section
-{
-    margin: auto;
-    width: 80vw;
-    min-height: 85vh;
-    /* height: calc(100vh - 300px); */
-    padding-top: 150px;  /* fill the space underneath the top header  */
-}
-
-.flexColumn
-{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }

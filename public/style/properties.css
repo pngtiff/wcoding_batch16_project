@@ -1,7 +1,11 @@
 /*** CSS for listPropertiesView and propertyCard pages ***/
 #properties {
-    width: 95%;
-    margin-top: 20px;
+    width: 100%;
+    padding: 20px 4% 0 4%;
+}
+
+#propertyDetails p {
+    margin: 5px;
 }
 
 #propertiesContainer {
@@ -28,4 +32,9 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
+}
+
+.price span {
+    font-weight: bold;
+    font-size: 1.15rem;
 }
