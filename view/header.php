@@ -35,16 +35,19 @@
             <div class="dropdown4">
                 <button class="dropbtn4">Account</button>
                 <div class="dropdown-content4">
-<<<<<<< HEAD
-                    <a href="view/viewProfile.php">View My Profile</a>
-                    <a href="index.php?action=modifyProfile">Edit My Profile</a>
-=======
                     <a href="index.php?action=profile&user=2">View My Profile</a>
                     <a href="view/profileFormView.php">Edit My Profile</a>
->>>>>>> master
                     <a href="">Logout</a>
                 </div>
             </div>
+            <form action="public/view/listPropertiesView.php" method="POST" class="form">
+              <input type="search" placeholder="Enter your search here" class="searchField" />
+              <button type="submit" class="searchButton">
+                    <img src="public/images/magnifying_glass.png" id="magnifying">
+            
+              </button>
+            </form>
+            
         </nav>
         <div class="signInUp">
             <!-- Changing interface once signed in/signed out -->

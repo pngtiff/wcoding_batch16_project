@@ -8,11 +8,7 @@
 
   <div class="landingHeader">
     <h3 id="slogan">Your hassle-free housing search starts with Room-EZ</h3>
-  </div>
-  
-  <div id="searchBarContainer">
-      <input type="text" name="searchbar" id="searchBar" placeholder="Start your search here" >              
-  </div>
+  </div>   
 
   <div class="slideshow">
     <div id="slide1" class="slide"></div>
