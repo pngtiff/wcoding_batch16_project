@@ -17,4 +17,3 @@
         <p>No properties yet :)</p>
         <?php
     }
-    ?>
