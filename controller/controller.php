@@ -49,7 +49,6 @@ function listProperties() {
 
 function getLanding() {
     $properties = listProperties();
-
     require('./view/indexView.php');
 }
 
@@ -77,4 +76,10 @@ function updateUserData () {
 function updateLastActive() {
     $userM = new UserManager();
     $userM -> updateLastActive();
+}
+
+function search($city) {
+    $propertyM = new PropertyManager();
+    $properties = $propertyM->searchProperties($city);
+    require('./view/searchView.php');
 }
