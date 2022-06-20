@@ -115,6 +115,12 @@ class UserManager extends Manager {
 
     public function validateProfile()
     {
+        //Check image size
+        $uploadOk = 1;
+        if ($_FILES["uploadFile"]["size"] > 500000) {
+            $uploadOk = 0;
+        }
+
         // Check phone number
         !empty($_REQUEST['phoneNum']) and preg_match("/^\+?[0-9]{7,14}$/", $_REQUEST['phoneNum']) ? $phoneNum = ($_REQUEST['phoneNum']) : $phoneNum = null;
 
@@ -168,7 +174,7 @@ class UserManager extends Manager {
         !empty($_REQUEST['bio']) ? $bio = $_REQUEST['bio'] : $bio = null;
 
         //Check form
-        if ($phoneNum and $dob and $gender and $language and $bio) {
+        if ($uploadOk === 1 and $phoneNum and $dob and $gender and $language and $bio) {
             $this->newProfile();
         } else {
             header('Location:index.php?action=createProfile&createAccount=error');
@@ -176,7 +182,7 @@ class UserManager extends Manager {
     }
 
     // creates new user profile that will be inserted into users table
-    public function newProfile()
+    public function newProfile() 
     {
         $phoneNum = strval(strip_tags($_POST['phoneNum']));
         $dob = strip_tags($_POST['year']) . '-' . strip_tags($_POST['month']) . '-' . strip_tags($_POST['day']);

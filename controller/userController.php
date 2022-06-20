@@ -3,7 +3,7 @@
     use wcoding\batch16\finalproject\Model\UserManager;
 
     function createProfile() {
-        require('./view/createProfile.php');
+        !empty($_SESSION['email']) ? require('./view/createProfile.php') : header('Location: index.php?access=denied');
     }
     
     function checkProfile() {
