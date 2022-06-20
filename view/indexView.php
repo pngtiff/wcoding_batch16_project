@@ -8,7 +8,12 @@
 
   <div class="landingHeader">
     <h3 id="slogan">Your hassle-free housing search starts with Room-EZ</h3>
-  </div>   
+  </div> 
+  
+  <div id="searchBarContainer">
+      <input type="text" name="searchbar" id="searchBar" placeholder="Start your search here">
+      <button class="searchButton"><i class="fa-solid fa-magnifying-glass"></i></button>
+  </div>
 
   <div class="slideshow">
     <div id="slide1" class="slide"></div>
@@ -50,3 +55,4 @@
 <?php require("template.php") ?>
 
 <script src="./public/js/modal.js"></script> 
+<script src="./public/js/search.js"></script> 
