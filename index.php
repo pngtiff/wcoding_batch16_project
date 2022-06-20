@@ -6,6 +6,9 @@ require('controller/controller.php');
 session_start();
 try {
     $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : null;
+    if (!empty($_SESSION['email'])) {
+        updateLastActive();
+    }
     switch ($action){
         case 'googleOauth':
             googleOauth($_REQUEST);

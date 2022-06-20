@@ -91,23 +91,25 @@ class UserManager extends Manager {
         
     } 
 
-    // 'createProfile' - action to redirect to createProfile page
     public function googleOauth($credential) {
         $response = json_decode(base64_decode(str_replace('_', '/', str_replace('-','+',explode('.', $credential)[1]))));
         if ($response->aud != "864435133244-6p5l99hhn44afncpkpifoqsefdns9biv.apps.googleusercontent.com" OR $response->azp != "864435133244-6p5l99hhn44afncpkpifoqsefdns9biv.apps.googleusercontent.com" OR $response->iss != 'https://accounts.google.com') {
             throw(new Exception('Google Identification went wrong'));
         }
-        $res = $this->_connection->query("SELECT email, dob FROM users WHERE email='$response->email'");
+        $res = $this->_connection->query("SELECT email, dob, uid, profile_img FROM users WHERE email='$response->email'");
         $user = $res->fetch(\PDO::FETCH_ASSOC);
         $_SESSION['firstName'] = $response->given_name;
         $_SESSION['email'] = $response->email;
         // If user signed up they are redirected to the main page
         if ($user) {
+            $_SESSION['uid'] = $user['uid'];
+            $_SESSION['profileImg'] = $user['profile_img'];
             header('Location:index.php');
-            // Else they are redirected to createProfile page
+        // Else they are redirected to createProfile page
         } else {
-            $_SESSION['picture'] = $response->picture;
             $uid = $this->createUID();
+            $_SESSION['uid'] = $uid;
+            $_SESSION['profileImg'] = $response->picture;
             $this->_connection->exec("INSERT INTO users (email, first_name, last_name, uid) VALUES ('$response->email','$response->given_name','$response->family_name', '$uid')");
             header('Location:index.php?action=createProfile');
         }
@@ -308,5 +310,9 @@ class UserManager extends Manager {
 
 
         // array_diff($_REQUEST['language'], $this::LANGUAGES) === array() ? $language = implode(',', $_REQUEST['language']) : $language = null;
+    }
+
+    public function updateLastActive() {
+        $this->_connection->exec("UPDATE users SET last_online=NOW() WHERE email='{$_SESSION['email']}'");
     }
 }
