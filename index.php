@@ -6,6 +6,9 @@ require('controller/controller.php');
 session_start();
 try {
     $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : null;
+    if (!empty($_SESSION['email'])) {
+        updateLastActive();
+    }
     switch ($action){
         case 'googleOauth':
             googleOauth($_REQUEST);
@@ -34,10 +37,11 @@ try {
             listProperties();
             break;
         case 'signUp':
-            if(preg_match("/^[a-z0-9\_\-]+@[a-z0-9\_\-]{2,}\.[a-z]{2,4}$/i", $_POST['email'])  AND !empty($_POST['firstName']) AND !empty($_POST['lastName']) AND !empty($_POST['password']) AND !empty($_POST['passwordConfirm']) AND $_POST['passwordConfirm']==$_POST['password'] AND preg_match('/^(?=.*[!@#$%^&*-])(?=.*[0-9])(?=.*[A-Z]).{8,20}$/', $_POST['password']) AND preg_match('/^[A-Za-z]{2,}$/', $_POST['firstName'])AND preg_match('/^[A-Za-z]{2,}$/', $_POST['lastName'])) {
+            if(preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $_POST['email'])  AND !empty($_POST['firstName']) AND !empty($_POST['lastName']) AND !empty($_POST['password']) AND !empty($_POST['passwordConfirm']) AND $_POST['passwordConfirm']==$_POST['password'] AND preg_match('/^(?=.*[!@#$%^&*-])(?=.*[0-9])(?=.*[A-Z]).{8,20}$/', $_POST['password']) AND preg_match('/^[A-Za-z]{2,}$/', $_POST['firstName'])AND preg_match('/^[A-Za-z]{2,}$/', $_POST['lastName'])) {
                 signUp($_REQUEST);
             }
         break;
+        
         case 'createProfile':
             createProfile();
             break;
@@ -45,6 +49,27 @@ try {
         case 'checkProfile':
             checkProfile();
             break;
+
+            // loads prifileFormView
+        case 'modifyProfile':
+            
+                modifyProfile();
+            
+            break;
+
+            // trigger image uplodaing
+        case 'uploadImg': 
+            if (!empty($_FILES["uploadFile"]['name'])) {
+                uploadImg($_FILES['uploadFile']);
+                // if the upload button is clicked again, leads to the break page
+            }
+            break;
+
+            // trigger updating data
+        case 'updateUserData':
+            if (!empty($_REQUEST['language']) OR !empty($_REQUEST['phone_number']) OR !empty($_REQUEST['bio'])) {
+                updateUserData();
+            }
         default: 
             getLanding();
             break;
