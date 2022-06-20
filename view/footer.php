@@ -7,7 +7,29 @@
     <title>footer</title>
     <script src="https://kit.fontawesome.com/949df75f70.js" crossorigin="anonymous"></script>
 </head>
-<body>    
+<body>
+    <style>
+        footer{
+            display:flex;
+            width: 100%;
+            height: 15vh;
+            justify-content: center;
+        }
+
+        .contact{
+            line-height: 0.5;
+            width: 30%;
+        }
+
+        .termsContent, .privacyContent{
+            padding-top: 2%;
+            padding-left: 1%;
+            padding-right: 1%;
+            font-size: 150%;
+            overflow: scroll;
+        }
+    </style>
+
     <footer class="footer">
         <div class="contact">
             <h3>Contact</h3>

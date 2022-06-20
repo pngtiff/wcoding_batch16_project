@@ -7,8 +7,7 @@
 <section class="flexColumn">
 
   <div class="landingHeader">
-    <h1>Welcome to Room-EZ</h1>
-    <h3>Your hassle-free housing search starts with Room-EZ</h3>
+    <h3 id="slogan">Your hassle-free housing search starts with Room-EZ</h3>
   </div>
   
   <div id="searchBarContainer">
@@ -22,8 +21,8 @@
 
   <?php include('listPropertiesView.php'); ?> 
 
-
   <div id="intro">
+    <h3>About Us</h3>
     <p>Room E-Z is a no-frills service linking hosts with housing or rooms to rent and renters looking for a place in Korea anywhere from a month to a year</p>
     <p>Whether you're a host or a renter, post your profile and look for potential matches!</p>
   </div>

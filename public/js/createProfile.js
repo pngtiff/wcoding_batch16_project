@@ -64,11 +64,12 @@ file.addEventListener('change', function(){
 
 
 // test if user phone # is valid
-phoneNum.value.match(/^\+?[0-9]{7,14}$/) ? contact = true : contact = null;
+let regexp = /^\+?[0-9]{7,14}$/;
+let validNum = regexp.test(phoneNum.value);
 
 // list of years for birthday
 let currentYear = new Date().getFullYear();
-for (let i = currentYear; i >= currentYear - 120; i--) {
+for (let i = currentYear - 19; i >= currentYear - 120; i--) {
     let option = document.createElement("option");
     option.value = i;
     option.textContent = i;
@@ -85,12 +86,12 @@ years.addEventListener('change', () => {
     checkDays();
 })
 
-// if (!contact || !gender || !languages.value || !bio.value) {
-//     profileForm.addEventListener('submit', (e) => {
-//         e.preventDefault();
-//         let alert = document.querySelector('#newProfile p');
-//         if (!alert.textContent) {
-//             alert.textContent = "Please fill out all fields";
-//         }
-//     })
-// }
+profileForm.addEventListener('submit', (e) => {
+    if (!(validNum || gender.value || languages.value || bio.value)) {
+        e.preventDefault();
+        let alert = document.querySelector('#newProfile p');
+        if (!alert.textContent) {
+            alert.textContent = "Please fill out all fields";
+        }
+    } 
+})
