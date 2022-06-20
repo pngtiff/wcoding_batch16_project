@@ -12,7 +12,7 @@
   </div>
   
   <div id="searchBarContainer">
-      <input type="text" name="searchbar" id="searchBar" placeholder="Start your search here">
+      <input type="text" name="searchbar" id="searchBar" placeholder="Start your search here" >              
   </div>
 
   <div class="slideshow">
