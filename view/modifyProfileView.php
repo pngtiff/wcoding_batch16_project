@@ -3,7 +3,8 @@
 
 
 <?php ob_start();?>
-<div class = "personalInformationContainer">
+<section>
+<div class = "personalInformationContainer profileFormsBorder">
     <h2>Modify Profile</h2>
 
     <form action="index.php" method = "POST" id = "photoForm" enctype="multipart/form-data">
@@ -18,8 +19,8 @@
 
     <form action="index.php" method = "POST">
     
-        <div>    
-            <label for="language">Which languages do you speak? (hold CMD/Ctrl to select multiple)</label>
+        <div id="langDetails">    
+            <label for="language">Which languages do you speak? <span>(hold CMD/Ctrl to select multiple)</span></label>
             <select id="language" name="language[]" multiple>
                 <option value="HK">Cantonese</option>
                 <option value="ZH">Chinese(Mandarin)</option>
@@ -56,6 +57,7 @@
 
     </form>
 </div>
+</section>
 
 <script src="public/js/modifyProfile.js"></script>
 <?php $content = ob_get_clean();?>

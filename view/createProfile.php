@@ -2,14 +2,17 @@
 
 <?php ob_start(); ?>
 <section>
-<form action="index.php?action=checkProfile" method="POST" id="newProfile" enctype="multipart/form-data">
+<form action="index.php?action=checkProfile" method="POST" id="newProfile" enctype="multipart/form-data" class="profileFormsBorder">
     <h1>Let's create a profile for you</h1>
-    <div id="profilePhoto">
-        <div>
-            
+    <div>
+
+        <div id="profilePhoto">
+            <div>
+                
+                </div>
         </div>
-        <input type="file" id="file" name="uploadFile">
-        <label for="file" class="customFileButton">Upload Profile Photo</label>
+            <input type="file" id="file" name="uploadFile">
+            <label for="file" class="customFileButton">Upload Profile Photo</label>
     </div>
     <div class="flexRow">
         <div id="createProfileDetails">
@@ -51,7 +54,7 @@
             </div>
         </div>
 
-        <div id="rightDetails">
+        <div id="langDetails">
             <div>
                 <label for="language">Which languages do you speak? <span>(hold CMD/Ctrl to select multiple)</span></label>
                 <select id="language" name="language[]" multiple>
