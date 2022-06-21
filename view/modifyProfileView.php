@@ -1,24 +1,36 @@
 
-<?php $title = "Welcome to Room-EZ";?>
+<?php $title = "Modify Profile";?>
 
 
 <?php ob_start();?>
 <section>
-    <div class = "personalInformationContainer">
+    <div class = "personalInformationContainer profileFormsBorder">
         <h2>Modify Profile</h2>
     
-        <form action="index.php" method = "POST" id = "photoForm" enctype="multipart/form-data">
-            <div id = "profilePhoto">
-                <img src= "./profile_images/<?php echo $_SESSION['fileName']; ?>" id = "photo" />
-                <input type="file" id = "file" name = "uploadFile">
-                <label for="file" id = "uploadButton">Choose Photo</label>
+        <!-- <form action="index.php" method = "POST" id = "photoFormM" enctype="multipart/form-data">
+            <div id = "profilePhotoM">
+                <img id = "photoM" src= ""/>
+                <input type="file" id = "fileM" name = "uploadFile">
+                <label for="fileM" id = "uploadButtonM">Choose Photo</label>
             </div>
             <input type="submit" name="submit" value="Upload" id ="sendPhotoButton">
             <input type="hidden" name="action" value="uploadImg">
         </form>
-    
-        <form action="index.php" method = "POST" id = "modifyForm">
-            <div>    
+     -->
+     
+        <form action="index.php" method = "POST" id = "modifyFormM" enctype="multipart/form-data">
+            
+            <div id = "phtoFormM">
+                <div id = "profilePhotoM">
+                    <img id = "photoM" src= "<?php if($_SESSION['folder']) {echo $_SESSION['folder'];} else { echo $_SESSION['profileImgLocation'];}?>"/>
+                    <input type="file" id = "fileM" name = "uploadFile">
+                    <label for="fileM" id = "uploadButtonM">Choose Photo</label>
+                    
+                    <input type="hidden" name="action" value="uploadImg">
+                </div>
+            </div>
+            
+            <div id = "languageSelection">    
                 <label for="language">Which languages do you speak? (hold CMD/Ctrl to select multiple)</label>
                 <select id="language" name="language[]" multiple>
                     <option value="HK">Cantonese</option>
@@ -39,25 +51,24 @@
                 </select>
             </div>
     
-            <div>
-                <label for="phone_number">Phone Number</label>
-                <input type="text" id = "phone_number"  class = "box" name = "phone_number">
+            <div class = "container phoneNumberMod ">
+                <label for="phoneNumberM" class = "labelM">Phone Number</label>
+                <input type="text" id = "phoneNumberM"  class = "boxM" name = "phone_number">
             </div>
     
-            <div>
-                <label for="bio">Introduce Yourself</label>
-                <input type="text" id = "bio"  class = "box" name = "bio">
+            <div class = "container bioMod ">
+                <label for="bio" class = "labelM">Introduce Yourself</label>
+                <input type="textarea" id = "bioM"  class = "boxM" name = "bio" placeholder="Modify your bio" rows="4">
             </div>
-    
+
             <div id = "buttonContainer">
                 <button type = "submit" class = "modifyFormButtons">Save</button>
             </div>
             <input type="hidden" name="action" value="updateUserData">
-    
         </form>
     </div>
-    <p></p>
 </section>
+<p></p>
 
 <script src="public/js/modifyProfile.js"></script>
 <?php $content = ob_get_clean();?>

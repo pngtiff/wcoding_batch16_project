@@ -68,6 +68,7 @@ class UserManager extends Manager {
         }
         return $uid;
     }
+
     public function signUp($firstName, $lastName, $email, $password){
         $firstName = addslashes(htmlspecialchars(htmlentities(trim($firstName))));
         $lastName = addslashes(htmlspecialchars(htmlentities(trim($lastName))));
@@ -187,7 +188,6 @@ class UserManager extends Manager {
         $bio = strip_tags($_POST['bio']);
 
         if (!empty($_FILES["uploadFile"]["name"])) {
-
             // Get file info 
             $fileName = $_FILES["uploadFile"]["name"];
             $fileLocation = $_FILES["uploadFile"]["tmp_name"];
@@ -233,24 +233,24 @@ class UserManager extends Manager {
         return $user;
     } 
 
-    public function uploadImg($file) {
-        // Get file info 
-        $fileName = $file["name"]; 
-        $fileLocation = $file["tmp_name"];
-        $folder = "./profile_images/" . basename($fileName);
-        
-        if (move_uploaded_file($fileLocation, $folder)) {
-            header("Location: index.php?action=modifyProfile");
-        } else {
+    public function updateUserData() {
+
+        // ============Update profile phpto =====//
+        //==========================================//
+        //==========================================//
+
+        // Get file info
+        if (!empty($_FILES["uploadFile"]["name"])) {
+            $fileName = $_FILES["uploadFile"]["name"];
+            $fileLocation = $_FILES["uploadFile"]["tmp_name"];
+            // $bytes = bin2hex(random_bytes(16));
+            // $newName = rename($fileName, $bytes);
+            $folder = "./public/images/profile_images/" . basename($fileName);
+            move_uploaded_file($fileLocation, $folder);
+
+        } else{
             throw(new Exception('Failed to upload a file'));
         }
-
-        session_start();
-        $_SESSION['folder'] = $folder;
-        $_SESSION['fileName'] = $fileName;
-    }
-
-    public function updateUserData() {
 
         // copy the information of the current profile //
         //==========================================//
@@ -260,6 +260,7 @@ class UserManager extends Manager {
 
         $data = $req->fetch(\PDO::FETCH_ASSOC);
 
+        $uid = $data['uid'];
         $firstName = $data['first_name'];
         $lastName = $data['last_name'];
         $email = $data['email'];
@@ -267,6 +268,12 @@ class UserManager extends Manager {
         $dob = $data['dob'];
         $gender = $data['gender'];
         $dateCreated = $data['date_created'];
+        $profileImgLocation = $data['profile_img']; // previous user profile img
+
+        session_start();
+        $_SESSION['profileImgLocation'] = $profileImgLocation;
+        $_SESSION['folder'] = $folder;
+        $_SESSION['fileName'] = $fileName;
 
         // update is_active status from 1 -> 0 =====//
         //==========================================//
@@ -274,20 +281,16 @@ class UserManager extends Manager {
         $req2->execute();
 
 
-        //=Insert the modified + inherited data=====//
-        //==========================================//
+        //====Insert the modified + inherited data=====//
         //==========================================//
 
         // modified profile
-        // $languages = ($_REQUEST['languages'] = null) ?  $data['languages'] : $_POST['languages'];
+        // $language =  ($_REQUEST['language'] = null) ? $data['languages'] :  strip_tags(implode(',', $_REQUEST['language']));
         $language = strip_tags(implode(',', $_REQUEST['language']));
         $phoneNumber = ($_REQUEST['phone_number'] = null) ?  $data['phone_number'] : $_POST['phone_number'];
         $bio = ($_REQUEST['bio'] = null) ?  $data['bio'] : $_POST['bio'];
         $status = 1;
-        $uid = "random"; 
-        session_start();
-        $profileImg =  $_SESSION['folder'];
-        
+
         $reqInsert = $this->_connection->prepare("INSERT INTO users (uid, first_name, last_name, email, password, dob, gender, languages, bio, phone_number, profile_img, is_active, date_created)
         VALUES ( :inuid, :infirst, :inlast, :inemail, :inpassword, :indob, :ingender, :inlanguages, :inbio, :inphoneNumber, :inprofileImg, :inactiveStatus, '$dateCreated') ");
 
@@ -296,7 +299,7 @@ class UserManager extends Manager {
         $reqInsert->bindParam("inphoneNumber", $phoneNumber, \PDO::PARAM_STR);
         $reqInsert->bindParam("inbio", $bio, \PDO::PARAM_STR);
         $reqInsert->bindParam("inactiveStatus", $status, \PDO::PARAM_INT);
-        $reqInsert->bindParam("inprofileImg", $profileImg, \PDO::PARAM_STR);
+        $reqInsert->bindParam("inprofileImg", $folder, \PDO::PARAM_STR);
         $reqInsert->bindParam("inuid", $uid, \PDO::PARAM_STR);
 
         // insert inherited from the previous data
@@ -310,9 +313,6 @@ class UserManager extends Manager {
         $reqInsert->execute();
 
         header("Location: index.php?action=modifyProfile");
-
-
-        // array_diff($_REQUEST['language'], $this::LANGUAGES) === array() ? $language = implode(',', $_REQUEST['language']) : $language = null;
     }
 
     public function updateLastActive() {

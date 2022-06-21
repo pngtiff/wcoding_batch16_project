@@ -1,9 +1,9 @@
 // delcaration
 
-const imgDiv = document.querySelector('#profilePhoto');
-const img = document.querySelector('#photo');
-const file = document.querySelector('#file');
-const uploadButton = document.querySelector('#uploadButton');
+const imgDiv = document.querySelector('#profilePhotoM');
+const img = document.querySelector('#photoM');
+const file = document.querySelector('#fileM');
+const uploadButton = document.querySelector('#uploadButtonM');
 
 // if user hovers on the profile photo, display the choose photo button
 imgDiv.addEventListener('mouseenter', function(){
@@ -16,19 +16,18 @@ imgDiv.addEventListener('mouseleave', function(){
 
 
 // change the photo by choosing the different files
-
 file.addEventListener('change', function(){   
     // refers to the file
-    const choosedFile = this.files[0];
+    const chosenFile = this.files[0];
 
-    if(choosedFile){
+    if(chosenFile){
         const reader = new FileReader();
 
         reader.addEventListener('load', function(){
             img.setAttribute('src', reader.result);
         });
 
-        reader.readAsDataURL(choosedFile);
+        reader.readAsDataURL(chosenFile);
     }
 
 });
