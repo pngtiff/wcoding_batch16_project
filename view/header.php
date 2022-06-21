@@ -23,7 +23,8 @@
                     <a href="">Become a Host</a>
                     <a href="">Post a New Listing</a>
                 </div>
-            </div> 
+            </div>
+           
             <div class="dropdown">
                 <button class="dropbtn">About Us</button>
                 <div class="dropdown-content">
