@@ -119,6 +119,10 @@
 }
 
 #language {
+<<<<<<< HEAD
+=======
+    height: 6.5rem;
+>>>>>>> master
     width: 15.5rem;
     padding: 0.25rem 0.5rem;
     font-size: 1rem;
@@ -129,10 +133,13 @@
     font-size: 0.8rem;
 }
 
+<<<<<<< HEAD
 .selected {
     background-color: rgba(128, 128, 128, 0.4);
 }
 
+=======
+>>>>>>> master
 #bio, #userBio {
     height: 4rem;
     width: 68rem;

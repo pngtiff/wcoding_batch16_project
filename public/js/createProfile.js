@@ -47,8 +47,13 @@ let imgContainer = document.querySelector('#profilePhoto div');
 
 
 // change the photo by choosing the different files
+<<<<<<< HEAD
 file.addEventListener('change', function () {
     imgContainer.innerHTML = "";
+=======
+file.addEventListener('change', function(){   
+    imgContainer.innerHTML="";
+>>>>>>> master
     const chosenFile = this.files[0];
     let fileSize = chosenFile.size;
     let fileType = chosenFile.name.split('.').pop();

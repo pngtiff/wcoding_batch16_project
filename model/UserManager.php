@@ -123,11 +123,17 @@ class UserManager extends Manager
     {
         //Check image size and file type
         $uploadOk = 1;
+<<<<<<< HEAD
         $imageFileType = strtolower(pathinfo($_FILES['uploadFile']['name'], PATHINFO_EXTENSION));
         if ($_FILES['uploadFile']['name']) {
             if ($_FILES['uploadFile']['size'] > 500000 or ($imageFileType != "jpg" and $imageFileType != "png" and $imageFileType != "jpeg" and $imageFileType != "webp")) {
                 $uploadOk = 0;
             } 
+=======
+        $imageFileType = strtolower(pathinfo($_FILES['uploadFile']['name'],PATHINFO_EXTENSION));
+        if ($_FILES['uploadFile']['size'] > 500000 or ($imageFileType != "jpg" and $imageFileType != "png" and $imageFileType != "jpeg" and $imageFileType != "webp" AND $imageFileType != null)) {
+            $uploadOk = 0;
+>>>>>>> master
         }
 
         // Check phone number
@@ -208,10 +214,17 @@ class UserManager extends Manager
             $extension  = $fileName['extension'];
             $fileLocation = $_FILES["uploadFile"]["tmp_name"];
             $bytes = bin2hex(random_bytes(16)); // generates secure pseudo random bytes and bin2hex converts to hexadecimal string
+<<<<<<< HEAD
             $imgName = $bytes . "." . $extension;
             move_uploaded_file($fileLocation, "./profile_images/" . $imgName);
         } else {
             $imgName = null;
+=======
+            $imgName = $bytes.".".$extension;
+            move_uploaded_file($fileLocation, "./profile_images/" . $imgName);
+        } else {
+             $imgName = "defaultProfile.png";
+>>>>>>> master
         }
 
         $req = $this->_connection->prepare("UPDATE users SET phone_number=:phoneNum, dob=:dob, gender=:gender, languages=:lang, bio=:bio, profile_img=:userImg WHERE email='{$_SESSION['email']}'");
