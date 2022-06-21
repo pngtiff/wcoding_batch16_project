@@ -23,6 +23,16 @@
                     <a href="">Become a Host</a>
                     <a href="">Post a New Listing</a>
                 </div>
+<<<<<<< HEAD
+            </div>
+            <div class="dropdown4">
+                <button class="dropbtn4">Account</button>
+                <div class="dropdown-content4">
+                    <a href="index.php?action=profile&user=2">View My Profile</a> 
+                    <!-- TODO: change to action -->
+                    <a href="index.php?action=modifyProfile">Edit My Profile</a>
+                    <a href="">Logout</a>
+=======
             </div> 
             <div class="dropdown">
                 <button class="dropbtn">About Us</button>
@@ -30,6 +40,7 @@
                     <a href="#intro">Who are we?</a>
                     <a href="">What do we do?</a>
                     <a href=".contact">Contact us</a>
+>>>>>>> master
                 </div>
             </div>
 
