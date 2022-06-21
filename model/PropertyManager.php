@@ -42,20 +42,6 @@ class PropertyManager extends Manager {
         return $properties;
     }
 
-<<<<<<< HEAD
-
-    // SEARCH FUNCTION : $search = "search" get parameter called from router
-
-    public function searchProperties($search, $rangeMin, $rangeMax, $propertyType, $roomType) {
-
-        $search = ($search == "anywhere") ? "%%" : $search; //// If search input is empty, show all results ("%%" is regex that catches any string)
-        $rangeMin = ($rangeMin == "any") ? 0 : $rangeMin;
-        $rangeMax = ($rangeMax == "any") ? 1000000000 : $rangeMax; /// default number large enough to catch all properties
-        $propertyType = ($propertyType == "any") ? "%%" : $propertyType;
-        $roomType = ($roomType == "any") ? "%%" : $roomType;
-
-        $req = $this->_connection->prepare('SELECT * FROM properties WHERE (city LIKE :inSearch OR province_state LIKE :inSearch) AND monthly_price_won >= :inRangeMin AND monthly_price_won <= :inRangeMax AND property_type_id LIKE :inPropertyType AND room_type_id LIKE :inRoomType');
-=======
     // Single property detail for property listing page
     public function getProperty($propId) {
         $req = $this->_connection->prepare("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.city, p.address1, p.address2, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.img_url AS p_img, pi.description AS image_description
@@ -80,7 +66,7 @@ class PropertyManager extends Manager {
 
     public function searchProperties($search, $rangeMin, $rangeMax, $propertyType, $roomType) {
 
-        $search = ($search == "any") ? "%%" : $search; //// If search input is empty, show all results ("%%" is regex that catches any string)
+        $search = ($search == "anywhere") ? "%%" : $search; //// If search input is empty, show all results ("%%" is regex that catches any string)
         $rangeMin = ($rangeMin == "any") ? 0 : $rangeMin;
         $rangeMax = ($rangeMax == "any") ? 1000000000 : $rangeMax; /// default number large enough to catch all properties
         $propertyType = ($propertyType == "any") ? "%%" : $propertyType;
@@ -95,7 +81,6 @@ class PropertyManager extends Manager {
         LEFT JOIN property_imgs pi
         ON p.id = pi.property_id
         WHERE p.is_active = 1 AND (city LIKE :inSearch OR province_state LIKE :inSearch) AND monthly_price_won >= :inRangeMin AND monthly_price_won <= :inRangeMax AND property_type_id LIKE :inPropertyType AND room_type_id LIKE :inRoomType");
->>>>>>> master
         $req->bindParam('inSearch', $search);
         $req->bindParam('inRangeMin', $rangeMin);
         $req->bindParam('inRangeMax', $rangeMax);

@@ -23,12 +23,8 @@
                     <a href="">Become a Host</a>
                     <a href="">Post a New Listing</a>
                 </div>
-<<<<<<< HEAD
-            </div> 
-=======
             </div>
            
->>>>>>> master
             <div class="dropdown">
                 <button class="dropbtn">About Us</button>
                 <div class="dropdown-content">
@@ -39,7 +35,7 @@
             </div>
 
             <div id="searchBarContainer">
-                <input type="search" name="searchbar" id="searchBar" placeholder="Type a City or Province to get started !" value = "<?php if (isset($_REQUEST['search']) && $_REQUEST['search'] != "any") { echo $_REQUEST['search']; } ?>"> 
+                <input type="search" name="searchbar" id="searchBar" placeholder="Type a City or Province to get started !" value = "<?php if (isset($_REQUEST['search']) && $_REQUEST['search'] != "anywhere") { echo $_REQUEST['search']; } ?>"> 
                 <select name="rentRange" id="rentRange" class="filter">
                     <option value="any">Price Range :</option>
                     <option value="500000">Less than 500k/month</option>
