@@ -24,11 +24,11 @@
     <?php include('listPropertiesView.php'); ?> 
   </div>
 
-  <div id="intro">
+  <!-- <div id="intro">
     <h3>About Us</h3>
     <p>Room E-Z is a no-frills service linking hosts with housing or rooms to rent and renters looking for a place in Korea anywhere from a month to a year</p>
     <p>Whether you're a host or a renter, post your profile and look for potential matches!</p>
-  </div>
+  </div> -->
 </section>
   
 
