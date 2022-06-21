@@ -1,7 +1,7 @@
 /////////// trigger search on icon click//////////////
 
 document.querySelector(".searchButton").addEventListener("click", function(e) {
-    let search = (document.querySelector("#searchBar").value != "") ? document.querySelector("#searchBar").value : "any"////// content of the search bar
+    let search = (document.querySelector("#searchBar").value != "") ? document.querySelector("#searchBar").value : "anywhere"////// content of the search bar
     let rangeMin = (document.querySelector("#rentRange").value != "any") ? parseInt(document.querySelector("#rentRange").value)-500000 : "any"
     let rangeMax = (document.querySelector("#rentRange").value != "any") ? parseInt(document.querySelector("#rentRange").value) : "any"
     let propertyType = (document.querySelector("#propertyType").value != "any") ? document.querySelector("#propertyType").value : "any"
@@ -18,7 +18,7 @@ document.getElementById("searchBar").addEventListener("keyup", function(e) {
     
     if (e.key == "Enter")
     {
-        let search = (document.querySelector("#searchBar").value != "") ? document.querySelector("#searchBar").value : "any"////// content of the search bar
+        let search = (document.querySelector("#searchBar").value != "") ? document.querySelector("#searchBar").value : "anywhere" ////// content of the search bar
         let rangeMin = (document.querySelector("#rentRange").value != "any") ? parseInt(document.querySelector("#rentRange").value)-500000 : "any"
         let rangeMax = (document.querySelector("#rentRange").value != "any") ? parseInt(document.querySelector("#rentRange").value) : "any"
         let propertyType = (document.querySelector("#propertyType").value != "any") ? document.querySelector("#propertyType").value : "any"
