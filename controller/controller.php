@@ -70,3 +70,9 @@ function updateLastActive() {
     $userM = new UserManager();
     $userM -> updateLastActive();
 }
+
+function search($city) {
+    $propertyM = new PropertyManager();
+    $properties = $propertyM->searchProperties($city);
+    require('./view/searchView.php');
+}

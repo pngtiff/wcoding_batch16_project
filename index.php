@@ -64,8 +64,10 @@ try {
             if (!empty($_REQUEST['language']) OR !empty($_REQUEST['phone_number']) OR !empty($_REQUEST['bio']) OR !empty($_FILES["uploadFile"]["name"])) {
                 updateUserData();
             }
+            //Search//
+        case 'search':
+            search($_REQUEST['city']);
             break;
-            
         default: 
             getLanding();
             break;

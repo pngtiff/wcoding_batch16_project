@@ -73,7 +73,7 @@ class UserManager extends Manager {
         $firstName = addslashes(htmlspecialchars(htmlentities(trim($firstName))));
         $lastName = addslashes(htmlspecialchars(htmlentities(trim($lastName))));
         $email = addslashes(htmlspecialchars(htmlentities(trim($email))));
-        $password =  password_hash(htmlspecialchars($password), PASSWORD_DEFAULT);
+        $password = password_hash(htmlspecialchars($password), PASSWORD_DEFAULT);
         $uid = $this->createUID(); 
 
             $response = $this->_connection->query("SELECT email, first_name, last_name FROM users WHERE email='$email'");
@@ -118,6 +118,13 @@ class UserManager extends Manager {
 
     public function validateProfile()
     {
+        //Check image size and file type
+        $uploadOk = 1;
+        $imageFileType = strtolower(pathinfo($_FILES['uploadFile']['name'],PATHINFO_EXTENSION));
+        if ($_FILES['uploadFile']['size'] > 500000 or ($imageFileType != "jpg" and $imageFileType != "png" and $imageFileType != "jpeg" and $imageFileType != "webp" AND $imageFileType != null)) {
+            $uploadOk = 0;
+        }
+
         // Check phone number
         !empty($_REQUEST['phoneNum']) and preg_match("/^\+?[0-9]{7,14}$/", $_REQUEST['phoneNum']) ? $phoneNum = ($_REQUEST['phoneNum']) : $phoneNum = null;
 
@@ -171,7 +178,7 @@ class UserManager extends Manager {
         !empty($_REQUEST['bio']) ? $bio = $_REQUEST['bio'] : $bio = null;
 
         //Check form
-        if ($phoneNum and $dob and $gender and $language and $bio) {
+        if ($uploadOk === 1 and $phoneNum and $dob and $gender and $language and $bio) {
             $this->newProfile();
         } else {
             header('Location:index.php?action=createProfile&createAccount=error');
@@ -179,7 +186,7 @@ class UserManager extends Manager {
     }
 
     // creates new user profile that will be inserted into users table
-    public function newProfile()
+    public function newProfile() 
     {
         $phoneNum = strval(strip_tags($_POST['phoneNum']));
         $dob = strip_tags($_POST['year']) . '-' . strip_tags($_POST['month']) . '-' . strip_tags($_POST['day']);
@@ -189,17 +196,14 @@ class UserManager extends Manager {
 
         if (!empty($_FILES["uploadFile"]["name"])) {
             // Get file info 
-            $fileName = $_FILES["uploadFile"]["name"];
+            $fileName = pathinfo($_FILES["uploadFile"]["name"]);
+            $extension  = $fileName['extension'];
             $fileLocation = $_FILES["uploadFile"]["tmp_name"];
-            $bytes = bin2hex(random_bytes(16));
-            $newName = rename($fileName, $bytes);
-            $folder = "./public/images/profile_images/" . basename($newName);
-
-            move_uploaded_file($fileLocation, $folder);
-
+            $bytes = bin2hex(random_bytes(16)); // generates secure pseudo random bytes and bin2hex converts to hexadecimal string
+            $imgName = $bytes.".".$extension;
+            move_uploaded_file($fileLocation, "./profile_images/" . $imgName);
         } else {
-
-            $folder = "./public/images/profile_images/defaultUser.png";
+             $imgName = "defaultProfile.png";
         }
 
         $req = $this->_connection->prepare("UPDATE users SET phone_number=:phoneNum, dob=:dob, gender=:gender, languages=:lang, bio=:bio, profile_img=:userImg WHERE email='{$_SESSION['email']}'");

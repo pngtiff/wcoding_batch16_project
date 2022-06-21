@@ -6,17 +6,6 @@
 <section>
     <div class = "personalInformationContainer profileFormsBorder">
         <h2>Modify Profile</h2>
-    
-        <!-- <form action="index.php" method = "POST" id = "photoFormM" enctype="multipart/form-data">
-            <div id = "profilePhotoM">
-                <img id = "photoM" src= ""/>
-                <input type="file" id = "fileM" name = "uploadFile">
-                <label for="fileM" id = "uploadButtonM">Choose Photo</label>
-            </div>
-            <input type="submit" name="submit" value="Upload" id ="sendPhotoButton">
-            <input type="hidden" name="action" value="uploadImg">
-        </form>
-     -->
      
         <form action="index.php" method = "POST" id = "modifyFormM" enctype="multipart/form-data">
             
@@ -25,7 +14,6 @@
                     <img id = "photoM" src= "<?php if($_SESSION['folder']) {echo $_SESSION['folder'];} else { echo $_SESSION['profileImgLocation'];}?>"/>
                     <input type="file" id = "fileM" name = "uploadFile">
                     <label for="fileM" id = "uploadButtonM">Choose Photo</label>
-                    
                     <input type="hidden" name="action" value="uploadImg">
                 </div>
             </div>
@@ -71,7 +59,7 @@
 <p></p>
 
 <script src="public/js/modifyProfile.js"></script>
-<?php $content = ob_get_clean();?>
-<?php require('template.php');?>
+<?php $content = ob_get_clean(); ?>
+<?php require('template.php'); ?>
 
 <!-- /Applications/XAMPP/xamppfiles/htdocs/sites/batch16_project/view/modifyProfileView.php on line 11" id = "photo" /> -->

@@ -7,13 +7,13 @@
     <title><?=$title;?></title>
     <link rel="stylesheet" href="public/style/style.css">
     <link rel="stylesheet" href="public/style/properties.css">
+    <link rel="stylesheet" href="public/style/searchResults.css">
     <link rel="stylesheet" href="public/style/profile.css">
     <link rel="stylesheet" href="public/style/signUp.css">
     <link rel="stylesheet" href="public/style/modal.css">
     <link rel="stylesheet" href="public/style/indexView.css">
-    <link rel="stylesheet" href="public/style/createProfile.css">
-    <link rel="stylesheet" href="public/style/modifyProfile.css">
     <link rel="stylesheet" href="public/style/header.css">
+    <link rel="stylesheet" href="public/style/footer.css">
     <!-- <script src="https://accounts.google.com/gsi/client"></script> -->
 </head>
 <body class="flexColumn">
