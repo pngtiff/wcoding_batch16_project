@@ -117,7 +117,7 @@ class UserManager extends Manager {
 
     public function validateProfile()
     {
-        //Check image size
+        //Check image size and file type
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($_FILES['uploadFile']['name'],PATHINFO_EXTENSION));
         if ($_FILES['uploadFile']['size'] > 500000 or ($imageFileType != "jpg" and $imageFileType != "png" and $imageFileType != "jpeg" and $imageFileType != "webp" AND $imageFileType != null)) {

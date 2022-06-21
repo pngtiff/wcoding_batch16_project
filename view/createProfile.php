@@ -78,7 +78,7 @@
             </div>
         </div>
         <div>
-            <input type="textarea" id="bio" name="bio" placeholder="Write about yourself" rows="4">
+            <input type="textarea" id="bio" name="bio" placeholder="Introduce yourself" rows="4">
         </div>
         <input type="submit" id="create" name="create" value="Create profile">
     </form>
