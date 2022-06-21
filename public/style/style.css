@@ -33,11 +33,6 @@ input, select {
     font-family: inherit;
 }
 
-.flexColumn {
-    width: 100%;
-    display: flex;
-    /* justify-content: center; */
-}
 
 
 button, input[type=submit] {
@@ -75,4 +70,5 @@ section
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
 }

@@ -6,7 +6,7 @@
             <a href="index.php">
             <img src="public/images/output-onlinepngtools.png" alt="logo" width="90px" height="90px">
             </a>
-        </div>
+        </div>`
         <nav class="nav">
             <div class="dropdown2">
                 <button class="dropbtn2">Browse</button>
@@ -23,16 +23,6 @@
                     <a href="">Become a Host</a>
                     <a href="">Post a New Listing</a>
                 </div>
-<<<<<<< HEAD
-            </div>
-            <div class="dropdown4">
-                <button class="dropbtn4">Account</button>
-                <div class="dropdown-content4">
-                    <a href="index.php?action=profile&user=2">View My Profile</a> 
-                    <!-- TODO: change to action -->
-                    <a href="index.php?action=modifyProfile">Edit My Profile</a>
-                    <a href="">Logout</a>
-=======
             </div> 
             <div class="dropdown">
                 <button class="dropbtn">About Us</button>
@@ -40,22 +30,34 @@
                     <a href="#intro">Who are we?</a>
                     <a href="">What do we do?</a>
                     <a href=".contact">Contact us</a>
->>>>>>> master
                 </div>
             </div>
 
             <div id="searchBarContainer">
-                <input type="search" name="searchbar" id="searchBar" placeholder="Start your search here">
+                <input type="search" name="searchbar" id="searchBar" placeholder="Type a City or Province to get started !" value = "<?php if (isset($_REQUEST['search']) && $_REQUEST['search'] != "any") { echo $_REQUEST['search']; } ?>"> 
+                <select name="rentRange" id="rentRange" class="filter">
+                    <option value="any">Price Range :</option>
+                    <option value="500000">Less than 500k/month</option>
+                    <option value="1000000">Between 500k and 1M/ month</option>
+                    <option value="1500000">Between 1M and 1.5M month</option>
+                </select>
+                <select name="propertyType" id="propertyType" class="filter">
+                    <option value="any">Type of Property :</option>
+                    <option value="1">Apartment</option>
+                    <option value="2">Officetel</option>
+                    <option value="3">Villa</option>
+                    <option value="4">House</option>
+                    <option value="5">Shared House</option>
+                    <option value="6">Residential Hotel</option>
+                </select>
+                <select name="roomType" id="roomType" class="filter">
+                    <option value="any">Room Type :</option>
+                    <option value="1">Private Room</option>
+                    <option value="2">Shared Room</option>
+                    <option value="3">Entire Place</option>
+                </select>
                 <button class="searchButton"><img src="public/images/magnifying_glass.png" id="magnifying"></button>
              </div>
-
-            <!-- <form action="" method="POST" class="form">
-              <input type="search" placeholder="Enter your search here" class="searchField" />
-              <button type="submit" class="searchButton">
-                    <img src="public/images/magnifying_glass.png" id="magnifying">
-            
-              </button>
-            </form> -->
             
         </nav>
         <div class="signInUp">
