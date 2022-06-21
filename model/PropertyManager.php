@@ -42,4 +42,8 @@ class PropertyManager extends Manager {
         $req->closeCursor();
         return $properties;
     }
+
+    public function postProperty() {
+        
+    }
 }

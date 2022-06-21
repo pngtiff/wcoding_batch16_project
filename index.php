@@ -70,6 +70,16 @@ try {
             if (!empty($_REQUEST['language']) OR !empty($_REQUEST['phone_number']) OR !empty($_REQUEST['bio'])) {
                 updateUserData();
             }
+            break;
+        case 'postProperty': 
+            // if (!empty($_REQUEST) AND !empty($_SESSION['email']));
+            print_r($_REQUEST);
+            break;
+        case 'viewPostProperty':
+            // if ($_SESSION['email']) {
+                viewPostProperty();
+            // }
+            break;
         default: 
             getLanding();
             break;

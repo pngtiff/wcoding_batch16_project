@@ -71,3 +71,12 @@ function updateLastActive() {
     $userM = new UserManager();
     $userM -> updateLastActive();
 }
+
+function postProperty($params) {
+    $propertyM = new PropertyManager();
+    $propertyM->postProperty();
+}
+
+function viewPostProperty() {
+    require('view/postPropertyView.php');
+}

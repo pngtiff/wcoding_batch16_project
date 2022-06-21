@@ -109,7 +109,6 @@ class UserManager extends Manager {
         } else {
             $uid = $this->createUID();
             $_SESSION['uid'] = $uid;
-            $_SESSION['profileImg'] = $response->picture;
             $this->_connection->exec("INSERT INTO users (email, first_name, last_name, uid) VALUES ('$response->email','$response->given_name','$response->family_name', '$uid')");
             header('Location:index.php?action=createProfile');
         }
