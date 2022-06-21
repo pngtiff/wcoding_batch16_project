@@ -1,4 +1,4 @@
-<a href="index.php?action=property&room=<?= $property['id'];?>">
+<a href="index.php?action=property&propId=<?= $property['id'];?>">
     <div class='property'>
         <div class='propertyImgContainer'><img alt="property main image" src="<?= $property['p_img'];?>"></div>
         <div id='propertyDetails'>

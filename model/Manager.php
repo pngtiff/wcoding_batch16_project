@@ -29,14 +29,6 @@ class Manager {
     public function setUserId($userId) {
         $this->_user_id = $userId;
     }
-
-    public function getPropId() {
-        return $this->_prop_id;
-    }
-
-    public function setPropId($propId){
-        $this->_prop_id = $propId;
-    }
     
     public function getLangauges($langCode) {
         foreach($this::LANGUAGES as $key=>$language) {

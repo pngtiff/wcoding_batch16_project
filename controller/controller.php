@@ -52,9 +52,9 @@ function getLanding() {
     require('./view/indexView.php');
 }
 
-function getProperty($action, $userId) {
-    $propertyM = new PropertyManager($userId);
-    $properties = $propertyM->getProperties($action);
+function getProperty($propId) {
+    $propertyM = new PropertyManager();
+    $propDetails = $propertyM->getProperty($propId);
 
     require('./view/detailedPropertyView.php');
 }
