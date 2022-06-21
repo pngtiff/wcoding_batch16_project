@@ -20,8 +20,9 @@
     <div id="slide1" class="slide"></div>
   </div>
 
-
-  <?php include('listPropertiesView.php'); ?> 
+  <div class="indexProperties">
+    <?php include('listPropertiesView.php'); ?> 
+  </div>
 
   <!-- <div id="intro">
     <h3>About Us</h3>
@@ -56,4 +57,3 @@
 <?php require("template.php") ?>
 
 <script src="./public/js/modal.js"></script> 
-<script src="./public/js/search.js"></script> 

@@ -1,4 +1,8 @@
 /* header  */
+header {
+    z-index: 999;
+}
+
 .headerContainer {
     width: 100%;
     display: flex;
@@ -189,4 +193,9 @@
 }
 input[type='search'] { 
     font-size: 17px;
+}
+
+.filter
+{
+    width: 50px;
 }

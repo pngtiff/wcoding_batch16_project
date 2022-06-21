@@ -190,5 +190,6 @@
         </div>
     </footer>
     <script src="public/js/footerModal.js"></script>
+    <script src="./public/js/search.js"></script> 
 </body>
 </html>
