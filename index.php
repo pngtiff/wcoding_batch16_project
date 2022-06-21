@@ -57,12 +57,14 @@ try {
             // loads modifyProfileView
         case 'modifyProfile':
             modifyProfile();
+            displayDefaultInfo();
             break;
 
             // trigger updating data - working without any issue at the moment
         case 'updateUserData':
             if (!empty($_REQUEST['language']) OR !empty($_REQUEST['phone_number']) OR !empty($_REQUEST['bio']) OR !empty($_FILES["uploadFile"]["name"])) {
                 updateUserData();
+                displayDefaultInfo();
             }
             //Search//
         case 'search':

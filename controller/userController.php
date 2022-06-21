@@ -11,3 +11,8 @@
         $user = $userM-> validateProfile();
         require('./view/createProfile.php');
     }
+
+    function displayDefaultInfo() {
+        $userM = new UserManager();
+        $user = $userM-> displayDefaultInfo();
+    }

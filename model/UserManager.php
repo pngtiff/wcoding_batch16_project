@@ -193,7 +193,6 @@ class UserManager extends Manager {
         $gender = strip_tags($_POST['gender']);
         $language = strip_tags(implode(',', $_REQUEST['language']));
         $bio = strip_tags($_POST['bio']);
-
         if (!empty($_FILES["uploadFile"]["name"])) {
             // Get file info 
             $fileName = pathinfo($_FILES["uploadFile"]["name"]);
@@ -205,7 +204,6 @@ class UserManager extends Manager {
         } else {
              $imgName = "defaultProfile.png";
         }
-
         $req = $this->_connection->prepare("UPDATE users SET phone_number=:phoneNum, dob=:dob, gender=:gender, languages=:lang, bio=:bio, profile_img=:userImg WHERE email='{$_SESSION['email']}'");
         $req->bindParam('phoneNum', $phoneNum, \PDO::PARAM_STR);
         $req->bindParam('dob', $dob, \PDO::PARAM_STR);
@@ -223,7 +221,7 @@ class UserManager extends Manager {
         header('Location:index.php');
     }
 
-    // getUserInfo to display on viewProfile page
+    
     public function getUserInfo () {
         $req = $this->_connection->prepare('SELECT * FROM users WHERE id = ?');
         $req->execute(array($this->_user_id));
@@ -235,10 +233,45 @@ class UserManager extends Manager {
         }
         $user['languages'] = $languages;
         return $user;
-    } 
+    }
+
+    
+    public function displayDefaultInfo(){
+        $req = $this->_connection->prepare("SELECT * FROM users WHERE email='{$_SESSION['email']}' AND is_active = 1");
+        $req->execute();
+        $info = $req->fetch(\PDO::FETCH_ASSOC);
+        $phoneNum = $info['phone_number'];
+        $bio = $info['bio'];
+
+        session_start();
+        $_SESSION['phoneNumber'] = $phoneNum;
+        $_SESSION['bio'] = $bio;
+    }
+    
 
     public function updateUserData() {
 
+        // copy the information of the current profile //
+        //==========================================//
+        //==========================================//
+        $req = $this->_connection->prepare("SELECT * FROM users WHERE email='{$_SESSION['email']}' AND is_active = 1");
+        $req->execute();
+        
+        $data = $req->fetch(\PDO::FETCH_ASSOC);
+        
+        $uid = $data['uid'];
+        $firstName = $data['first_name'];
+        $lastName = $data['last_name'];
+        $email = $data['email'];
+        $password = $data['password'];
+        $dob = $data['dob'];
+        $gender = $data['gender'];
+        $dateCreated = $data['date_created'];
+        $profileImgLocation = $data['profile_img'];
+        $phoneNumber = $data['phone_number'];
+        $bio = $data['bio'];
+        $languages = $data['languages'];
+        
         // ============Update profile phpto =====//
         //==========================================//
         //==========================================//
@@ -252,49 +285,39 @@ class UserManager extends Manager {
             $folder = "./public/images/profile_images/" . basename($fileName);
             move_uploaded_file($fileLocation, $folder);
 
+        } else if ($profileImgLocation){
+            $folder = $profileImgLocation;
         } else{
             throw(new Exception('Failed to upload a file'));
         }
 
-        // copy the information of the current profile //
-        //==========================================//
-        //==========================================//
-        $req = $this->_connection->prepare("SELECT * FROM users WHERE email='{$_SESSION['email']}' ");
-        $req->execute();
-
-        $data = $req->fetch(\PDO::FETCH_ASSOC);
-
-        $uid = $data['uid'];
-        $firstName = $data['first_name'];
-        $lastName = $data['last_name'];
-        $email = $data['email'];
-        $password = $data['password'];
-        $dob = $data['dob'];
-        $gender = $data['gender'];
-        $dateCreated = $data['date_created'];
-        $profileImgLocation = $data['profile_img']; // previous user profile img
-
-        session_start();
+        // session variable to change the profile image displayed
         $_SESSION['profileImgLocation'] = $profileImgLocation;
         $_SESSION['folder'] = $folder;
         $_SESSION['fileName'] = $fileName;
-
+        
         // update is_active status from 1 -> 0 =====//
         //==========================================//
         $req2 = $this->_connection->prepare("UPDATE users SET is_active = 0 WHERE email = '{$_SESSION['email']}' ");
         $req2->execute();
-
-
+        
+        
         //====Insert the modified + inherited data=====//
         //==========================================//
-
-        // modified profile
-        // $language =  ($_REQUEST['language'] = null) ? $data['languages'] :  strip_tags(implode(',', $_REQUEST['language']));
-        $language = strip_tags(implode(',', $_REQUEST['language']));
-        $phoneNumber = ($_REQUEST['phone_number'] = null) ?  $data['phone_number'] : $_POST['phone_number'];
-        $bio = ($_REQUEST['bio'] = null) ?  $data['bio'] : $_POST['bio'];
+        
+        // modified profile info
+        $language =  ($_REQUEST['language']) ? strip_tags(implode(',', $_REQUEST['language'])) : $languages;
+        $bio = ($_REQUEST['bio']) ? $_POST['bio'] : $data['bio'];
         $status = 1;
+        
+        // check phone number formating
+        $phoneNumber = ($_REQUEST['phoneNumber']) ?  $_POST['phoneNumber'] : $data['phone_number'];
+        // !empty($_REQUEST['phoneNumber']) and preg_match("/^\+?[0-9]{7,14}$/", $_REQUEST['phoneNumber']) ? $phoneNumber = ($_REQUEST['phoneNumber']) : $phoneNumber = null;
+        // if($phoneNumber = null){
 
+        // }
+
+        
         $reqInsert = $this->_connection->prepare("INSERT INTO users (uid, first_name, last_name, email, password, dob, gender, languages, bio, phone_number, profile_img, is_active, date_created)
         VALUES ( :inuid, :infirst, :inlast, :inemail, :inpassword, :indob, :ingender, :inlanguages, :inbio, :inphoneNumber, :inprofileImg, :inactiveStatus, '$dateCreated') ");
 
@@ -304,9 +327,9 @@ class UserManager extends Manager {
         $reqInsert->bindParam("inbio", $bio, \PDO::PARAM_STR);
         $reqInsert->bindParam("inactiveStatus", $status, \PDO::PARAM_INT);
         $reqInsert->bindParam("inprofileImg", $folder, \PDO::PARAM_STR);
-        $reqInsert->bindParam("inuid", $uid, \PDO::PARAM_STR);
-
+        
         // insert inherited from the previous data
+        $reqInsert->bindParam("inuid", $uid, \PDO::PARAM_STR);
         $reqInsert->bindParam("infirst", $firstName, \PDO::PARAM_STR);
         $reqInsert->bindParam("inlast", $lastName, \PDO::PARAM_STR);
         $reqInsert->bindParam("inemail", $email, \PDO::PARAM_STR);

@@ -56,11 +56,6 @@ function modifyProfile() {
     require('./view/modifyProfileView.php');
 }
 
-function uploadImg ($file) {
-    $userM = new UserManager();
-    $userM->uploadImg($file);
-}
-
 function updateUserData () {
     $userM = new UserManager();
     $userM->updateUserData();
