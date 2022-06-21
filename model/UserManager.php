@@ -117,9 +117,10 @@ class UserManager extends Manager {
 
     public function validateProfile()
     {
-        //Check image size
+        //Check image size and file type
         $uploadOk = 1;
-        if ($_FILES["uploadFile"]["size"] > 500000) {
+        $imageFileType = strtolower(pathinfo($_FILES['uploadFile']['name'],PATHINFO_EXTENSION));
+        if ($_FILES['uploadFile']['size'] > 500000 or ($imageFileType != "jpg" and $imageFileType != "png" and $imageFileType != "jpeg" and $imageFileType != "webp" AND $imageFileType != null)) {
             $uploadOk = 0;
         }
 
@@ -195,15 +196,14 @@ class UserManager extends Manager {
         if (!empty($_FILES["uploadFile"]["name"])) {
 
             // Get file info 
-            $file = $_FILES["uploadFile"]["name"];
             $fileName = pathinfo($_FILES["uploadFile"]["name"]);
             $extension  = $fileName['extension'];
             $fileLocation = $_FILES["uploadFile"]["tmp_name"];
             $bytes = bin2hex(random_bytes(16)); // generates secure pseudo random bytes and bin2hex converts to hexadecimal string
             $imgName = $bytes.".".$extension;
-            move_uploaded_file($fileLocation, "./public/images/profile_images/" . $imgName);
+            move_uploaded_file($fileLocation, "./profile_images/" . $imgName);
         } else {
-             $imgName = "defaultUser.png";
+             $imgName = "defaultProfile.png";
         }
 
         $req = $this->_connection->prepare("UPDATE users SET phone_number=:phoneNum, dob=:dob, gender=:gender, languages=:lang, bio=:bio, profile_img=:userImg WHERE email='{$_SESSION['email']}'");
