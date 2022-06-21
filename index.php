@@ -75,7 +75,7 @@ try {
             }
             //Search//
         case 'search':
-            search($_REQUEST['city']);
+            search($_REQUEST);
             break;
         default: 
             getLanding();

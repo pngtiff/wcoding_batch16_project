@@ -1,19 +1,7 @@
 // delcaration
-
-const imgDiv = document.querySelector('#profilePhoto');
 const img = document.querySelector('#photo');
 const file = document.querySelector('#file');
 const uploadButton = document.querySelector('#uploadButton');
-
-// if user hovers on the profile photo, display the choose photo button
-imgDiv.addEventListener('mouseenter', function(){
-    uploadButton.style.display = "block";
-})
-
-imgDiv.addEventListener('mouseleave', function(){
-    uploadButton.style.display = "none";
-})
-
 
 // change the photo by choosing the different files
 

@@ -1,7 +1,7 @@
 <?php $title = 'User Profile';?>
 
 <?php ob_start();?>
-<section>
+<section id="viewProfile">
 <div>
     <button id='homeButton'><a href='index.php'>Home</a></button>
 </div>

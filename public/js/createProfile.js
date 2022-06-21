@@ -46,11 +46,16 @@ let imgContainer = document.querySelector('#profilePhoto div');
 // change the photo by choosing the different files
 file.addEventListener('change', function(){   
     imgContainer.innerHTML="";
-    let fileSize = this.files[0].size;
-    if (fileSize > 500000) {
-        return imgContainer.textContent = "Sorry, your file is too large.";
-    }
     const chosenFile = this.files[0];
+    let fileSize = chosenFile.size;
+    let fileType = chosenFile.name.split('.').pop();
+
+    if (fileSize > 500000) {
+        return imgContainer.textContent = "Sorry, your file is too large";
+    } else if (fileType !== "jpeg" && fileType !== "jpg" && fileType !== "png" && fileType !== "webp" && fileType !== "") {
+        return imgContainer.textContent = "Images must be in jpeg, jpg, png, or webp format";
+    }
+
     let img = document.createElement('img');
 
     if(chosenFile){

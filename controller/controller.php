@@ -78,8 +78,8 @@ function updateLastActive() {
     $userM -> updateLastActive();
 }
 
-function search($city) {
+function search($params) {
     $propertyM = new PropertyManager();
-    $properties = $propertyM->searchProperties($city);
+    $properties = $propertyM->searchProperties($params['search'], $params['rangeMin'], $params['rangeMax'], $params['propertyType'], $params['roomType']);
     require('./view/searchView.php');
 }

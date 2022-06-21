@@ -63,10 +63,23 @@ class PropertyManager extends Manager {
         return $propDetails;        
     }
     
-    public function searchProperties($city) {
 
-        $req = $this->_connection->prepare('SELECT * FROM properties WHERE city = :inCity');
-        $req->bindParam('inCity', $city);
+    // SEARCH FUNCTION : $search = "search" get parameter called from router
+
+    public function searchProperties($search, $rangeMin, $rangeMax, $propertyType, $roomType) {
+
+        $search = ($search == "any") ? "%%" : $search; //// If search input is empty, show all results ("%%" is regex that catches any string)
+        $rangeMin = ($rangeMin == "any") ? 0 : $rangeMin;
+        $rangeMax = ($rangeMax == "any") ? 1000000000 : $rangeMax; /// default number large enough to catch all properties
+        $propertyType = ($propertyType == "any") ? "%%" : $propertyType;
+        $roomType = ($roomType == "any") ? "%%" : $roomType;
+
+        $req = $this->_connection->prepare('SELECT * FROM properties WHERE (city LIKE :inSearch OR province_state LIKE :inSearch) AND monthly_price_won >= :inRangeMin AND monthly_price_won <= :inRangeMax AND property_type_id LIKE :inPropertyType AND room_type_id LIKE :inRoomType');
+        $req->bindParam('inSearch', $search);
+        $req->bindParam('inRangeMin', $rangeMin);
+        $req->bindParam('inRangeMax', $rangeMax);
+        $req->bindParam('inPropertyType', $propertyType);
+        $req->bindParam('inRoomType', $roomType);
         $req->execute();
 
         $properties = $req->fetchAll(\PDO::FETCH_ASSOC);
