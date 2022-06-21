@@ -1,4 +1,3 @@
-
 /////////// trigger search on icon click//////////////
 
 document.querySelector(".searchButton").addEventListener("click", function(e) {
@@ -16,3 +15,6 @@ document.getElementById("searchBar").addEventListener("keyup", function(e) {
         window.location = `index.php?action=search&city=${city}`;
     }
 })
+
+
+
