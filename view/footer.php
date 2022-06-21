@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>footer</title>
-    <script src="https://kit.fontawesome.com/949df75f70.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <footer class="footer">
@@ -20,17 +19,29 @@
             <a href="#"><i class="fa-brands fa-twitter"></i></a> 
         </div>
 
+        
         <div class="footerRight">
-            <div class="aboutUs">
-            <a href="#intro"> <h3>About Us</h3></a>
-                <!-- <p>introduction  of ROOM-EZ</p> -->
+            <div id="footerAboutUsModal" class="modal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <div class="aboutUsContent">
+                      <div>
+                        Room E-Z is a no-frills service linking hosts with housing or rooms to rent 
+                        and renters looking for a place in Korea anywhere from a month to a year.
+                        Whether you're a host or a renter, post your profile and look for potential matches
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="aboutUs">
+                <a href=""><h3>About Us</h3></a>
             </div>
     
             <div class="services">
-            <a href="#searchBar"><h3>Services</h3></a>
-                <!-- <a href="#">Advertise whole property or a room</a>
-                <a href="#">Search for a whole property or a room</a>
-                <a href="#">Roommate finder</a> -->
+                <a href="#searchBar"><h3>Services</h3></a>  
+                <!--click services to go to search bar  -->
             </div>
     
             <div id="footerPrivacyModal" class="modal">

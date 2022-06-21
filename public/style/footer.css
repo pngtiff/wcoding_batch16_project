@@ -6,17 +6,22 @@ footer{
     margin-bottom: 0%;
     margin-top: 5%;
     padding-top: 1%;
-    background-color:rgb(215, 215, 244) ;
+    /* background-color:rgb(215, 215, 244) ; */
+    background-color:black ;
+    color: white;
 }
 
 .contact{
     line-height: 0.5;
+    padding-right: 10%;
 }
 
-.termsContent, .privacyContent{
-    padding-top: 2%;
-    padding-left: 1%;
-    padding-right: 1%;
-    font-size: 120%;
+.aboutUsContent, .termsContent, .privacyContent{
+    padding: 4% 6% 4% 6%;
+    /* padding-left: 3%; */
+    /* padding-right: 3%; */
+    font-size: 100%;
     overflow: scroll;
+    text-align: justify;
+    color: black;
 }

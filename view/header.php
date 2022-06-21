@@ -4,7 +4,7 @@
     <div class="headerContainer"> 
         <div class="logo">
             <a href="index.php">
-            <img src="public/images/output-onlinepngtools.png" alt="logo" width="90px" height="90px">
+            <img src="public/images/output-onlinepngtools.png" alt="logo" width="100px" height="100px">
             </a>
         </div>
         <nav class="nav">
@@ -23,8 +23,7 @@
                     <a href="">Become a Host</a>
                     <a href="">Post a New Listing</a>
                 </div>
-            </div>
-            
+            </div> 
             <div class="dropdown">
                 <button class="dropbtn">About Us</button>
                 <div class="dropdown-content">
@@ -37,21 +36,13 @@
             <div id="searchBarContainer">
                 <input type="search" name="searchbar" id="searchBar" placeholder="Start your search here">
                 <button class="searchButton"><img src="public/images/magnifying_glass.png" id="magnifying"></button>
-             </div>
-
-            <!-- <form action="" method="POST" class="form">
-              <input type="search" placeholder="Enter your search here" class="searchField" />
-              <button type="submit" class="searchButton">
-                    <img src="public/images/magnifying_glass.png" id="magnifying">
-            
-              </button>
-            </form> -->
-            
+             </div>            
         </nav>
+
         <div class="signInUp">
             <!-- Changing interface once signed in/signed out -->
             <div class="dropdown4">
-                <button class="dropbtn4"><a href=""><img src="public/images/defaultProfile.png" alt="defaultPic" width="40px" height="40x"></a></button>
+                <button class="dropbtn4"><a href=""><img src="public/images/defaultProfileImage.jpeg" alt="defaultPic" width="40px" height="40x"></a></button>
                 <div class="dropdown-content4">
                     <?php echo (!empty($_SESSION['firstName'])) ? '<button id="settingsButton"><a href="#">Settings</a></button>' : '<button id="signUpButton"><a href="#">Register</a></button>'; ?>
                     <?php echo (!empty($_SESSION['firstName'])) ? '<button id="signOutButton"><a href="index.php?action=signOut">Sign Out</a></button>' : '<button id="signInButton"><a href="#">Sign In</a></button>'; ?>
@@ -63,9 +54,7 @@
                             echo '<a href="index.php?action=modifyProfile">Edit My Profile</a>';
                             
                         }
-                    ?>
-                    
-                    
+                    ?>                    
                 </div>
             </div>
         </div>
