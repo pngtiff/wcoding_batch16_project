@@ -51,13 +51,8 @@ class UserManager extends Manager
         $userInfo = $response->fetch(\PDO::FETCH_ASSOC);
         $passwordHashed = $userInfo['password'];
         $response->closeCursor();
-<<<<<<< HEAD
-        
-        $check = password_verify(htmlspecialchars($password), $passwordHashed);
-=======
 
         $check = password_verify($password, $passwordHashed);
->>>>>>> master
 
         if ($check) {
             echo 1;
@@ -76,13 +71,8 @@ class UserManager extends Manager
         }
         return $uid;
     }
-<<<<<<< HEAD
-
-    public function signUp($firstName, $lastName, $email, $password){
-=======
     public function signUp($firstName, $lastName, $email, $password)
     {
->>>>>>> master
         $firstName = addslashes(htmlspecialchars(htmlentities(trim($firstName))));
         $lastName = addslashes(htmlspecialchars(htmlentities(trim($lastName))));
         $email = addslashes(htmlspecialchars(htmlentities(trim($email))));
@@ -239,15 +229,8 @@ class UserManager extends Manager
         setcookie(session_name(), '', time() - 3600, '/');
         header('Location:index.php');
     }
-<<<<<<< HEAD
     
     public function getUserInfo () {
-=======
-
-    // getUserInfo to display on viewProfile page
-    public function getUserInfo()
-    {
->>>>>>> master
         $req = $this->_connection->prepare('SELECT * FROM users WHERE id = ?');
         $req->execute(array($this->_user_id));
         $user = $req->fetch(\PDO::FETCH_ASSOC);
@@ -259,7 +242,6 @@ class UserManager extends Manager
         $user['languages'] = $languages;
         return $user;
     }
-<<<<<<< HEAD
     
     public function displayDefaultInfo(){
         $req = $this->_connection->prepare("SELECT * FROM users WHERE email='{$_SESSION['email']}' AND is_active = 1");
@@ -267,21 +249,6 @@ class UserManager extends Manager
         $info = $req->fetch(\PDO::FETCH_ASSOC);
         $phoneNum = $info['phone_number'];
         $bio = $info['bio'];
-=======
-
-    public function uploadImg($file)
-    {
-        // Get file info 
-        $fileName = $file["name"];
-        $fileLocation = $file["tmp_name"];
-        $folder = "./profile_images/" . basename($fileName);
-
-        if (move_uploaded_file($fileLocation, $folder)) {
-            header("Location: index.php?action=modifyProfile");
-        } else {
-            throw (new Exception('Failed to upload a file'));
-        }
->>>>>>> master
 
         session_start();
         $_SESSION['phoneNumber'] = $phoneNum;
@@ -291,10 +258,7 @@ class UserManager extends Manager
 
     public function updateUserData()
     {
-
         //copy the information of the current profile//
-        //==========================================//
-        //==========================================//
         $req = $this->_connection->prepare("SELECT * FROM users WHERE email='{$_SESSION['email']}' AND is_active = 1");
         $req->execute();
         
@@ -314,9 +278,6 @@ class UserManager extends Manager
         $languages = $data['languages'];
         
         // ============Update profile phpto ========//
-        //==========================================//
-        //==========================================//
-
         // Get file info
         if (!empty($_FILES["uploadFile"]["name"])) {
             $fileName = $_FILES["uploadFile"]["name"];
@@ -341,22 +302,34 @@ class UserManager extends Manager
         //==========================================//
         $req2 = $this->_connection->prepare("UPDATE users SET is_active = 0 WHERE email = '{$_SESSION['email']}' ");
         $req2->execute();
-        
-        
+    
         //====Insert the modified + inherited data=====//
-        //=============================================//
-        
         // modified profile info
-        $language =  ($_REQUEST['language']) ? strip_tags(implode(',', $_REQUEST['language'])) : $languages;
         $bio = ($_REQUEST['bio']) ? $_POST['bio'] : $data['bio'];
         $status = 1;
-<<<<<<< HEAD
         
-        // check phone number formating
-        // $phoneNumber = ($_REQUEST['phoneNumber']) ?  $_POST['phoneNumber'] : $phoneNumber;
+        //=============================================//
+        //================Backend checking ============//
+        //=============================================//
+
+        // Check phone number formating
+        // phone number cannot be null
         !empty($_REQUEST['phoneNumber']) and preg_match("/^\+?[0-9]{7,14}$/", $_REQUEST['phoneNumber']) ? $phoneNumber = ($_REQUEST['phoneNumber']) : $phoneNumber = null;
         
-        if($phoneNumber){
+        // Check languages (add languages to array as necessary)
+        $languages = array(
+            'Cantonese' => 'HK', 'Chinese(Mandarin)' => 'ZH', 'Dutch' => 'NL', 'English' => 'EN',
+            'French' => 'FR', 'German' => 'DE', 'Hindi' => 'HI', 'Indonesian' => 'IN', 'Italian' => 'IT', 'Japanese' => 'JA',
+            'Korean' => 'KO', 'Vietnamese' => 'VI', 'Portuguese' => 'PT', 'Russian' => 'RU', 'Spanish' => 'ES'
+        );
+        $userLang = explode(',', $_REQUEST['userLang']);
+        !empty($userLang) and array_diff($userLang, $languages) === array() ? $language = implode(',', array_unique($userLang)) : $language = $languages;
+
+        // Check bio
+        !empty($_REQUEST['bio']) ? $bio = $_REQUEST['bio'] : $data['bio'];
+
+        // create a new row with the inherited and modified informaiton //
+        if($phoneNumber != null){
             $reqInsert = $this->_connection->prepare("INSERT INTO users (uid, first_name, last_name, email, password, dob, gender, languages, bio, phone_number, profile_img, is_active, date_created)
             VALUES ( :inuid, :infirst, :inlast, :inemail, :inpassword, :indob, :ingender, :inlanguages, :inbio, :inphoneNumber, :inprofileImg, :inactiveStatus, '$dateCreated') ");
     
@@ -384,37 +357,6 @@ class UserManager extends Manager
             throw(new Exception('Wrong phone number format'));
         }
         
-=======
-        $uid = "random";
-        session_start();
-        $profileImg =  $_SESSION['folder'];
-
-        $reqInsert = $this->_connection->prepare("INSERT INTO users (uid, first_name, last_name, email, password, dob, gender, languages, bio, phone_number, profile_img, is_active, date_created)
-        VALUES ( :inuid, :infirst, :inlast, :inemail, :inpassword, :indob, :ingender, :inlanguages, :inbio, :inphoneNumber, :inprofileImg, :inactiveStatus, '$dateCreated') ");
-
-        // insert modified content
-        $reqInsert->bindParam("inlanguages", $languages, \PDO::PARAM_STR);
-        $reqInsert->bindParam("inphoneNumber", $phoneNumber, \PDO::PARAM_STR);
-        $reqInsert->bindParam("inbio", $bio, \PDO::PARAM_STR);
-        $reqInsert->bindParam("inactiveStatus", $status, \PDO::PARAM_INT);
-        $reqInsert->bindParam("inprofileImg", $profileImg, \PDO::PARAM_STR);
-        $reqInsert->bindParam("inuid", $uid, \PDO::PARAM_STR);
-
-        // insert inherited from the previous data
-        $reqInsert->bindParam("infirst", $firstName, \PDO::PARAM_STR);
-        $reqInsert->bindParam("inlast", $lastName, \PDO::PARAM_STR);
-        $reqInsert->bindParam("inemail", $email, \PDO::PARAM_STR);
-        $reqInsert->bindParam("inpassword", $password, \PDO::PARAM_STR);
-        $reqInsert->bindParam("indob", $dob, \PDO::PARAM_STR);
-        $reqInsert->bindParam("ingender", $gender, \PDO::PARAM_STR);
-
-        $reqInsert->execute();
-
-        header("Location: index.php?action=modifyProfile");
-
-
-        // array_diff($_REQUEST['language'], $this::LANGUAGES) === array() ? $language = implode(',', $_REQUEST['language']) : $language = null;
->>>>>>> master
     }
 
     public function updateLastActive()

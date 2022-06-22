@@ -9,6 +9,13 @@ const phoneNumInput = document.querySelector('#phoneNumber');
 const inputBoxes = document.querySelectorAll('input');
 const alertMesg = document.querySelector('#alertMesg');
 
+// language selection
+let languages = document.querySelector('#language');
+let options = document.querySelectorAll('#language option');
+let langArray = [];
+let userLang = document.querySelector('#userLang');
+
+
 
 // if user hovers on the profile photo, display the choose photo button
 imgDiv.addEventListener('mouseenter', function(){
@@ -34,6 +41,18 @@ file.addEventListener('change', function(){
     }
 });
 
+// multi language selection
+languages.addEventListener('change', (e) => {
+    for (i = 0; i < options.length; i++) {
+        if(options[i].id === e.target.value) {
+            options[i].setAttribute('disabled', 'disabled');
+            langArray.push(e.target.value);
+        }
+    }
+    userLang.value = langArray;
+});
+
+
 
 // frontend checking for the phone number //
 // =======================================//
@@ -41,7 +60,6 @@ file.addEventListener('change', function(){
 // hide and show message
 const display = function(element){
     alertMesg.style.display = "none";
-
     if(element.classList.contains("red")){
         alertMesg.style.display = "block";
     }
@@ -50,7 +68,8 @@ const display = function(element){
 // function to check the condition
 const countStr = function(phoneNum){
     let count = phoneNum.value.length; // add more condition
-    if(count < 11){
+    console.log(count);
+    if(count < 11 || count >= 12){
         phoneNum.classList.remove("green");
         phoneNum.classList.add("red"); // display the input box in red color
     } else{
