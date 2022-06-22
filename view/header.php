@@ -4,7 +4,7 @@
     <div class="headerContainer"> 
         <div class="logo">
             <a href="index.php">
-            <img src="public/images/output-onlinepngtools.png" alt="logo" width="100px" height="100px">
+                <img src="public/images/output-onlinepngtools.png" alt="logo" width="100px" height="100px">
             </a>
         </div>`
         <nav class="nav">
@@ -71,16 +71,37 @@
                     
                     <?php 
                         if (!empty($_SESSION['firstName'])){
+                            // echo '<img src="' . $_SESSION['profile_img']. '" width="500px" height="400px">';
                             echo '<a href="index.php?action=profile&user='.$_SESSION['uid'].'">View My Profile</a>';
-                            echo '<a href="index.php?action=modifyProfile">Edit My Profile</a>';
-                            
+                            echo '<a href="index.php?action=modifyProfile">Edit My Profile</a>';                        
                         }
                     ?>                    
                 </div>
             </div>
         </div>
     </div>
+      <!-- Modal section -->
+<?php if (empty($_SESSION['email'])) {?>
+  <div id="modalBox" class="modal">
+    
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div id="banner-container"></div>
+      <span class="close">&times;</span>
+      <div class="form-container">
+        <div id="signIn-container">
+          <?php include('view/signInView.php');?>
+        </div>
+        <div id="signUp-container">
+          <?php include('view/signUpView.php');?>
+        </div>
+      </div>
+    </div>
+  </div>
+<?php } ?>
 </header>
+
+<div class="headerBackgroundColor"></div>
 
 
 
