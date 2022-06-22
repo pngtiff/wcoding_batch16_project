@@ -49,7 +49,7 @@ const display = function(element){
 
 // function to check the condition
 const countStr = function(phoneNum){
-    let count = phoneNum.value.length;
+    let count = phoneNum.value.length; // add more condition
     if(count < 11){
         phoneNum.classList.remove("green");
         phoneNum.classList.add("red"); // display the input box in red color
@@ -65,7 +65,7 @@ inputBoxes[3].addEventListener('input', function(){
     countStr(phoneNumInput);
 });
 
-// to check the 
+// to check the before form submission
 saveButton.addEventListener('click', function(e){
     countStr(phoneNumInput);
 });
