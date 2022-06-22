@@ -5,9 +5,9 @@
 
         <div class="logo">
             <a href="index.php">
-            <img src="public/images/output-onlinepngtools.png" alt="logo" width="100px" height="100px">
+                <img src="public/images/output-onlinepngtools.png" alt="logo" width="100px" height="100px">
             </a>
-        </div>
+        </div>`
         <nav class="nav">
             <div class="dropdown2">
                 <button class="dropbtn2">Browse</button>
@@ -36,7 +36,7 @@
             </div>
 
             <div id="searchBarContainer">
-                <input type="search" name="searchbar" id="searchBar" placeholder="Type a City or Province to get started !" value = "<?php if (isset($_REQUEST['search']) && $_REQUEST['search'] != "any") { echo $_REQUEST['search']; } ?>"> 
+                <input type="search" name="searchbar" id="searchBar" placeholder="Type a City or Province to get started !" value = "<?php if (isset($_REQUEST['search']) && $_REQUEST['search'] != "anywhere") { echo $_REQUEST['search']; } ?>"> 
                 <select name="rentRange" id="rentRange" class="filter">
                     <option value="any">Price Range :</option>
                     <option value="500000">Less than 500k/month</option>
@@ -72,19 +72,37 @@
                     
                     <?php 
                         if (!empty($_SESSION['firstName'])){
-                            echo '<a href="index.php?action=profile&user=2">View My Profile</a>';
-                            // <-- TODO: change to action for specific user -->
-                            echo '<a href="index.php?action=modifyProfile">Edit My Profile</a>';
-                            
+                            // echo '<img src="' . $_SESSION['profile_img']. '" width="500px" height="400px">';
+                            echo '<a href="index.php?action=profile&user='.$_SESSION['uid'].'">View My Profile</a>';
+                            echo '<a href="index.php?action=modifyProfile">Edit My Profile</a>';                        
                         }
                     ?>                    
                 </div>
             </div>
         </div>
     </div>
+      <!-- Modal section -->
+<?php if (empty($_SESSION['email'])) {?>
+  <div id="modalBox" class="modal">
+    
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div id="banner-container"></div>
+      <span class="close">&times;</span>
+      <div class="form-container">
+        <div id="signIn-container">
+          <?php include('view/signInView.php');?>
+        </div>
+        <div id="signUp-container">
+          <?php include('view/signUpView.php');?>
+        </div>
+      </div>
+    </div>
+  </div>
+<?php } ?>
 </header>
 
-<div class="headerBackgroundColor"> </div>
+<div class="headerBackgroundColor"></div>
 
 
 

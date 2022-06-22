@@ -20,7 +20,7 @@ class UserManager extends Manager
         $email = htmlspecialchars($email);
         $password = htmlspecialchars($password);
 
-        $response = $this->_connection->query("SELECT email, password, dob, first_name FROM users WHERE email = '$email'");
+        $response = $this->_connection->query("SELECT email, password, dob, first_name, id, uid FROM users WHERE email = '$email'");
         $userInfo = $response->fetch(\PDO::FETCH_ASSOC);
         $passwordHashed = $userInfo['password'];
         $response->closeCursor();
@@ -34,6 +34,7 @@ class UserManager extends Manager
             // setting rememberMe cookie
             $_SESSION['firstName'] = $userInfo['first_name'];
             $_SESSION['email'] = $email;
+            $_SESSION['uid'] = $userInfo['uid'];
 
             if ($userInfo['dob']) {
                 // checking dob when signing in. dob is mandatory submission so
@@ -132,11 +133,12 @@ class UserManager extends Manager
         if ($_FILES['uploadFile']['name']) {
             if ($_FILES['uploadFile']['size'] > 500000 or ($imageFileType != "jpg" and $imageFileType != "png" and $imageFileType != "jpeg" and $imageFileType != "webp")) {
                 $uploadOk = 0;
-            } 
+            }   
         }
 
         // Check phone number
-        !empty($_REQUEST['phoneNum']) and preg_match("/^\+?[0-9]{7,14}$/", $_REQUEST['phoneNum']) ? $phoneNum = ($_REQUEST['phoneNum']) : $phoneNum = null;
+        $phones = str_replace('-', '', str_replace(' ', '', $_REQUEST['phoneNum']));
+        !empty($phones) and preg_match("/^\+?[0-9]{7,14}$/", $phones) ? $phoneNum = $phones : $phoneNum = null;
 
         // Check birthday
         $days30 = array(4, 6, 9, 11);
@@ -200,7 +202,7 @@ class UserManager extends Manager
     // creates new user profile that will be inserted into users table
     public function newProfile()
     {
-        $phoneNum = strval(strip_tags($_POST['phoneNum']));
+        $phoneNum = strval(strip_tags(str_replace('-', '', str_replace(' ', '', $_REQUEST['phoneNum']))));
         $dob = strip_tags($_POST['year']) . '-' . strip_tags($_POST['month']) . '-' . strip_tags($_POST['day']);
         $gender = strip_tags($_POST['gender']);
         $language = strip_tags($_REQUEST['userLang']);
@@ -240,7 +242,7 @@ class UserManager extends Manager
     // getUserInfo to display on viewProfile page
     public function getUserInfo()
     {
-        $req = $this->_connection->prepare('SELECT * FROM users WHERE id = ?');
+        $req = $this->_connection->prepare('SELECT * FROM users WHERE uid = ?');
         $req->execute(array($this->_user_id));
         $user = $req->fetch(\PDO::FETCH_ASSOC);
         $req->closeCursor();
