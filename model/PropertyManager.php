@@ -66,7 +66,7 @@ class PropertyManager extends Manager {
 
     public function searchProperties($search, $rangeMin, $rangeMax, $propertyType, $roomType) {
 
-        $search = ($search == "any") ? "%%" : $search; //// If search input is empty, show all results ("%%" is regex that catches any string)
+        $search = ($search == "anywhere") ? "%%" : $search; //// If search input is empty, show all results ("%%" is regex that catches any string)
         $rangeMin = ($rangeMin == "any") ? 0 : $rangeMin;
         $rangeMax = ($rangeMax == "any") ? 1000000000 : $rangeMax; /// default number large enough to catch all properties
         $propertyType = ($propertyType == "any") ? "%%" : $propertyType;
