@@ -23,7 +23,7 @@
                 <div id = "phoneBox" >
                     <div>
                         <label for="phoneNumber">Phone Number:</label>
-                        <span id = "phoneNumberCheck">Please Check Your Phone Number</span>
+                        <span id="alertMesg">Please Check Your Phone Number</span>
                     </div>
                     <div>
                         <input type="text" id="phoneNumber" class="box" name="phoneNumber" value = "<?php print_r($_SESSION['phoneNumber']);?>">

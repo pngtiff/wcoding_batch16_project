@@ -220,7 +220,6 @@ class UserManager extends Manager {
         setcookie(session_name(), '', time()-3600,'/');
         header('Location:index.php');
     }
-
     
     public function getUserInfo () {
         $req = $this->_connection->prepare('SELECT * FROM users WHERE id = ?');
@@ -234,7 +233,6 @@ class UserManager extends Manager {
         $user['languages'] = $languages;
         return $user;
     }
-
     
     public function displayDefaultInfo(){
         $req = $this->_connection->prepare("SELECT * FROM users WHERE email='{$_SESSION['email']}' AND is_active = 1");
@@ -251,7 +249,7 @@ class UserManager extends Manager {
 
     public function updateUserData() {
 
-        // copy the information of the current profile //
+        //copy the information of the current profile//
         //==========================================//
         //==========================================//
         $req = $this->_connection->prepare("SELECT * FROM users WHERE email='{$_SESSION['email']}' AND is_active = 1");
@@ -272,7 +270,7 @@ class UserManager extends Manager {
         $bio = $data['bio'];
         $languages = $data['languages'];
         
-        // ============Update profile phpto =====//
+        // ============Update profile phpto ========//
         //==========================================//
         //==========================================//
 
@@ -303,7 +301,7 @@ class UserManager extends Manager {
         
         
         //====Insert the modified + inherited data=====//
-        //==========================================//
+        //=============================================//
         
         // modified profile info
         $language =  ($_REQUEST['language']) ? strip_tags(implode(',', $_REQUEST['language'])) : $languages;
@@ -311,35 +309,37 @@ class UserManager extends Manager {
         $status = 1;
         
         // check phone number formating
-        $phoneNumber = ($_REQUEST['phoneNumber']) ?  $_POST['phoneNumber'] : $data['phone_number'];
-        // !empty($_REQUEST['phoneNumber']) and preg_match("/^\+?[0-9]{7,14}$/", $_REQUEST['phoneNumber']) ? $phoneNumber = ($_REQUEST['phoneNumber']) : $phoneNumber = null;
-        // if($phoneNumber = null){
-
-        // }
-
+        // $phoneNumber = ($_REQUEST['phoneNumber']) ?  $_POST['phoneNumber'] : $phoneNumber;
+        !empty($_REQUEST['phoneNumber']) and preg_match("/^\+?[0-9]{7,14}$/", $_REQUEST['phoneNumber']) ? $phoneNumber = ($_REQUEST['phoneNumber']) : $phoneNumber = null;
         
-        $reqInsert = $this->_connection->prepare("INSERT INTO users (uid, first_name, last_name, email, password, dob, gender, languages, bio, phone_number, profile_img, is_active, date_created)
-        VALUES ( :inuid, :infirst, :inlast, :inemail, :inpassword, :indob, :ingender, :inlanguages, :inbio, :inphoneNumber, :inprofileImg, :inactiveStatus, '$dateCreated') ");
-
-        // insert modified content
-        $reqInsert->bindParam("inlanguages", $language, \PDO::PARAM_STR);
-        $reqInsert->bindParam("inphoneNumber", $phoneNumber, \PDO::PARAM_STR);
-        $reqInsert->bindParam("inbio", $bio, \PDO::PARAM_STR);
-        $reqInsert->bindParam("inactiveStatus", $status, \PDO::PARAM_INT);
-        $reqInsert->bindParam("inprofileImg", $folder, \PDO::PARAM_STR);
+        if($phoneNumber){
+            $reqInsert = $this->_connection->prepare("INSERT INTO users (uid, first_name, last_name, email, password, dob, gender, languages, bio, phone_number, profile_img, is_active, date_created)
+            VALUES ( :inuid, :infirst, :inlast, :inemail, :inpassword, :indob, :ingender, :inlanguages, :inbio, :inphoneNumber, :inprofileImg, :inactiveStatus, '$dateCreated') ");
+    
+            // insert modified content
+            $reqInsert->bindParam("inlanguages", $language, \PDO::PARAM_STR);
+            $reqInsert->bindParam("inphoneNumber", $phoneNumber, \PDO::PARAM_STR);
+            $reqInsert->bindParam("inbio", $bio, \PDO::PARAM_STR);
+            $reqInsert->bindParam("inactiveStatus", $status, \PDO::PARAM_INT);
+            $reqInsert->bindParam("inprofileImg", $folder, \PDO::PARAM_STR);
+            
+            // insert inherited from the previous data
+            $reqInsert->bindParam("inuid", $uid, \PDO::PARAM_STR);
+            $reqInsert->bindParam("infirst", $firstName, \PDO::PARAM_STR);
+            $reqInsert->bindParam("inlast", $lastName, \PDO::PARAM_STR);
+            $reqInsert->bindParam("inemail", $email, \PDO::PARAM_STR);
+            $reqInsert->bindParam("inpassword", $password, \PDO::PARAM_STR);
+            $reqInsert->bindParam("indob", $dob, \PDO::PARAM_STR);
+            $reqInsert->bindParam("ingender", $gender, \PDO::PARAM_STR);
+    
+            $reqInsert->execute();
+    
+            header("Location: index.php?action=modifyProfile");
+        }
+        else{
+            throw(new Exception('Wrong phone number format'));
+        }
         
-        // insert inherited from the previous data
-        $reqInsert->bindParam("inuid", $uid, \PDO::PARAM_STR);
-        $reqInsert->bindParam("infirst", $firstName, \PDO::PARAM_STR);
-        $reqInsert->bindParam("inlast", $lastName, \PDO::PARAM_STR);
-        $reqInsert->bindParam("inemail", $email, \PDO::PARAM_STR);
-        $reqInsert->bindParam("inpassword", $password, \PDO::PARAM_STR);
-        $reqInsert->bindParam("indob", $dob, \PDO::PARAM_STR);
-        $reqInsert->bindParam("ingender", $gender, \PDO::PARAM_STR);
-
-        $reqInsert->execute();
-
-        header("Location: index.php?action=modifyProfile");
     }
 
     public function updateLastActive() {

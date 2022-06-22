@@ -1,3 +1,21 @@
+
+:root{
+    /* color */
+    --white-color: white;
+    --black-color: black;
+    --pastelOrange-color: #ffe0b2;
+    --pastelPink-color:#ffebee;
+    --navy-color: navy;
+    --red-color: red;
+    --green-color: green;
+
+    /* font size */
+    --font-large:2em;
+    --font-medium:1.5em;
+    --font-small:0.5em;
+   
+}
+
 #newProfile, #viewProfile, #modifyProfile {
     margin-bottom: 5rem;
 }
@@ -272,9 +290,16 @@
     justify-content: center;
 }
 
-#phoneNumberCheck{
-    display: none;
+#alertMesg{
     color: red;
+    display: none;
 }
 
+.red{
+    border: 1px solid var(--red-color);
+}
+
+.green{
+    border: 1px solid var(--green-color);
+}
 
