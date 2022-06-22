@@ -39,7 +39,13 @@ try {
         case 'listProperties':
             listProperties();
             break;
+<<<<<<< HEAD
             
+=======
+        case 'property':
+            getProperty($_REQUEST['propId']);
+            break;
+>>>>>>> master
         case 'signUp':
             if(preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $_POST['email'])  AND !empty($_POST['firstName']) AND !empty($_POST['lastName']) AND !empty($_POST['password']) AND !empty($_POST['passwordConfirm']) AND $_POST['passwordConfirm']==$_POST['password'] AND preg_match('/^(?=.*[!@#$%^&*-])(?=.*[0-9])(?=.*[A-Z]).{8,20}$/', $_POST['password']) AND preg_match('/^[A-Za-z]{2,}$/', $_POST['firstName'])AND preg_match('/^[A-Za-z]{2,}$/', $_POST['lastName'])) {
                 signUp($_REQUEST);
@@ -68,7 +74,7 @@ try {
             }
             //Search//
         case 'search':
-            search($_REQUEST['city']);
+            search($_REQUEST);
             break;
         default: 
             getLanding();
