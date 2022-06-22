@@ -20,8 +20,8 @@ class PropertyManager extends Manager {
             ON p.room_type_id = rt.id
             LEFT JOIN property_imgs pi
             ON p.id = pi.property_id
-            WHERE p.is_active = 1 AND user_uid = :uid");
-            $req->bindParam('uid', $this->_user_id);
+            WHERE p.is_active = 1 AND p.user_uid = :uid");
+            $req->bindParam('uid', $_REQUEST['user']);
             $req->execute();
         
         } else {
