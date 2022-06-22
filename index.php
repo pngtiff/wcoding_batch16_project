@@ -58,7 +58,7 @@ try {
 
             // loads modifyProfileView
         case 'modifyProfile':
-            modifyProfile();
+            modifyProfile($_REQUEST['user']);
             displayDefaultInfo();
             break;
 
@@ -68,6 +68,8 @@ try {
                 updateUserData();
                 displayDefaultInfo();
             }
+            break;
+            
             //Search//
         case 'search':
             search($_REQUEST);

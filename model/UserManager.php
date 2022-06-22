@@ -20,7 +20,7 @@ class UserManager extends Manager
         $email = htmlspecialchars($email);
         $password = htmlspecialchars($password);
 
-        $response = $this->_connection->query("SELECT email, password, dob, first_name FROM users WHERE email = '$email'");
+        $response = $this->_connection->query("SELECT email, password, dob, first_name, id, uid FROM users WHERE email = '$email'");
         $userInfo = $response->fetch(\PDO::FETCH_ASSOC);
         $passwordHashed = $userInfo['password'];
         $response->closeCursor();
@@ -31,6 +31,7 @@ class UserManager extends Manager
             session_start();
             $_SESSION['firstName'] = $userInfo['first_name'];
             $_SESSION['email'] = $email;
+            $_SESSION['uid'] = $userInfo['uid'];
 
             if ($userInfo['dob']) {
                 header("Location:index.php");
@@ -71,6 +72,7 @@ class UserManager extends Manager
         }
         return $uid;
     }
+
     public function signUp($firstName, $lastName, $email, $password)
     {
         $firstName = addslashes(htmlspecialchars(htmlentities(trim($firstName))));
@@ -229,9 +231,11 @@ class UserManager extends Manager
         setcookie(session_name(), '', time() - 3600, '/');
         header('Location:index.php');
     }
-    
-    public function getUserInfo () {
-        $req = $this->_connection->prepare('SELECT * FROM users WHERE id = ?');
+
+    //view
+    public function getUserInfo()
+    {
+        $req = $this->_connection->prepare('SELECT * FROM users WHERE uid = ? AND is_active = 1');
         $req->execute(array($this->_user_id));
         $user = $req->fetch(\PDO::FETCH_ASSOC);
         $req->closeCursor();
@@ -244,22 +248,23 @@ class UserManager extends Manager
     }
     
     public function displayDefaultInfo(){
-        $req = $this->_connection->prepare("SELECT * FROM users WHERE email='{$_SESSION['email']}' AND is_active = 1");
+        $req = $this->_connection->prepare("SELECT * FROM users WHERE uid ='{$_SESSION['uid']}' AND is_active = 1");
         $req->execute();
         $info = $req->fetch(\PDO::FETCH_ASSOC);
         $phoneNum = $info['phone_number'];
         $bio = $info['bio'];
+        $last_online = $info['last_online'];
 
-        session_start();
         $_SESSION['phoneNumber'] = $phoneNum;
         $_SESSION['bio'] = $bio;
+        $_SESSION['last_online'] = $last_online;
     }
     
 
     public function updateUserData()
     {
         //copy the information of the current profile//
-        $req = $this->_connection->prepare("SELECT * FROM users WHERE email='{$_SESSION['email']}' AND is_active = 1");
+        $req = $this->_connection->prepare("SELECT * FROM users WHERE uid ='{$_SESSION['uid']}' AND is_active = 1");
         $req->execute();
         
         $data = $req->fetch(\PDO::FETCH_ASSOC);
@@ -275,7 +280,6 @@ class UserManager extends Manager
         $profileImgLocation = $data['profile_img'];
         $phoneNumber = $data['phone_number'];
         $bio = $data['bio'];
-        $languages = $data['languages'];
         
         // ============Update profile phpto ========//
         // Get file info
@@ -296,18 +300,12 @@ class UserManager extends Manager
         // session variable to change the profile image displayed
         $_SESSION['profileImgLocation'] = $profileImgLocation;
         $_SESSION['folder'] = $folder;
-        $_SESSION['fileName'] = $fileName;
         
         // update is_active status from 1 -> 0 =====//
         //==========================================//
-        $req2 = $this->_connection->prepare("UPDATE users SET is_active = 0 WHERE email = '{$_SESSION['email']}' ");
+        $req2 = $this->_connection->prepare("UPDATE users SET is_active = 0 WHERE uid ='{$_SESSION['uid']}' ");
         $req2->execute();
-    
-        //====Insert the modified + inherited data=====//
-        // modified profile info
-        $bio = ($_REQUEST['bio']) ? $_POST['bio'] : $data['bio'];
-        $status = 1;
-        
+     
         //=============================================//
         //================Backend checking ============//
         //=============================================//
@@ -322,17 +320,19 @@ class UserManager extends Manager
             'French' => 'FR', 'German' => 'DE', 'Hindi' => 'HI', 'Indonesian' => 'IN', 'Italian' => 'IT', 'Japanese' => 'JA',
             'Korean' => 'KO', 'Vietnamese' => 'VI', 'Portuguese' => 'PT', 'Russian' => 'RU', 'Spanish' => 'ES'
         );
-        $userLang = explode(',', $_REQUEST['userLang']);
-        !empty($userLang) and array_diff($userLang, $languages) === array() ? $language = implode(',', array_unique($userLang)) : $language = $languages;
+
+        $userLang = explode(',', $_REQUEST['userLang'] ?? "");
+        !empty($userLang) and array_diff($userLang, $languages) === array() ? $language = implode(',', array_unique($userLang)) : $language = $data['languages'];
 
         // Check bio
-        !empty($_REQUEST['bio']) ? $bio = $_REQUEST['bio'] : $data['bio'];
+        !empty($_REQUEST['bio']) ? $bio = $_REQUEST['bio'] : $bio = $data['bio'];
 
         // create a new row with the inherited and modified informaiton //
+        $status = 1;
         if($phoneNumber != null){
             $reqInsert = $this->_connection->prepare("INSERT INTO users (uid, first_name, last_name, email, password, dob, gender, languages, bio, phone_number, profile_img, is_active, date_created)
             VALUES ( :inuid, :infirst, :inlast, :inemail, :inpassword, :indob, :ingender, :inlanguages, :inbio, :inphoneNumber, :inprofileImg, :inactiveStatus, '$dateCreated') ");
-    
+
             // insert modified content
             $reqInsert->bindParam("inlanguages", $language, \PDO::PARAM_STR);
             $reqInsert->bindParam("inphoneNumber", $phoneNumber, \PDO::PARAM_STR);
@@ -350,8 +350,6 @@ class UserManager extends Manager
             $reqInsert->bindParam("ingender", $gender, \PDO::PARAM_STR);
     
             $reqInsert->execute();
-    
-            header("Location: index.php?action=modifyProfile");
         }
         else{
             throw(new Exception('Wrong phone number format'));

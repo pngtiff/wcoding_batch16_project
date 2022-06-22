@@ -59,13 +59,18 @@ function getProperty($propId) {
     require('./view/detailedPropertyView.php');
 }
 
-function modifyProfile() {
+function modifyProfile($userId) {
+    $userM = new UserManager($userId);
+    $user = $userM->updateUserData();
+
     require('./view/modifyProfileView.php');
 }
 
 function updateUserData () {
     $userM = new UserManager();
     $userM->updateUserData();
+
+    header("Location: index.php?action=profile&user={$_SESSION['uid']}");
 }
 
 function updateLastActive() {

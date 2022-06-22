@@ -85,7 +85,7 @@ inputBoxes[3].addEventListener('input', function(){
 });
 
 // to check the before form submission
-saveButton.addEventListener('click', function(e){
-    countStr(phoneNumInput);
-});
+// saveButton.addEventListener('click', function(e){
+//     countStr(phoneNumInput);
+// });
 

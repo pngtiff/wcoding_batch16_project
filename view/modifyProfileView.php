@@ -7,7 +7,7 @@
     <div class = "personalInformationContainer profileFormsBorder">
         <h2>Modify Profile</h2>
      
-        <form action="index.php" method = "POST" id = "modifyFormM" enctype="multipart/form-data">
+        <form action="index.php" method = "post" id = "modifyFormM" enctype="multipart/form-data">
             
             <div id = "photoContainerM">
                 <div id = "profilePhotoM">
