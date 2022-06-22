@@ -20,7 +20,8 @@ class PropertyManager extends Manager {
             ON p.room_type_id = rt.id
             LEFT JOIN property_imgs pi
             ON p.id = pi.property_id
-            WHERE p.is_active = 1 AND p.user_uid = :uid");
+            WHERE p.is_active = 1 AND p.user_uid = :uid
+            GROUP BY pi.property_id");
             $req->bindParam('uid', $_REQUEST['user']);
             $req->execute();
         
@@ -34,6 +35,7 @@ class PropertyManager extends Manager {
             LEFT JOIN property_imgs pi
             ON p.id = pi.property_id
             WHERE p.is_active = 1
+            GROUP BY pi.property_id
             ORDER BY date_created DESC LIMIT 0,8");
         }
         $properties = $req->fetchAll(\PDO::FETCH_ASSOC);
@@ -55,8 +57,7 @@ class PropertyManager extends Manager {
         WHERE p.is_active = 1 AND p.id = :propId");
         $req->bindParam('propId', $propId);
         $req->execute();
-        $propDetails = $req->fetch(\PDO::FETCH_ASSOC);
-        
+        $propDetails = $req->fetchAll(\PDO::FETCH_ASSOC);
         $req->closeCursor();
         return $propDetails;        
     }

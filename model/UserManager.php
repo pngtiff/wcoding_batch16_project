@@ -237,7 +237,7 @@ class UserManager extends Manager
     // getUserInfo to display on viewProfile page
     public function getUserInfo()
     {
-        $req = $this->_connection->prepare('SELECT * FROM users WHERE uid = ?');
+        $req = $this->_connection->prepare('SELECT * FROM users WHERE uid = ? AND is_active = 1');
         $req->execute(array($this->_user_id));
         $user = $req->fetch(\PDO::FETCH_ASSOC);
         $req->closeCursor();
