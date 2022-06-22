@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>footer</title>
-</head>
-<body>
+
     <footer class="footer">
         <div class="contact">
             <h3>Contact</h3>
@@ -30,6 +22,9 @@
                         Room E-Z is a no-frills service linking hosts with housing or rooms to rent 
                         and renters looking for a place in Korea anywhere from a month to a year.
                         Whether you're a host or a renter, post your profile and look for potential matches
+                      </div>
+                      <div>
+                          <img src="public/images/sampleChart.png" alt="sampleChart" width="600px" height="400px">
                       </div>
                     </div>
                 </div>
@@ -191,5 +186,4 @@
     </footer>
     <script src="public/js/footerModal.js"></script>
     <script src="./public/js/search.js"></script> 
-</body>
-</html>
+
