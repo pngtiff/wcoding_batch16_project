@@ -52,6 +52,13 @@ function getLanding() {
     require('./view/indexView.php');
 }
 
+function getProperty($propId) {
+    $propertyM = new PropertyManager();
+    $propDetails = $propertyM->getProperty($propId);
+
+    require('./view/detailedPropertyView.php');
+}
+
 function modifyProfile() {
     require('./view/modifyProfileView.php');
 }
@@ -71,8 +78,8 @@ function updateLastActive() {
     $userM -> updateLastActive();
 }
 
-function search($city) {
+function search($params) {
     $propertyM = new PropertyManager();
-    $properties = $propertyM->searchProperties($city);
-    require('./view/searchView.php');
+    $properties = $propertyM->searchProperties($params['search'], $params['rangeMin'], $params['rangeMax'], $params['propertyType'], $params['roomType']);
+    require('./view/searchResultsCard.php');
 }
