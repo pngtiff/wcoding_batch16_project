@@ -27,12 +27,15 @@ try {
         case 'checkSignIn':
             checkSignIn($_REQUEST);
         break;
+
         case 'signOut':
             signOut();
         break;
+
         case 'profile':
             showUserInfo($_REQUEST['action'], $_REQUEST['user']);
             break;
+
         case 'listProperties':
             listProperties();
             break;
@@ -53,26 +56,20 @@ try {
             checkProfile();
             break;
 
-            // loads prifileFormView
+            // loads modifyProfileView
         case 'modifyProfile':
-            
-                modifyProfile();
-            
+            modifyProfile($_REQUEST['user']);
+            displayDefaultInfo();
             break;
 
-            // trigger image uplodaing
-        case 'uploadImg': 
-            if (!empty($_FILES["uploadFile"]['name'])) {
-                uploadImg($_FILES['uploadFile']);
-                // if the upload button is clicked again, leads to the break page
-            }
-            break;
-
-            // trigger updating data
+            // trigger updating data - working without any issue at the moment
         case 'updateUserData':
-            if (!empty($_REQUEST['language']) OR !empty($_REQUEST['phone_number']) OR !empty($_REQUEST['bio'])) {
+            if (!empty($_REQUEST['language']) OR !empty($_REQUEST['phone_number']) OR !empty($_REQUEST['bio']) OR !empty($_FILES["uploadFile"]["name"])) {
                 updateUserData();
+                displayDefaultInfo();
             }
+            break;
+            
             //Search//
         case 'search':
             search($_REQUEST);

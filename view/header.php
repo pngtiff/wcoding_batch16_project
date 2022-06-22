@@ -7,8 +7,9 @@
             <a href="index.php">
                 <img src="public/images/output-onlinepngtools.png" alt="logo" width="100px" height="100px">
             </a>
-        </div>`
+        </div>
         <nav class="nav">
+
             <div class="dropdown2">
                 <button class="dropbtn2">Browse</button>
                 <div class="dropdown-content2">
@@ -18,6 +19,7 @@
                     <a href="">Find a Roommate</a>
                 </div>
             </div>
+
             <div class="dropdown3">
                 <button class="dropbtn3">Post</button>
                 <div class="dropdown-content3">
@@ -43,6 +45,7 @@
                     <option value="1000000">Between 500k and 1M/ month</option>
                     <option value="1500000">Between 1M and 1.5M month</option>
                 </select>
+
                 <select name="propertyType" id="propertyType" class="filter">
                     <option value="any">Type of Property :</option>
                     <option value="1">Apartment</option>
@@ -52,6 +55,7 @@
                     <option value="5">Shared House</option>
                     <option value="6">Residential Hotel</option>
                 </select>
+                
                 <select name="roomType" id="roomType" class="filter">
                     <option value="any">Room Type :</option>
                     <option value="1">Private Room</option>
@@ -74,7 +78,8 @@
                         if (!empty($_SESSION['firstName'])){
                             // echo '<img src="' . $_SESSION['profile_img']. '" width="500px" height="400px">';
                             echo '<a href="index.php?action=profile&user='.$_SESSION['uid'].'">View My Profile</a>';
-                            echo '<a href="index.php?action=modifyProfile">Edit My Profile</a>';                        
+                            echo '<a href="index.php?action=modifyProfile&user='.$_SESSION['uid'].'">Edit My Profile</a>';
+
                         }
                     ?>                    
                 </div>
