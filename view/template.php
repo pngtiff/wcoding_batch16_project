@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="public/style/modifyProfile.css">
     <link rel="stylesheet" href="public/style/header.css">
     <link rel="stylesheet" href="public/style/footer.css">
-    <!-- <script src="https://accounts.google.com/gsi/client"></script> -->
+    <link rel="stylesheet" href="public/style/postProperty.css">
 </head>
 <body class="flexColumn">
     <?php require "header.php"; ?>

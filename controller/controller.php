@@ -76,3 +76,32 @@ function search($city) {
     $properties = $propertyM->searchProperties($city);
     require('./view/searchView.php');
 }
+function postProperty($params, $imgs) {
+    $propertyM = new PropertyManager();
+    $propertyM->postProperty($params['title'], $params['country'], $params['province'], $params['city'], $params['address1'], $params['address2'], $params['zipcode'], $params['propertyType'], $params['roomType'], $params['size'], $params['price'], $params['description'], $params['bankAccNum'], $imgs);
+}
+
+function viewPostProperty() {
+    require('view/postPropertyView.php');
+}
+
+function getCities($province) {
+    $propertyM = new PropertyManager();
+    $cities = $propertyM->getCities($province);
+    echo "<option selected disabled>Select a city</option>";
+    foreach($cities as $key=>$city) {
+        echo "<option value='$key'>$city</option>";
+    }
+}
+function getDistricts($city) {
+    $propertyM = new PropertyManager();
+    $districts = $propertyM->getDistricts($city);
+    if ($districts) {
+        echo "<option selected disabled>Select a district</option>";
+        foreach($districts as $key=>$district) {
+            echo "<option value='$key'>$district</option>";
+        }
+    } else {
+        echo '<option selected disabled value="-1">No districts in this city</option>';
+    }
+}

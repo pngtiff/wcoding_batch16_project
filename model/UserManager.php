@@ -100,16 +100,25 @@ class UserManager extends Manager {
         $user = $res->fetch(\PDO::FETCH_ASSOC);
         $_SESSION['firstName'] = $response->given_name;
         $_SESSION['email'] = $response->email;
-        // If user signed up they are redirected to the main page
+        // If user had signed in before 
         if ($user) {
-            $_SESSION['uid'] = $user['uid'];
-            $_SESSION['profileImg'] = $user['profile_img'];
-            header('Location:index.php');
+            // If user has a profile they are redirected to main page
+            if ($user['dob']) {
+                $_SESSION['uid'] = $user['uid'];
+                $_SESSION['profileImg'] = $user['profile_img'];
+                header('Location:index.php');
+            } 
+            // If user has a profile they are redirected to createProfile page
+            else {
+                $uid = $this->createUID();
+                $_SESSION['uid'] = $uid;
+                $this->_connection->exec("INSERT INTO users (email, first_name, last_name, uid) VALUES ('$response->email','$response->given_name','$response->family_name', '$uid')");
+                header('Location:index.php?action=createProfile');
+            }
         // Else they are redirected to createProfile page
         } else {
             $uid = $this->createUID();
             $_SESSION['uid'] = $uid;
-            $_SESSION['profileImg'] = $response->picture;
             $this->_connection->exec("INSERT INTO users (email, first_name, last_name, uid) VALUES ('$response->email','$response->given_name','$response->family_name', '$uid')");
             header('Location:index.php?action=createProfile');
         }

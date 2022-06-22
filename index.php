@@ -12,7 +12,7 @@ try {
     switch ($action){
         case 'googleOauth':
             googleOauth($_REQUEST);
-        break;
+            break;
         // catching users trying to bypass front-end check
         case 'wrongPassword':
             throw(new Exception('You tried to sign in using wrong password.'));
@@ -22,14 +22,14 @@ try {
             } else {
                 throw(new Exception('You tried to sign in without a password.'));
             }
-        break;
+            break;
         // case for ajax request to check if email/password are correct without refreshing the page
         case 'checkSignIn':
             checkSignIn($_REQUEST);
-        break;
+            break;
         case 'signOut':
             signOut();
-        break;
+            break;
         case 'profile':
             showUserInfo($_REQUEST['action'], $_REQUEST['user']);
             break;
@@ -40,7 +40,7 @@ try {
             if(preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $_POST['email'])  AND !empty($_POST['firstName']) AND !empty($_POST['lastName']) AND !empty($_POST['password']) AND !empty($_POST['passwordConfirm']) AND $_POST['passwordConfirm']==$_POST['password'] AND preg_match('/^(?=.*[!@#$%^&*-])(?=.*[0-9])(?=.*[A-Z]).{8,20}$/', $_POST['password']) AND preg_match('/^[A-Za-z]{2,}$/', $_POST['firstName'])AND preg_match('/^[A-Za-z]{2,}$/', $_POST['lastName'])) {
                 signUp($_REQUEST);
             }
-        break;
+            break;
         
         case 'createProfile':
             createProfile();
@@ -73,6 +73,26 @@ try {
             //Search//
         case 'search':
             search($_REQUEST['city']);
+            break;
+        case 'postProperty': 
+            if (!empty($_REQUEST['title']) AND !empty($_SESSION['email']) AND !empty($_REQUEST['city']) AND !empty($_REQUEST['country']) AND !empty($_REQUEST['province']) AND !empty($_REQUEST['address1']) AND !empty($_REQUEST['zipcode']) AND !empty($_REQUEST['propertyType']) AND !empty($_REQUEST['roomType']) AND !empty($_REQUEST['size']) AND !empty($_REQUEST['price']) AND !empty($_REQUEST['description']) AND count($_FILES) >= 2 AND count($_FILES) <= 20 AND !empty($_REQUEST['bankAccNum'])) {
+                postProperty($_REQUEST, $_FILES);
+            }
+            break;
+        case 'viewPostProperty':
+            if ($_SESSION['email']) {
+                viewPostProperty();
+            }
+            break;
+        case 'getCities':
+            if (!empty($_REQUEST['province'])) {
+                getCities($_REQUEST['province']);
+            }
+            break;
+        case 'getDistrict':
+            if (!empty($_REQUEST['city'])) {
+                getDistricts($_REQUEST['city']);
+            }
             break;
         default: 
             getLanding();

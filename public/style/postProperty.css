@@ -1,0 +1,15 @@
+#postPropertyForm {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#postPropertyForm > * {
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+}
+
+#photosPreview img {
+    width: 200px
+}
