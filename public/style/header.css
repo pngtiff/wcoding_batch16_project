@@ -177,6 +177,7 @@ header {
     overflow: hidden;
     margin-top: 20px;
     margin-left: 25px;
+    border: black 1px solid;
 }
 
 #searchBar {

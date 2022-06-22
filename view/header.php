@@ -2,6 +2,7 @@
 <header class="flexColumn"> 
     <!-- <h2>BATCH 16 (awesome) PROJECT : ROOM EZ !</h2> -->
     <div class="headerContainer"> 
+
         <div class="logo">
             <a href="index.php">
                 <img src="public/images/output-onlinepngtools.png" alt="logo" width="100px" height="100px">

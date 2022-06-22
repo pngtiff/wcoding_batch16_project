@@ -14,9 +14,9 @@ class UserManager extends Manager
         $this->_user_id = $user;
     }
 
-    public function signIn($email, $password)
+    public function signIn($email, $password, $rememberMe)
     {
-
+        // rememberMe function
         $email = htmlspecialchars($email);
         $password = htmlspecialchars($password);
 
@@ -28,12 +28,17 @@ class UserManager extends Manager
         $check = password_verify(htmlspecialchars($password), $passwordHashed);
 
         if ($check) {
-            session_start();
+            if ($rememberMe) {
+                setcookie('email', $email, time()+365*24*3600);
+            }
+            // setting rememberMe cookie
             $_SESSION['firstName'] = $userInfo['first_name'];
             $_SESSION['email'] = $email;
             $_SESSION['uid'] = $userInfo['uid'];
 
             if ($userInfo['dob']) {
+                // checking dob when signing in. dob is mandatory submission so
+                // if it's in the database user has already created a profile.                
                 header("Location:index.php");
             } else {
                 header("Location:index.php?action=createProfile");
