@@ -7,7 +7,9 @@ use wcoding\batch16\finalproject\Model\PropertyManager;
 
 function signIn($params) {
     $signIn = new UserManager();
-    $signIn->signIn($params['email'], $params['password']);
+    $rememberMe = !empty($params['rememberMe']);
+    $signIn->signIn($params['email'], $params['password'], $rememberMe);
+    // rememberMe feature
 }
 
 function checkSignIn($params){
@@ -59,18 +61,18 @@ function getProperty($propId) {
     require('./view/detailedPropertyView.php');
 }
 
-function modifyProfile() {
-    require('./view/modifyProfileView.php');
-}
+function modifyProfile($userId) {
+    $userM = new UserManager($userId);
+    $user = $userM->updateUserData();
 
-function uploadImg ($file) {
-    $userM = new UserManager();
-    $userM->uploadImg($file);
+    require('./view/modifyProfileView.php');
 }
 
 function updateUserData () {
     $userM = new UserManager();
     $userM->updateUserData();
+
+    header("Location: index.php?action=profile&user={$_SESSION['uid']}");
 }
 
 function updateLastActive() {

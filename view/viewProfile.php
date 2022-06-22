@@ -51,8 +51,11 @@
                         echo 'No bio yet';
                     };?></p>
                 <?php if(!empty($_SESSION['email'])) { ?>
-                <form action='index.php?action=modifyProfile' method='post'>
+                
+                <form action="index.php" method='GET'>
                     <button type='submit' id='editProfileButton'>Edit Profile</button>
+                    <input type="hidden" name = "action" value = "modifyProfile">
+                    <input type="hidden" name = "user" value = "<?= $_SESSION['uid']?>">
                 </form>
                 <?php } ?>
             </div>

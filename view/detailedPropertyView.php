@@ -8,18 +8,9 @@
         echo ' ‣ Validated Property'?> <img class='validatedCheck' src="./public/images/validatedPropertyCheck.png" alt="validation green check"><?php ;}
         else?></p>
     <div class='propertyImgContainer propImages'>
-        <?php if(count($propDetails)>1) {
-            include('propImagesCarousel.php');
-            // <!-- TODO: click for modal with slide gallery for showing all property photos -->
-        } else {
-            echo "<img alt=".$propDetails[0]['image_description']." src=". $propDetails[0]['p_img'].">";
-        } ?>
-    </div>
-    <div style="text-align:center">
-        <?php if(count($propDetails)>1) {
-            for($i=0; $i<count($propDetails); $i++) {?>
-        <span class="dot" onclick="currentSlide(<?=$i+1?>)"></span>
-        <?php }};?>
+        <img alt="property main image" src="<?= $propDetails['p_img'];?>">
+        <button class='allPropPhotos'><a href="">See all photos <i class="fa-solid fa-images"></i></a></button>
+        <!-- TODO: click for modal with slide gallery for showing all property photos -->
     </div>
     <div class='propDetails'>
         <div class='propDesc'>
