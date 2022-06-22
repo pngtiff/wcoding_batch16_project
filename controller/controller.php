@@ -7,7 +7,9 @@ use wcoding\batch16\finalproject\Model\PropertyManager;
 
 function signIn($params) {
     $signIn = new UserManager();
-    $signIn->signIn($params['email'], $params['password']);
+    $rememberMe = !empty($params['rememberMe']);
+    $signIn->signIn($params['email'], $params['password'], $rememberMe);
+    // rememberMe feature
 }
 
 function checkSignIn($params){
