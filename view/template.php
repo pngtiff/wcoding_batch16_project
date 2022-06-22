@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="public/style/header.css">
     <link rel="stylesheet" href="public/style/footer.css">
     <!-- <script src="https://accounts.google.com/gsi/client"></script> -->
+    <script src="https://kit.fontawesome.com/949df75f70.js" crossorigin="anonymous"></script>
+
 </head>
 <body class="flexColumn">
     <?php require "header.php"; ?>
