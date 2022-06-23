@@ -11,6 +11,7 @@
     overflow: hidden;
     border: 1px solid grey;
     position: relative;
+    z-index: -1;
 }
 
 #userImgContainer img, #profilePhoto div img, #userImg, #photo{
@@ -71,6 +72,7 @@
 
 #profilePhoto {
     margin: 1.25rem 0;
+    z-index: -2;
 }
 
 #profilePhoto div {
