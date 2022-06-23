@@ -53,6 +53,7 @@
 
 #profilePhoto {
     margin: 1.25rem 0;
+    z-index: -2;
 }
 
 #profilePhoto div {
