@@ -12,10 +12,10 @@ email.addEventListener('keyup', checkEmail)
 password.addEventListener('keyup', checkPassword);
 passwordConfirm.addEventListener('keyup', checkPasswordConfirm); 
 signUpForm.addEventListener('submit', submitForm); 
-reset.addEventListener('click', resetForm)
+reset.addEventListener('click', resetForm); 
 
 function checkFirstName() {
-    let regex = /^[A-Za-z]{2,}$/; 
+    let regex = /^(?![\s.]+$)[A-Z\-a-z\s.]{2,}$/;
     if (regex.test(firstName.value)) {
         firstName.classList.add('green');
         firstName.classList.remove('red'); 
@@ -31,7 +31,7 @@ function checkFirstName() {
     }
 
 function checkLastName() {
-let regex = /^[A-Za-z]{2,}$/; 
+let regex = /^(?![\s.]+$)[A-Z\-a-z\s.]{2,}$/;
 if (regex.test(lastName.value)) {
     lastName.classList.add('green');
     lastName.classList.remove('red'); 
@@ -47,7 +47,7 @@ else {
 }
 
 function checkEmail() {
-let regex = /^[a-z0-9\_\-]+@[a-z0-9\_\-]{2,}\.[a-z]{2,4}$/i; 
+let regex = /^[a-z0-9_-]+@[a-z0-9_-]{2,}.[a-z.]{2,4}?[a-z]{2,4}$/i;
 if (regex.test(email.value)) {
     email.classList.add('green');
     email.classList.remove('red'); 
@@ -103,6 +103,25 @@ function submitForm(e) {
         e.preventDefault();
 
         document.querySelector("#signUp-container").innerHTML = ""
+        document.querySelector("#signUp-container").innerHTML = "Sign Up Successful! Please sign in"
+    } else {
+        e.preventDefault();
+    }
+}
+
+function verifyEmail(e) {
+    if(checkEmail() && checkPassword() && checkPasswordConfirm()) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'index.php?action=signUp');
+        
+        xhr.response 
+
+
+        xhr.send();
+        e.preventDefault();
+
+        document.querySelector("#signUp-container").innerHTML = ""
+        document.querySelector("#signUp-container").innerHTML = "Sign Up Successful! Please sign in"
         document.querySelector("#signUp-container").innerHTML = "Account Created. Please sign in to complete the registration process." //////////// New Div
         // let confirmationText = document.createElement(h4);
         // h4.textContent = "Account created. Please sign in to complete the process";
