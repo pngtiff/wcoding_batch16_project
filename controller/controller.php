@@ -80,7 +80,10 @@ function modifyProperty($propId) {
 //     $propertyM->modifyProperty();
 // }
 
-function modifyProfile() {
+function modifyProfile($userId) {
+    $userM = new UserManager($userId); 
+    $data = $userM->viewUserData();
+
     require('./view/modifyProfileView.php');
 }
 
