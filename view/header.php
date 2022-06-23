@@ -31,7 +31,7 @@
             <div class="dropdown">
                 <button class="dropbtn">About Us</button>
                 <div class="dropdown-content">
-                    <a href="#intro">Who are we?</a>
+                    <a href="view/footer.php/.modal-content">Who are we?</a>
                     <a href="">What do we do?</a>
                     <a href=".contact">Contact us</a>
                 </div>
