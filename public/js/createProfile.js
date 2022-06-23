@@ -45,6 +45,9 @@ let userLang = document.querySelector('#userLang');
 let bio = document.querySelector('#bio');
 let imgContainer = document.querySelector('#profilePhoto div');
 
+let imgError = document.createElement('div');
+imgError.style.marginTop = '10px';
+imgDiv.parentNode.appendChild(imgError);
 
 // change the photo by choosing the different files
 file.addEventListener('change', function () {
@@ -53,10 +56,16 @@ file.addEventListener('change', function () {
     let fileSize = chosenFile.size;
     let fileType = chosenFile.name.split('.').pop();
 
-    if (fileSize > 500000) {
-        return imgContainer.textContent = "Sorry, your file is too large";
-    } else if (fileType !== "jpeg" && fileType !== "jpg" && fileType !== "png" && fileType !== "webp" && fileType !== "") {
-        return imgContainer.textContent = "Images must be in jpeg, jpg, png, or webp format";
+    let fileTypeReg = /(jpg|jpeg|png|webp)/i;
+    let validFileType = fileTypeReg.test(fileType);
+
+    imgError.textContent = "";
+    if (fileSize > 500000 || (!validFileType && fileType !== "")) {
+        if (fileSize > 500000) {
+            return imgError.textContent = "Sorry, your file is too large";
+        } else {
+            return imgError.textContent = "Images must be in jpeg, jpg, png, or webp format";
+        }
     }
 
     let img = document.createElement('img');

@@ -36,6 +36,14 @@
     </div>
 
 </section>
+
+<!-- All property photos modal -->
+<div id="modalBox">
+    <div id="propPhotosModal">
+        
+    </div>
+</div>
+
 <script src="./public/js/propImagesCarousel.js"></script>
 <?php $content = ob_get_clean();?>
 <?php require('template.php');?>

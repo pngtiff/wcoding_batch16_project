@@ -35,7 +35,7 @@ class UserManager extends Manager
             $_SESSION['firstName'] = $userInfo['first_name'];
             $_SESSION['email'] = $email;
             $_SESSION['uid'] = $userInfo['uid'];
-            $_SESSION['profile_img'] = $userInfo['profile_img'];
+            $_SESSION['profile_img'] = './profile_images/'.$userInfo['profile_img'];
 
             if ($userInfo['dob']) {
                 // checking dob when signing in. dob is mandatory submission so
@@ -226,7 +226,7 @@ class UserManager extends Manager
         $req->bindParam('gender', $gender, \PDO::PARAM_STR);
         $req->bindParam('lang', $language, \PDO::PARAM_STR);
         $req->bindParam('bio', $bio, \PDO::PARAM_STR);
-        $req->bindParam('userImg', $folder, \PDO::PARAM_STR);
+        $req->bindParam('userImg', $imgName, \PDO::PARAM_STR);
         $req->execute();
         header('Location:index.php');
     }
