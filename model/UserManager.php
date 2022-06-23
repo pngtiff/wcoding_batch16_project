@@ -35,7 +35,7 @@ class UserManager extends Manager
             $_SESSION['firstName'] = $userInfo['first_name'];
             $_SESSION['email'] = $email;
             $_SESSION['uid'] = $userInfo['uid'];
-            $_SESSION['profile_img'] = $userInfo['profile_img'];
+            $_SESSION['profile_img'] = './profile_images/'.$userInfo['profile_img'];
 
             if ($userInfo['dob']) {
                 // checking dob when signing in. dob is mandatory submission so
