@@ -254,19 +254,6 @@ class UserManager extends Manager
         return $user;
     }
     
-    // public function displayDefaultInfo(){
-    //     $req = $this->_connection->prepare("SELECT * FROM users WHERE uid ='{$_SESSION['uid']}' AND is_active = 1");
-    //     $req->execute();
-    //     $info = $req->fetch(\PDO::FETCH_ASSOC);
-    //     $phoneNum = $info['phone_number'];
-    //     $bio = $info['bio'];
-    //     $last_online = $info['last_online'];
-
-    //     $_SESSION['phoneNumber'] = $phoneNum;
-    //     $_SESSION['bio'] = $bio;
-    //     $_SESSION['last_online'] = $last_online;
-    // }
-    
     public function viewUserData()
     {
         //view the information of the current profile//
@@ -299,7 +286,8 @@ class UserManager extends Manager
             $fileLocation = $_FILES["uploadFile"]["tmp_name"];
             $bytes = bin2hex(random_bytes(16)); // generates secure pseudo random bytes and bin2hex converts to hexadecimal string
             $imgName = $bytes . "." . $extension;
-            move_uploaded_file($fileLocation, "./profile_images/" . $imgName);
+            $imgName = "./profile_images/" . $imgName;
+            move_uploaded_file($fileLocation, $imgName);
 
         } 
         else if ($profileImgLocation){
@@ -308,9 +296,6 @@ class UserManager extends Manager
             $imgName = null;
         }
 
-        // session variable to change the profile image displayed
-        // $_SESSION['profileImgLocation'] = $profileImgLocation;
-        // $_SESSION['folder'] = $folder;
         
         // update is_active status from 1 -> 0 =====//
         //==========================================//
@@ -343,13 +328,13 @@ class UserManager extends Manager
         if($phoneNumber != null){
             $reqInsert = $this->_connection->prepare("INSERT INTO users (uid, first_name, last_name, email, password, dob, gender, languages, bio, phone_number, profile_img, is_active, date_created)
             VALUES ( :inuid, :infirst, :inlast, :inemail, :inpassword, :indob, :ingender, :inlanguages, :inbio, :inphoneNumber, :inprofileImg, :inactiveStatus, '$dateCreated') ");
-            $filePath = "./profile_images/" . $imgName;
+
             // insert modified content
             $reqInsert->bindParam("inlanguages", $language, \PDO::PARAM_STR);
             $reqInsert->bindParam("inphoneNumber", $phoneNumber, \PDO::PARAM_STR);
             $reqInsert->bindParam("inbio", $bio, \PDO::PARAM_STR);
             $reqInsert->bindParam("inactiveStatus", $status, \PDO::PARAM_INT);
-            $reqInsert->bindParam("inprofileImg", $filePath, \PDO::PARAM_STR);
+            $reqInsert->bindParam("inprofileImg", $imgName, \PDO::PARAM_STR);
             
             // insert inherited from the previous data
             $reqInsert->bindParam("inuid", $uid, \PDO::PARAM_STR);
