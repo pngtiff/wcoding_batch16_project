@@ -7,6 +7,10 @@
     if($propDetails[0]['validation']) {
         echo ' ‣ Validated Property'?> <img class='validatedCheck' src="./public/images/validatedPropertyCheck.png" alt="validation green check"><?php ;}
         else?></p>
+    <?php
+    if($_SESSION['uid'] === $_SESSION['user_uid']) { ?>
+       <button><a href="index.php?action=modifyProperty&propId=<?= $_REQUEST['propId'];?>">Modify Property Details</a></button>
+    <?php } ?>
     <div class='propertyImgContainer propImages'>
         <?php if(count($propDetails)>1) {
             include('propImagesCarousel.php');
@@ -36,6 +40,14 @@
     </div>
 
 </section>
+
+<!-- All property photos modal -->
+<div id="modalBox">
+    <div id="propPhotosModal">
+        
+    </div>
+</div>
+
 <script src="./public/js/propImagesCarousel.js"></script>
 <?php $content = ob_get_clean();?>
 <?php require('template.php');?>

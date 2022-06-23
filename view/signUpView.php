@@ -31,3 +31,5 @@
 </div>
 
 <script src="public/js/signUp.js"></script>
+
+
