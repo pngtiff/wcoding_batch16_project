@@ -14,13 +14,13 @@ class UserManager extends Manager
         $this->_user_id = $user;
     }
 
-    public function signIn($email, $password)
+    public function signIn($email, $password, $rememberMe)
     {
-
+        // rememberMe function
         $email = htmlspecialchars($email);
         $password = htmlspecialchars($password);
 
-        $response = $this->_connection->query("SELECT email, password, dob, first_name, id, uid FROM users WHERE email = '$email'");
+        $response = $this->_connection->query("SELECT email, password, dob, first_name, id, uid, profile_img FROM users WHERE email = '$email'");
         $userInfo = $response->fetch(\PDO::FETCH_ASSOC);
         $passwordHashed = $userInfo['password'];
         $response->closeCursor();
@@ -28,12 +28,18 @@ class UserManager extends Manager
         $check = password_verify(htmlspecialchars($password), $passwordHashed);
 
         if ($check) {
-            session_start();
+            if ($rememberMe) {
+                setcookie('email', $email, time()+365*24*3600);
+            }
+            // setting rememberMe cookie
             $_SESSION['firstName'] = $userInfo['first_name'];
             $_SESSION['email'] = $email;
             $_SESSION['uid'] = $userInfo['uid'];
+            $_SESSION['profile_img'] = './profile_images/'.$userInfo['profile_img'];
 
             if ($userInfo['dob']) {
+                // checking dob when signing in. dob is mandatory submission so
+                // if it's in the database user has already created a profile.                
                 header("Location:index.php");
             } else {
                 header("Location:index.php?action=createProfile");
@@ -281,8 +287,7 @@ class UserManager extends Manager
         } else {
             $imgName = null;
         }
-
-
+        
         // update is_active status from 1 -> 0 =====//
         $req2 = $this->_connection->prepare("UPDATE users SET is_active = 0 WHERE uid ='{$_SESSION['uid']}' ");
         $req2->execute();
