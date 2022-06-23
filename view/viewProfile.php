@@ -56,13 +56,14 @@
                         echo 'No bio yet';
                     };?></p>
 
-                <?php if($_REQUEST['user'] == $_SESSION['uid']) { ?>
+                <?php if(!empty($_SESSION['uid'])) {
+                    if($_REQUEST['user'] == $_SESSION['uid']) { ?>
                 <form action="index.php" method='GET'>
                     <button type='submit' id='editProfileButton'>Edit Profile</button>
                     <input type="hidden" name = "action" value = "modifyProfile">
                     <input type="hidden" name = "user" value = "<?= $_SESSION['uid']?>">
                 </form>
-                <?php } ?>
+                <?php }} ?>
             </div>
         </div>
     </div>

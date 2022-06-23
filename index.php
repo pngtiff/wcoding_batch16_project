@@ -39,7 +39,6 @@ try {
             break;
         case 'property':
             getProperty($_REQUEST['propId']);
-            getPropertyOwner($_REQUEST['propId']);
             break;
         case 'modifyProperty':
             modifyProperty($_REQUEST['propId']);

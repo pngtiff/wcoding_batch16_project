@@ -77,7 +77,7 @@ class PropertyManager extends Manager {
             $req2->closeCursor();
 
             $_SESSION['uid'] = $data['uid'];
-            $_SESSION['user_uid'] = $propDetails['user_uid'];
+            $_SESSION['user_uid'] = $propDetails[0]['user_uid'];
         }
         $propDetails[0]['province_state'] = $this::PROVINCES['KR'][$propDetails[0]['province_state']];
         $propDetails[0]['city'] = $this::CITIES[$propDetails[0]['province_state']][$propDetails[0]['city']];
