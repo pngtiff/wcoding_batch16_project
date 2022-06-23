@@ -21,18 +21,42 @@ class Manager {
     );
 
     const PROVINCES = array(
-        'KR' => array('Chungcheongbuk-do',
-        'Chungcheongnam-do',
-        'Gangwon-do',
-        'Gyeonggi-do',
-        'Gyeongsangbuk-do',
-        'Gyeongsangnam-do',
-        'Jeollabuk-do',
-        'Jeollanam-do',
-        'Jeju Special Self-governing Province')
-    );
-
+        'KR' => array(
+            'Busan',
+            'Chungcheongbuk-do',
+            'Chungcheongnam-do',
+            'Daegu',
+            'Daejon',
+            'Gwangju',
+            'Incheon',
+            'Gangwon-do',
+            'Gyeonggi-do',
+            'Gyeongsangbuk-do',
+            'Gyeongsangnam-do',
+            'Jeollabuk-do',
+            'Jeollanam-do',
+            'Jeju-do',
+            'Sejong',
+            'Seoul')
+        );
     const CITIES = array(
+        'Busan' => array(
+            'Buk District',
+            'Busanjin District',
+            'Dong District',
+            'Dongnae District',
+            'Gangseo District',
+            'Geumjeong District',
+            'Haeundae District',
+            'Jung District',
+            'Nam District',
+            'Saha District',
+            'Sasang District',
+            'Seo District',
+            'Suyeong District',
+            'Yeongdo District',
+            'Yeonje District',
+        ),
         'Chungcheongbuk-do' => array(
             'Cheongju',
             'Chungju',
@@ -61,6 +85,22 @@ class Manager {
             'Taean',
             'Geumsan',
             'Cheongyang',),
+        'Daegu' => array(
+            'Jung District',
+            'Dong District',
+            'Seo District',
+            'Nam District',
+            'Buk District',
+            'Suseong District',
+            'Dalseo District',
+        ),
+        'Daejeon' => array(
+            'Daedeok District',
+            'Dong District',
+            'Jung District',
+            'Seo District',
+            'Yuseong District',
+        ),
         'Gangwon-do' => array(
             'Wonju',
             'Chuncheon',
@@ -80,6 +120,13 @@ class Manager {
             'Yangyang',
             'Hwacheon',
             'Yanggu',),
+        'Gwangju' => array(
+            'Buk District',
+            'Dong District',
+            'Gwangsan District',
+            'Nam District',
+            'Seo District',
+        ),
         'Gyeonggi-do' => array(
             'Suwon',
             'Seongnam',
@@ -156,6 +203,20 @@ class Manager {
             'Sancheong',
             'Uiryeong',
         ),
+        'Incheon' => array(
+            'Bupyeong District',
+            'Dong District',
+            'Gyeyang District',
+            'Jung District',
+            'Namdong District',
+            'Michuhol District',
+            'Seo District',
+            'Yeonsu District',
+        ),
+        'Jeju-do' => array(
+            'Jeju', 
+            'Seogwipo'
+        ),
         'Jeollabuk-do' => array(
             'Jeonju',
             'Iksan',
@@ -194,96 +255,6 @@ class Manager {
             'Jindo',
             'Gokseong',
             'Gurye',),
-        'Jeju Special Self-governing Province' => array(
-            'Jeju',
-            'Seogwipo',)
-    );
-
-    const DISTRICTS = array (
-        'Ansan' => array('Danwon-gu','Sangnok-gu'),
-        'Anyang' => array('Dongan-gu','Manan-gu'),
-        'Busan' => array(
-            'Buk District',
-            'Busanjin District',
-            'Dong District',
-            'Dongnae District',
-            'Gangseo District',
-            'Geumjeong District',
-            'Haeundae District',
-            'Jung District',
-            'Nam District',
-            'Saha District',
-            'Sasang District',
-            'Seo District',
-            'Suyeong District',
-            'Yeongdo District',
-            'Yeonje District',
-        ),
-        'Changwon' => array(
-            'Jinhae-gu',
-            'Masanhappo-gu',
-            'Masanhoewon-gu',
-            'Seongsan-gu',
-            'Uichang-gu',
-        ),
-        'Cheongju' => array(
-            'Heungdeok-gu',
-            'Sangdang-gu',
-            'Cheongwon-gu',
-            'Seowon-gu',
-        ),
-        'Cheonan' => array('Dongnam-gu','Seobuk-gu'),
-        'Daegu' => array(
-            'Jung District',
-            'Dong District',
-            'Seo District',
-            'Nam District',
-            'Buk District',
-            'Suseong District',
-            'Dalseo District',
-        ),
-        'Daejeon' => array(
-            'Daedeok District',
-            'Dong District',
-            'Jung District',
-            'Seo District',
-            'Yuseong District',
-        ),
-        'Goyang' => array(
-            'Deogyang-gu',
-            'Ilsandong-gu',
-            'Ilsanseo-gu',
-        ),
-        'Gwangju' => array(
-            'Buk District',
-            'Dong District',
-            'Gwangsan District',
-            'Nam District',
-            'Seo District',
-        ),
-        'Incheon' => array(
-            'Bupyeong District',
-            'Dong District',
-            'Gyeyang District',
-            'Jung District',
-            'Namdong District',
-            'Michuhol District',
-            'Seo District',
-            'Yeonsu District',
-        ),
-        'Jeonju' => array(
-            'Deokjin-gu',
-            'Wansan-gu',
-        ),
-        'Pohang' => array(
-            'Buk-gu',
-            'Nam-gu',
-        ),
-        'Seongnam' => array(
-            'Bundang-gu',
-            'Jungwon-gu',
-            'Sujeong-gu',
-        ),
         'Seoul' => array(
             'Dobong District',
             'Dongdaemun District',
@@ -311,17 +282,54 @@ class Manager {
             'Yeongdeungpo District',
             'Yongsan District',
         ),
-        'Suwon' => array(
-            'Gwonseon-gu',
-            'Jangan-gu',
-            'Paldal-gu',
-            'Yeongtong-gu',
-        ),
         'Ulsan' => array(
             'Buk District',
             'Dong District',
             'Jung District',
             'Nam District',
+        ),
+    );
+
+    const DISTRICTS = array (
+        'Ansan' => array('Danwon-gu','Sangnok-gu'),
+        'Anyang' => array('Dongan-gu','Manan-gu'),
+        'Changwon' => array(
+            'Jinhae-gu',
+            'Masanhappo-gu',
+            'Masanhoewon-gu',
+            'Seongsan-gu',
+            'Uichang-gu',
+        ),
+        'Cheongju' => array(
+            'Heungdeok-gu',
+            'Sangdang-gu',
+            'Cheongwon-gu',
+            'Seowon-gu',
+        ),
+        'Cheonan' => array('Dongnam-gu','Seobuk-gu'),
+        'Goyang' => array(
+            'Deogyang-gu',
+            'Ilsandong-gu',
+            'Ilsanseo-gu',
+        ),
+        'Jeonju' => array(
+            'Deokjin-gu',
+            'Wansan-gu',
+        ),
+        'Pohang' => array(
+            'Buk-gu',
+            'Nam-gu',
+        ),
+        'Seongnam' => array(
+            'Bundang-gu',
+            'Jungwon-gu',
+            'Sujeong-gu',
+        ),
+        'Suwon' => array(
+            'Gwonseon-gu',
+            'Jangan-gu',
+            'Paldal-gu',
+            'Yeongtong-gu',
         ),
         'Yongin' => array(
             'Cheoin-gu',

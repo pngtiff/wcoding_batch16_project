@@ -12,11 +12,11 @@
     <link rel="stylesheet" href="public/style/signUp.css">
     <link rel="stylesheet" href="public/style/modal.css">
     <link rel="stylesheet" href="public/style/indexView.css">
-    <link rel="stylesheet" href="public/style/createProfile.css">
-    <link rel="stylesheet" href="public/style/modifyProfile.css">
     <link rel="stylesheet" href="public/style/header.css">
     <link rel="stylesheet" href="public/style/footer.css">
     <link rel="stylesheet" href="public/style/postProperty.css">
+    <script src="https://kit.fontawesome.com/949df75f70.js" crossorigin="anonymous"></script>
+
 </head>
 <body class="flexColumn">
     <?php require "header.php"; ?>

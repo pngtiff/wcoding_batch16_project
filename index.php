@@ -36,9 +36,20 @@ try {
         case 'listProperties':
             listProperties();
             break;
+        case 'property':
+            getProperty($_REQUEST['propId']);
+            break;
         case 'signUp':
-            if(preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $_POST['email'])  AND !empty($_POST['firstName']) AND !empty($_POST['lastName']) AND !empty($_POST['password']) AND !empty($_POST['passwordConfirm']) AND $_POST['passwordConfirm']==$_POST['password'] AND preg_match('/^(?=.*[!@#$%^&*-])(?=.*[0-9])(?=.*[A-Z]).{8,20}$/', $_POST['password']) AND preg_match('/^[A-Za-z]{2,}$/', $_POST['firstName'])AND preg_match('/^[A-Za-z]{2,}$/', $_POST['lastName'])) {
-                signUp($_REQUEST);
+            if(preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $_POST['email'])  
+                AND !empty($_POST['firstName']) 
+                AND !empty($_POST['lastName']) 
+                AND !empty($_POST['password']) 
+                AND !empty($_POST['passwordConfirm']) 
+                AND $_POST['passwordConfirm']==$_POST['password'] 
+                AND preg_match('/^(?=.*[!@#$%^&*-])(?=.*[0-9])(?=.*[A-Z]).{8,20}$/', $_POST['password']) 
+                AND preg_match('/^[A-Za-z]{2,}$/', $_POST['firstName'])
+                AND preg_match('/^[A-Za-z]{2,}$/', $_POST['lastName'])) {
+                    signUp($_REQUEST);
             }
             break;
         
@@ -72,12 +83,38 @@ try {
             }
             //Search//
         case 'search':
-            search($_REQUEST['city']);
+            search($_REQUEST);
             break;
         case 'postProperty': 
-            if (!empty($_REQUEST['title']) AND !empty($_SESSION['email']) AND !empty($_REQUEST['city']) AND !empty($_REQUEST['country']) AND !empty($_REQUEST['province']) AND !empty($_REQUEST['address1']) AND !empty($_REQUEST['zipcode']) AND !empty($_REQUEST['propertyType']) AND !empty($_REQUEST['roomType']) AND !empty($_REQUEST['size']) AND !empty($_REQUEST['price']) AND !empty($_REQUEST['description']) AND count($_FILES) >= 2 AND count($_FILES) <= 20 AND !empty($_REQUEST['bankAccNum'])) {
-                postProperty($_REQUEST, $_FILES);
+            $bedNum = (!empty($_REQUEST['furnished']) AND !empty($_REQUEST['bedNum'])) ? !empty($_REQUEST['bedNum']) : empty($_REQUEST['furnished']) AND empty($_REQUEST['bedNum']) ? true : false;
+            $_REQUEST['district'] = (!empty($_REQUEST['city']) AND $_REQUEST['city'] == -1) ? -1 : $_REQUEST['district'];
+            if (!empty($_REQUEST['title']) 
+                AND !empty($_SESSION['email']) 
+                AND !empty($_REQUEST['city']) 
+                AND !empty($_REQUEST['country']) 
+                AND !empty($_REQUEST['province']) 
+                AND !empty($_REQUEST['address1']) 
+                AND !empty($_REQUEST['zipcode']) 
+                AND !empty($_REQUEST['propertyType']) 
+                AND !empty($_REQUEST['roomType']) 
+                AND !empty($_REQUEST['size']) 
+                AND !empty($_REQUEST['price']) 
+                AND !empty($_REQUEST['description']) 
+                AND count($_FILES) >= 2 
+                AND count($_FILES) <= 20 
+                AND !empty($_REQUEST['bankAccNum']) 
+                AND !empty($_REQUEST['roomNum']) 
+                AND !empty($_REQUEST['bathNum']) 
+                AND $bedNum 
+                AND !empty($_REQUEST['district'])) {
+                    for ($i=0; $i<count($_FILES); $i++) {
+                        if (empty($_REQUEST["t-attachment-$i"])) {
+                            throw (new Exception("Message description is empty"));
+                        }
+                    }
+                    postProperty($_REQUEST, $_FILES);
             }
+            
             break;
         case 'viewPostProperty':
             if ($_SESSION['email']) {
@@ -89,7 +126,7 @@ try {
                 getCities($_REQUEST['province']);
             }
             break;
-        case 'getDistrict':
+        case 'getDistricts':
             if (!empty($_REQUEST['city'])) {
                 getDistricts($_REQUEST['city']);
             }

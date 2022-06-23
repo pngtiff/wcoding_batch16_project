@@ -52,6 +52,13 @@ function getLanding() {
     require('./view/indexView.php');
 }
 
+function getProperty($propId) {
+    $propertyM = new PropertyManager();
+    $propDetails = $propertyM->getProperty($propId);
+
+    require('./view/detailedPropertyView.php');
+}
+
 function modifyProfile() {
     require('./view/modifyProfileView.php');
 }
@@ -71,14 +78,21 @@ function updateLastActive() {
     $userM -> updateLastActive();
 }
 
-function search($city) {
+function search($params) {
     $propertyM = new PropertyManager();
-    $properties = $propertyM->searchProperties($city);
-    require('./view/searchView.php');
+    $properties = $propertyM->searchProperties($params['search'], $params['rangeMin'], $params['rangeMax'], $params['propertyType'], $params['roomType']);
+    require('./view/searchResultsCard.php');
 }
 function postProperty($params, $imgs) {
     $propertyM = new PropertyManager();
-    $propertyM->postProperty($params['title'], $params['country'], $params['province'], $params['city'], $params['address1'], $params['address2'], $params['zipcode'], $params['propertyType'], $params['roomType'], $params['size'], $params['price'], $params['description'], $params['bankAccNum'], $imgs);
+    for($i=0; $i<count($imgs); $i++) {
+        $imgDescriptions[] = $params["t-attachment-$i"];
+    }
+    if (!empty($params['furnished'])) {
+        $propertyM->postProperty($params['title'], $params['country'], $params['province'], $params['city'], $params['district'], $params['address1'], $params['address2'], $params['zipcode'], $params['propertyType'], $params['roomType'], $params['roomNum'], $params['bedNum'], $params['bathNum'],$params['furnished'], $params['size'], $params['price'], $params['description'], $params['bankAccNum'], $imgs, $imgDescriptions);
+    } else {
+        $propertyM->postProperty($params['title'], $params['country'], $params['province'], $params['city'], $params['district'], $params['address1'], $params['address2'], $params['zipcode'], $params['propertyType'], $params['roomType'], $params['roomNum'], null, $params['bathNum'], null, $params['size'], $params['price'], $params['description'], $params['bankAccNum'], $imgs, $imgDescriptions);
+    }
 }
 
 function viewPostProperty() {
@@ -88,9 +102,14 @@ function viewPostProperty() {
 function getCities($province) {
     $propertyM = new PropertyManager();
     $cities = $propertyM->getCities($province);
-    echo "<option selected disabled>Select a city</option>";
-    foreach($cities as $key=>$city) {
-        echo "<option value='$key'>$city</option>";
+    if ($cities) {
+        echo "<option selected disabled>Select a city</option>";
+        foreach($cities as $key=>$city) {
+            $key+=1;
+            echo "<option value='{$key}'>$city</option>";
+        }
+    } else {
+        echo '<option selected value="-1">No cities/districts in this area</option>';
     }
 }
 function getDistricts($city) {
@@ -99,9 +118,10 @@ function getDistricts($city) {
     if ($districts) {
         echo "<option selected disabled>Select a district</option>";
         foreach($districts as $key=>$district) {
+            $key+=1;
             echo "<option value='$key'>$district</option>";
         }
     } else {
-        echo '<option selected disabled value="-1">No districts in this city</option>';
+        echo '<option selected value="-1">No cities/districts in this area</option>';
     }
 }
