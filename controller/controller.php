@@ -105,3 +105,48 @@ function search($params) {
     $properties = $propertyM->searchProperties($params['search'], $params['rangeMin'], $params['rangeMax'], $params['propertyType'], $params['roomType']);
     require('./view/searchResultsCard.php');
 }
+<<<<<<< HEAD
+function postProperty($params, $imgs) {
+    $propertyM = new PropertyManager();
+    for($i=0; $i<count($imgs); $i++) {
+        $imgDescriptions[] = $params["t-attachment-$i"];
+    }
+    if (!empty($params['furnished'])) {
+        $propertyM->postProperty($params['title'], $params['country'], $params['province'], $params['city'], $params['district'], $params['address1'], $params['address2'], $params['zipcode'], $params['propertyType'], $params['roomType'], $params['roomNum'], $params['bedNum'], $params['bathNum'],$params['furnished'], $params['size'], $params['price'], $params['description'], $params['bankAccNum'], $imgs, $imgDescriptions);
+    } else {
+        $propertyM->postProperty($params['title'], $params['country'], $params['province'], $params['city'], $params['district'], $params['address1'], $params['address2'], $params['zipcode'], $params['propertyType'], $params['roomType'], $params['roomNum'], null, $params['bathNum'], null, $params['size'], $params['price'], $params['description'], $params['bankAccNum'], $imgs, $imgDescriptions);
+    }
+}
+
+function viewPostProperty() {
+    require('view/postPropertyView.php');
+}
+
+function getCities($province) {
+    $propertyM = new PropertyManager();
+    $cities = $propertyM->getCities($province);
+    if ($cities) {
+        echo "<option selected disabled>Select a city</option>";
+        foreach($cities as $key=>$city) {
+            $key+=1;
+            echo "<option value='{$key}'>$city</option>";
+        }
+    } else {
+        echo '<option selected value="-1">No cities/districts in this area</option>';
+    }
+}
+function getDistricts($city) {
+    $propertyM = new PropertyManager();
+    $districts = $propertyM->getDistricts($city);
+    if ($districts) {
+        echo "<option selected disabled>Select a district</option>";
+        foreach($districts as $key=>$district) {
+            $key+=1;
+            echo "<option value='$key'>$district</option>";
+        }
+    } else {
+        echo '<option selected value="-1">No cities/districts in this area</option>';
+    }
+}
+=======
+>>>>>>> master
