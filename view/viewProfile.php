@@ -55,8 +55,8 @@
                     } else {
                         echo 'No bio yet';
                     };?></p>
-                <?php if(!empty($_SESSION['email'])) { ?>
-                
+
+                <?php if($_REQUEST['user'] == $_SESSION['uid']) { ?>
                 <form action="index.php" method='GET'>
                     <button type='submit' id='editProfileButton'>Edit Profile</button>
                     <input type="hidden" name = "action" value = "modifyProfile">
