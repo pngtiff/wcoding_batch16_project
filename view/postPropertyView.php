@@ -89,17 +89,17 @@ ob_start();?>
         <label for="roomNum">
             <span>Number of bedrooms</span>
             <input type="number" name="roomNum" id="roomNum" >
-            <span class='hide'>Number between 1 and 1000</span>
+            <span class='hide'>Number between 1 and 100</span>
         </label>
         <label for="bedNum">
             <span>Number of beds</span>
             <input type="number" name="bedNum" id="bedNum">
-            <span class='hide'>Number between 1 and 1000</span>
+            <span class='hide'>Number between 1 and 100</span>
         </label>
         <label for="bathNum">
             <span>Number of baths</span>
             <input type="number" name="bathNum" id="bathNum" >
-            <span class='hide'>Number between 1 and 1000</span>
+            <span class='hide'>Number between 1 and 100</span>
         </label>
         <label for="furnished">
             <span>Furnished</span>

@@ -26,7 +26,7 @@ class Manager {
             'Chungcheongbuk-do',
             'Chungcheongnam-do',
             'Daegu',
-            'Daejon',
+            'Daejeon',
             'Gwangju',
             'Incheon',
             'Gangwon-do',

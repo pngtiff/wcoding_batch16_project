@@ -63,11 +63,11 @@ city.addEventListener('change', function(e) {
 })
 
 function checkTitle(e) {
-    return /^.{6,50}$/is.test(e.value)
+    return (e.value.length >= 4 && e.value.length <= 50)
 }
 
 function checkSelect(e) {
-    return e.value > 0
+    return e.value >= -1
 }
 
 function checkCountry(e) {
@@ -75,7 +75,7 @@ function checkCountry(e) {
 }
 
 function checkAddress(e) {
-    return /^.{6,255}$/is.test(e.value)
+    return (e.value.length >= 4 && e.value.length <= 255)
 }
 
 function checkZip(e) {
@@ -83,15 +83,15 @@ function checkZip(e) {
 }
 
 function checkNumber(e) {
-    return /^[1-9][0-9]?$/i.test(e.value)
+    return (e.value > 0 && e.value < 100)
 }
 
 function checkSize(e) {
-    return /^[1-9][0-9]{1,2}$/i.test(e.value)
+    return (e.value > 0 && e.value < 1000)
 }
 
 function checkPrice(e) {
-    return /^[1-9][0-9]+$/i.test(e.value)
+    return e.value > 0
 }
 
 function checkImg() {
@@ -107,11 +107,11 @@ function checkImg() {
 }
 
 function checkDescription(e) {
-    return /^.{6,255}$/is.test(e.value)
+    return (e.value.length >= 4 && e.value.length <= 255)
 }
 
 function checkBank(e) {
-    return /^[1-9][0-9]{10,17}$/i.test(e.value)
+    return (e.value.length >= 4 && e.value.length <= 20)
 }
 let title = document.querySelector('#title');
 let country = document.querySelector('#country');
