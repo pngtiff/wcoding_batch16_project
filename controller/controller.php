@@ -17,6 +17,11 @@ function checkSignIn($params){
     $signIn->checkSignIn($params['email'], $params['password']);
 }
 
+function verifyEmail($params){
+    $email = new UserManager();
+    $email->verifyEmail($params['email']);
+}
+
 function signOut(){
     $signOut = new UserManager();
     $signOut->signOut();
@@ -102,7 +107,9 @@ function updateLastActive() {
 
 function search($params) {
     $propertyM = new PropertyManager();
-    $properties = $propertyM->searchProperties($params['search'], $params['rangeMin'], $params['rangeMax'], $params['propertyType'], $params['roomType']);
+    $rangeMin = $params["rentRange"] != "any" ? $params['rentRange']-500000 : "any";
+    $rangeMax = $params["rentRange"] != "any" ? $params['rentRange'] : "any";
+    $properties = $propertyM->searchProperties($params['province'], $params['city'], $rangeMin, $rangeMax, $params['propertyType'], $params['roomType']);
     require('./view/searchResultsCard.php');
 }
 function postProperty($params, $imgs) {

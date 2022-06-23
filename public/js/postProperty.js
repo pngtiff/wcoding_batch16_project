@@ -37,8 +37,8 @@ document.querySelector('form button#addImg').addEventListener('click', function(
     input.click();
 });
 let countries = ['KR']
-let province = document.querySelector('#province');
-let city = document.querySelector('#city');
+let province = document.querySelector('#provincePost');
+let city = document.querySelector('#cityPost');
 let district = document.querySelector('#district');
 province.addEventListener('change', function(e) {
     let xhr = new XMLHttpRequest();
@@ -117,8 +117,8 @@ let title = document.querySelector('#title');
 let country = document.querySelector('#country');
 let address1 = document.querySelector('#address1');
 let zipcode = document.querySelector('#zipcode');
-let propertyType = document.querySelector('#postPropertyForm #propertyType');
-let roomType = document.querySelector('#postPropertyForm #roomType');
+let propertyType = document.querySelector('#propertyTypePost');
+let roomType = document.querySelector('#roomTypePost');
 let roomNum = document.querySelector('#roomNum');
 let bedNum = document.querySelector('#bedNum');
 let bathNum = document.querySelector('#bathNum');

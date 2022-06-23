@@ -15,7 +15,7 @@
         <?php if(count($propDetails)>1) {
             include('propImagesCarousel.php');
         } else {
-            echo "<img alt=".$propDetails[0]['image_description']." src=". $propDetails[0]['p_img'].">";
+            echo "<img alt=".$propDetails[0]['image_description']." src=./public/images/property_images/{$propDetails[0]['p_id']}/{$propDetails[0]['p_img']}>";
         } ?>
     </div>
     <div style="text-align:center">
@@ -29,7 +29,7 @@
             <h3><?=$propDetails[0]['r_type']?> in <?= $propDetails[0]['p_type'];?></h3>
             <p>Size: <?=$propDetails[0]['size'];?>m² | # Beds | # Baths</p>
             <p class='upperLowerBorders'><?= $propDetails[0]['description'];?></p>
-            <p>Address: <?= $propDetails[0]['address1'].' '.$propDetails[0]['address2'].', '.$propDetails[0]['city'];?></p>
+            <p>Address: <?= $propDetails[0]['province_state'].', '.$propDetails[0]['city'];?></p>
         </div>
         <div class='propResv flexColumn'>
             <p class='price'>Price: <span><?= number_format($propDetails[0]['monthly_price_won']);?></span>₩/month</p>
