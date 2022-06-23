@@ -95,7 +95,19 @@ function checkPasswordConfirm() {
 
 function submitForm(e) {
     if(checkLastName() && checkFirstName() && checkEmail() && checkPassword() && checkPasswordConfirm()) {
-        signUpForm.submit()
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'index.php?action=signUp');
+        var form = document.querySelector('#signUpForm'),
+        formData = new FormData(form);
+        xhr.send(formData);
+        e.preventDefault();
+
+        document.querySelector("#signUp-container").innerHTML = ""
+        document.querySelector("#signUp-container").innerHTML = "Account Created. Please sign in to complete the registration process." //////////// New Div
+        // let confirmationText = document.createElement(h4);
+        // h4.textContent = "Account created. Please sign in to complete the process";
+        
+
     } else {
         e.preventDefault();
     }

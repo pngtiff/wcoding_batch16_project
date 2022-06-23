@@ -105,7 +105,6 @@ function search($params) {
     $properties = $propertyM->searchProperties($params['search'], $params['rangeMin'], $params['rangeMax'], $params['propertyType'], $params['roomType']);
     require('./view/searchResultsCard.php');
 }
-<<<<<<< HEAD
 function postProperty($params, $imgs) {
     $propertyM = new PropertyManager();
     for($i=0; $i<count($imgs); $i++) {
@@ -148,5 +147,3 @@ function getDistricts($city) {
         echo '<option selected value="-1">No cities/districts in this area</option>';
     }
 }
-=======
->>>>>>> master
