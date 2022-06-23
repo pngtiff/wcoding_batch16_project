@@ -81,6 +81,7 @@ function modifyProperty($propId) {
 // }
 
 function modifyProfile() {
+    
     require('./view/modifyProfileView.php');
 }
 
