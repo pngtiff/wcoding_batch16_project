@@ -48,7 +48,7 @@ class PropertyManager extends Manager {
         foreach($properties as &$property) {
             $property['country'] = $this::COUNTRIES['KR'];
             $property['province_state'] = $this::PROVINCES['KR'][$property['province_state']];
-            $property['city'] = $this::CITIES[$property['province_state']][$property['city']];
+            $property['city'] = !empty($this::CITIES[$property['province_state']][$property['city']]) ? $this::CITIES[$property['province_state']][$property['city']] : '';
           }
         return $properties;
     }
@@ -56,7 +56,7 @@ class PropertyManager extends Manager {
     // Single property detail for property listing page
     public function getProperty($propId)
     {
-        $req = $this->_connection->prepare("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.city, p.address1, p.address2, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
+        $req = $this->_connection->prepare("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.city, p.address1, p.address2, p.room_num, p.bed_num, p.bath_num, p.is_furnished, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
         FROM properties p
         LEFT JOIN property_types pt
         ON p.property_type_id = pt.id
@@ -84,9 +84,19 @@ class PropertyManager extends Manager {
         return $propDetails;
     }
 
+    public function getPropertyOwner($propId)
+    {
+        $req = $this->_connection->prepare("SELECT u.uid, u.first_name, u.profile_img, p.user_uid FROM users u JOIN properties p ON u.uid = p.user_uid WHERE p.id = :propId");
+        $req->bindParam('propId', $propId);
+        $req->execute();
+        $propOwner = $req->fetch(\PDO::FETCH_ASSOC);
+        $req->closeCursor();
+        return $propOwner;
+    }
+
     public function modifyProperty($propId)
     {
-        $req = $this->_connection->prepare("SELECT p.post_title, p.room_num, p.bed_num, p.bath_num, p.is_furnished, p.room_type_id, p.monthly_price_won, p.description, p.bank_account_num, p.validation, rt.room_type AS r_type, pi.img_url AS p_img, pi.description AS image_description
+        $req = $this->_connection->prepare("SELECT p.post_title, p.room_num, p.bed_num, p.bath_num, p.is_furnished, p.room_type_id, p.monthly_price_won, p.description, p.bank_account_num, p.validation, rt.room_type AS r_type, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
         FROM properties p
         LEFT JOIN property_types pt
         ON p.property_type_id = pt.id
@@ -120,7 +130,7 @@ class PropertyManager extends Manager {
         $propertyType = ($propertyType == "any") ? "%%" : $propertyType;
         $roomType = ($roomType == "any") ? "%%" : $roomType;
 
-        $req = $this->_connection->prepare("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.city, p.address1, p.address2, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.img_url AS p_img, pi.description AS image_description
+        $req = $this->_connection->prepare("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.city, p.address1, p.address2, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
         FROM properties p
         LEFT JOIN property_types pt
         ON p.property_type_id = pt.id
@@ -158,6 +168,11 @@ class PropertyManager extends Manager {
         // }
 
         $req->closeCursor();
+        foreach($properties as &$property) {
+            $property['country'] = $this::COUNTRIES['KR'];
+            $property['province_state'] = $this::PROVINCES['KR'][$property['province_state']];
+            $property['city'] = !empty($this::CITIES[$property['province_state']][$property['city']]) ? $this::CITIES[$property['province_state']][$property['city']] : '';
+        }
 
         return $properties;
     }
