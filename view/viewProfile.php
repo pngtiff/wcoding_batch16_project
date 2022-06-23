@@ -12,7 +12,7 @@
             <div>
                 <div>
                     <h2 id='userName'><?= $user['first_name'];?></h2>
-                    <p>Last active: <? // TODO: last online status based on session end datetime ?></p>
+                    <p>Last active: <? print_r($_SESSION['last_active']); ?></p>
                 </div>
             </div>
         </div>

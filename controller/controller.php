@@ -61,14 +61,14 @@ function getProperty($propId) {
 
 function modifyProfile($userId) {
     $userM = new UserManager($userId);
-    $user = $userM->updateUserData();
-
+    $data = $userM->viewProfile();
     require('./view/modifyProfileView.php');
 }
 
 function updateUserData () {
     $userM = new UserManager();
-    $userM->updateUserData();
+    $data = $userM->viewProfile();
+    $userM->updateUserData($data);
 
     header("Location: index.php?action=profile&user={$_SESSION['uid']}");
 }
