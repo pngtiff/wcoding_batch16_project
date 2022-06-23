@@ -1,0 +1,31 @@
+#postPropertyForm {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#postPropertyForm > * {
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+    position: relative;
+}
+
+#postPropertyForm #photosPreview > * {
+    position: relative;
+}
+
+#postPropertyForm span.hide {
+    display: none;
+}
+#postPropertyForm span.show {
+    position: absolute;
+    display: block;
+    left: 100%;
+    width: 100%;
+}
+
+#photosPreview img {
+    width: 200px
+}
+

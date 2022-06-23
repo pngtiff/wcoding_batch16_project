@@ -2,6 +2,9 @@
 
 namespace wcoding\batch16\finalproject\Model;
 
+use Exception;
+use TypeError;
+
 require_once('Manager.php');
 class PropertyManager extends Manager
 {
@@ -91,7 +94,7 @@ class PropertyManager extends Manager
         $req->execute();
         $propDetails = $req->fetch(\PDO::FETCH_ASSOC);
         $req->closeCursor();
-    
+
         return $propDetails;
     }
 
@@ -152,5 +155,154 @@ class PropertyManager extends Manager
         $req->closeCursor();
 
         return $properties;
+    }
+
+    public function postProperty($title, $country, $province, $city, $district, $address1, $address2, $zipcode, $propertyType, $roomType, $roomNum, $bedNum, $bathNum, $furnished, $size, $price, $description, $bankAccNum, $imgs, $imgDescriptions)
+    {
+        $uid = $this->_connection->query("SELECT uid FROM users WHERE email='{$_SESSION['email']}'")->fetch(\PDO::FETCH_ASSOC)['uid'];
+        // INFO validation
+        if (strlen($title) < 50) {
+            $title = strip_tags($title);
+        } else {
+            throw (new Exception('Title is too long'));
+        }
+        // Address
+        if ($this::COUNTRIES[$country]) {
+            $country =  $country;
+        } else {
+            throw (new Exception('This country is not supported'));
+        }
+        if ($this::PROVINCES[$country][$province - 1]) {
+            $province = $province - 1;
+        } else {
+            throw (new Exception('Province/State is not found'));
+        }
+
+        if ($city >= 0) {
+            if ($this::CITIES[$this::PROVINCES[$country][$province]][$city - 1]) {
+                $city = $city - 1;
+            } else {
+                throw (new Exception('City is not found'));
+            }
+        } else {
+            $city = -1;
+        }
+        if ($district >= 0) {
+            if ($this::DISTRICTS[$this::CITIES[$this::PROVINCES[$country][$province]][$city]][$district - 1]) {
+                $district = $district - 1;
+            } else {
+                throw (new Exception('City is too long'));
+            }
+        } else {
+            $district = -1;
+        }
+        if (strlen($address1) < 256) {
+            $address1 = strip_tags($address1);
+        } else {
+            throw (new Exception('Address1 is too long'));
+        }
+        if (strlen($address2) < 256) {
+            $address2 = strip_tags($address2);
+        } else {
+            throw (new Exception('Address2 is too long'));
+        }
+        if (strlen($zipcode) < 11) {
+            $zipcode = strip_tags($zipcode);
+        } else {
+            throw (new Exception('Zipcode is too long'));
+        }
+        // Property Info
+        if ($propertyType > 0 and $propertyType < 7) {
+            $propertyType = $propertyType;
+        } else {
+            throw (new TypeError("Invalid property type"));
+        }
+        if ($roomType > 0 and $roomType < 5) {
+            $roomType = $roomType;
+        } else {
+            throw (new TypeError("Invalid room type"));
+        }
+        if ($roomNum > 0 and $roomNum < 100) {
+            $roomNum = $roomNum;
+        } else {
+            throw (new TypeError("Invalid room number"));
+        }
+        $furnished = $furnished ? 1 : null;
+        if ($furnished) {
+            if ($bedNum < 100) {
+                $bedNum = $bedNum;
+            } else {
+                throw (new TypeError("Invalid bed number"));
+            }
+        } else {
+            0;
+        }
+        if($bathNum > 0 and $bathNum < 100) {
+            $bathNum = $bathNum;
+        } else {
+            throw (new TypeError("Invalid room number"));
+        }
+        if($size > 0 and $size < 10000) {
+            $size = $size;
+        } else {
+            throw (new TypeError("Invalid size"));
+        }
+        if($price > 0) {
+            $price = $price;
+        } else {
+            throw (new TypeError("Invalid price"));
+        }
+        $description = strip_tags($description);
+        if(strlen($bankAccNum) < 21) {
+            $bankAccNum = strip_tags($bankAccNum);
+        } else {
+            throw (new Exception('Bank Account Number is too long'));
+        }
+        // Img Check
+        foreach ($imgDescriptions as &$desc) {
+            if(strlen($desc) < 256) {
+                $desc = htmlspecialchars($desc);
+            } else {
+                throw (new Exception('Bank Account Number is too long'));
+            }
+        }
+        foreach ($imgs as $file) {
+            if ($file['size'] > 1048576) {
+                throw (new Exception('Image is too big'));
+            }
+        }
+        // Create a folder for the property on the server
+        $propertyId = $this->_connection->query("SELECT id FROM properties ORDER BY ID DESC LIMIT 0, 1")->fetch(\PDO::FETCH_ASSOC)['id'] + 1;
+        if (!file_exists("./public/images/property_images/$propertyId")) {
+            mkdir("./public/images/property_images/$propertyId");
+        }
+        foreach ($imgs as $file) {
+            $fileName = pathinfo($file["name"]);
+            $extension  = $fileName['extension'];
+            $fileLocation = $file["tmp_name"];
+            $bytes = bin2hex(random_bytes(16)); // generates secure pseudo random bytes and bin2hex converts to hexadecimal string
+            $imgName[] = $bytes . "." . $extension;
+            move_uploaded_file($fileLocation, "./public/images/property_images/$propertyId/" . $imgName[count($imgName) - 1]);
+        }
+
+
+        if ($furnished) {
+            $this->_connection->exec("INSERT 
+                INTO properties (user_uid, post_title, country, province_state, zipcode, city, district, address1, address2, size, property_type_id, room_type_id, monthly_price_won, description, bank_account_num, room_num, bed_num, bath_num, is_furnished) 
+                VALUES ('$uid', '$title','$country','$province','$zipcode','$city',$district,'$address1','$address2',$size,$propertyType,$roomType,$price,'$description','$bankAccNum', $roomNum, $bedNum, $bathNum, $furnished)");
+        } else {
+            $this->_connection->exec("INSERT 
+                INTO properties (user_uid, post_title, country, province_state, zipcode, city, district, address1, address2, size, property_type_id, room_type_id, monthly_price_won, description, bank_account_num, room_num, bath_num) 
+                VALUES ('$uid', '$title','$country','$province','$zipcode','$city','$district','$address1','$address2','$size','$propertyType','$roomType','$price','$description','$bankAccNum', '$roomNum','$bathNum'
+            )");
+        }
+
+        for ($i = 0; $i < count($imgName); $i++) {
+            $this->_connection->exec("INSERT
+                INTO property_imgs (property_id, img_url, description) 
+                VALUES ('$propertyId', '{$imgName[$i]}', '{$imgDescriptions[$i]}')
+            ");
+        }
+        header("Location:index.php?action=property&propId={$propertyId}");
     }
 }
