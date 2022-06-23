@@ -37,8 +37,8 @@ document.querySelector('form button#addImg').addEventListener('click', function(
     input.click();
 });
 let countries = ['KR']
-let province = document.querySelector('#province');
-let city = document.querySelector('#city');
+let province = document.querySelector('#provincePost');
+let city = document.querySelector('#cityPost');
 let district = document.querySelector('#district');
 province.addEventListener('change', function(e) {
     let xhr = new XMLHttpRequest();
@@ -63,7 +63,7 @@ city.addEventListener('change', function(e) {
 })
 
 function checkTitle(e) {
-    return /^.{6,50}$/is.test(e.value)
+    return (e.value.length >= 4 && e.value.length <= 50)
 }
 
 function checkSelect(e) {
@@ -75,7 +75,7 @@ function checkCountry(e) {
 }
 
 function checkAddress(e) {
-    return /^.{6,255}$/is.test(e.value)
+    return (e.value.length >= 4 && e.value.length <= 255)
 }
 
 function checkZip(e) {
@@ -83,15 +83,15 @@ function checkZip(e) {
 }
 
 function checkNumber(e) {
-    return /^[1-9][0-9]?$/i.test(e.value)
+    return (e.value > 0 && e.value < 100)
 }
 
 function checkSize(e) {
-    return /^[1-9][0-9]{1,2}$/i.test(e.value)
+    return (e.value > 0 && e.value < 1000)
 }
 
 function checkPrice(e) {
-    return /^[1-9][0-9]+$/i.test(e.value)
+    return e.value > 0
 }
 
 function checkImg() {
@@ -107,18 +107,18 @@ function checkImg() {
 }
 
 function checkDescription(e) {
-    return /^.{6,255}$/is.test(e.value)
+    return (e.value.length >= 4 && e.value.length <= 255)
 }
 
 function checkBank(e) {
-    return /^[1-9][0-9]{10,17}$/i.test(e.value)
+    return (e.value.length >= 4 && e.value.length <= 20)
 }
 let title = document.querySelector('#title');
 let country = document.querySelector('#country');
 let address1 = document.querySelector('#address1');
 let zipcode = document.querySelector('#zipcode');
-let propertyType = document.querySelector('#postPropertyForm #propertyType');
-let roomType = document.querySelector('#postPropertyForm #roomType');
+let propertyType = document.querySelector('#propertyTypePost');
+let roomType = document.querySelector('#roomTypePost');
 let roomNum = document.querySelector('#roomNum');
 let bedNum = document.querySelector('#bedNum');
 let bathNum = document.querySelector('#bathNum');

@@ -16,9 +16,9 @@ ob_start();?>
             </select>
             <span class="hide">Select one</span>
         </label>
-        <label for="province">
+        <label for="provincePost">
             <span>Province/Special City</span>
-            <select name="province" id="province" >
+            <select name="province" id="provincePost" >
                 <option selected disabled>Select a Province/Special City</option>
                 <option value="1">Busan</option>
                 <option value="2">Chungcheongbuk-do</option>
@@ -39,9 +39,9 @@ ob_start();?>
             </select>
             <span class="hide">Select one</span>
         </label>
-        <label for="city">
+        <label for="cityPost">
             <span>City/District</span>
-            <select name="city" id="city" ></select>
+            <select name="city" id="cityPost" ></select>
             <span class="hide">Select one</span>
         </label>
         <label for="district">
@@ -64,7 +64,7 @@ ob_start();?>
             <input type="text" name="zipcode" id="zipcode" >
             <span class="hide">Enter real zipcode</span>
         </label>
-        <label for="propertyType" >
+        <label for="propertyTypePost" >
             <span>Property Type</span>
             <select name="propertyType" id="propertyType">
                 <option value="1">Apartment</option>
@@ -76,7 +76,7 @@ ob_start();?>
             </select>
             <span class="hide">Select one</span>
         </label>
-        <label for="roomType">
+        <label for="roomTypePost">
             <span>Room Type</span>
             <select name="roomType" id="roomType" >
                 <option value="1">Private room</option>
@@ -89,17 +89,17 @@ ob_start();?>
         <label for="roomNum">
             <span>Number of bedrooms</span>
             <input type="number" name="roomNum" id="roomNum" >
-            <span class='hide'>Number between 1 and 1000</span>
+            <span class='hide'>Number between 1 and 100</span>
         </label>
         <label for="bedNum">
             <span>Number of beds</span>
             <input type="number" name="bedNum" id="bedNum">
-            <span class='hide'>Number between 1 and 1000</span>
+            <span class='hide'>Number between 1 and 100</span>
         </label>
         <label for="bathNum">
             <span>Number of baths</span>
             <input type="number" name="bathNum" id="bathNum" >
-            <span class='hide'>Number between 1 and 1000</span>
+            <span class='hide'>Number between 1 and 100</span>
         </label>
         <label for="furnished">
             <span>Furnished</span>
