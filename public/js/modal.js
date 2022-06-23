@@ -85,6 +85,7 @@ document.getElementById("signInButton").addEventListener("click", function(e) {
 
 // close the modal when click X
 document.querySelector(".close").addEventListener("click", function() {
+    console.log("one");
 	modalBox.style.display = "none";
 	document.body.style.overflowY = "visible";
 	opacity(0, modalBox);
