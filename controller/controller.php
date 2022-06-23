@@ -64,11 +64,27 @@ function getProperty($propId) {
     require('./view/detailedPropertyView.php');
 }
 
+function modifyProperty($propId) {
+    if(isset($_SESSION['uid']) and $_SESSION['uid'] === $_SESSION['user_uid']) {
+        $propertyM = new PropertyManager();
+        $propDetails = $propertyM->modifyProperty($propId);
+        
+        require('./view/modifyProperty.php');
+    } else {
+        header('Location: index.php');
+    }
+}
+
+// function modifyProperty() {
+//     $propertyM = new PropertyManager();
+//     $propertyM->modifyProperty();
+// }
+
 function modifyProfile($userId) {
     $userM = new UserManager($userId); 
     $data = $userM->viewUserData();
 
-    require('./view/modifyProfileView.php');  
+    require('./view/modifyProfileView.php');
 }
 
 function updateProfile () {
