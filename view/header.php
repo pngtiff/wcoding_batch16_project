@@ -24,7 +24,7 @@
                 <button class="dropbtn3">Post</button>
                 <div class="dropdown-content3">
                     <a href="">Become a Host</a>
-                    <a href="">Post a New Listing</a>
+                    <a href="index.php?action=viewPostProperty">Post a New Listing</a>
                 </div>
             </div>
            

@@ -101,6 +101,7 @@
     transition: 0.6s ease;
     border-radius: 0 3px 3px 0;
     user-select: none;
+    text-shadow: 2px 2px 4px #717171;
 }
 
 .next {

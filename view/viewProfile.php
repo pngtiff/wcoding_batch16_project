@@ -12,7 +12,12 @@
             <div>
                 <div>
                     <h2 id='userName'><?= $user['first_name'];?></h2>
-                    <p>Last active: <? // TODO: last online status based on session end datetime ?></p>
+                    <p>Last active: <?php if($lastOnline = $user['last_online']){
+                    $lastOnline = $user['last_online'];
+                    $currentTime = date('Y-m-d H:i:s');
+                    echo $lastOnline." KST";
+                }
+                // TODO: last online status based on session end datetime ?></p>
                 </div>
             </div>
         </div>

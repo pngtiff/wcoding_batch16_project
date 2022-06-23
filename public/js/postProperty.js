@@ -67,7 +67,7 @@ function checkTitle(e) {
 }
 
 function checkSelect(e) {
-    return e.value > 0
+    return e.value >= -1
 }
 
 function checkCountry(e) {
