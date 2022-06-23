@@ -39,6 +39,7 @@ try {
             break;
         case 'property':
             getProperty($_REQUEST['propId']);
+            getPropertyOwner($_REQUEST['propId']);
             break;
         case 'modifyProperty':
             modifyProperty($_REQUEST['propId']);
@@ -75,6 +76,8 @@ try {
             
             //Search//
         case 'search':
+            $_REQUEST['province'] = !empty($_REQUEST['province']) ? strip_tags($_REQUEST['province']) : 'any';
+            $_REQUEST['city'] = !empty($_REQUEST['city']) ? strip_tags($_REQUEST['city']) : 'any';
             search($_REQUEST);
             break;
         case 'postProperty': 

@@ -37,8 +37,27 @@
                 </div>
             </div>
 
-            <div id="searchBarContainer">
-                <input type="search" name="searchbar" id="searchBar" placeholder="Type a City or Province to get started !" value = "<?php if (isset($_REQUEST['search']) && $_REQUEST['search'] != "anywhere") { echo $_REQUEST['search']; } ?>"> 
+            <form id="searchBarContainer" method="post" action="index.php">
+                <select name="province" id="province"> 
+                    <option selected disabled>Select a Province/Special City</option>
+                    <option value="1">Busan</option>
+                    <option value="2">Chungcheongbuk-do</option>
+                    <option value="3">Chungcheongnam-do</option>
+                    <option value="4">Daegu</option>
+                    <option value="5">Daejeon</option>
+                    <option value="6">Gangwon-do</option>
+                    <option value="7">Gwangju</option>
+                    <option value="8">Gyeonggi-do</option>
+                    <option value="9">Gyeongsangbuk-do</option>
+                    <option value="10">Gyeongsangnam-do</option>
+                    <option value="11">Incheon</option>
+                    <option value="12">Jeju-do</option>
+                    <option value="13">Jeollabuk-do</option>
+                    <option value="14">Jeollanam-do</option>
+                    <option value="15">Sejong-si</option>
+                    <option value="16">Seoul</option>
+                </select>
+                <select name="city" id="city" ></select>
                 <select name="rentRange" id="rentRange" class="filter">
                     <option value="any">Price Range :</option>
                     <option value="500000">Less than 500k/month</option>
@@ -63,13 +82,18 @@
                     <option value="3">Entire Place</option>
                 </select>
                 <button class="searchButton"><img src="public/images/magnifying_glass.png" id="magnifying"></button>
-             </div>            
+                <input type="hidden" name="action" value="search">
+            </form>            
         </nav>
 
         <div class="signInUp">
             <!-- Changing interface once signed in/signed out -->
             <div class="dropdown4">
+<<<<<<< HEAD
                 <button class="dropbtn4"><a href="index.php?action=profile&user=<?=$_SESSION['uid'];?>"><img src="<?= (isset($_SESSION['profile_img'])) ? './profile_images/'.$_SESSION['profile_img'] : "./public/images/defaultProfile.jpg" ?>" alt="defaultPic"></a></button>
+=======
+                <button class="dropbtn4"><a href=""><img src="<?= (isset($_SESSION['profile_img'])) ? './profile_images/'.$_SESSION['profile_img'] : "./public/images/defaultProfile.jpg" ?>" alt="defaultPic"></a></button>
+>>>>>>> master
                 <div class="dropdown-content4">
                     <?php echo (!empty($_SESSION['firstName'])) ? '<button id="settingsButton"><a href="#">Settings</a></button>' : '<button id="signUpButton"><a href="#">Register</a></button>'; ?>
                     <?php echo (!empty($_SESSION['firstName'])) ? '<button id="signOutButton"><a href="index.php?action=signOut">Sign Out</a></button>' : '<button id="signInButton"><a href="#">Sign In</a></button>'; ?>

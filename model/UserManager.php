@@ -117,7 +117,7 @@ class UserManager extends Manager
             // If user has a profile they are redirected to main page
             if ($user['dob']) {
                 $_SESSION['uid'] = $user['uid'];
-                $_SESSION['profileImg'] = $user['profile_img'];
+                $_SESSION['profile_img'] = $user['profile_img'];
                 header('Location:index.php');
             } 
             // If user has a profile they are redirected to createProfile page
