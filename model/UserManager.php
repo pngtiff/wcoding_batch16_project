@@ -125,7 +125,7 @@ class UserManager extends Manager
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($_FILES['uploadFile']['name'], PATHINFO_EXTENSION));
         if ($_FILES['uploadFile']['name']) {
-            if ($_FILES['uploadFile']['size'] > 500000 or ($imageFileType != "jpg" and $imageFileType != "png" and $imageFileType != "jpeg" and $imageFileType != "webp")) {
+            if ($_FILES['uploadFile']['size'] > 500000 or ($imageFileType != "JPG" and $imageFileType != "jpg" and $imageFileType != "png" and $imageFileType != "JPEG" and $imageFileType != "jpeg" and $imageFileType != "webp")) {
                 $uploadOk = 0;
             }   
         }
@@ -196,14 +196,14 @@ class UserManager extends Manager
     // creates new user profile that will be inserted into users table
     public function newProfile()
     {
-        $phoneNum = strval(strip_tags(str_replace('-', '', str_replace(' ', '', $_REQUEST['phoneNum']))));
+        $specialChar = array(' ', '-');
+        $phoneNum = strval(strip_tags(str_replace($specialChar, '', $_REQUEST['phoneNum'])));
         $dob = strip_tags($_POST['year']) . '-' . strip_tags($_POST['month']) . '-' . strip_tags($_POST['day']);
         $gender = strip_tags($_POST['gender']);
         $language = strip_tags($_REQUEST['userLang']);
         $bio = strip_tags($_POST['bio']);
 
         if (!empty($_FILES["uploadFile"]["name"])) {
-
             // Get file info 
             $fileName = pathinfo($_FILES["uploadFile"]["name"]);
             $extension  = $fileName['extension'];

@@ -7,6 +7,10 @@
     if($propDetails['validation']) {
         echo ' ‣ Validated Property'?> <i class="fa-solid fa-check"></i><?php ;}
         else?></p>
+    <?php
+    if($_SESSION['uid'] === $_SESSION['user_uid']) { ?>
+       <button><a href="index.php?action=modifyProperty&propId=<?= $_REQUEST['propId'];?>">Modify Property Details</a></button>
+    <?php } ?>
     <div class='propertyImgContainer propImages'>
         <img alt="property main image" src="<?= $propDetails['p_img'];?>">
         <button class='allPropPhotos'><a href="">See all photos <i class="fa-solid fa-images"></i></a>
