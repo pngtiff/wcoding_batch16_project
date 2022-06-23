@@ -65,6 +65,14 @@ function getLanding($userId) {
 function getProperty($propId) {
     $propertyM = new PropertyManager();
     $propDetails = $propertyM->getProperty($propId);
+    $propOwner = $propertyM->getPropertyOwner($propId);
+
+    require('./view/detailedPropertyView.php');
+}
+
+function getPropertyOwner($propId) {
+    $propertyM = new PropertyManager();
+    $propOwner = $propertyM->getPropertyOwner($propId);
 
     require('./view/detailedPropertyView.php');
 }

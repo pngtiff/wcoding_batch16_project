@@ -89,7 +89,7 @@
         <div class="signInUp">
             <!-- Changing interface once signed in/signed out -->
             <div class="dropdown4">
-                <button class="dropbtn4"><a href=""><img src="<?= (isset($data['profile_img'])) ? './profile_images/'.$data['profile_img'] : "./public/images/defaultProfile.jpg" ?>" alt="defaultPic"></a></button>
+                <button class="dropbtn4"><a href=""><img src="<?= (isset($_SESSION['profile_img'])) ? './profile_images/'.$_SESSION['profile_img'] : "./public/images/defaultProfile.jpg" ?>" alt="defaultPic"></a></button>
                 <div class="dropdown-content4">
                     <?php echo (!empty($_SESSION['firstName'])) ? '<button id="settingsButton"><a href="#">Settings</a></button>' : '<button id="signUpButton"><a href="#">Register</a></button>'; ?>
                     <?php echo (!empty($_SESSION['firstName'])) ? '<button id="signOutButton"><a href="index.php?action=signOut">Sign Out</a></button>' : '<button id="signInButton"><a href="#">Sign In</a></button>'; ?>
