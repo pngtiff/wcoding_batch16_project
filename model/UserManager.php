@@ -286,8 +286,8 @@ class UserManager extends Manager
             $fileLocation = $_FILES["uploadFile"]["tmp_name"];
             $bytes = bin2hex(random_bytes(16)); // generates secure pseudo random bytes and bin2hex converts to hexadecimal string
             $imgName = $bytes . "." . $extension;
-            $imgName = "./profile_images/" . $imgName;
-            move_uploaded_file($fileLocation, $imgName);
+            $folder = "./profile_images/" . $imgName;
+            move_uploaded_file($fileLocation, $folder);
 
         } 
         else if ($profileImgLocation){
