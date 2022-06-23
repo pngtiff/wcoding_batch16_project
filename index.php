@@ -58,15 +58,15 @@ try {
 
             // loads modifyProfileView
         case 'modifyProfile':
+            // displayDefaultInfo();
             modifyProfile($_REQUEST['user']);
-            displayDefaultInfo();
             break;
 
             // trigger updating data - working without any issue at the moment
         case 'updateUserData':
             if (!empty($_REQUEST['language']) OR !empty($_REQUEST['phone_number']) OR !empty($_REQUEST['bio']) OR !empty($_FILES["uploadFile"]["name"])) {
-                updateUserData();
-                displayDefaultInfo();
+                updateProfile();
+                // displayDefaultInfo();
             }
             break;
             
@@ -74,8 +74,9 @@ try {
         case 'search':
             search($_REQUEST);
             break;
-        default: 
-            getLanding();
+        default:
+            //////// If logged in : Load user data for profile picture, if not, load without user data///
+            (isset($_REQUEST['userid'])) ? getLanding($_REQUEST['userid']) : getLanding(0);
             break;
     }
 } catch (Exception $e) {

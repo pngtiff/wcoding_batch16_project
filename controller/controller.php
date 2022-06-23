@@ -49,8 +49,10 @@ function listProperties() {
     return $properties;
 }
 
-function getLanding() {
+function getLanding($userId) {
     $properties = listProperties();
+    $userM = new UserManager($userId); 
+    $data = $userM->viewUserData();
     require('./view/indexView.php');
 }
 
@@ -62,15 +64,16 @@ function getProperty($propId) {
 }
 
 function modifyProfile($userId) {
-    $userM = new UserManager($userId);
-    $user = $userM->updateUserData();
+    $userM = new UserManager($userId); 
+    $data = $userM->viewUserData();
 
-    require('./view/modifyProfileView.php');
+    require('./view/modifyProfileView.php');  
 }
 
-function updateUserData () {
+function updateProfile () {
     $userM = new UserManager();
-    $userM->updateUserData();
+    $data = $userM->viewUserData();
+    $userM->updateUserData($data);
 
     header("Location: index.php?action=profile&user={$_SESSION['uid']}");
 }
