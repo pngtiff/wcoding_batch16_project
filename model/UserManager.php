@@ -112,16 +112,25 @@ class UserManager extends Manager
         $user = $res->fetch(\PDO::FETCH_ASSOC);
         $_SESSION['firstName'] = $response->given_name;
         $_SESSION['email'] = $response->email;
-        // If user signed up they are redirected to the main page
+        // If user had signed in before 
         if ($user) {
-            $_SESSION['uid'] = $user['uid'];
-            $_SESSION['profileImg'] = $user['profile_img'];
-            header('Location:index.php');
-            // Else they are redirected to createProfile page
+            // If user has a profile they are redirected to main page
+            if ($user['dob']) {
+                $_SESSION['uid'] = $user['uid'];
+                $_SESSION['profileImg'] = $user['profile_img'];
+                header('Location:index.php');
+            } 
+            // If user has a profile they are redirected to createProfile page
+            else {
+                $uid = $this->createUID();
+                $_SESSION['uid'] = $uid;
+                $this->_connection->exec("INSERT INTO users (email, first_name, last_name, uid) VALUES ('$response->email','$response->given_name','$response->family_name', '$uid')");
+                header('Location:index.php?action=createProfile');
+            }
+        // Else they are redirected to createProfile page
         } else {
             $uid = $this->createUID();
             $_SESSION['uid'] = $uid;
-            $_SESSION['profileImg'] = $response->picture;
             $this->_connection->exec("INSERT INTO users (email, first_name, last_name, uid) VALUES ('$response->email','$response->given_name','$response->family_name', '$uid')");
             header('Location:index.php?action=createProfile');
         }
@@ -133,7 +142,7 @@ class UserManager extends Manager
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($_FILES['uploadFile']['name'], PATHINFO_EXTENSION));
         if ($_FILES['uploadFile']['name']) {
-            if ($_FILES['uploadFile']['size'] > 500000 or ($imageFileType != "jpg" and $imageFileType != "png" and $imageFileType != "jpeg" and $imageFileType != "webp")) {
+            if ($_FILES['uploadFile']['size'] > 500000 or ($imageFileType != "JPG" and $imageFileType != "jpg" and $imageFileType != "png" and $imageFileType != "JPEG" and $imageFileType != "jpeg" and $imageFileType != "webp")) {
                 $uploadOk = 0;
             }   
         }
@@ -204,7 +213,8 @@ class UserManager extends Manager
     // creates new user profile that will be inserted into users table
     public function newProfile()
     {
-        $phoneNum = strval(strip_tags(str_replace('-', '', str_replace(' ', '', $_REQUEST['phoneNum']))));
+        $specialChar = array(' ', '-');
+        $phoneNum = strval(strip_tags(str_replace($specialChar, '', $_REQUEST['phoneNum'])));
         $dob = strip_tags($_POST['year']) . '-' . strip_tags($_POST['month']) . '-' . strip_tags($_POST['day']);
         $gender = strip_tags($_POST['gender']);
         $language = strip_tags($_REQUEST['userLang']);
