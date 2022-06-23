@@ -16,10 +16,10 @@
     if($propDetails[0]['validation']) {
         echo ' ‣ Validated Property'?> <img class='validatedCheck' src="./public/images/validatedPropertyCheck.png" alt="validation green check"><?php ;}
         else?></p>
-    <?php
+    <?php if(!empty($_SESSION['uid'])) {
     if($_SESSION['uid'] === $_SESSION['user_uid']) { ?>
        <button><a href="index.php?action=modifyProperty&propId=<?= $_REQUEST['propId'];?>">Modify Property Details</a></button>
-    <?php } ?>
+    <?php }} ?>
     <div class='propertyImgContainer propImages'>
         <?php if(count($propDetails)>1) {
             include('propImagesCarousel.php');

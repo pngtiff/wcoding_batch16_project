@@ -16,7 +16,7 @@
     margin-bottom: 5rem;
 }
 
-#userImgContainer, #profilePhoto {
+#userImgContainer, #profilePhoto, #profilePhoto div{
     height: 10rem;
     width: 10rem;
     position: absolute;
