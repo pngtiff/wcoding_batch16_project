@@ -11,7 +11,7 @@
             
             <div id = "photoContainerM">
                 <div id = "profilePhotoM">
-                    <img id = "photoM" src= "<?= $data['profile_img']?>"/>
+                    <img id = "photoM" src= "./profile_images/<?= $data['profile_img']?>"/>
                     <input type="file" id = "fileM" name = "uploadFile">
                     <label for="fileM" id = "uploadButtonM">Choose Photo</label>
                     <input type="hidden" name="action" value="uploadImg">
