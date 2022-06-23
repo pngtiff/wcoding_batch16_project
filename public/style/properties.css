@@ -42,11 +42,15 @@
 
 /* SINGLE DETAILED PROPERTY VIEW */
 
-.propImages {
+.validatedCheck {
+    width: 25px;
+    vertical-align: bottom;
+}
+
+.propImages, .propImgSlides {
     width: 100%;
     height: 450px;
     position: relative;
-    z-index: -1;
 }
 
 .allPropPhotos {
@@ -54,7 +58,6 @@
     bottom: 10px;
     left: 50px;
     z-index: 1;
-    font-size: 1.1rem;
 }
 
 .propDetails {
@@ -83,4 +86,58 @@
 
 .resvbutton {
     font-size: 1.1rem;
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 30px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+
+.propImgDesc {
+    color: #f2f2f2;
+    background-color: rgba(0,0,0,0.8);
+    font-size: 1.05rem;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+}
+
+.propImgSlides {
+    display: none;
+}
+
+.propImgDots {
+    cursor: pointer;
+    height: 10px;
+    width: 10px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active, .propImgDots:hover {
+    background-color: #717171;
 }

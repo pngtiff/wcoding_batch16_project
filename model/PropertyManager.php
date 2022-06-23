@@ -23,8 +23,9 @@ class PropertyManager extends Manager
             ON p.room_type_id = rt.id
             LEFT JOIN property_imgs pi
             ON p.id = pi.property_id
-            WHERE p.is_active = 1 AND user_uid = :uid");
-            $req->bindParam('uid', $this->_user_id);
+            WHERE p.is_active = 1 AND p.user_uid = :uid
+            GROUP BY pi.property_id");
+            $req->bindParam('uid', $_REQUEST['user']);
             $req->execute();
         } else {
             $req = $this->_connection->query("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.city, p.address1, p.address2, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.img_url AS p_img, pi.description AS image_description
@@ -36,6 +37,7 @@ class PropertyManager extends Manager
             LEFT JOIN property_imgs pi
             ON p.id = pi.property_id
             WHERE p.is_active = 1
+            GROUP BY pi.property_id
             ORDER BY date_created DESC LIMIT 0,8");
         }
         $properties = $req->fetchAll(\PDO::FETCH_ASSOC);
@@ -58,8 +60,7 @@ class PropertyManager extends Manager
         WHERE p.is_active = 1 AND p.id = :propId");
         $req->bindParam('propId', $propId);
         $req->execute();
-        $propDetails = $req->fetch(\PDO::FETCH_ASSOC);
-
+        $propDetails = $req->fetchAll(\PDO::FETCH_ASSOC);
         $req->closeCursor();
 
         if (isset($_SESSION['email'])) {
@@ -105,7 +106,7 @@ class PropertyManager extends Manager
     public function searchProperties($search, $rangeMin, $rangeMax, $propertyType, $roomType)
     {
 
-        $search = ($search == "any") ? "%%" : $search; //// If search input is empty, show all results ("%%" is regex that catches any string)
+        $search = ($search == "anywhere") ? "%%" : $search; //// If search input is empty, show all results ("%%" is regex that catches any string)
         $rangeMin = ($rangeMin == "any") ? 0 : $rangeMin;
         $rangeMax = ($rangeMax == "any") ? 1000000000 : $rangeMax; /// default number large enough to catch all properties
         $propertyType = ($propertyType == "any") ? "%%" : $propertyType;
@@ -119,7 +120,8 @@ class PropertyManager extends Manager
         ON p.room_type_id = rt.id
         LEFT JOIN property_imgs pi
         ON p.id = pi.property_id
-        WHERE p.is_active = 1 AND (city LIKE :inSearch OR province_state LIKE :inSearch) AND monthly_price_won >= :inRangeMin AND monthly_price_won <= :inRangeMax AND property_type_id LIKE :inPropertyType AND room_type_id LIKE :inRoomType");
+        WHERE p.is_active = 1 AND (city LIKE :inSearch OR province_state LIKE :inSearch) AND monthly_price_won >= :inRangeMin AND monthly_price_won <= :inRangeMax AND property_type_id LIKE :inPropertyType AND room_type_id LIKE :inRoomType
+        GROUP BY pi.property_id");
         $req->bindParam('inSearch', $search);
         $req->bindParam('inRangeMin', $rangeMin);
         $req->bindParam('inRangeMax', $rangeMax);

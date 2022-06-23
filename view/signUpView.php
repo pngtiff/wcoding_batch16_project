@@ -1,5 +1,6 @@
 <div class="create">
-<h1>Create Account</h1>
+<h1>Create Account:</h1>
+<br>
 <form id="signUpForm" action="index.php" method="post">
     <div class="firstName">
         <input type="text" name="firstName" id="firstName" placeholder="First Name" required>

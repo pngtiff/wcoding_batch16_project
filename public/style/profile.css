@@ -1,3 +1,17 @@
+
+:root{
+    /* color */
+    --white-color: white;
+    --black-color: black;
+    --gray-color: gray;
+    --profile-border-color: #FFBD00; 
+    --red-color: red;
+    --green-color: green;
+
+    /* font size */
+   
+}
+
 #newProfile, #viewProfile, #modifyProfile {
     margin-bottom: 5rem;
 }
@@ -9,43 +23,28 @@
     right: 1%;
     border-radius: 50%;
     overflow: hidden;
-    border: 1px solid grey;
+    border: 1px solid var(--gray-color);
     position: relative;
+    z-index: -1;
 }
 
-#profilePhoto div img, #userImg, #photo{
-    height: 12.5rem;
-    width: auto;
-    border-radius: 50%;
+#userImgContainer img, #profilePhoto div img, #userImg, #photo{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
-#submitButton{
-    position: absolute;
-    left: 5%;
-    top: 17.5rem;
-    width: 9.5rem;
-}
-
-.box{
-    left: 10.5rem;
-    width: 15.5rem;
-    height: 2rem;
-    position: absolute;
-}
-
-.buttons{
-    width: 12.5rem;
-    justify-content: space-evenly;
-}
-
-
-/* Create Profile */
 
 .profileFormsBorder {
-    border: 2px solid #FFBD00;
+    border: 2px solid var(--profile-border-color);
     border-radius: 1.25rem;
-    padding: 2rem;
+    padding: 5rem 7rem;
 }
+
+/* =============== */
+/* Create Profile  */
+/* =============== */
 
 #newProfile h1 {
     margin: 0;
@@ -67,9 +66,9 @@
 }
 
 .customFileButton {
-    color: gray;
+    color: var(--gray-color);
     padding: 0.25rem 0.5rem;
-    border: 2px solid gray;
+    border: 2px solid var(--gray-color);
     border-radius: 0.25rem;
     cursor: pointer;
     font-size: 0.9rem;
@@ -149,17 +148,19 @@
 
 #bio, #userBio {
     height: 4rem;
-    width: 68rem;
+    width: 100%;
     padding: 0.25rem 0.5rem;
     font-size: 1rem;
 }
 
 #create, #save {
-    width: 68rem;
+    width: 100%;
     font-size: 1.1rem;
 }
 
-/* PROFILE VIEW */
+/* =============== */
+/* PROFILE VIEW   */
+/* =============== */
 
 #profileContainer { 
     justify-content: center;
@@ -173,8 +174,9 @@
     width: 100%;
     min-width: 34.375rem;
     justify-content: center;
-    border: 2px solid #FFBD00;
+    border: 2px solid var(--profile-border-color);
     border-radius: 1.25rem;
+    padding: 3rem 2rem;
 }
 
 #userName {
@@ -191,7 +193,7 @@
 }
 
 #userMain {
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid var(--gray-color);
 }
 
 #userInfo>div>div:first-child {
@@ -207,15 +209,65 @@
     padding-left: 2.5rem;
 }
 
-/* Modify Profile */
 
-#uploadButton {
-    width: 10rem;
+/* =============== */
+/* Modify Profile  */
+/* =============== */
+#modifyProfileSection{
+    width: 80%;
+    display: flex;
+    justify-content: center;
 }
 
-#row1 {
+.personalInformationContainer{
     width: 100%;
-    margin-bottom: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+}
+
+/* =============== */
+/*  profile photo  */
+/* =============== */
+
+#profilePhotoM{
+    height: 10rem;
+    width: 10rem;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid var(--gray-color);
+    margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 1em;
+}
+
+#photoM{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+#fileM{
+    display: none;
+}
+
+#uploadButtonM{
+    height: 40px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    text-align: center;
+    transform: translateX(-50%);
+    background-color: rgb(0, 0, 0, 0.7);
+    color: var(--white-color);
+    line-height: 30px;
+    font-size: 15px;
+    cursor: pointer;
+    display: none;
 }
 
 #phoneBox {
@@ -224,14 +276,41 @@
     flex-direction: column;
 }
 
+#row1 {
+    width: 100%;
+    margin-bottom: 5rem;
+}
+
 #phoneNumber {
     margin:0.5rem 0 0 0.5rem;
 }
 
 #userBio {
     margin-left: 0.5rem;
+    
 }
 
 #save {
     margin-top: 7rem;
 }
+
+.bottomContainerM{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+}
+
+#alertMesg{
+    color: var(--red-color);
+    display: none;
+}
+
+.red{
+    border: 1px solid var(--red-color);
+}
+
+.green{
+    border: 1px solid var(--green-color);
+}
+

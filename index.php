@@ -26,13 +26,16 @@ try {
             // case for ajax request to check if email/password are correct without refreshing the page
         case 'checkSignIn':
             checkSignIn($_REQUEST);
-            break;
+        break;
+
         case 'signOut':
             signOut();
-            break;
+        break;
+
         case 'profile':
             showUserInfo($_REQUEST['action'], $_REQUEST['user']);
             break;
+
         case 'listProperties':
             listProperties();
             break;
@@ -59,30 +62,26 @@ try {
             checkProfile();
             break;
 
-            // loads prifileFormView
+            // loads modifyProfileView
         case 'modifyProfile':
-            modifyProfile();
+            // displayDefaultInfo();
+            modifyProfile($_REQUEST['user']);
             break;
 
-            // trigger image uplodaing
-        case 'uploadImg':
-            if (!empty($_FILES["uploadFile"]['name'])) {
-                uploadImg($_FILES['uploadFile']);
-                // if the upload button is clicked again, leads to the break page
-            }
-            break;
-
-            // trigger updating data
+            // trigger updating data - working without any issue at the moment
         case 'updateUserData':
-            if (!empty($_REQUEST['language']) or !empty($_REQUEST['phone_number']) or !empty($_REQUEST['bio'])) {
-                updateUserData();
+            if (!empty($_REQUEST['language']) OR !empty($_REQUEST['phone_number']) OR !empty($_REQUEST['bio']) OR !empty($_FILES["uploadFile"]["name"])) {
+                updateProfile();
             }
+            break;
+            
             //Search//
         case 'search':
             search($_REQUEST);
             break;
         default:
-            getLanding();
+            //////// If logged in : Load user data for profile picture, if not, load without user data///
+            (isset($_REQUEST['userid'])) ? getLanding($_REQUEST['userid']) : getLanding(0);
             break;
     }
 } catch (Exception $e) {

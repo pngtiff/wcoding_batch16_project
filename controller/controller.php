@@ -7,7 +7,9 @@ use wcoding\batch16\finalproject\Model\PropertyManager;
 
 function signIn($params) {
     $signIn = new UserManager();
-    $signIn->signIn($params['email'], $params['password']);
+    $rememberMe = !empty($params['rememberMe']);
+    $signIn->signIn($params['email'], $params['password'], $rememberMe);
+    // rememberMe feature
 }
 
 function checkSignIn($params){
@@ -33,6 +35,7 @@ function signUp($params) {
 function showUserInfo($action, $userId) {
     $userM = new UserManager($userId);
     $user = $userM->getUserInfo();
+    $data = $userM->viewUserData(); //// for header profile picture - @TODO Get user ID directly from GetUserInfo function to avoid calling 2 functions /// 
     
     $propertyM = new PropertyManager($userId);
     $properties = $propertyM->getProperties($action);
@@ -47,8 +50,10 @@ function listProperties() {
     return $properties;
 }
 
-function getLanding() {
+function getLanding($userId) {
     $properties = listProperties();
+    $userM = new UserManager($userId); 
+    $data = $userM->viewUserData();
     require('./view/indexView.php');
 }
 
@@ -79,14 +84,12 @@ function modifyProfile() {
     require('./view/modifyProfileView.php');
 }
 
-function uploadImg ($file) {
+function updateProfile () {
     $userM = new UserManager();
-    $userM->uploadImg($file);
-}
+    $data = $userM->viewUserData();
+    $userM->updateUserData($data);
 
-function updateUserData () {
-    $userM = new UserManager();
-    $userM->updateUserData();
+    header("Location: index.php?action=profile&user={$_SESSION['uid']}");
 }
 
 function updateLastActive() {
@@ -97,5 +100,5 @@ function updateLastActive() {
 function search($params) {
     $propertyM = new PropertyManager();
     $properties = $propertyM->searchProperties($params['search'], $params['rangeMin'], $params['rangeMax'], $params['propertyType'], $params['roomType']);
-    require('./view/searchView.php');
+    require('./view/searchResultsCard.php');
 }
