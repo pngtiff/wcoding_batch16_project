@@ -25,6 +25,7 @@
     overflow: hidden;
     border: 1px solid var(--gray-color);
     position: relative;
+    z-index: -1;
 }
 
 #userImgContainer img, #profilePhoto div img, #userImg, #photo{

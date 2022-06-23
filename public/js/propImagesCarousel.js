@@ -24,3 +24,17 @@ function showSlides(n) {
   slides[slideIndex-1].style.display = "block";  
   dots[slideIndex-1].className += " active";
 }
+
+function showAllPropPhotos() {
+    let propModal = document.querySelector("propPhotosModal");
+    
+
+}
+
+
+document.getElementsByClassName("allPropPhotos").addEventListener("click", function(e) { 
+	e.preventDefault()
+	showAllPropPhotos();
+	modalBox.style.display = "block";
+	setTimeout(opacity, 50, 1, modalBox);
+})
