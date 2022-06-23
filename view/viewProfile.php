@@ -8,7 +8,7 @@
 <div id='profileContainer' class='flexColumn'>
     <div id='userInfo' class='flexColumn'>
         <div id='userMain'>
-            <div><div id='userImgContainer'><img id='userImg' src="<?php if($userImg = $user['profile_img']) {echo $user['profile_img'];} else {echo './public/images/defaultProfile.jpg';}?>" alt="<?= $user['id'].'profile image';?>"></div></div>
+            <div><div id='userImgContainer'><img id='userImg' src="<?php if($userImg = $user['profile_img']) {echo './profile_images/'.$user['profile_img'];} else {echo './public/images/defaultProfile.jpg';}?>" alt="<?= $user['id'].'profile image';?>"></div></div>
             <div>
                 <div>
                     <h2 id='userName'><?= $user['first_name'];?></h2>
@@ -51,8 +51,11 @@
                         echo 'No bio yet';
                     };?></p>
                 <?php if(!empty($_SESSION['email'])) { ?>
-                <form action='index.php?action=modifyProfile' method='post'>
+                
+                <form action="index.php" method='GET'>
                     <button type='submit' id='editProfileButton'>Edit Profile</button>
+                    <input type="hidden" name = "action" value = "modifyProfile">
+                    <input type="hidden" name = "user" value = "<?= $_SESSION['uid']?>">
                 </form>
                 <?php } ?>
             </div>

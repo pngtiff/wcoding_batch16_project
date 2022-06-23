@@ -35,6 +35,7 @@ function signUp($params) {
 function showUserInfo($action, $userId) {
     $userM = new UserManager($userId);
     $user = $userM->getUserInfo();
+    $data = $userM->viewUserData(); //// for header profile picture - @TODO Get user ID directly from GetUserInfo function to avoid calling 2 functions /// 
     
     $propertyM = new PropertyManager($userId);
     $properties = $propertyM->getProperties($action);
@@ -49,8 +50,10 @@ function listProperties() {
     return $properties;
 }
 
-function getLanding() {
+function getLanding($userId) {
     $properties = listProperties();
+    $userM = new UserManager($userId); 
+    $data = $userM->viewUserData();
     require('./view/indexView.php');
 }
 
@@ -61,18 +64,35 @@ function getProperty($propId) {
     require('./view/detailedPropertyView.php');
 }
 
-function modifyProfile() {
+function modifyProperty($propId) {
+    if(isset($_SESSION['uid']) and $_SESSION['uid'] === $_SESSION['user_uid']) {
+        $propertyM = new PropertyManager();
+        $propDetails = $propertyM->modifyProperty($propId);
+        
+        require('./view/modifyProperty.php');
+    } else {
+        header('Location: index.php');
+    }
+}
+
+// function modifyProperty() {
+//     $propertyM = new PropertyManager();
+//     $propertyM->modifyProperty();
+// }
+
+function modifyProfile($userId) {
+    $userM = new UserManager($userId); 
+    $data = $userM->viewUserData();
+
     require('./view/modifyProfileView.php');
 }
 
-function uploadImg ($file) {
+function updateProfile () {
     $userM = new UserManager();
-    $userM->uploadImg($file);
-}
+    $data = $userM->viewUserData();
+    $userM->updateUserData($data);
 
-function updateUserData () {
-    $userM = new UserManager();
-    $userM->updateUserData();
+    header("Location: index.php?action=profile&user={$_SESSION['uid']}");
 }
 
 function updateLastActive() {
@@ -84,4 +104,46 @@ function search($params) {
     $propertyM = new PropertyManager();
     $properties = $propertyM->searchProperties($params['search'], $params['rangeMin'], $params['rangeMax'], $params['propertyType'], $params['roomType']);
     require('./view/searchResultsCard.php');
+}
+function postProperty($params, $imgs) {
+    $propertyM = new PropertyManager();
+    for($i=0; $i<count($imgs); $i++) {
+        $imgDescriptions[] = $params["t-attachment-$i"];
+    }
+    if (!empty($params['furnished'])) {
+        $propertyM->postProperty($params['title'], $params['country'], $params['province'], $params['city'], $params['district'], $params['address1'], $params['address2'], $params['zipcode'], $params['propertyType'], $params['roomType'], $params['roomNum'], $params['bedNum'], $params['bathNum'],$params['furnished'], $params['size'], $params['price'], $params['description'], $params['bankAccNum'], $imgs, $imgDescriptions);
+    } else {
+        $propertyM->postProperty($params['title'], $params['country'], $params['province'], $params['city'], $params['district'], $params['address1'], $params['address2'], $params['zipcode'], $params['propertyType'], $params['roomType'], $params['roomNum'], null, $params['bathNum'], null, $params['size'], $params['price'], $params['description'], $params['bankAccNum'], $imgs, $imgDescriptions);
+    }
+}
+
+function viewPostProperty() {
+    require('view/postPropertyView.php');
+}
+
+function getCities($province) {
+    $propertyM = new PropertyManager();
+    $cities = $propertyM->getCities($province);
+    if ($cities) {
+        echo "<option selected disabled>Select a city</option>";
+        foreach($cities as $key=>$city) {
+            $key+=1;
+            echo "<option value='{$key}'>$city</option>";
+        }
+    } else {
+        echo '<option selected value="-1">No cities/districts in this area</option>';
+    }
+}
+function getDistricts($city) {
+    $propertyM = new PropertyManager();
+    $districts = $propertyM->getDistricts($city);
+    if ($districts) {
+        echo "<option selected disabled>Select a district</option>";
+        foreach($districts as $key=>$district) {
+            $key+=1;
+            echo "<option value='$key'>$district</option>";
+        }
+    } else {
+        echo '<option selected value="-1">No cities/districts in this area</option>';
+    }
 }
