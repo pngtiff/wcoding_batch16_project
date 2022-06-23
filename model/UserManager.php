@@ -217,6 +217,7 @@ class UserManager extends Manager
             $bytes = bin2hex(random_bytes(16)); // generates secure pseudo random bytes and bin2hex converts to hexadecimal string
             $imgName = $bytes . "." . $extension;
             move_uploaded_file($fileLocation, "./profile_images/" . $imgName);
+
         } else {
             $imgName = null;
         }
@@ -253,27 +254,18 @@ class UserManager extends Manager
         return $user;
     }
     
-    public function displayDefaultInfo(){
-        $req = $this->_connection->prepare("SELECT * FROM users WHERE uid ='{$_SESSION['uid']}' AND is_active = 1");
-        $req->execute();
-        $info = $req->fetch(\PDO::FETCH_ASSOC);
-        $phoneNum = $info['phone_number'];
-        $bio = $info['bio'];
-        $last_online = $info['last_online'];
-
-        $_SESSION['phoneNumber'] = $phoneNum;
-        $_SESSION['bio'] = $bio;
-        $_SESSION['last_online'] = $last_online;
-    }
-    
-
-    public function updateUserData()
+    public function viewUserData()
     {
-        //copy the information of the current profile//
+        //view the information of the current profile//
         $req = $this->_connection->prepare("SELECT * FROM users WHERE uid ='{$_SESSION['uid']}' AND is_active = 1");
         $req->execute();
-        
         $data = $req->fetch(\PDO::FETCH_ASSOC);
+
+        return $data;
+    }
+
+    public function updateUserData($data)
+    {
         
         $uid = $data['uid'];
         $firstName = $data['first_name'];
@@ -286,26 +278,24 @@ class UserManager extends Manager
         $profileImgLocation = $data['profile_img'];
         $phoneNumber = $data['phone_number'];
         $bio = $data['bio'];
-        
-        // ============Update profile phpto ========//
+        // ============Update profile photo ========//
         // Get file info
         if (!empty($_FILES["uploadFile"]["name"])) {
-            $fileName = $_FILES["uploadFile"]["name"];
+            $fileName = pathinfo($_FILES["uploadFile"]["name"]);
+            $extension  = $fileName['extension'];
             $fileLocation = $_FILES["uploadFile"]["tmp_name"];
-            // $bytes = bin2hex(random_bytes(16));
-            // $newName = rename($fileName, $bytes);
-            $folder = "./public/images/profile_images/" . basename($fileName);
-            move_uploaded_file($fileLocation, $folder);
+            $bytes = bin2hex(random_bytes(16)); // generates secure pseudo random bytes and bin2hex converts to hexadecimal string
+            $imgName = $bytes . "." . $extension;
+            // $folder = "./profile_images/" . $imgName;
+            move_uploaded_file($fileLocation, "./profile_images/" . $imgName);
 
-        } else if ($profileImgLocation){
-            $folder = $profileImgLocation;
+        } 
+        else if ($profileImgLocation){
+            $imgName = $profileImgLocation;
         } else{
-            throw(new Exception('Failed to upload a file'));
+            $imgName = null;
         }
 
-        // session variable to change the profile image displayed
-        $_SESSION['profileImgLocation'] = $profileImgLocation;
-        $_SESSION['folder'] = $folder;
         
         // update is_active status from 1 -> 0 =====//
         //==========================================//
@@ -344,7 +334,7 @@ class UserManager extends Manager
             $reqInsert->bindParam("inphoneNumber", $phoneNumber, \PDO::PARAM_STR);
             $reqInsert->bindParam("inbio", $bio, \PDO::PARAM_STR);
             $reqInsert->bindParam("inactiveStatus", $status, \PDO::PARAM_INT);
-            $reqInsert->bindParam("inprofileImg", $folder, \PDO::PARAM_STR);
+            $reqInsert->bindParam("inprofileImg", $imgName, \PDO::PARAM_STR);
             
             // insert inherited from the previous data
             $reqInsert->bindParam("inuid", $uid, \PDO::PARAM_STR);
@@ -358,7 +348,7 @@ class UserManager extends Manager
             $reqInsert->execute();
         }
         else{
-            throw(new Exception('Wrong phone number format'));
+            throw(new Exception('Phone cannot be Null !'));
         }
         
     }
