@@ -122,6 +122,11 @@ function verifyEmail(e) {
 
         document.querySelector("#signUp-container").innerHTML = ""
         document.querySelector("#signUp-container").innerHTML = "Sign Up Successful! Please sign in"
+        document.querySelector("#signUp-container").innerHTML = "Account Created. Please sign in to complete the registration process." //////////// New Div
+        // let confirmationText = document.createElement(h4);
+        // h4.textContent = "Account created. Please sign in to complete the process";
+        
+
     } else {
         e.preventDefault();
     }
