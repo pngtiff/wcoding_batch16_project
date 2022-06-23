@@ -20,7 +20,7 @@ class UserManager extends Manager
         $email = htmlspecialchars($email);
         $password = htmlspecialchars($password);
 
-        $response = $this->_connection->query("SELECT email, password, dob, first_name, id, uid FROM users WHERE email = '$email'");
+        $response = $this->_connection->query("SELECT email, password, dob, first_name, id, uid, profile_img FROM users WHERE email = '$email'");
         $userInfo = $response->fetch(\PDO::FETCH_ASSOC);
         $passwordHashed = $userInfo['password'];
         $response->closeCursor();
@@ -35,6 +35,7 @@ class UserManager extends Manager
             $_SESSION['firstName'] = $userInfo['first_name'];
             $_SESSION['email'] = $email;
             $_SESSION['uid'] = $userInfo['uid'];
+            $_SESSION['profile_img'] = $userInfo['profile_img'];
 
             if ($userInfo['dob']) {
                 // checking dob when signing in. dob is mandatory submission so

@@ -23,7 +23,7 @@
     height: 600px;
     border: 1px solid #888;
     border-radius: 20px;
-    overflow: scroll;
+    /* overflow: scroll; */
     /* text-align: center; */
 }
 

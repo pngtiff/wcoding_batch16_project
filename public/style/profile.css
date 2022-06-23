@@ -33,43 +33,17 @@
     object-fit: cover;
     object-position: center;
 }
-/* 
-#photoForm {
-    height: 2.5rem;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-}
 
-#submitButton{
-    position: absolute;
-    left: 5%;
-    top: 17.5rem;
-    width: 9.5rem;
-}
-
-.box{
-    left: 10.5rem;
-    width: 15.5rem;
-    height: 2rem;
-    position: absolute;
-}
-
-.buttons{
-    width: 12.5rem;
-    justify-content: space-evenly;
-} */
-
-/* =============== */
-/* Create Profile  */
-/* =============== */
 
 .profileFormsBorder {
     border: 2px solid var(--profile-border-color);
     border-radius: 1.25rem;
-    padding: 2rem;
+    padding: 5rem 7rem;
 }
+
+/* =============== */
+/* Create Profile  */
+/* =============== */
 
 #newProfile h1 {
     margin: 0;
@@ -139,13 +113,13 @@
 
 #bio, #userBio {
     height: 4rem;
-    width: 68rem;
+    width: 100%;
     padding: 0.25rem 0.5rem;
     font-size: 1rem;
 }
 
 #create, #save {
-    width: 68rem;
+    width: 100%;
     font-size: 1.1rem;
 }
 
@@ -167,6 +141,7 @@
     justify-content: center;
     border: 2px solid var(--profile-border-color);
     border-radius: 1.25rem;
+    padding: 3rem 2rem;
 }
 
 #userName {
@@ -217,12 +192,7 @@
     /* align-items: center; */
 }
 
-.profileFormsBorder{
-    border: 2px solid var(--profile-border-color);
-    border-radius: 20px;
-    padding: 30px;
-}
-
+/* =============== */
 /*  profile photo  */
 /* =============== */
 
@@ -241,6 +211,8 @@
 #photoM{
     height: 100%;
     width: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 #fileM{

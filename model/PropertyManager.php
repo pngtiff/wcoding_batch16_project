@@ -81,7 +81,8 @@ class PropertyManager extends Manager {
         ON p.room_type_id = rt.id
         LEFT JOIN property_imgs pi
         ON p.id = pi.property_id
-        WHERE p.is_active = 1 AND (city LIKE :inSearch OR province_state LIKE :inSearch) AND monthly_price_won >= :inRangeMin AND monthly_price_won <= :inRangeMax AND property_type_id LIKE :inPropertyType AND room_type_id LIKE :inRoomType");
+        WHERE p.is_active = 1 AND (city LIKE :inSearch OR province_state LIKE :inSearch) AND monthly_price_won >= :inRangeMin AND monthly_price_won <= :inRangeMax AND property_type_id LIKE :inPropertyType AND room_type_id LIKE :inRoomType
+        GROUP BY pi.property_id");
         $req->bindParam('inSearch', $search);
         $req->bindParam('inRangeMin', $rangeMin);
         $req->bindParam('inRangeMax', $rangeMax);
