@@ -109,7 +109,7 @@ try {
             
             break;
         case 'viewPostProperty':
-            if ($_SESSION['email']) {
+            if (!empty($_SESSION['email'])) {
                 viewPostProperty();
             }
             break;
