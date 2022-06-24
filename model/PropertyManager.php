@@ -195,11 +195,11 @@ class PropertyManager extends Manager {
             throw(new Exception('Province/State is not found'));
         else 
             $province-=1; 
-        if ($city >= 0 AND empty($this::CITIES[$this::PROVINCES[$country][$province]][$city-1]))
+        if ($city >= 0 AND !empty($this::CITIES[$this::PROVINCES[$country][$province]][$city-1]))
             $city-=1;
         else if ($city < -1) 
             throw(new Exception('City is not found'));
-        if ($district >= 0 AND (empty($this::DISTRICTS[$this::CITIES[$this::PROVINCES[$country][$province]][$city]][$district-1])))
+        if ($district >= 0 AND (!empty($this::DISTRICTS[$this::CITIES[$this::PROVINCES[$country][$province]][$city]][$district-1])))
             $district-=1;
         else if ($district<-1) 
             throw(new Exception('City is too long'));
@@ -217,7 +217,7 @@ class PropertyManager extends Manager {
             throw(new Exception('Zipcode is too long'));
         if ($propertyType <= 0 OR $propertyType >= 7)
             throw(new TypeError("Invalid property type"));
-        if ($roomType <= 0 OR $roomType >= 5)
+        if ($roomType <= 0 OR $roomType >= 4)
             throw(new TypeError("Invalid room type"));
         if ($roomNum <= 0 OR $roomNum >= 100)
             throw(new TypeError("Invalid room number"));

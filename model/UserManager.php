@@ -272,6 +272,9 @@ class UserManager extends Manager
         $req->execute();
         $data = $req->fetch(\PDO::FETCH_ASSOC);
 
+        $languages = explode(',', $data['languages']);
+        $data['languages'] = $languages;
+
         return $data;
     }
 

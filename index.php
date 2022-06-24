@@ -129,7 +129,8 @@ try {
             break;
         default:
             //////// If logged in : Load user data for profile picture, if not, load without user data///
-            (isset($_REQUEST['userid'])) ? getLanding($_REQUEST['userid']) : getLanding(0);
+            // (isset($_REQUEST['userid'])) ? getLanding($_REQUEST['userid']) : getLanding(0);
+            getLanding();
             break;
     }
 } catch (Exception $e) {
