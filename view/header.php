@@ -39,7 +39,7 @@
 
             <form id="searchBarContainer" method="post" action="index.php">
                 <select name="province" id="province"> 
-                    <option selected disabled>Select a Province/Special City</option>
+                    <option selected value="-1">Select a Province/Special City</option>
                     <option value="1">Busan</option>
                     <option value="2">Chungcheongbuk-do</option>
                     <option value="3">Chungcheongnam-do</option>
@@ -62,7 +62,7 @@
                     <option value="any">Price Range :</option>
                     <option value="500000">Less than 500k/month</option>
                     <option value="1000000">Between 500k and 1M/ month</option>
-                    <option value="1500000">Between 1M and 1.5M month</option>
+                    <option value="1500000">More than 1M/month</option>
                 </select>
 
                 <select name="propertyType" id="propertyType" class="filter">
