@@ -75,6 +75,8 @@ try {
             
             //Search//
         case 'search':
+            $_REQUEST['province'] = !empty($_REQUEST['province']) ? strip_tags($_REQUEST['province']) : 'any';
+            $_REQUEST['city'] = !empty($_REQUEST['city']) ? strip_tags($_REQUEST['city']) : 'any';
             search($_REQUEST);
             break;
         case 'postProperty': 
@@ -109,7 +111,7 @@ try {
             
             break;
         case 'viewPostProperty':
-            if ($_SESSION['email']) {
+            if (!empty($_SESSION['email'])) {
                 viewPostProperty();
             }
             break;

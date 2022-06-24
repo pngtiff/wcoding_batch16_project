@@ -12,7 +12,12 @@
             <div>
                 <div>
                     <h2 id='userName'><?= $user['first_name'];?></h2>
-                    <p>Last active: <? // TODO: last online status based on session end datetime ?></p>
+                    <p>Last active: <?php if($lastOnline = $user['last_online']){
+                    $lastOnline = $user['last_online'];
+                    $currentTime = date('Y-m-d H:i:s');
+                    echo $lastOnline." KST";
+                }
+                // TODO: last online status based on session end datetime ?></p>
                 </div>
             </div>
         </div>
@@ -50,14 +55,15 @@
                     } else {
                         echo 'No bio yet';
                     };?></p>
-                <?php if(!empty($_SESSION['email'])) { ?>
-                
+
+                <?php if(!empty($_SESSION['uid'])) {
+                    if($_REQUEST['user'] == $_SESSION['uid']) { ?>
                 <form action="index.php" method='GET'>
                     <button type='submit' id='editProfileButton'>Edit Profile</button>
                     <input type="hidden" name = "action" value = "modifyProfile">
                     <input type="hidden" name = "user" value = "<?= $_SESSION['uid']?>">
                 </form>
-                <?php } ?>
+                <?php }} ?>
             </div>
         </div>
     </div>

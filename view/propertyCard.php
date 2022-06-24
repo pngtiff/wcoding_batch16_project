@@ -1,6 +1,6 @@
 <a href="index.php?action=property&propId=<?= $property['id'];?>">
     <div class='property'>
-        <div class='propertyImgContainer'><img alt="property main image" src="<?= $property['p_img'];?>"></div>
+        <div class='propertyImgContainer'><img alt="property main image" src="<?= "./public/images/property_images/{$property['p_id']}/{$property['p_img']}";?>"></div>
         <div id='propertyDetails'>
             <p class="price">Price: <span><?= number_format($property['monthly_price_won']);?></span>₩/month</p>
             <p>Location: <?= $property['city'].', '.$property['country'];?></p>
