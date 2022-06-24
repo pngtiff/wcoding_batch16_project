@@ -8,7 +8,8 @@ let form = document.querySelector('#modifyPropertyForm'),
 if (pictures) {
     pictures.forEach(picture => {
         let img = document.createElement('img');
-        img.src = picture;
+        let propId = document.querySelector('#propId');
+        img.src = `./public/images/property_images/${propId.value}/${picture}`;
         let div = document.createElement('div');
         let title = document.createElement('input');
         title.name = picture + 'desc';

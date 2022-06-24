@@ -1,5 +1,8 @@
+<?php $title = "Modify Property"; ?>
+
+<?php ob_start(); ?>
 <section>
-    <form action="index.php?action=displayUpdatedProperty" method="post" id="modifyPropertyForm" enctype="multipart/form-data">
+    <form action="index.php?action=modifyProperty" method="post" id="modifyPropertyForm" enctype="multipart/form-data">
         <label for="title">Title<input type="text" name="title" id="title" value="<?=$propDetails['post_title'];?>"></label>
     
         <label for="roomType">Room Type
@@ -20,9 +23,12 @@
         <button id="addImg">Add img</button>
         <input type="hidden" id="imgLinks", name="imgLinks" value="<?=$propDetails['p_img'];?>">
         <div id="photosPreview"></div>
+        <input type="hidden" id="propId" name="propId" value="<?= $propDetails['propId'];?>">
         <input type="hidden" name="action" value="postProperty">
         <button type="submit">SUBMIT</button>
     </form>
 
 </section>
 <script src="./public/js/modifyProperty.js"></script>
+<?php $content = ob_get_clean(); ?>
+<?php require('template.php'); ?>

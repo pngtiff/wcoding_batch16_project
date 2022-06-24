@@ -95,9 +95,9 @@ class PropertyManager extends Manager
         return $propOwner;
     }
 
-    public function modifyProperty($propId)
+    public function prefillProperty($propId)
     {
-        $req = $this->_connection->prepare("SELECT p.post_title, p.room_num, p.bed_num, p.bath_num, p.is_furnished, p.room_type_id, p.monthly_price_won, p.description, p.bank_account_num, p.validation, rt.room_type AS r_type, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
+        $req = $this->_connection->prepare("SELECT p.id AS propId, p.post_title, p.room_num, p.bed_num, p.bath_num, p.is_furnished, p.room_type_id, p.monthly_price_won, p.description, p.bank_account_num, p.validation, rt.room_type AS r_type, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
         FROM properties p
         LEFT JOIN property_types pt
         ON p.property_type_id = pt.id
@@ -114,10 +114,10 @@ class PropertyManager extends Manager
         return $propDetails;
     }
 
-    // public function modifyProperty()
-    // {
+    public function modifyProperty()
+    {
 
-    // }
+    }
 
 
     // SEARCH FUNCTION : $search = "search" get parameter called from router

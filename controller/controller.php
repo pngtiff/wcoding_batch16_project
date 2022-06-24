@@ -56,9 +56,9 @@ function listProperties() {
 }
 
 function getLanding() {
-    // $properties = listProperties();
-    // $userM = new UserManager(); 
-    // $data = $userM->viewUserData();`
+    $properties = listProperties();
+    $userM = new UserManager(); 
+    $data = $userM->viewUserData();
     require('./view/indexView.php');
 }
 
@@ -77,10 +77,10 @@ function getPropertyOwner($propId) {
     require('./view/detailedPropertyView.php');
 }
 
-function modifyProperty($propId) {
+function prefillProperty($propId) {
     if(isset($_SESSION['uid']) and $_SESSION['uid'] === $_SESSION['user_uid']) {
         $propertyM = new PropertyManager();
-        $propDetails = $propertyM->modifyProperty($propId);
+        $propDetails = $propertyM->prefillProperty($propId);
         
         require('./view/modifyProperty.php');
     } else {
@@ -88,10 +88,10 @@ function modifyProperty($propId) {
     }
 }
 
-// function modifyProperty() {
-//     $propertyM = new PropertyManager();
-//     $propertyM->modifyProperty();
-// }
+function modifyProperty() {
+    $propertyM = new PropertyManager();
+    $propertyM->modifyProperty();
+}
 
 function modifyProfile($userId) {
     $userM = new UserManager($userId); 
