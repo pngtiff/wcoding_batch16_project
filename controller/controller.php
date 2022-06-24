@@ -17,7 +17,6 @@ function checkSignIn($params){
     $signIn->checkSignIn($params['email'], $params['password']);
 }
 
-
 function signOut(){
     $signOut = new UserManager();
     $signOut->signOut();
@@ -51,10 +50,10 @@ function listProperties() {
     return $properties;
 }
 
-function getLanding($userId) {
+function getLanding() {
     $properties = listProperties();
-    $userM = new UserManager($userId); 
-    $data = $userM->viewUserData();
+    $userM = new UserManager(); 
+    // $data = $userM->viewUserData();
     require('./view/indexView.php');
 }
 
@@ -92,6 +91,11 @@ function modifyProperty($propId) {
 function modifyProfile($userId) {
     $userM = new UserManager($userId); 
     $data = $userM->viewUserData();
+
+    for($i=0; $i<count($data['languages']); $i++) {
+        $selectedLang = $data['languages'][$i];
+        // echo $data['languages'][$i];
+    }
 
     require('./view/modifyProfileView.php');
 }

@@ -35,7 +35,6 @@
     object-position: center;
 }
 
-
 .profileFormsBorder {
     border: 2px solid var(--profile-border-color);
     border-radius: 1.25rem;
@@ -98,30 +97,31 @@
 
 #birthdate select {
     font-size: 1rem;
-    padding: 0.25 0.5;
+    padding: 0.25rem 0.5rem;
     width: 5rem;
 }
 
 .multi-selector{
-    width: max-content;
+    width: 15.5rem;
 }
 .select-field{
+    cursor: pointer;
+    width: 15.5rem;
     border: 1px solid rgb(187, 187, 187);
     border-radius: 0.25rem;
 }
 .select-field,.lang,.list{
-    width: 100%;
     background-color: white;
-    padding: 0.3rem;
+    padding: 0.25rem 0.5rem;
 }
 .list{
+    width: 15.5rem;
     box-shadow: 0 30px 60px rgb(0,0,0,0.2);
     display: none;
 }
 .down-arrow{
     font-size: 1.2rem;
     display: inline-block;
-    cursor: pointer;
     transition: 0.2s linear;
 }
 .lang{
@@ -138,6 +138,7 @@
 }
 .show{
     display: block;
+    position: absolute;
 }
 .rotate180{
     transform: rotate(-180deg);
@@ -228,7 +229,12 @@
     /* align-items: center; */
 }
 
-/* =============== */
+.profileFormsBorder{
+    border: 2px solid var(--profile-border-color);
+    border-radius: 20px;
+    padding: 30px;
+}
+
 /*  profile photo  */
 /* =============== */
 
@@ -242,6 +248,7 @@
     position: relative;
     overflow: hidden;
     margin-top: 1em;
+    z-index: -1;
 }
 
 #photoM{

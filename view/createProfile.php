@@ -58,10 +58,11 @@
             </div>
 
             <div id="langDetails">
+                <p>Which languages can you speak?</p>
                 <div>
                     <div id="language" class="multi-selector">
                         <div class="select-field">
-                            <p>Which languages can you speak? <span class="down-arrow">&blacktriangledown;</span></p>
+                            <p>Choose one or multiple <span class="down-arrow">&blacktriangledown;</span></p>
                         </div>
                         <div class="list">
                             <label for="HK" class="lang"><input type="checkbox" id="HK" name="HK" value="HK"> Cantonese</label>
