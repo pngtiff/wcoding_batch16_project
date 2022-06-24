@@ -47,7 +47,7 @@ else {
 }
 
 function checkEmail() {
-let regex = /^[a-z0-9_-]+@[a-z0-9_-]{2,}.[a-z.]{2,4}?[a-z]{2,4}$/i;
+let regex = /^[a-z.0-9_-]+@[a-z0-9_-]{2,}.[a-z.]{2,4}?[a-z]{2,4}$/i;
 if (regex.test(email.value)) {
     email.classList.add('green');
     email.classList.remove('red'); 
