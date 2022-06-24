@@ -134,7 +134,6 @@ ob_start();?>
             <span class="hide">(At least 2, at most 20)</span>
         </label>
         <div id="photosPreview"></div>
-        <input type="hidden" name="action" value="postProperty">
         <button type="submit">SUBMIT</button>
     </form>
 

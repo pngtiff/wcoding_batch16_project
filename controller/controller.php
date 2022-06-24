@@ -88,9 +88,18 @@ function prefillProperty($propId) {
     }
 }
 
-function modifyProperty() {
-    $propertyM = new PropertyManager();
-    $propertyM->modifyProperty();
+function modifyProperty($params, $imgs) {
+    if(isset($_SESSION['uid']) and $_SESSION['uid'] === $_SESSION['user_uid']) {
+        $propertyM = new PropertyManager();
+        for($i=0; $i<count($imgs); $i++) {
+            $imgDescriptions[] = $params["t-attachment-$i"];
+        }
+        $propertyM->modifyProperty($params['prefillProperty[propId]'], $imgs, $imgDescriptions);
+
+        require('./view/modifyProperty.php');
+    } else {
+        header("Location: index.php?action=property&propId={$params['propId']}");
+    }
 }
 
 function modifyProfile($userId) {

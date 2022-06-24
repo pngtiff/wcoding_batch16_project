@@ -114,12 +114,6 @@ class PropertyManager extends Manager
         return $propDetails;
     }
 
-    public function modifyProperty()
-    {
-
-    }
-
-
     // SEARCH FUNCTION : $search = "search" get parameter called from router
 
     public function searchProperties($province, $city, $rangeMin, $rangeMax, $propertyType, $roomType)
@@ -285,5 +279,97 @@ class PropertyManager extends Manager
             ");
         }
         header("Location:index.php?action=property&propId={$propertyId}");
+    }
+    public function modifyProperty($propId, $imgs, $imgDescriptions) {
+        // INFO validation
+        if (strlen($_POST['title']) < 50) {
+            $title = strip_tags($_POST['title']);
+        } else {
+            throw (new Exception('Title is too long'));
+        }
+
+        if ($_POST['roomType'] > 0 and $_POST['roomType'] < 5) {
+            $roomType = $_POST['roomType'];
+        } else {
+            throw (new TypeError("Invalid room type"));
+        }
+
+        if ($_POST['bedroom'] > 0 and $_POST['bedroom'] < 100) {
+            $bedrooms = $_POST['bedroom'];
+        } else {
+            throw (new TypeError("Invalid room number"));
+        }
+
+        if($_POST['bath'] > 0 and $_POST['bath'] < 100) {
+            $bathrooms = $_POST['bath'];
+        } else {
+            throw (new TypeError("Invalid room number"));
+        }
+
+        if (isset($_POST['furnished'])) {
+            $furnished = 1;
+            if ($_POST['bed']< 100) {
+                $beds = $_POST['bed'];
+            } else {
+                throw (new TypeError("Invalid bed number"));
+            }
+        } else {
+            $furnished = 0;
+            $beds = 0;
+        }
+
+        if($_POST['price'] > 0) {
+            $price = $_POST['price'];
+        } else {
+            throw (new TypeError("Invalid price"));
+        }
+
+        $description = strip_tags($_POST['description']);
+
+        if(strlen($_POST['bankAccNum']) < 21) {
+            $bankAccNum = strip_tags($_POST['bankAccNum']);
+        } else {
+            throw (new Exception('Bank Account Number is too long'));
+        }
+        // Img Check
+        foreach ($imgDescriptions as &$desc) {
+            if(strlen($desc) < 256) {
+                $desc = htmlspecialchars($desc);
+            } else {
+                throw (new Exception('Description must be less than 256 characters'));
+            }
+        }
+        foreach ($imgs as $file) {
+            if ($file['size'] > 1048576) {
+                throw (new Exception('Image is too big'));
+            }
+        }
+        if($roomType and $bedrooms and $bathrooms and $beds and $price and $description and $bankAccNum and count($imgs) >= 2) {
+            $req = $this->_connection->prepare("UPDATE properties SET is_active = 0 WHERE id = :propId");
+            $req->bindParam('propId', $propId, \PDO::PARAM_INT);
+            $req->execute();
+            $req->closeCursor();
+
+            $update = $this->_connection->prepare("INSERT 
+            INTO properties (post_title, room_type_id, monthly_price_won, description, bank_account_num, room_num, bath_num, is_furnished, bed_num) 
+            VALUES (:title,:roomType,:price,:description,:bankAccNum,:bedrooms,:bathrooms,:furnished,:beds)");
+            $update->bindParam('title', $title, \PDO::PARAM_STR);
+            $update->bindParam('roomType', $roomType, \PDO::PARAM_INT);
+            $update->bindParam('price', $price, \PDO::PARAM_INT);
+            $update->bindParam('description', $description, \PDO::PARAM_STR);
+            $update->bindParam('bankAccNum', $bankAccNum, \PDO::PARAM_STR);
+            $update->bindParam('bedrooms', $bedrooms, \PDO::PARAM_INT);
+            $update->bindParam('bathrooms', $bathrooms, \PDO::PARAM_INT);
+            $update->bindParam('furnished', $furnished, \PDO::PARAM_INT);
+            $update->bindParam('beds', $beds, \PDO::PARAM_INT);
+            $update->execute();
+
+            // $album = implode(',', $imgs);
+            // $updateImg = $this->_connection->prepare("UPDATE property_imgs SET img_url = :imgs, description = WHERE property_id = :propId");
+            // $updateImg->bindParam('imgs', $album, \PDO::PARAM_STR);
+            // $updateImg->bindParam('propId', $propId, \PDO::PARAM_INT);
+
+            header("Location: index.php?action=property&propertyId={$_REQUEST['propId']}");
+        }
     }
 }

@@ -63,3 +63,67 @@ document.querySelector('form button#addImg').addEventListener('click', function 
     input.style.display = 'none';
     input.click();
 });
+
+function checkTitle(e) {
+    return /^.{6,50}$/is.test(e.value)
+}
+
+function checkSelect(e) {
+    return e.value > 0
+}
+
+function checkNumber(e) {
+    return /^[1-9][0-9]?$/i.test(e.value)
+}
+
+function checkPrice(e) {
+    return /^[1-9][0-9]+$/i.test(e.value)
+}
+
+function checkImg() {
+    let imgs = document.querySelectorAll("form input[type='file']")
+    let desc = document.querySelectorAll("#photosPreview input[type='text']")
+    if (imgs.length < 2 || imgs.length > 20) return 
+    for (i=0; i<imgs.length; i++) {
+        if(imgs[i].files[0].size > 1048576 || !checkDescription(desc[i])) {
+            return
+        }
+    }
+    return true
+}
+
+function checkDescription(e) {
+    return /^.{6,255}$/is.test(e.value)
+}
+
+function checkBank(e) {
+    return /^[1-9][0-9]{10,17}$/i.test(e.value)
+}
+let title = document.querySelector('#title');
+let roomType = document.querySelector('#postPropertyForm #roomType');
+let roomNum = document.querySelector('#roomNum');
+let bedNum = document.querySelector('#bedNum');
+let bathNum = document.querySelector('#bathNum');
+let price = document.querySelector('#price');
+let description = document.querySelector('#description');
+let bankAccNum = document.querySelector('#bankAccNum');
+postPropertyForm.addEventListener('submit', (e)=> {
+    e.preventDefault();
+    if (checkTitle(title)&&
+        checkSelect(roomType) &&
+        checkNumber(roomNum) &&
+        checkNumber(bedNum) && 
+        checkNumber(bathNum) &&
+        checkPrice(price) &&
+        checkDescription(description) &&
+        checkBank(bankAccNum) &&
+        checkImg()) {
+            postPropertyForm.submit()
+        }
+    else {
+        let errorMsgs = document.querySelectorAll('#postPropertyForm span.hide');
+        for (i=0; i<errorMsgs.length; i++) {
+            errorMsgs[i].className = 'show'
+        }
+    }
+})

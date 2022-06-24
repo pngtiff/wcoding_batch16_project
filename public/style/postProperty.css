@@ -11,7 +11,11 @@
     position: relative;
 }
 
+<<<<<<< Updated upstream
 #postPropertyForm #photosPreview > * , #modifyPropertyForm #photosPreview > *{
+=======
+#postPropertyForm #photosPreview > *, #modifyPropertyForm #photosPreview > * {
+>>>>>>> Stashed changes
     position: relative;
 }
 

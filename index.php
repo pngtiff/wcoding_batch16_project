@@ -115,6 +115,20 @@ try {
             }
 
             break;
+
+        case 'prefillProperty':
+            prefillProperty($_REQUEST['propId']);
+            break;
+
+        case 'modifyProperty':
+            // for ($i = 0; $i < count($_FILES); $i++) {
+            //     if (empty($_REQUEST["t-attachment-$i"])) {
+            //         throw (new Exception("Message description is empty"));
+            //     }
+            // }
+            modifyProperty($_REQUEST['propId'], $_FILES);
+            break;
+
         case 'viewPostProperty':
             if (!empty($_SESSION['email'])) {
                 viewPostProperty();
