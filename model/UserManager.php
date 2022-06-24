@@ -300,7 +300,7 @@ class UserManager extends Manager
             $imgName = $bytes . "." . $extension;
             // $folder = "./profile_images/" . $imgName;
             move_uploaded_file($fileLocation, "./profile_images/" . $imgName);
-
+            $_SESSION['profile_img'] = $imgName;
         } 
         else if ($profileImgLocation){
             $imgName = $profileImgLocation;

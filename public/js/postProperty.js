@@ -99,7 +99,7 @@ function checkImg() {
     let desc = document.querySelectorAll("#photosPreview input[type='text']")
     if (imgs.length < 2 || imgs.length > 20) return 
     for (i=0; i<imgs.length; i++) {
-        if(imgs[i].files[0].size > 1048576 || !checkDescription(desc[i])) {
+        if(imgs[i].files[0].size > 10485760 || !checkDescription(desc[i])) {
             return
         }
     }
