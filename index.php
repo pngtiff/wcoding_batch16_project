@@ -31,7 +31,7 @@ try {
             signOut();
             break;
         case 'loggedOut':
-            getLanding(0);
+            getLanding();
             include("view/toaster.php");
             // echo('<div class="toast">You are logged out !</div>');
             break;
@@ -56,6 +56,7 @@ try {
                 signUp($_REQUEST);
             }
             break;
+    
 
         case 'createProfile':
             createProfile();
