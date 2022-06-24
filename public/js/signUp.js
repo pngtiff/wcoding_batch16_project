@@ -47,7 +47,7 @@ else {
 }
 
 function checkEmail() {
-let regex = /^[a-z0-9_-]+@[a-z0-9_-]{2,}.[a-z.]{2,4}?[a-z]{2,4}$/i;
+let regex = /^[a-z.0-9_-]+@[a-z0-9_-]{2,}.[a-z.]{2,4}?[a-z]{2,4}$/i;
 if (regex.test(email.value)) {
     email.classList.add('green');
     email.classList.remove('red'); 
@@ -94,43 +94,59 @@ function checkPasswordConfirm() {
 }
 
 function submitForm(e) {
+
+    e.preventDefault();
     if(checkLastName() && checkFirstName() && checkEmail() && checkPassword() && checkPasswordConfirm()) {
+        
         var xhr = new XMLHttpRequest();
         xhr.open('POST', 'index.php?action=signUp');
+        
         var form = document.querySelector('#signUpForm'),
         formData = new FormData(form);
+        xhr.addEventListener('readystatechange', function() {
+            if (xhr.readyState === 4) {
+                console.log(xhr.responseText); 
+                if (xhr.responseText == "1") //1 denotes if email is already in the database
+                {
+                    alert("Email is already registered. Please use another email or sign in using an existing account."); 
+                } else {
+                    document.querySelector("#signUp-container").innerHTML = ""
+                    document.querySelector("#signUp-container").innerHTML = "Sign Up Successful! Please sign in"
+                }
+            }
+        });
+        
+        // xhr.send();
         xhr.send(formData);
-        e.preventDefault();
 
-        document.querySelector("#signUp-container").innerHTML = ""
-        document.querySelector("#signUp-container").innerHTML = "Sign Up Successful! Please sign in"
-    } else {
-        e.preventDefault();
-    }
+
+    } 
+    // else {
+    //     e.preventDefault();
+    // }
 }
 
-function verifyEmail(e) {
-    if(checkEmail() && checkPassword() && checkPasswordConfirm()) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'index.php?action=signUp');
+// function verifyEmail(e) {
+//     if(checkEmail() && checkPassword() && checkPasswordConfirm()) {
+//         var xhr = new XMLHttpRequest();
+//         xhr.open('POST', 'index.php?action=signUp');
+
+
+
+//         xhr.send();
+//         e.preventDefault();
+
+//         document.querySelector("#signUp-container").innerHTML = ""
+//         document.querySelector("#signUp-container").innerHTML = "Sign Up Successful! Please sign in"
+//         document.querySelector("#signUp-container").innerHTML = "Account Created. Please sign in to complete the registration process." //////////// New Div
+//         // let confirmationText = document.createElement(h4);
+//         // h4.textContent = "Account created. Please sign in to complete the process";
         
-        xhr.response 
 
-
-        xhr.send();
-        e.preventDefault();
-
-        document.querySelector("#signUp-container").innerHTML = ""
-        document.querySelector("#signUp-container").innerHTML = "Sign Up Successful! Please sign in"
-        document.querySelector("#signUp-container").innerHTML = "Account Created. Please sign in to complete the registration process." //////////// New Div
-        // let confirmationText = document.createElement(h4);
-        // h4.textContent = "Account created. Please sign in to complete the process";
-        
-
-    } else {
-        e.preventDefault();
-    }
-}
+//     } else {
+//         e.preventDefault();
+//     }
+// }
 
 function resetForm() {
     document.getElementById('myForm').reset(); 

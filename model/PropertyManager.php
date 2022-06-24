@@ -127,7 +127,7 @@ class PropertyManager extends Manager {
         $province = ($province == "any") ? "%%" : $province-1; //// If search input is empty, show all results ("%%" is regex that catches any string)
         $city = ($city == "any") ? "%%" : $city-1; //// If search input is empty, show all results ("%%" is regex that catches any string)
         $rangeMin = ($rangeMin == "any") ? 0 : $rangeMin;
-        $rangeMax = ($rangeMax == "any") ? 1000000000 : $rangeMax; /// default number large enough to catch all properties
+        $rangeMax = (($rangeMax == "any") OR ($rangeMax > 1000000)) ? 10000000 : $rangeMax; /// default number large enough to catch all properties
         $propertyType = ($propertyType == "any") ? "%%" : $propertyType;
         $roomType = ($roomType == "any") ? "%%" : $roomType;
 
@@ -192,16 +192,16 @@ class PropertyManager extends Manager {
         if (empty($this::COUNTRIES[$country]))
             throw(new Exception('This country is not supported')) ;
         if (empty($this::PROVINCES[$country][$province-1]))
-            $province-=1; 
-        else 
             throw(new Exception('Province/State is not found'));
-        if ($city >= 0 AND (empty($this::CITIES[$this::PROVINCES[$country][$province]][$city-1])))
+        else 
+            $province-=1; 
+        if ($city >= 0 AND empty($this::CITIES[$this::PROVINCES[$country][$province]][$city-1]))
             $city-=1;
-        else if ($city != -1) 
+        else if ($city < -1) 
             throw(new Exception('City is not found'));
         if ($district >= 0 AND (empty($this::DISTRICTS[$this::CITIES[$this::PROVINCES[$country][$province]][$city]][$district-1])))
             $district-=1;
-        else if ($district!=-1) 
+        else if ($district<-1) 
             throw(new Exception('City is too long'));
         if (strlen($address1) < 256)
             $address1 = strip_tags($address1);
@@ -246,7 +246,7 @@ class PropertyManager extends Manager {
                 throw(new Exception('Bank Account Number is too long'));
         }
         foreach ($imgs as $file) {
-            if ($file['size'] > 1048576) {
+            if ($file['size'] > 10485760) {
                 throw(new Exception('Image is too big'));
             }
         }
