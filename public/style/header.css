@@ -267,7 +267,7 @@ header {
 
     /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
   However, delay the fade out process for 2.5 seconds */
-    animation: fadein 0.5s, fadeout 1s 2.5s forwards;
+    animation: fadein 0.6s, fadeout 2s 2.5s forwards;
 
     height: 100px;
     width: 300px;
@@ -281,7 +281,7 @@ header {
     text-align: center;
     justify-content: center;
 
-    background-color: bisque;
+    background-color: magenta;
 
     z-index: 9999999;
 }
