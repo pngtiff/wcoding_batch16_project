@@ -238,7 +238,7 @@ class UserManager extends Manager
         $req->bindParam('gender', $gender, \PDO::PARAM_STR);
         $req->bindParam('lang', $language, \PDO::PARAM_STR);
         $req->bindParam('bio', $bio, \PDO::PARAM_STR);
-        $req->bindParam('userImg', $imgName, \PDO::PARAM_STR);
+        $req->bindParam('userImg', $folder, \PDO::PARAM_STR);
         $req->execute();
         $_SESSION['profile_img'] = $imgName;
         header('Location:index.php');
@@ -251,14 +251,14 @@ class UserManager extends Manager
         header('Location:index.php?action=loggedOut');
     }
 
-    //view
+
     public function getUserInfo()
     {
         $req = $this->_connection->prepare('SELECT * FROM users WHERE uid = ? AND is_active = 1');
         $req->execute(array($this->_user_id));
         $user = $req->fetch(\PDO::FETCH_ASSOC);
         $req->closeCursor();
-        $languages = explode(',', $user['languages']);
+        $languages = explode(',', $user['languages'] ?? "");
         foreach ($languages as &$language) {
             $language = $this->getLangauges($language);
         }
@@ -287,9 +287,10 @@ class UserManager extends Manager
         $dob = $data['dob'];
         $gender = $data['gender'];
         $dateCreated = $data['date_created'];
-        $profileImgLocation = $data['profile_img'];
         $phoneNumber = $data['phone_number'];
         $bio = $data['bio'];
+        $profileImgLocation = $data['profile_img'];
+
         // ============Update profile photo ========//
         // Get file info
         if (!empty($_FILES["uploadFile"]["name"])) {
@@ -310,7 +311,6 @@ class UserManager extends Manager
 
         
         // update is_active status from 1 -> 0 =====//
-        //==========================================//
         $req2 = $this->_connection->prepare("UPDATE users SET is_active = 0 WHERE uid ='{$_SESSION['uid']}' ");
         $req2->execute();
      
@@ -328,16 +328,16 @@ class UserManager extends Manager
             'French' => 'FR', 'German' => 'DE', 'Hindi' => 'HI', 'Indonesian' => 'IN', 'Italian' => 'IT', 'Japanese' => 'JA',
             'Korean' => 'KO', 'Vietnamese' => 'VI', 'Portuguese' => 'PT', 'Russian' => 'RU', 'Spanish' => 'ES'
         );
-
         $userLang = explode(',', $_REQUEST['userLang'] ?? "");
-        !empty($userLang) and array_diff($userLang, $languages) === array() ? $language = implode(',', array_unique($userLang)) : $language = $data['languages'];
+        !empty($userLang) and array_diff($userLang, $languages) === array() ? $language = implode(',', array_unique($userLang)) : $language = null;
 
         // Check bio
-        !empty($_REQUEST['bio']) ? $bio = $_REQUEST['bio'] : $bio = $data['bio'];
+        !empty($_REQUEST['bio']) ? $bio = $_REQUEST['bio'] : $bio = null;
 
         // create a new row with the inherited and modified informaiton //
         $status = 1;
         if($phoneNumber != null){
+            
             $reqInsert = $this->_connection->prepare("INSERT INTO users (uid, first_name, last_name, email, password, dob, gender, languages, bio, phone_number, profile_img, is_active, date_created)
             VALUES ( :inuid, :infirst, :inlast, :inemail, :inpassword, :indob, :ingender, :inlanguages, :inbio, :inphoneNumber, :inprofileImg, :inactiveStatus, '$dateCreated') ");
 
