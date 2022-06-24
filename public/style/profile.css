@@ -35,7 +35,6 @@
     object-position: center;
 }
 
-
 .profileFormsBorder {
     border: 2px solid var(--profile-border-color);
     border-radius: 1.25rem;
@@ -230,7 +229,12 @@
     /* align-items: center; */
 }
 
-/* =============== */
+.profileFormsBorder{
+    border: 2px solid var(--profile-border-color);
+    border-radius: 20px;
+    padding: 30px;
+}
+
 /*  profile photo  */
 /* =============== */
 
