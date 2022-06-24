@@ -17,11 +17,6 @@ function checkSignIn($params){
     $signIn->checkSignIn($params['email'], $params['password']);
 }
 
-function verifyEmail($params){
-    $email = new UserManager();
-    $email->verifyEmail($params['email']);
-}
-
 function signOut(){
     $signOut = new UserManager();
     $signOut->signOut();
