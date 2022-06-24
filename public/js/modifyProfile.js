@@ -75,6 +75,32 @@ for (i = 0; i < languages.length; i++) {
 // });
 
 
+for (i = 0; i < languages.length; i++) {
+    if(languages[i].checked) {
+        langArray.push(languages[i].value);
+    }
+    languages[i].addEventListener('change', (e) => {
+        if (e.target.checked) {
+            langArray.push(e.target.value);
+        } else if (!e.target.checked) {
+            langArray = langArray.filter(lang => lang != e.target.value);
+        }
+        userLang.value = langArray;
+    })
+}
+
+
+// languages.addEventListener('change', (e) => {
+//     for (i = 0; i < options.length; i++) {
+//         if(options[i].id === e.target.value) {
+//             options[i].setAttribute('disabled', 'disabled');
+//             langArray.push(e.target.value);
+//         }
+//     }
+//     userLang.value = langArray;
+// });
+
+
 
 // frontend checking for the phone number //
 // =======================================//
