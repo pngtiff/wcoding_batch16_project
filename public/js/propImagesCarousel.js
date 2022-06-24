@@ -1,5 +1,3 @@
-let slideIndex = 1;
-showSlides(slideIndex);
 
 function plusSlides(n) {
   showSlides(slideIndex += n);
@@ -25,16 +23,10 @@ function showSlides(n) {
   dots[slideIndex-1].className += " active";
 }
 
-function showAllPropPhotos() {
-    let propModal = document.querySelector("propPhotosModal");
-    
-
-}
+let slideIndex = 1;
+showSlides(slideIndex);
 
 
-document.getElementsByClassName("allPropPhotos").addEventListener("click", function(e) { 
-	e.preventDefault()
-	showAllPropPhotos();
-	modalBox.style.display = "block";
-	setTimeout(opacity, 50, 1, modalBox);
-})
+
+
+

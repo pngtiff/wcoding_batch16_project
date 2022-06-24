@@ -238,14 +238,14 @@ class UserManager extends Manager
         header('Location:index.php');
     }
 
-    //view
+
     public function getUserInfo()
     {
         $req = $this->_connection->prepare('SELECT * FROM users WHERE uid = ? AND is_active = 1');
         $req->execute(array($this->_user_id));
         $user = $req->fetch(\PDO::FETCH_ASSOC);
         $req->closeCursor();
-        $languages = explode(',', $user['languages']);
+        $languages = explode(',', $user['languages'] ?? "");
         foreach ($languages as &$language) {
             $language = $this->getLangauges($language);
         }
@@ -273,6 +273,7 @@ class UserManager extends Manager
         $dateCreated = $data['date_created'];
         $phoneNumber = $data['phone_number'];
         $bio = $data['bio'];
+        $profileImg = $data['profile_img'];
         
         // ============Update profile phpto ========//
         // Get file info
@@ -284,7 +285,12 @@ class UserManager extends Manager
             $bytes = bin2hex(random_bytes(16)); // generates secure pseudo random bytes and bin2hex converts to hexadecimal string
             $imgName = $bytes . "." . $extension;
             move_uploaded_file($fileLocation, "./profile_images/" . $imgName);
-        } else {
+            
+        }
+        else if($profileImg){
+            $imgName = $profileImg;
+        }
+        else {
             $imgName = null;
         }
         
@@ -325,7 +331,7 @@ class UserManager extends Manager
             $reqInsert->bindParam("inphoneNumber", $phoneNumber, \PDO::PARAM_STR);
             $reqInsert->bindParam("inbio", $bio, \PDO::PARAM_STR);
             $reqInsert->bindParam("inactiveStatus", $status, \PDO::PARAM_INT);
-            $reqInsert->bindParam("inprofileImg", $filePath, \PDO::PARAM_STR);
+            $reqInsert->bindParam("inprofileImg", $imgName, \PDO::PARAM_STR);
             
             // insert inherited from the previous data
             $reqInsert->bindParam("inuid", $uid, \PDO::PARAM_STR);
