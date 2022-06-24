@@ -138,7 +138,6 @@ try {
             }
             break;
         default:
-            //////// If logged in : Load user data for profile picture, if not, load without user data///
             getLanding();
             break;
     }
