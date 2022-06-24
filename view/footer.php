@@ -4,7 +4,7 @@
             <p>23, SeonYu-Ro 49-gil, Suite 1101</p>
             <p>YeongDeungPo-Gu, Seoul, South Korea</p>
             <p>02-123-4567</p>
-            <a href="#"><p>info@room-ez.com</p></a>
+            <a href="mailto:info@room-ez.com"><p>info@room-ez.com</p></a>
             <a href="#"><i class="fa-brands fa-facebook-f"></i></a>        
             <a href="#"><i class="fa-brands fa-instagram-square"></i></i></a>        
             <a href="#"><i class="fa-brands fa-twitter"></i></a> 
