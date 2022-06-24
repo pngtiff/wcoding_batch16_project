@@ -18,7 +18,7 @@ class PropertyManager extends Manager
     public function getProperties($action = '')
     {
         if ($action == 'profile') {
-            $req = $this->_connection->prepare("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.city, p.address1, p.address2, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.img_url AS p_img, pi.description AS image_description
+            $req = $this->_connection->prepare("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.city, p.address1, p.address2, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
             FROM properties p
             LEFT JOIN property_types pt
             ON p.property_type_id = pt.id
@@ -31,7 +31,7 @@ class PropertyManager extends Manager
             $req->bindParam('uid', $_REQUEST['user']);
             $req->execute();
         } else {
-            $req = $this->_connection->query("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.city, p.address1, p.address2, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.img_url AS p_img, pi.description AS image_description
+            $req = $this->_connection->query("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.city, p.address1, p.address2, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
             FROM properties p
             LEFT JOIN property_types pt
             ON p.property_type_id = pt.id
@@ -46,13 +46,18 @@ class PropertyManager extends Manager
         $properties = $req->fetchAll(\PDO::FETCH_ASSOC);
 
         $req->closeCursor();
+        foreach($properties as &$property) {
+            $property['country'] = $this::COUNTRIES['KR'];
+            $property['province_state'] = $this::PROVINCES['KR'][$property['province_state']];
+            $property['city'] = !empty($this::CITIES[$property['province_state']][$property['city']]) ? $this::CITIES[$property['province_state']][$property['city']] : '';
+          }
         return $properties;
     }
 
     // Single property detail for property listing page
     public function getProperty($propId)
     {
-        $req = $this->_connection->prepare("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.city, p.address1, p.address2, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.img_url AS p_img, pi.description AS image_description
+        $req = $this->_connection->prepare("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.city, p.address1, p.address2, p.room_num, p.bed_num, p.bath_num, p.is_furnished, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
         FROM properties p
         LEFT JOIN property_types pt
         ON p.property_type_id = pt.id
@@ -75,13 +80,24 @@ class PropertyManager extends Manager
             $_SESSION['uid'] = $data['uid'];
             $_SESSION['user_uid'] = $propDetails[0]['user_uid'];
         }
-
+        $propDetails[0]['province_state'] = $this::PROVINCES['KR'][$propDetails[0]['province_state']];
+        $propDetails[0]['city'] = $this::CITIES[$propDetails[0]['province_state']][$propDetails[0]['city']];
         return $propDetails;
+    }
+
+    public function getPropertyOwner($propId)
+    {
+        $req = $this->_connection->prepare("SELECT u.uid, u.first_name, u.profile_img, p.user_uid FROM users u JOIN properties p ON u.uid = p.user_uid WHERE p.id = :propId");
+        $req->bindParam('propId', $propId);
+        $req->execute();
+        $propOwner = $req->fetch(\PDO::FETCH_ASSOC);
+        $req->closeCursor();
+        return $propOwner;
     }
 
     public function modifyProperty($propId)
     {
-        $req = $this->_connection->prepare("SELECT p.post_title, p.room_num, p.bed_num, p.bath_num, p.is_furnished, p.room_type_id, p.monthly_price_won, p.description, p.bank_account_num, p.validation, rt.room_type AS r_type, pi.img_url AS p_img, pi.description AS image_description
+        $req = $this->_connection->prepare("SELECT p.post_title, p.room_num, p.bed_num, p.bath_num, p.is_furnished, p.room_type_id, p.monthly_price_won, p.description, p.bank_account_num, p.validation, rt.room_type AS r_type, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
         FROM properties p
         LEFT JOIN property_types pt
         ON p.property_type_id = pt.id
@@ -106,16 +122,17 @@ class PropertyManager extends Manager
 
     // SEARCH FUNCTION : $search = "search" get parameter called from router
 
-    public function searchProperties($search, $rangeMin, $rangeMax, $propertyType, $roomType)
+    public function searchProperties($province, $city, $rangeMin, $rangeMax, $propertyType, $roomType)
     {
 
-        $search = ($search == "anywhere") ? "%%" : $search; //// If search input is empty, show all results ("%%" is regex that catches any string)
+        $province = ($province == "any") ? "%%" : $province-1; //// If search input is empty, show all results ("%%" is regex that catches any string)
+        $city = ($city == "any") ? "%%" : $city-1; //// If search input is empty, show all results ("%%" is regex that catches any string)
         $rangeMin = ($rangeMin == "any") ? 0 : $rangeMin;
-        $rangeMax = ($rangeMax == "any") ? 1000000000 : $rangeMax; /// default number large enough to catch all properties
+        $rangeMax = (($rangeMax == "any") OR ($rangeMax > 1000000)) ? 10000000 : $rangeMax; /// default number large enough to catch all properties
         $propertyType = ($propertyType == "any") ? "%%" : $propertyType;
         $roomType = ($roomType == "any") ? "%%" : $roomType;
 
-        $req = $this->_connection->prepare("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.city, p.address1, p.address2, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.img_url AS p_img, pi.description AS image_description
+        $req = $this->_connection->prepare("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.city, p.address1, p.address2, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
         FROM properties p
         LEFT JOIN property_types pt
         ON p.property_type_id = pt.id
@@ -123,9 +140,10 @@ class PropertyManager extends Manager
         ON p.room_type_id = rt.id
         LEFT JOIN property_imgs pi
         ON p.id = pi.property_id
-        WHERE p.is_active = 1 AND (city LIKE :inSearch OR province_state LIKE :inSearch) AND monthly_price_won >= :inRangeMin AND monthly_price_won <= :inRangeMax AND property_type_id LIKE :inPropertyType AND room_type_id LIKE :inRoomType
+        WHERE p.is_active = 1 AND (p.city LIKE :inCity AND p.province_state LIKE :inProvince) AND monthly_price_won >= :inRangeMin AND monthly_price_won <= :inRangeMax AND property_type_id LIKE :inPropertyType AND room_type_id LIKE :inRoomType
         GROUP BY pi.property_id");
-        $req->bindParam('inSearch', $search);
+        $req->bindParam('inCity', $city);
+        $req->bindParam('inProvince', $province);
         $req->bindParam('inRangeMin', $rangeMin);
         $req->bindParam('inRangeMax', $rangeMax);
         $req->bindParam('inPropertyType', $propertyType);
@@ -153,6 +171,13 @@ class PropertyManager extends Manager
         // }
 
         $req->closeCursor();
+        foreach($properties as &$property) {
+            $property['country'] = $this::COUNTRIES['KR'];
+            $property['province_state'] = $this::PROVINCES['KR'][$property['province_state']];
+            $property['city'] = !empty($this::CITIES[$property['province_state']][$property['city']]) ? $this::CITIES[$property['province_state']][$property['city']] : '';
+          }
+        $_REQUEST['province'] = $province != '%%' ? $this::PROVINCES['KR'][$province] : 'anywhere';
+        $_REQUEST['city'] = ($city != '%%' AND !empty($this::CITIES[$_REQUEST['province']][$city])) ? $this::CITIES[$_REQUEST['province']][$city] : '';
 
         return $properties;
     }
@@ -161,114 +186,70 @@ class PropertyManager extends Manager
     {
         $uid = $this->_connection->query("SELECT uid FROM users WHERE email='{$_SESSION['email']}'")->fetch(\PDO::FETCH_ASSOC)['uid'];
         // INFO validation
-        if (strlen($title) < 50) {
-            $title = strip_tags($title);
-        } else {
-            throw (new Exception('Title is too long'));
-        }
         // Address
-        if ($this::COUNTRIES[$country]) {
-            $country =  $country;
-        } else {
-            throw (new Exception('This country is not supported'));
-        }
-        if ($this::PROVINCES[$country][$province - 1]) {
-            $province = $province - 1;
-        } else {
-            throw (new Exception('Province/State is not found'));
-        }
-
-        if ($city >= 0) {
-            if ($this::CITIES[$this::PROVINCES[$country][$province]][$city - 1]) {
-                $city = $city - 1;
-            } else {
-                throw (new Exception('City is not found'));
-            }
-        } else {
-            $city = -1;
-        }
-        if ($district >= 0) {
-            if ($this::DISTRICTS[$this::CITIES[$this::PROVINCES[$country][$province]][$city]][$district - 1]) {
-                $district = $district - 1;
-            } else {
-                throw (new Exception('City is too long'));
-            }
-        } else {
-            $district = -1;
-        }
-        if (strlen($address1) < 256) {
+        if (strlen($title) < 50)
+            $title = strip_tags($title);
+        else 
+            throw(new Exception('Title is too long'));
+        if (empty($this::COUNTRIES[$country]))
+            throw(new Exception('This country is not supported')) ;
+        if (empty($this::PROVINCES[$country][$province-1]))
+            throw(new Exception('Province/State is not found'));
+        else 
+            $province-=1; 
+        if ($city >= 0 AND empty($this::CITIES[$this::PROVINCES[$country][$province]][$city-1]))
+            $city-=1;
+        else if ($city < -1) 
+            throw(new Exception('City is not found'));
+        if ($district >= 0 AND (empty($this::DISTRICTS[$this::CITIES[$this::PROVINCES[$country][$province]][$city]][$district-1])))
+            $district-=1;
+        else if ($district<-1) 
+            throw(new Exception('City is too long'));
+        if (strlen($address1) < 256)
             $address1 = strip_tags($address1);
-        } else {
-            throw (new Exception('Address1 is too long'));
-        }
-        if (strlen($address2) < 256) {
+        else
+            throw(new Exception('Address1 is too long'));
+        if (strlen($address2) < 256)
             $address2 = strip_tags($address2);
-        } else {
-            throw (new Exception('Address2 is too long'));
-        }
-        if (strlen($zipcode) < 11) {
+        else
+            throw(new Exception('Address2 is too long'));
+        if (strlen($zipcode) < 11)
             $zipcode = strip_tags($zipcode);
-        } else {
-            throw (new Exception('Zipcode is too long'));
-        }
-        // Property Info
-        if ($propertyType > 0 and $propertyType < 7) {
-            $propertyType = $propertyType;
-        } else {
-            throw (new TypeError("Invalid property type"));
-        }
-        if ($roomType > 0 and $roomType < 5) {
-            $roomType = $roomType;
-        } else {
-            throw (new TypeError("Invalid room type"));
-        }
-        if ($roomNum > 0 and $roomNum < 100) {
-            $roomNum = $roomNum;
-        } else {
-            throw (new TypeError("Invalid room number"));
-        }
+        else
+            throw(new Exception('Zipcode is too long'));
+        if ($propertyType <= 0 OR $propertyType >= 7)
+            throw(new TypeError("Invalid property type"));
+        if ($roomType <= 0 OR $roomType >= 5)
+            throw(new TypeError("Invalid room type"));
+        if ($roomNum <= 0 OR $roomNum >= 100)
+            throw(new TypeError("Invalid room number"));
         $furnished = $furnished ? 1 : null;
-        if ($furnished) {
-            if ($bedNum < 100) {
-                $bedNum = $bedNum;
-            } else {
-                throw (new TypeError("Invalid bed number"));
-            }
-        } else {
-            0;
+        if ($furnished AND $bedNum >= 100)
+            throw(new TypeError("Invalid bed number")); 
+        else if (!$furnished) {
+            $bedNum = 0;
         }
-        if($bathNum > 0 and $bathNum < 100) {
-            $bathNum = $bathNum;
-        } else {
-            throw (new TypeError("Invalid room number"));
-        }
-        if($size > 0 and $size < 10000) {
-            $size = $size;
-        } else {
-            throw (new TypeError("Invalid size"));
-        }
-        if($price > 0) {
-            $price = $price;
-        } else {
-            throw (new TypeError("Invalid price"));
-        }
+        if ($bathNum <= 0 OR $bathNum >= 100)
+            throw(new TypeError("Invalid room number"));
+        if ($size <= 0 OR $size >= 10000)
+            throw(new TypeError("Invalid size"));
+        if ($price <= 0)
+            throw(new TypeError("Invalid price"));
         $description = strip_tags($description);
-        if(strlen($bankAccNum) < 21) {
+        if (strlen($bankAccNum) < 21)
             $bankAccNum = strip_tags($bankAccNum);
-        } else {
-            throw (new Exception('Bank Account Number is too long'));
-        }
+        else
+            throw(new Exception('Bank Account Number is too long'));
         // Img Check
-        foreach ($imgDescriptions as &$desc) {
-            if(strlen($desc) < 256) {
+        foreach($imgDescriptions as &$desc) {
+            if (strlen($desc) < 256) 
                 $desc = htmlspecialchars($desc);
-            } else {
-                throw (new Exception('Bank Account Number is too long'));
-            }
+            else
+                throw(new Exception('Bank Account Number is too long'));
         }
         foreach ($imgs as $file) {
-            if ($file['size'] > 1048576) {
-                throw (new Exception('Image is too big'));
+            if ($file['size'] > 10485760) {
+                throw(new Exception('Image is too big'));
             }
         }
         // Create a folder for the property on the server

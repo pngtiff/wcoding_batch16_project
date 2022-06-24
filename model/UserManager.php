@@ -117,7 +117,7 @@ class UserManager extends Manager
             // If user has a profile they are redirected to main page
             if ($user['dob']) {
                 $_SESSION['uid'] = $user['uid'];
-                $_SESSION['profileImg'] = $user['profile_img'];
+                $_SESSION['profile_img'] = $user['profile_img'];
                 header('Location:index.php');
             } 
             // If user has a profile they are redirected to createProfile page
@@ -239,6 +239,7 @@ class UserManager extends Manager
         $req->bindParam('bio', $bio, \PDO::PARAM_STR);
         $req->bindParam('userImg', $imgName, \PDO::PARAM_STR);
         $req->execute();
+        $_SESSION['profile_img'] = $imgName;
         header('Location:index.php');
     }
 
@@ -298,7 +299,7 @@ class UserManager extends Manager
             $imgName = $bytes . "." . $extension;
             // $folder = "./profile_images/" . $imgName;
             move_uploaded_file($fileLocation, "./profile_images/" . $imgName);
-
+            $_SESSION['profile_img'] = $imgName;
         } 
         else if ($profileImgLocation){
             $imgName = $profileImgLocation;

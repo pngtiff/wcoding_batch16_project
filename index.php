@@ -47,7 +47,7 @@ try {
             //     modifyProperty();
             //     break;
         case 'signUp':
-            if (preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $_POST['email'])  and !empty($_POST['firstName']) and !empty($_POST['lastName']) and !empty($_POST['password']) and !empty($_POST['passwordConfirm']) and $_POST['passwordConfirm'] == $_POST['password'] and preg_match('/^(?=.*[!@#$%^&*-])(?=.*[0-9])(?=.*[A-Z]).{8,20}$/', $_POST['password']) and preg_match('/^[A-Za-z]{2,}$/', $_POST['firstName']) and preg_match('/^[A-Za-z]{2,}$/', $_POST['lastName'])) {
+            if(preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}+$#", $_POST['email'])  AND !empty($_POST['firstName']) AND !empty($_POST['lastName']) AND !empty($_POST['password']) AND !empty($_POST['passwordConfirm']) AND $_POST['passwordConfirm']==$_POST['password'] AND preg_match('/^(?=.*[!@#$%^&*-])(?=.*[0-9])(?=.*[A-Z]).{8,20}$/', $_POST['password']) AND preg_match('/^(?![\s.]+$)[A-Z\-a-z\s.]{2,}$/', $_POST['firstName'])AND preg_match('/^(?![\s.]+$)[A-Z\-a-z\s.]{2,}$/', $_POST['lastName'])) {
                 signUp($_REQUEST);
             }
             break;
@@ -75,6 +75,10 @@ try {
             
             //Search//
         case 'search':
+            $_REQUEST['province'] = !empty($_REQUEST['province']) ? strip_tags($_REQUEST['province']) : 'any';
+            $_REQUEST['province'] = $_REQUEST['province'] == -1 ? 'any' : $_REQUEST['province'];
+            $_REQUEST['city'] = !empty($_REQUEST['city']) ? strip_tags($_REQUEST['city']) : 'any';
+            $_REQUEST['city'] = $_REQUEST['city'] == -1 ? 'any' : $_REQUEST['city'];
             search($_REQUEST);
             break;
         case 'postProperty': 
@@ -109,7 +113,7 @@ try {
             
             break;
         case 'viewPostProperty':
-            if ($_SESSION['email']) {
+            if (!empty($_SESSION['email'])) {
                 viewPostProperty();
             }
             break;

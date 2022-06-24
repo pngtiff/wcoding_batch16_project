@@ -3,7 +3,7 @@
     if(count($properties)>0){
         ?>
         
-        <h2>Search Results for <?= $_REQUEST['search'] ?></h2>
+        <h2>Search Results for <?php echo $_REQUEST['province'].(!empty($_REQUEST['city']) ? ", {$_REQUEST['city']}" : '');?></h2>
         <div id='propertiesSearchList'>
             <?php
             foreach($properties as $property)
@@ -15,6 +15,6 @@
     <?php
     }else {
         ?>
-        <p>No Search Results Yet for <b><?= $_REQUEST['search'] ?></b> with the Selected Filters ! Try to expand your Search.</p>
+        <p>No Search Results Yet for <b><?php echo $_REQUEST['province'].(!empty($_REQUEST['city']) ? ", {$_REQUEST['city']}" : '');?></b> with the Selected Filters ! Try to expand your Search.</p>
         <?php
     } ?>
