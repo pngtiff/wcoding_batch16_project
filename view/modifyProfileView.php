@@ -11,7 +11,7 @@
             
             <div id = "photoContainerM">
                 <div id = "profilePhotoM">
-                    <img id = "photoM" src= "<?php if($_SESSION['folder']) {echo $_SESSION['folder'];} else { echo $_SESSION['profileImgLocation'];}?>"/>
+                    <img id = "photoM" src= "./profile_images/<?= $data['profile_img']?>"/>
                     <input type="file" id = "fileM" name = "uploadFile">
                     <label for="fileM" id = "uploadButtonM">Choose Photo</label>
                     <input type="hidden" name="action" value="uploadImg">
@@ -26,7 +26,7 @@
                         <span id="alertMesg">Please Check Your Phone Number</span>
                     </div>
                     <div>
-                        <input type="text" id="phoneNumber" class="box" name="phoneNumber" value = "<?php print_r($_SESSION['phoneNumber']);?>">
+                        <input type="text" id="phoneNumber" class="box" name="phoneNumber" value = "<?=$data['phone_number'];?>">
                     </div>
                 </div>
     
@@ -57,7 +57,7 @@
             </div>
             
             <div class = "bottomContainerM">
-                <input type="textarea" id="userBio" class="box" name="bio" value = "<?php print_r($_SESSION['bio']);?>">
+                <input type="textarea" id="userBio" class="box" name="bio" value = "<?= $data['bio']?>">
             </div>
 
             <div class = "bottomContainerM">

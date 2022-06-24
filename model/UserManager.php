@@ -35,7 +35,7 @@ class UserManager extends Manager
             $_SESSION['firstName'] = $userInfo['first_name'];
             $_SESSION['email'] = $email;
             $_SESSION['uid'] = $userInfo['uid'];
-            $_SESSION['profile_img'] = './profile_images/'.$userInfo['profile_img'];
+            $_SESSION['profile_img'] = $userInfo['profile_img'];
 
             if ($userInfo['dob']) {
                 // checking dob when signing in. dob is mandatory submission so
@@ -112,16 +112,25 @@ class UserManager extends Manager
         $user = $res->fetch(\PDO::FETCH_ASSOC);
         $_SESSION['firstName'] = $response->given_name;
         $_SESSION['email'] = $response->email;
-        // If user signed up they are redirected to the main page
+        // If user had signed in before 
         if ($user) {
-            $_SESSION['uid'] = $user['uid'];
-            $_SESSION['profileImg'] = $user['profile_img'];
-            header('Location:index.php');
-            // Else they are redirected to createProfile page
+            // If user has a profile they are redirected to main page
+            if ($user['dob']) {
+                $_SESSION['uid'] = $user['uid'];
+                $_SESSION['profile_img'] = $user['profile_img'];
+                header('Location:index.php');
+            } 
+            // If user has a profile they are redirected to createProfile page
+            else {
+                $uid = $this->createUID();
+                $_SESSION['uid'] = $uid;
+                $this->_connection->exec("INSERT INTO users (email, first_name, last_name, uid) VALUES ('$response->email','$response->given_name','$response->family_name', '$uid')");
+                header('Location:index.php?action=createProfile');
+            }
+        // Else they are redirected to createProfile page
         } else {
             $uid = $this->createUID();
             $_SESSION['uid'] = $uid;
-            $_SESSION['profileImg'] = $response->picture;
             $this->_connection->exec("INSERT INTO users (email, first_name, last_name, uid) VALUES ('$response->email','$response->given_name','$response->family_name', '$uid')");
             header('Location:index.php?action=createProfile');
         }
@@ -133,7 +142,7 @@ class UserManager extends Manager
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($_FILES['uploadFile']['name'], PATHINFO_EXTENSION));
         if ($_FILES['uploadFile']['name']) {
-            if ($_FILES['uploadFile']['size'] > 500000 or ($imageFileType != "jpg" and $imageFileType != "png" and $imageFileType != "jpeg" and $imageFileType != "webp")) {
+            if ($_FILES['uploadFile']['size'] > 500000 or ($imageFileType != "JPG" and $imageFileType != "jpg" and $imageFileType != "png" and $imageFileType != "JPEG" and $imageFileType != "jpeg" and $imageFileType != "webp")) {
                 $uploadOk = 0;
             }   
         }
@@ -204,7 +213,8 @@ class UserManager extends Manager
     // creates new user profile that will be inserted into users table
     public function newProfile()
     {
-        $phoneNum = strval(strip_tags(str_replace('-', '', str_replace(' ', '', $_REQUEST['phoneNum']))));
+        $specialChar = array(' ', '-');
+        $phoneNum = strval(strip_tags(str_replace($specialChar, '', $_REQUEST['phoneNum'])));
         $dob = strip_tags($_POST['year']) . '-' . strip_tags($_POST['month']) . '-' . strip_tags($_POST['day']);
         $gender = strip_tags($_POST['gender']);
         $language = strip_tags($_REQUEST['userLang']);
@@ -217,6 +227,7 @@ class UserManager extends Manager
             $bytes = bin2hex(random_bytes(16)); // generates secure pseudo random bytes and bin2hex converts to hexadecimal string
             $imgName = $bytes . "." . $extension;
             move_uploaded_file($fileLocation, "./profile_images/" . $imgName);
+
         } else {
             $imgName = null;
         }
@@ -228,6 +239,7 @@ class UserManager extends Manager
         $req->bindParam('bio', $bio, \PDO::PARAM_STR);
         $req->bindParam('userImg', $imgName, \PDO::PARAM_STR);
         $req->execute();
+        $_SESSION['profile_img'] = $imgName;
         header('Location:index.php');
     }
 
@@ -253,27 +265,18 @@ class UserManager extends Manager
         return $user;
     }
     
-    public function displayDefaultInfo(){
-        $req = $this->_connection->prepare("SELECT * FROM users WHERE uid ='{$_SESSION['uid']}' AND is_active = 1");
-        $req->execute();
-        $info = $req->fetch(\PDO::FETCH_ASSOC);
-        $phoneNum = $info['phone_number'];
-        $bio = $info['bio'];
-        $last_online = $info['last_online'];
-
-        $_SESSION['phoneNumber'] = $phoneNum;
-        $_SESSION['bio'] = $bio;
-        $_SESSION['last_online'] = $last_online;
-    }
-    
-
-    public function updateUserData()
+    public function viewUserData()
     {
-        //copy the information of the current profile//
+        //view the information of the current profile//
         $req = $this->_connection->prepare("SELECT * FROM users WHERE uid ='{$_SESSION['uid']}' AND is_active = 1");
         $req->execute();
-        
         $data = $req->fetch(\PDO::FETCH_ASSOC);
+
+        return $data;
+    }
+
+    public function updateUserData($data)
+    {
         
         $uid = $data['uid'];
         $firstName = $data['first_name'];
@@ -286,26 +289,24 @@ class UserManager extends Manager
         $profileImgLocation = $data['profile_img'];
         $phoneNumber = $data['phone_number'];
         $bio = $data['bio'];
-        
-        // ============Update profile phpto ========//
+        // ============Update profile photo ========//
         // Get file info
         if (!empty($_FILES["uploadFile"]["name"])) {
-            $fileName = $_FILES["uploadFile"]["name"];
+            $fileName = pathinfo($_FILES["uploadFile"]["name"]);
+            $extension  = $fileName['extension'];
             $fileLocation = $_FILES["uploadFile"]["tmp_name"];
-            // $bytes = bin2hex(random_bytes(16));
-            // $newName = rename($fileName, $bytes);
-            $folder = "./public/images/profile_images/" . basename($fileName);
-            move_uploaded_file($fileLocation, $folder);
+            $bytes = bin2hex(random_bytes(16)); // generates secure pseudo random bytes and bin2hex converts to hexadecimal string
+            $imgName = $bytes . "." . $extension;
+            // $folder = "./profile_images/" . $imgName;
+            move_uploaded_file($fileLocation, "./profile_images/" . $imgName);
 
-        } else if ($profileImgLocation){
-            $folder = $profileImgLocation;
+        } 
+        else if ($profileImgLocation){
+            $imgName = $profileImgLocation;
         } else{
-            throw(new Exception('Failed to upload a file'));
+            $imgName = null;
         }
 
-        // session variable to change the profile image displayed
-        $_SESSION['profileImgLocation'] = $profileImgLocation;
-        $_SESSION['folder'] = $folder;
         
         // update is_active status from 1 -> 0 =====//
         //==========================================//
@@ -344,7 +345,7 @@ class UserManager extends Manager
             $reqInsert->bindParam("inphoneNumber", $phoneNumber, \PDO::PARAM_STR);
             $reqInsert->bindParam("inbio", $bio, \PDO::PARAM_STR);
             $reqInsert->bindParam("inactiveStatus", $status, \PDO::PARAM_INT);
-            $reqInsert->bindParam("inprofileImg", $folder, \PDO::PARAM_STR);
+            $reqInsert->bindParam("inprofileImg", $imgName, \PDO::PARAM_STR);
             
             // insert inherited from the previous data
             $reqInsert->bindParam("inuid", $uid, \PDO::PARAM_STR);
@@ -358,7 +359,7 @@ class UserManager extends Manager
             $reqInsert->execute();
         }
         else{
-            throw(new Exception('Wrong phone number format'));
+            throw(new Exception('Phone cannot be Null !'));
         }
         
     }
