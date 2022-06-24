@@ -31,7 +31,7 @@
             </div>
     
             <div class="services">
-                <a href="#searchBar"><h3>Services</h3></a>  
+                <!-- <a href="#searchBar"><h3>Services</h3></a>   -->
                 <!--click services to go to search bar  -->
             </div>
     

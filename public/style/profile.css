@@ -242,6 +242,7 @@
     position: relative;
     overflow: hidden;
     margin-top: 1em;
+    z-index: -1;
 }
 
 #photoM{
