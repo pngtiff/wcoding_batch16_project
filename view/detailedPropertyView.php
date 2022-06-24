@@ -60,18 +60,16 @@
 
 <!-- All property photos modal -->
 <div class="photoModalContainer">
-    <div class="photoModal">
-        <button id="photoModalClose">Close</button>
+    
+    <div class="innerContainer">
+        <button class="pModalCloseButton">Close</button>
         <!-- this grabs the related photos -->
         <div class="imgGrid">
             <?php include('allPropertyImg.php');?> 
         </div>
-        
-        <div class="propImgGallery">
-                
-        </div>
-
     </div>
+
+    
 </div>
 
 <script src="./public/js/propImagesCarousel.js"></script>

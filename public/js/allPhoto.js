@@ -1,6 +1,6 @@
 const viewOpenButton = document.querySelector(".allPropPhotos");
 const photoModalContianer = document.querySelector(".photoModalContainer");
-const viewCloseButton = document.querySelector("#photoModalClose");
+const viewCloseButton = document.querySelector(".pModalCloseButton");
 const propertyImg = document.getElementsByClassName("allPropImgContainer");
 
 
@@ -19,5 +19,5 @@ viewCloseButton.addEventListener("click", function(e) {
 });
 
 propertyImg.addEventListener("click", function(e){
-    
+
 });
