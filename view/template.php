@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="public/style/indexView.css">
     <link rel="stylesheet" href="public/style/header.css">
     <link rel="stylesheet" href="public/style/footer.css">
-    <!-- <script src="https://accounts.google.com/gsi/client"></script> -->
+    <link rel="stylesheet" href="public/style/postProperty.css">
     <script src="https://kit.fontawesome.com/949df75f70.js" crossorigin="anonymous"></script>
 
 </head>

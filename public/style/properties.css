@@ -101,6 +101,7 @@
     transition: 0.6s ease;
     border-radius: 0 3px 3px 0;
     user-select: none;
+    text-shadow: 2px 2px 4px #717171;
 }
 
 .next {
@@ -154,14 +155,14 @@
     align-items: center;
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.3);
-    z-index: 100;
+    z-index: 1000;
     opacity: 0;
     pointer-events: none;
 }
 
 .photoModal{
-    width: 80%;
-    height: 70%;
+    width: 90%;
+    height: 90%;
     max-width: 100%;
     background-color: white;
     border: 1px solid black;
@@ -170,6 +171,7 @@
     align-items: center;
     /* justify-content: center; */
     border-radius: 15px;
+    overflow-y: scroll;
 }
 
 .imgGrid{
@@ -177,17 +179,29 @@
     --num-cols: 4;
     --row-height: 300px;
 
+    box-sizing: border-box;
+    padding: var(--gap);
+
+    display: grid;
+    grid-template-columns: repeat(var(--num-cols), 1fr);
     grid-auto-rows: var(--row-height);
     gap: var(--gap);
 
     width: 100%;
-    display: grid;
-    justify-content: space-around;
 }
 
 .allPropImg{
-    width: 250px;
-    height: 200px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.col2{
+grid-column: span 2;
+}
+
+.row2{
+grid-row: span 2;
 }
 
 #photoModalClose{
@@ -220,6 +234,7 @@ grid-auto-rows: var(--row-height);
 gap: var(--gap);
 } */
 
+/* 
 .image-grid > img {
 width: 100%;
 height: 100%;
@@ -234,11 +249,32 @@ grid-column: span 2;
 grid-row: span 2;
 }
 
-/* Anything udner 1024px */
+
 @media screen and (max-width: 1024px) {
 .image-grid {
     --num-cols: 2;
     --row-height: 200px;
 }
+} */
+
+/* ============== */
+
+.propOwnerInfo {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #000;
 }
 
+.propOwnerIcon {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.propOwnerIcon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}

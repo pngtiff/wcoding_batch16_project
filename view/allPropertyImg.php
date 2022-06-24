@@ -1,8 +1,7 @@
 <?php
 for($i=0; $i<count($propDetails); $i++) {?>
-    <div class="allPropImgContainer">
-        <img class="allPropImg" src="<?= $propDetails[$i]['p_img'];?>" alt="<?= $propDetails[$i]['image_description'];?>">
-        
+    <div class="allPropImgContainer<?=$i+1?>">
+        <img class="allPropImg clo2 row2" src="<?= "./public/images/property_images/{$propDetails[$i]['p_id']}/{$propDetails[$i]['p_img']}";?>" alt="<?= $propDetails[$i]['image_description'];?>">
     </div>
     <?php 
 };

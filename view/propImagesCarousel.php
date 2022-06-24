@@ -1,7 +1,7 @@
 <?php
 for($i=0; $i<count($propDetails); $i++) {?>
     <div class="propImgSlides">
-        <img src="<?= $propDetails[$i]['p_img'];?>" alt="<?= $propDetails[$i]['image_description'];?>">
+        <img src="<?= "./public/images/property_images/{$propDetails[$i]['p_id']}/{$propDetails[$i]['p_img']}";?>" alt="<?= $propDetails[$i]['image_description'];?>">
         <div class="propImgDesc"><?=$propDetails[$i]['image_description'];?></div>
     </div>
     <?php 

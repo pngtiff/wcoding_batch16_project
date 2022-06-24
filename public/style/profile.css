@@ -4,7 +4,7 @@
     --white-color: white;
     --black-color: black;
     --gray-color: gray;
-    --profile-border-color: #FFBD00; 
+    --profile-border-color: #B0E0E6; 
     --red-color: red;
     --green-color: green;
 
@@ -16,7 +16,7 @@
     margin-bottom: 5rem;
 }
 
-#userImgContainer, #profilePhoto {
+#userImgContainer, #profilePhoto, #profilePhoto div{
     height: 10rem;
     width: 10rem;
     position: absolute;
@@ -52,6 +52,7 @@
 
 #profilePhoto {
     margin: 1.25rem 0;
+    z-index: -2;
 }
 
 #profilePhoto div {
@@ -100,15 +101,49 @@
     width: 5rem;
 }
 
-#language {
-    width: 15.5rem;
-    padding: 0.25rem 0.5rem;
-    font-size: 1rem;
+.multi-selector{
+    width: max-content;
+}
+.select-field{
+    border: 1px solid rgb(187, 187, 187);
+    border-radius: 0.25rem;
+}
+.select-field,.lang,.list{
+    width: 100%;
+    background-color: white;
+    padding: 0.3rem;
+}
+.list{
+    box-shadow: 0 30px 60px rgb(0,0,0,0.2);
+    display: none;
+}
+.down-arrow{
+    font-size: 1.2rem;
+    display: inline-block;
+    cursor: pointer;
+    transition: 0.2s linear;
+}
+.lang{
+    display: block;
+    padding-left: 0;
+}
+.lang span{
+    float: right;
+    font-size: 0.6rem;
+    padding-top: 6px;
+}
+.lang:hover{
+    background-color: aliceblue;
+}
+.show{
+    display: block;
+}
+.rotate180{
+    transform: rotate(-180deg);
 }
 
-#langDetails span {
-    display: block;
-    font-size: 0.8rem;
+#line1 p {
+    color: red;
 }
 
 #bio, #userBio {

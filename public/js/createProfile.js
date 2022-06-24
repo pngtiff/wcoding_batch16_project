@@ -38,8 +38,7 @@ let years = document.querySelector('#year');
 let months = document.querySelector('#month');
 let days = document.querySelector('#day');
 let gender = document.querySelector('input[name="gender"]:checked');
-let languages = document.querySelector('#language');
-let options = document.querySelectorAll('#language option');
+let languages = document.querySelectorAll('.list input[type="checkbox"]');
 let langArray = [];
 let userLang = document.querySelector('#userLang');
 let bio = document.querySelector('#bio');
@@ -107,24 +106,29 @@ years.addEventListener('change', () => {
     checkDays();
 })
 
-languages.addEventListener('change', (e) => {
-    for (i = 0; i < options.length; i++) {
-        if(options[i].id === e.target.value) {
-            options[i].setAttribute('disabled', 'disabled');
+document.querySelector('.select-field').addEventListener('click', () => {
+    document.querySelector('.list').classList.toggle('show');
+    document.querySelector('.down-arrow').classList.toggle('rotate180');
+
+});
+
+for (i = 0; i < languages.length; i++) {
+    languages[i].addEventListener('change', (e) => {
+        if (e.target.checked) {
             langArray.push(e.target.value);
+        } else if (!e.target.checked) {
+            langArray = langArray.filter(lang => lang != e.target.value);
         }
-    }
-    userLang.value = langArray;
-})  
+        userLang.value = langArray;
+    })
+}
 
 profileForm.addEventListener('submit', (e) => {
     if (!(validNum || gender.value || userLang.value || bio.value)) {
         e.preventDefault();
-        let alert = document.querySelector('#newProfile p');
+        let alert = document.querySelector('#line1 p');
         if (!alert.textContent) {
-            alert.textContent = "Please fill out all fields";
+            alert.textContent = "Please check that all fields were filled out correctly";
         }
     }
 })
-
-

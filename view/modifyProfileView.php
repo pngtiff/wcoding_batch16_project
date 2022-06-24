@@ -26,7 +26,7 @@
                         <span id="alertMesg">Please Check Your Phone Number</span>
                     </div>
                     <div>
-                        <input type="text" id="phoneNumber" class="box" name="phoneNumber" value = "<?= $data['phone_number']?>">
+                        <input type="text" id="phoneNumber" class="box" name="phoneNumber" value = "<?=$data['phone_number'];?>">
                     </div>
                 </div>
     
