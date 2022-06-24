@@ -33,15 +33,6 @@
     animation: shrink 20s infinite alternate;  
 }
 
-@keyframes shrink {
-    0% {
-      background-size: 120% 120%;
-    }
-    100% {
-      background-size: 100% 100%;
-    }
-}
-
 #slogan {
     position: absolute;
     top: 350px;
@@ -64,10 +55,16 @@
     100% { right: 0; }
 }
 
-#modalBox {
-    z-index: 1000;
+@keyframes shrink {
+    0% {
+      background-size: 120% 120%;
+    }
+    100% {
+      background-size: 100% 100%;
+    }
 }
-  
+
+
  
 
   

@@ -1,0 +1,1 @@
+<div class="toast">You are logged out !</div>

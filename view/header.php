@@ -125,6 +125,7 @@
     </div>
   </div>
 <?php } ?>
+
 </header>
 
 <div class="headerBackgroundColor"></div>

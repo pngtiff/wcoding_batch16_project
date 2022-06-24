@@ -30,6 +30,11 @@ try {
         case 'signOut':
             signOut();
             break;
+        case 'loggedOut':
+            getLanding(0);
+            include("view/toaster.php");
+            // echo('<div class="toast">You are logged out !</div>');
+            break;
         case 'profile':
             showUserInfo($_REQUEST['action'], $_REQUEST['user']);
             break;
