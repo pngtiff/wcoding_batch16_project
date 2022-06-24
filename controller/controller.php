@@ -17,6 +17,11 @@ function checkSignIn($params){
     $signIn->checkSignIn($params['email'], $params['password']);
 }
 
+function verifyEmail($params){
+    $email = new UserManager();
+    $email->verifyEmail($params['email']);
+}
+
 function signOut(){
     $signOut = new UserManager();
     $signOut->signOut();
@@ -35,7 +40,7 @@ function signUp($params) {
 function showUserInfo($action, $userId) {
     $userM = new UserManager($userId);
     $user = $userM->getUserInfo();
-    $data = $userM->viewUserData(); //// for header profile picture - @TODO Get user ID directly from GetUserInfo function to avoid calling 2 functions /// 
+    // $data = $userM->viewUserData(); //// for header profile picture - @TODO Get user ID directly from GetUserInfo function to avoid calling 2 functions /// 
     
     $propertyM = new PropertyManager($userId);
     $properties = $propertyM->getProperties($action);
@@ -60,6 +65,14 @@ function getLanding($userId) {
 function getProperty($propId) {
     $propertyM = new PropertyManager();
     $propDetails = $propertyM->getProperty($propId);
+    $propOwner = $propertyM->getPropertyOwner($propId);
+
+    require('./view/detailedPropertyView.php');
+}
+
+function getPropertyOwner($propId) {
+    $propertyM = new PropertyManager();
+    $propOwner = $propertyM->getPropertyOwner($propId);
 
     require('./view/detailedPropertyView.php');
 }
@@ -102,7 +115,9 @@ function updateLastActive() {
 
 function search($params) {
     $propertyM = new PropertyManager();
-    $properties = $propertyM->searchProperties($params['search'], $params['rangeMin'], $params['rangeMax'], $params['propertyType'], $params['roomType']);
+    $rangeMin = $params["rentRange"] != "any" ? $params['rentRange']-500000 : "any";
+    $rangeMax = $params["rentRange"] != "any" ? $params['rentRange'] : "any";
+    $properties = $propertyM->searchProperties($params['province'], $params['city'], $rangeMin, $rangeMax, $params['propertyType'], $params['roomType']);
     require('./view/searchResultsCard.php');
 }
 function postProperty($params, $imgs) {

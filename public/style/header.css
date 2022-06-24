@@ -247,12 +247,12 @@ header {
     height: 50px;
     font-size: 2rem;
 }
-input[type='search'] { 
-    font-size: 17px;
+#searchBarContainer select { 
+    width: 200px;
+    border: 1px; 
 }
 
-.filter
-{
-    width: 130px;
+#searchBarContainer select.filter {
+    width: 100px;
     border: 1px; 
 }
