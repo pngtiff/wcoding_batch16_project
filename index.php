@@ -51,6 +51,7 @@ try {
                 signUp($_REQUEST);
             }
             break;
+    
 
         case 'createProfile':
             createProfile();
