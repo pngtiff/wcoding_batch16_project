@@ -89,7 +89,8 @@ class UserManager extends Manager
 
         $response = $this->_connection->query("SELECT email, first_name, last_name FROM users WHERE email='$email'");
         if ($response->fetch(\PDO::FETCH_ASSOC)) {
-            header('Location:index.php');
+            // header('Location:index.php');
+        echo "1"; 
         } else {
             $response = $this->_connection->prepare("INSERT INTO users (password, email, first_name, last_name, uid) VALUES (:password, :email, :firstName, :lastName, :uid)");
             $response->bindParam("firstName", $firstName, \PDO::PARAM_STR);

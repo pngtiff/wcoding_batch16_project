@@ -33,7 +33,7 @@
                 <div class="dropdown-content">
                     <a href="view/footer.php/.modal-content">Who are we?</a>
                     <a href="">What do we do?</a>
-                    <a href=".contact">Contact us</a>
+                    <a href="view/footer.php/.contact">Contact us</a>
                 </div>
             </div>
 
