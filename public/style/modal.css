@@ -46,6 +46,7 @@
     z-index: 1;
     /* in order to close by clicking x */
     text-align: center;
+    border-radius: 20px;
 
 }
 
