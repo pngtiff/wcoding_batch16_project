@@ -122,9 +122,7 @@ class UserManager extends Manager
             } 
             // If user has a profile they are redirected to createProfile page
             else {
-                $uid = $this->createUID();
-                $_SESSION['uid'] = $uid;
-                $this->_connection->exec("INSERT INTO users (email, first_name, last_name, uid) VALUES ('$response->email','$response->given_name','$response->family_name', '$uid')");
+                $_SESSION['uid'] = $user['uid'];
                 header('Location:index.php?action=createProfile');
             }
         // Else they are redirected to createProfile page
