@@ -81,8 +81,7 @@ ob_start();?>
             <select name="roomType" id="roomTypePost" >
                 <option value="1">Private room</option>
                 <option value="2">Shared room</option>
-                <option value="3">Shared unit</option>
-                <option value="4">Entire place</option>
+                <option value="3">Entire place</option>
             </select>
             <span class="hide">Select one</span>
         </label>

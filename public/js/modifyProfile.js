@@ -10,8 +10,9 @@ const inputBoxes = document.querySelectorAll('input');
 const alertMesg = document.querySelector('#alertMesg');
 
 // language selection
-let languages = document.querySelector('#language');
-let options = document.querySelectorAll('#language option');
+// let languages = document.querySelector('#language');
+// let options = document.querySelectorAll('#language option');
+let languages = document.querySelectorAll('.list input[type="checkbox"]');
 let langArray = [];
 let userLang = document.querySelector('#userLang');
 
@@ -42,15 +43,34 @@ file.addEventListener('change', function(){
 });
 
 // multi language selection
-languages.addEventListener('change', (e) => {
-    for (i = 0; i < options.length; i++) {
-        if(options[i].id === e.target.value) {
-            options[i].setAttribute('disabled', 'disabled');
-            langArray.push(e.target.value);
-        }
-    }
-    userLang.value = langArray;
+document.querySelector('.select-field').addEventListener('click', () => {
+    document.querySelector('.list').classList.toggle('show');
+    document.querySelector('.down-arrow').classList.toggle('rotate180');
+
 });
+
+
+for (i = 0; i < languages.length; i++) {
+    languages[i].addEventListener('change', (e) => {
+        if (e.target.checked) {
+            langArray.push(e.target.value);
+        } else if (!e.target.checked) {
+            langArray = langArray.filter(lang => lang != e.target.value);
+        }
+        userLang.value = langArray;
+    })
+}
+
+
+// languages.addEventListener('change', (e) => {
+//     for (i = 0; i < options.length; i++) {
+//         if(options[i].id === e.target.value) {
+//             options[i].setAttribute('disabled', 'disabled');
+//             langArray.push(e.target.value);
+//         }
+//     }
+//     userLang.value = langArray;
+// });
 
 
 
