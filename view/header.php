@@ -33,7 +33,7 @@
                 <div class="dropdown-content">
                     <a href="view/footer.php/.modal-content">Who are we?</a>
                     <a href="">What do we do?</a>
-                    <a href=".contact">Contact us</a>
+                    <a href="view/footer.php/.contact">Contact us</a>
                 </div>
             </div>
 
@@ -91,17 +91,17 @@
             <div class="dropdown4">
                 <button class="dropbtn4"><a href="<?= (isset($_SESSION['uid'])) ? "index.php?action=profile&user={$_SESSION['uid']}" : "#" ;?>"><img src="<?= (isset($_SESSION['profile_img'])) ? './profile_images/'.$_SESSION['profile_img'] : "./public/images/defaultProfile.jpg" ?>" alt="defaultPic"></a></button>
                 <div class="dropdown-content4">
-                    <?php echo (!empty($_SESSION['firstName'])) ? '<button id="settingsButton"><a href="#">Settings</a></button>' : '<button id="signUpButton"><a href="#">Register</a></button>'; ?>
-                    <?php echo (!empty($_SESSION['firstName'])) ? '<button id="signOutButton"><a href="index.php?action=signOut">Sign Out</a></button>' : '<button id="signInButton"><a href="#">Sign In</a></button>'; ?>
                     
                     <?php 
                         if (!empty($_SESSION['firstName'])){
                             // echo '<img src="' . $_SESSION['profile_img']. '" width="500px" height="400px">';
                             echo '<a href="index.php?action=profile&user='.$_SESSION['uid'].'">View My Profile</a>';
                             echo '<a href="index.php?action=modifyProfile&user='.$_SESSION['uid'].'">Edit My Profile</a>';
-
+                            
                         }
-                    ?>                    
+                        ?>                    
+                        <?php echo (!empty($_SESSION['firstName'])) ? '' : '<button id="signUpButton"><a href="#">Register</a></button>'; ?>
+                        <?php echo (!empty($_SESSION['firstName'])) ? '<button id="signOutButton"><a href="index.php?action=signOut">Sign Out</a></button>' : '<button id="signInButton"><a href="#">Sign In</a></button>'; ?>
                 </div>
             </div>
         </div>
