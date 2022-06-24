@@ -33,13 +33,13 @@
                 <div class="dropdown-content">
                     <a href="view/footer.php/.modal-content">Who are we?</a>
                     <a href="">What do we do?</a>
-                    <a href=".contact">Contact us</a>
+                    <a href="view/footer.php/.contact">Contact us</a>
                 </div>
             </div>
 
             <form id="searchBarContainer" method="post" action="index.php">
                 <select name="province" id="province"> 
-                    <option selected disabled>Select a Province/Special City</option>
+                    <option selected value="-1">Select a Province/Special City</option>
                     <option value="1">Busan</option>
                     <option value="2">Chungcheongbuk-do</option>
                     <option value="3">Chungcheongnam-do</option>
@@ -62,7 +62,7 @@
                     <option value="any">Price Range :</option>
                     <option value="500000">Less than 500k/month</option>
                     <option value="1000000">Between 500k and 1M/ month</option>
-                    <option value="1500000">Between 1M and 1.5M month</option>
+                    <option value="1500000">More than 1M/month</option>
                 </select>
 
                 <select name="propertyType" id="propertyType" class="filter">
@@ -89,19 +89,19 @@
         <div class="signInUp">
             <!-- Changing interface once signed in/signed out -->
             <div class="dropdown4">
-                <button class="dropbtn4"><a href=""><img src="<?= (isset($_SESSION['profile_img'])) ? './profile_images/'.$_SESSION['profile_img'] : "./public/images/defaultProfile.jpg" ?>" alt="defaultPic"></a></button>
+                <button class="dropbtn4"><a href="<?= (isset($_SESSION['uid'])) ? "index.php?action=profile&user={$_SESSION['uid']}" : "#" ;?>"><img src="<?= (isset($_SESSION['profile_img'])) ? './profile_images/'.$_SESSION['profile_img'] : "./public/images/defaultProfile.jpg" ?>" alt="defaultPic"></a></button>
                 <div class="dropdown-content4">
-                    <?php echo (!empty($_SESSION['firstName'])) ? '<button id="settingsButton"><a href="#">Settings</a></button>' : '<button id="signUpButton"><a href="#">Register</a></button>'; ?>
-                    <?php echo (!empty($_SESSION['firstName'])) ? '<button id="signOutButton"><a href="index.php?action=signOut">Sign Out</a></button>' : '<button id="signInButton"><a href="#">Sign In</a></button>'; ?>
                     
                     <?php 
                         if (!empty($_SESSION['firstName'])){
                             // echo '<img src="' . $_SESSION['profile_img']. '" width="500px" height="400px">';
                             echo '<a href="index.php?action=profile&user='.$_SESSION['uid'].'">View My Profile</a>';
                             echo '<a href="index.php?action=modifyProfile&user='.$_SESSION['uid'].'">Edit My Profile</a>';
-
+                            
                         }
-                    ?>                    
+                        ?>                    
+                        <?php echo (!empty($_SESSION['firstName'])) ? '' : '<button id="signUpButton"><a href="#">Register</a></button>'; ?>
+                        <?php echo (!empty($_SESSION['firstName'])) ? '<button id="signOutButton"><a href="index.php?action=signOut">Sign Out</a></button>' : '<button id="signInButton"><a href="#">Sign In</a></button>'; ?>
                 </div>
             </div>
         </div>

@@ -13,11 +13,31 @@
                 <div>
                     <h2 id='userName'><?= $user['first_name'];?></h2>
                     <p>Last active: <?php if($lastOnline = $user['last_online']){
-                    $lastOnline = $user['last_online'];
-                    $currentTime = date('Y-m-d H:i:s');
-                    echo $lastOnline." KST";
-                }
-                // TODO: last online status based on session end datetime ?></p>
+                    $lastOnline = new DateTime($user['last_online']);
+                    $currentTime = new DateTime(date('Y-m-d H:i:s'));
+                    $diff = $lastOnline->diff($currentTime);
+                    if($diff->y == 0) {
+                        if($diff->m == 0) {
+                            if($diff->d == 0) {
+                                if($diff->h == 0) {
+                                    echo $diff->i.' minute(s)';
+                                } else {
+                                    echo $diff->h.' hour(s)';
+                                }
+                            } else {
+                                echo $diff->d.' day(s)';
+                            }
+                        } else {
+                            echo $diff->m.' month(s)';
+                        }
+                    } else {
+                        echo $diff->y.' year(s)';
+                    }
+                    echo ' ago';
+                    // echo '<pre>';
+                    // print_r($diff)." KST";
+                    // echo '</pre>';
+                } ?></p>
                 </div>
             </div>
         </div>
@@ -55,15 +75,15 @@
                     } else {
                         echo 'No bio yet';
                     };?></p>
+
                 <?php if(!empty($_SESSION['uid'])) {
                     if($_REQUEST['user'] == $_SESSION['uid']) { ?>
-                        <form action="index.php" method='GET'>
-                            <button type='submit' id='editProfileButton'>Edit Profile</button>
-                            <input type="hidden" name = "action" value = "modifyProfile">
-                            <input type="hidden" name = "user" value = "<?= $_SESSION['uid']?>">
-                        </form>
-                    <?php } ?>
-                <?php } ?>
+                <form action="index.php" method='GET'>
+                    <button type='submit' id='editProfileButton'>Edit Profile</button>
+                    <input type="hidden" name = "action" value = "modifyProfile">
+                    <input type="hidden" name = "user" value = "<?= $_SESSION['uid']?>">
+                </form>
+                <?php }} ?>
             </div>
         </div>
     </div>

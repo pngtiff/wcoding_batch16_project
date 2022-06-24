@@ -39,7 +39,6 @@ try {
             break;
         case 'property':
             getProperty($_REQUEST['propId']);
-            getPropertyOwner($_REQUEST['propId']);
             break;
         case 'modifyProperty':
             modifyProperty($_REQUEST['propId']);
@@ -52,6 +51,7 @@ try {
                 signUp($_REQUEST);
             }
             break;
+    
 
         case 'createProfile':
             createProfile();
@@ -77,7 +77,9 @@ try {
             //Search//
         case 'search':
             $_REQUEST['province'] = !empty($_REQUEST['province']) ? strip_tags($_REQUEST['province']) : 'any';
+            $_REQUEST['province'] = $_REQUEST['province'] == -1 ? 'any' : $_REQUEST['province'];
             $_REQUEST['city'] = !empty($_REQUEST['city']) ? strip_tags($_REQUEST['city']) : 'any';
+            $_REQUEST['city'] = $_REQUEST['city'] == -1 ? 'any' : $_REQUEST['city'];
             search($_REQUEST);
             break;
         case 'postProperty': 
@@ -128,7 +130,8 @@ try {
             break;
         default:
             //////// If logged in : Load user data for profile picture, if not, load without user data///
-            (isset($_REQUEST['userid'])) ? getLanding($_REQUEST['userid']) : getLanding(0);
+            // (isset($_REQUEST['userid'])) ? getLanding($_REQUEST['userid']) : getLanding(0);
+            getLanding();
             break;
     }
 } catch (Exception $e) {

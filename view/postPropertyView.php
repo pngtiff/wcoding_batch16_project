@@ -66,7 +66,7 @@ ob_start();?>
         </label>
         <label for="propertyTypePost" >
             <span>Property Type</span>
-            <select name="propertyType" id="propertyType">
+            <select name="propertyType" id="propertyTypePost">
                 <option value="1">Apartment</option>
                 <option value="2">Officetel</option>
                 <option value="3">Villa</option>
@@ -78,11 +78,10 @@ ob_start();?>
         </label>
         <label for="roomTypePost">
             <span>Room Type</span>
-            <select name="roomType" id="roomType" >
+            <select name="roomType" id="roomTypePost" >
                 <option value="1">Private room</option>
                 <option value="2">Shared room</option>
-                <option value="3">Shared unit</option>
-                <option value="4">Entire place</option>
+                <option value="3">Entire place</option>
             </select>
             <span class="hide">Select one</span>
         </label>
