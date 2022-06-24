@@ -40,7 +40,7 @@ class UserManager extends Manager
             if ($userInfo['dob']) {
                 // checking dob when signing in. dob is mandatory submission so
                 // if it's in the database user has already created a profile.                
-                header("Location:index.php");
+                header("Location:index.php?action=loggedIn");
             } else {
                 header("Location:index.php?action=createProfile");
             }
@@ -248,7 +248,7 @@ class UserManager extends Manager
     {
         session_destroy();
         setcookie(session_name(), '', time() - 3600, '/');
-        header('Location:index.php');
+        header('Location:index.php?action=loggedOut');
     }
 
     //view

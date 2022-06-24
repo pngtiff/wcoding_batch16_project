@@ -19,6 +19,7 @@ try {
         case 'signIn':
             if (!empty($_REQUEST['password']) and !empty($_REQUEST['email'])) {
                 signIn($_REQUEST);
+
             } else {
                 throw (new Exception('You tried to sign in without a password.'));
             }
@@ -30,10 +31,13 @@ try {
         case 'signOut':
             signOut();
             break;
+        case 'loggedIn':
+            getLanding();
+            include("view/toaster.php"); ///// Notification toaster
+            break;
         case 'loggedOut':
             getLanding();
-            include("view/toaster.php");
-            // echo('<div class="toast">You are logged out !</div>');
+            include("view/toaster.php"); ///// Notification toaster
             break;
         case 'profile':
             showUserInfo($_REQUEST['action'], $_REQUEST['user']);
@@ -135,7 +139,7 @@ try {
             break;
         default:
             //////// If logged in : Load user data for profile picture, if not, load without user data///
-            (isset($_REQUEST['userid'])) ? getLanding($_REQUEST['userid']) : getLanding(0);
+            getLanding();
             break;
     }
 } catch (Exception $e) {

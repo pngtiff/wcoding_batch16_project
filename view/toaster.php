@@ -1,1 +1,5 @@
-<div class="toast">You are logged out !</div>
+<div class="toast">
+
+<?= ($_REQUEST['action'] == "loggedIn") ? "You Are Logged In !" : "You Are Logged Out !"; ?>
+
+</div>

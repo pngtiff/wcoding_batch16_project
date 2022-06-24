@@ -55,10 +55,10 @@ function listProperties() {
     return $properties;
 }
 
-function getLanding($userId) {
+function getLanding() {
     $properties = listProperties();
-    $userM = new UserManager($userId); 
-    $data = $userM->viewUserData();
+    // $userM = new UserManager(); 
+    // $data = $userM->viewUserData();
     require('./view/indexView.php');
 }
 

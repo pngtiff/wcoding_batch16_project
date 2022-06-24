@@ -261,7 +261,7 @@ header {
 
     /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
   However, delay the fade out process for 2.5 seconds */
-    animation: fadein 0.5s, fadeout 0.5s 2.5s forwards;
+    animation: fadein 0.5s, fadeout 1s 2.5s forwards;
 
     height: 100px;
     width: 300px;
@@ -276,6 +276,8 @@ header {
     justify-content: center;
 
     background-color: bisque;
+
+    z-index: 9999999;
 }
 
 @keyframes fadein {
@@ -285,6 +287,7 @@ header {
 
   
   @keyframes fadeout {
-    from {opacity: 1; right: 10px}
-    to {opacity: 0; right: -500px}
+    0% {opacity: 1; right: 10px;}
+    50% {opacity: 0; right: 10px;}
+    100%{ opacity: 0; right: -500px;}
   }
