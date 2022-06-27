@@ -108,7 +108,7 @@ class PropertyManager extends Manager
         WHERE p.is_active = 1 AND p.id = :propId");
         $req->bindParam('propId', $propId);
         $req->execute();
-        $propDetails = $req->fetch(\PDO::FETCH_ASSOC);
+        $propDetails = $req->fetchAll(\PDO::FETCH_ASSOC);
         $req->closeCursor();
 
         return $propDetails;
@@ -344,15 +344,63 @@ class PropertyManager extends Manager
                 throw (new Exception('Image is too big'));
             }
         }
-        if($roomType and $bedrooms and $bathrooms and $beds and $price and $description and $bankAccNum and count($imgs) >= 2) {
+        if($roomType and $bedrooms and $bathrooms and $beds and $price and $description and $bankAccNum) {
+            // Copying previous entry
+            $copy = $this->_connection->prepare("INSERT INTO properties (user_uid, post_title, country, province_state, zipcode, city, district, address1, address2, size, property_type_id, room_type_id, monthly_price_won, description, bank_account_num, room_num, bed_num, bath_num, is_furnished)
+            SELECT user_uid, post_title, country, province_state, zipcode, city, district, address1, address2, size, property_type_id, room_type_id, monthly_price_won, description, bank_account_num, room_num, bed_num, bath_num, is_furnished
+            FROM properties
+            WHERE id = :propId");
+            $copy->bindParam('propId', $propId, \PDO::PARAM_INT);
+            $copy->execute();
+            $copy->closeCursor();
+
+            $newPropId = $this->_connection->query("SELECT id FROM properties ORDER BY ID DESC LIMIT 0, 1")->fetch(\PDO::FETCH_ASSOC)['id'];
+            $dest = "./public/images/property_images/$newPropId/";
+            $src = "./public/images/property_images/$propId/";
+
+            // Create new folder for images of updated property
+            if (!file_exists($dest)) { 
+                mkdir($dest);
+            }
+            // Getting all the images from the folder
+            $files = glob($src."*.{"."jpg,png,gif"."}", GLOB_BRACE);
+        
+            // Moving all the images from old folder into a new one
+            if (count($files)>0) { 
+                    foreach ($files as $f) {
+                    $moveTo = $dest . basename($f);
+                    rename($f, $moveTo);
+                }
+            }
+
+            // Moving newly uploaded images into the folder
+            foreach ($imgs as $file) {
+                $fileName = pathinfo($file["name"]);
+                $extension  = $fileName['extension'];
+                $fileLocation = $file["tmp_name"];
+                $bytes = bin2hex(random_bytes(16)); // generates secure pseudo random bytes and bin2hex converts to hexadecimal string
+                $imgName[] = $bytes . "." . $extension;
+                move_uploaded_file($fileLocation, "./public/images/property_images/$newPropId/" . $imgName[count($imgName) - 1]);
+            }
+
+            // Deactivating previous entry
             $req = $this->_connection->prepare("UPDATE properties SET is_active = 0 WHERE id = :propId");
             $req->bindParam('propId', $propId, \PDO::PARAM_INT);
             $req->execute();
             $req->closeCursor();
-
-            $update = $this->_connection->prepare("INSERT 
-            INTO properties (post_title, room_type_id, monthly_price_won, description, bank_account_num, room_num, bath_num, is_furnished, bed_num) 
-            VALUES (:title,:roomType,:price,:description,:bankAccNum,:bedrooms,:bathrooms,:furnished,:beds)");
+            
+            // Updating copy of an old entry
+            $update = $this->_connection->prepare("UPDATE properties 
+            SET post_title=:title, 
+                room_type_id=:roomType, 
+                monthly_price_won=:price, 
+                description=:description, 
+                bank_account_num=:bankAccNum, 
+                room_num=:bedrooms, 
+                bath_num=:bathrooms, 
+                is_furnished=:furnished, 
+                bed_num=:beds 
+            WHERE property_id=$newPropId");
             $update->bindParam('title', $title, \PDO::PARAM_STR);
             $update->bindParam('roomType', $roomType, \PDO::PARAM_INT);
             $update->bindParam('price', $price, \PDO::PARAM_INT);
@@ -364,10 +412,15 @@ class PropertyManager extends Manager
             $update->bindParam('beds', $beds, \PDO::PARAM_INT);
             $update->execute();
 
-            // $album = implode(',', $imgs);
-            // $updateImg = $this->_connection->prepare("UPDATE property_imgs SET img_url = :imgs, description = WHERE property_id = :propId");
-            // $updateImg->bindParam('imgs', $album, \PDO::PARAM_STR);
-            // $updateImg->bindParam('propId', $propId, \PDO::PARAM_INT);
+            // Adding images into the database
+            for ($i = 0; $i < count($imgName); $i++) {
+                $this->_connection->exec("INSERT
+                    INTO property_imgs (property_id, img_url, description) 
+                    VALUES ('$newPropId', '{$imgName[$i]}', '{$imgDescriptions[$i]}')
+                ");
+            }
+
+            $this->_connection->exec("UPDATE property_id SET property_id=$newPropId WHERE id=$propId");
 
             header("Location: index.php?action=property&propertyId={$_REQUEST['propId']}");
         }

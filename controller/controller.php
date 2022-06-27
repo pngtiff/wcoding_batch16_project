@@ -94,9 +94,8 @@ function modifyProperty($params, $imgs) {
         for($i=0; $i<count($imgs); $i++) {
             $imgDescriptions[] = $params["t-attachment-$i"];
         }
-        $propertyM->modifyProperty($params['prefillProperty[propId]'], $imgs, $imgDescriptions);
+        $propertyM->modifyProperty($params['propId'], $imgs, $imgDescriptions);
 
-        require('./view/modifyProperty.php');
     } else {
         header("Location: index.php?action=property&propId={$params['propId']}");
     }

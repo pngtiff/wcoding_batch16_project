@@ -40,13 +40,6 @@ try {
         case 'property':
             getProperty($_REQUEST['propId']);
             break;
-        case 'prefillProperty':
-            prefillProperty($_REQUEST['propId']);
-            break;
-
-        case 'modifyProperty':
-            modifyProperty();
-            break;
         case 'signUp':
             if (preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}+$#", $_POST['email'])  and !empty($_POST['firstName']) and !empty($_POST['lastName']) and !empty($_POST['password']) and !empty($_POST['passwordConfirm']) and $_POST['passwordConfirm'] == $_POST['password'] and preg_match('/^(?=.*[!@#$%^&*-])(?=.*[0-9])(?=.*[A-Z]).{8,20}$/', $_POST['password']) and preg_match('/^(?![\s.]+$)[A-Z\-a-z\s.]{2,}$/', $_POST['firstName']) and preg_match('/^(?![\s.]+$)[A-Z\-a-z\s.]{2,}$/', $_POST['lastName'])) {
                 signUp($_REQUEST);
@@ -126,7 +119,7 @@ try {
             //         throw (new Exception("Message description is empty"));
             //     }
             // }
-            modifyProperty($_REQUEST['propId'], $_FILES);
+            modifyProperty($_REQUEST, $_FILES);
             break;
 
         case 'viewPostProperty':
