@@ -51,6 +51,9 @@ document.querySelector('.select-field').addEventListener('click', () => {
 
 
 for (i = 0; i < languages.length; i++) {
+    if(languages[i].checked) {
+        langArray.push(languages[i].value);
+    }
     languages[i].addEventListener('change', (e) => {
         if (e.target.checked) {
             langArray.push(e.target.value);

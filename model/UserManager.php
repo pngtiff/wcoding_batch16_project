@@ -123,9 +123,7 @@ class UserManager extends Manager
             } 
             // If user has a profile they are redirected to createProfile page
             else {
-                $uid = $this->createUID();
-                $_SESSION['uid'] = $uid;
-                $this->_connection->exec("INSERT INTO users (email, first_name, last_name, uid) VALUES ('$response->email','$response->given_name','$response->family_name', '$uid')");
+                $_SESSION['uid'] = $user['uid'];
                 header('Location:index.php?action=createProfile');
             }
         // Else they are redirected to createProfile page
@@ -238,7 +236,7 @@ class UserManager extends Manager
         $req->bindParam('gender', $gender, \PDO::PARAM_STR);
         $req->bindParam('lang', $language, \PDO::PARAM_STR);
         $req->bindParam('bio', $bio, \PDO::PARAM_STR);
-        $req->bindParam('userImg', $folder, \PDO::PARAM_STR);
+        $req->bindParam('userImg', $imgName, \PDO::PARAM_STR);
         $req->execute();
         $_SESSION['profile_img'] = $imgName;
         header('Location:index.php');
