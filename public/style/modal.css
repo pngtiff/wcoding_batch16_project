@@ -21,7 +21,7 @@
     margin: auto;
     width: 80%;
     height: 600px;
-    border: 1px solid #888;
+    /* border: 1px solid #888; */
     border-radius: 20px;
     /* overflow: scroll; */
     /* text-align: center; */
@@ -42,7 +42,7 @@
     height: 100%;
     left: 50%;
     color: white;
-    background-color: #CAE5FF;
+    background-color: #53a2be;
     z-index: 1;
     /* in order to close by clicking x */
     text-align: center;

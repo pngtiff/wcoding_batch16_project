@@ -59,14 +59,14 @@
                 </select>
                 <select name="city" id="city" ></select>
                 <select name="rentRange" id="rentRange" class="filter">
-                    <option value="any">Price Range :</option>
-                    <option value="500000">Less than 500k/month</option>
-                    <option value="1000000">Between 500k and 1M/ month</option>
-                    <option value="1500000">More than 1M/month</option>
+                    <option value="any">Price Range (monthly)</option>
+                    <option value="500000">Less than 500k</option>
+                    <option value="1000000">Between 500k and 1M</option>
+                    <option value="1500000">More than 1M</option>
                 </select>
 
                 <select name="propertyType" id="propertyType" class="filter">
-                    <option value="any">Type of Property :</option>
+                    <option value="any">Property Type</option>
                     <option value="1">Apartment</option>
                     <option value="2">Officetel</option>
                     <option value="3">Villa</option>
@@ -76,7 +76,7 @@
                 </select>
                 
                 <select name="roomType" id="roomType" class="filter">
-                    <option value="any">Room Type :</option>
+                    <option value="any">Room Type</option>
                     <option value="1">Private Room</option>
                     <option value="2">Shared Room</option>
                     <option value="3">Entire Place</option>
