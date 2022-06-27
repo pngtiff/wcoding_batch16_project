@@ -401,7 +401,7 @@ class PropertyManager extends Manager
                 bath_num=:bathrooms, 
                 is_furnished=:furnished, 
                 bed_num=:beds 
-            WHERE property_id=$newPropId");
+            WHERE id=$newPropId");
             $update->bindParam('title', $title, \PDO::PARAM_STR);
             $update->bindParam('roomType', $roomType, \PDO::PARAM_INT);
             $update->bindParam('price', $price, \PDO::PARAM_INT);
@@ -421,9 +421,9 @@ class PropertyManager extends Manager
                 ");
             }
 
-            $this->_connection->exec("UPDATE property_id SET property_id=$newPropId WHERE id=$propId");
+            $this->_connection->exec("UPDATE property_imgs SET property_id=$newPropId WHERE property_id=$propId");
 
-            header("Location: index.php?action=property&propertyId={$_REQUEST['propId']}");
+            header("Location: index.php?action=property&propId={$newPropId}");
         }
     }
 }
