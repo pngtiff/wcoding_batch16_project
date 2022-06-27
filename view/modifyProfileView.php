@@ -31,28 +31,93 @@
                 </div>
     
                 <div id="langDetails">
-                    <div>
-                        <label for="language">Which languages do you speak?</label>
-                        <select id="language" name="language">
-                                <option id="HK" value="HK">Cantonese</option>
-                                <option id="ZH" value="ZH">Chinese(Mandarin)</option>
-                                <option id="NL" value="NL">Dutch</option>
-                                <option id="EN" value="EN">English</option>
-                                <option id="DE" value="DE">German</option>
-                                <option id="FR" value="FR">French</option>
-                                <option id="HI" value="HI">Hindi</option>
-                                <option id="IN" value="IN">Indonesian</option>
-                                <option id="IT" value="IT">Italian</option>
-                                <option id="JA" value="JA">Japanese</option>
-                                <option id="KO" value="KO">Korean</option>
-                                <option id="VI" value="VI">Vietnamese</option>
-                                <option id="PT" value="PT">Portugese</option>
-                                <option id="RU" value="RU">Russian</option>
-                                <option id="ES" value="ES">Spanish</option>
-                        </select>
-                        <input type="hidden" id="userLang" name="userLang" value="">
+                <p>Which languages can you speak?</p>
+                <div>
+                    <div id="language" class="multi-selector">
+                        <div class="select-field">
+                            <p>Choose one or multiple <span class="down-arrow">&blacktriangledown;</span></p>
+                        </div>
+                        <div class="list">
+                            <label for="HK" class="lang"><input type="checkbox" id="HK" name="HK" value="HK" 
+                            <?php for($i=0; $i<count($data['languages']); $i++) {
+                                if($data['languages'][$i]=="HK")
+                                echo "checked";
+                            }?>> Cantonese</label>
+                            <label for="ZH" class="lang"><input type="checkbox" id="ZH" name="ZH" value="ZH"
+                            <?php for($i=0; $i<count($data['languages']); $i++) {
+                                if($data['languages'][$i]=="ZH")
+                                echo "checked";
+                            }?>> Chinese(Mandarin)</label>
+                            <label for="NL" class="lang"><input type="checkbox" id="NL" name="NL" value="NL"
+                            <?php for($i=0; $i<count($data['languages']); $i++) {
+                                if($data['languages'][$i]=="NL")
+                                echo "checked";
+                            }?>> Dutch</label>
+                            <label for="EN" class="lang"><input type="checkbox" id="EN" name="EN" value="EN"
+                            <?php for($i=0; $i<count($data['languages']); $i++) {
+                                if($data['languages'][$i]=="EN")
+                                echo "checked";
+                            }?>> English</label>
+                            <label for="DE" class="lang"><input type="checkbox" id="DE" name="DE" value="DE"
+                            <?php for($i=0; $i<count($data['languages']); $i++) {
+                                if($data['languages'][$i]=="DE")
+                                echo "checked";
+                            }?>> German</label>
+                            <label for="FR" class="lang"><input type="checkbox" id="FR" name="FR" value="FR"
+                            <?php for($i=0; $i<count($data['languages']); $i++) {
+                                if($data['languages'][$i]=="FR")
+                                echo "checked";
+                            }?>> French</label>
+                            <label for="HI" class="lang"><input type="checkbox" id="HI" name="HI" value="HI"
+                            <?php for($i=0; $i<count($data['languages']); $i++) {
+                                if($data['languages'][$i]=="HI")
+                                echo "checked";
+                            }?>> Hindi</label>
+                            <label for="IN" class="lang"><input type="checkbox" id="IN" name="IN" value="IN"
+                            <?php for($i=0; $i<count($data['languages']); $i++) {
+                                if($data['languages'][$i]=="IN")
+                                echo "checked";
+                            }?>> Indonesian</label>
+                            <label for="IT" class="lang"><input type="checkbox" id="IT" name="IT" value="IT"
+                            <?php for($i=0; $i<count($data['languages']); $i++) {
+                                if($data['languages'][$i]=="IT")
+                                echo "checked";
+                            }?>> Italian</label>
+                            <label for="JA" class="lang"><input type="checkbox" id="JA" name="JA" value="JA"
+                            <?php for($i=0; $i<count($data['languages']); $i++) {
+                                if($data['languages'][$i]=="JA")
+                                echo "checked";
+                            }?>> Japanese</label>
+                            <label for="KO" class="lang"><input type="checkbox" id="KO" name="KO" value="KO"
+                            <?php for($i=0; $i<count($data['languages']); $i++) {
+                                if($data['languages'][$i]=="KO")
+                                echo "checked";
+                            }?>> Korean</label>
+                            <label for="VI" class="lang"><input type="checkbox" id="VI" name="VI" value="VI"
+                            <?php for($i=0; $i<count($data['languages']); $i++) {
+                                if($data['languages'][$i]=="VI")
+                                echo "checked";
+                            }?>> Vietnamese</label>
+                            <label for="PT" class="lang"><input type="checkbox" id="PT" name="PT" value="PT"
+                            <?php for($i=0; $i<count($data['languages']); $i++) {
+                                if($data['languages'][$i]=="PT")
+                                echo "checked";
+                            }?>> Portugese</label>
+                            <label for="RU" class="lang"><input type="checkbox" id="RU" name="RU" value="RU"
+                            <?php for($i=0; $i<count($data['languages']); $i++) {
+                                if($data['languages'][$i]=="RU")
+                                echo "checked";
+                            }?>> Russian</label>
+                            <label for="ES" class="lang"><input type="checkbox" id="ES" name="ES" value="ES"
+                            <?php for($i=0; $i<count($data['languages']); $i++) {
+                                if($data['languages'][$i]=="ES")
+                                echo "checked";
+                            }?>> Spanish</label>
+                        </div>
                     </div>
+                    <input type="hidden" id="userLang" name="userLang" value="">
                 </div>
+            </div>
 
             </div>
             

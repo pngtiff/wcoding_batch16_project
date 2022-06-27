@@ -59,12 +59,21 @@
 </section>
 
 <!-- All property photos modal -->
-<div id="modalBox">
-    <div id="propPhotosModal">
-        
+<div class="photoModalContainer">
+    
+    <div class="innerContainer">
+        <button class="pModalCloseButton">Close</button>
+        <!-- this grabs the related photos -->
+        <div class="imgGrid">
+            <?php include('allPropertyImg.php');?> 
+        </div>
     </div>
+
+    
 </div>
 
 <script src="./public/js/propImagesCarousel.js"></script>
+<script src="./public/js/allPhoto.js"></script>
+
 <?php $content = ob_get_clean();?>
 <?php require('template.php');?>

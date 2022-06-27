@@ -40,7 +40,7 @@ class UserManager extends Manager
             if ($userInfo['dob']) {
                 // checking dob when signing in. dob is mandatory submission so
                 // if it's in the database user has already created a profile.                
-                header("Location:index.php");
+                header("Location:index.php?action=loggedIn");
             } else {
                 header("Location:index.php?action=createProfile");
             }
@@ -89,7 +89,8 @@ class UserManager extends Manager
 
         $response = $this->_connection->query("SELECT email, first_name, last_name FROM users WHERE email='$email'");
         if ($response->fetch(\PDO::FETCH_ASSOC)) {
-            header('Location:index.php');
+            // header('Location:index.php');
+        echo "1"; 
         } else {
             $response = $this->_connection->prepare("INSERT INTO users (password, email, first_name, last_name, uid) VALUES (:password, :email, :firstName, :lastName, :uid)");
             $response->bindParam("firstName", $firstName, \PDO::PARAM_STR);
@@ -122,9 +123,7 @@ class UserManager extends Manager
             } 
             // If user has a profile they are redirected to createProfile page
             else {
-                $uid = $this->createUID();
-                $_SESSION['uid'] = $uid;
-                $this->_connection->exec("INSERT INTO users (email, first_name, last_name, uid) VALUES ('$response->email','$response->given_name','$response->family_name', '$uid')");
+                $_SESSION['uid'] = $user['uid'];
                 header('Location:index.php?action=createProfile');
             }
         // Else they are redirected to createProfile page
@@ -247,17 +246,17 @@ class UserManager extends Manager
     {
         session_destroy();
         setcookie(session_name(), '', time() - 3600, '/');
-        header('Location:index.php');
+        header('Location:index.php?action=loggedOut');
     }
 
-    //view
+
     public function getUserInfo()
     {
         $req = $this->_connection->prepare('SELECT * FROM users WHERE uid = ? AND is_active = 1');
         $req->execute(array($this->_user_id));
         $user = $req->fetch(\PDO::FETCH_ASSOC);
         $req->closeCursor();
-        $languages = explode(',', $user['languages']);
+        $languages = explode(',', $user['languages'] ?? "");
         foreach ($languages as &$language) {
             $language = $this->getLangauges($language);
         }
@@ -271,6 +270,9 @@ class UserManager extends Manager
         $req = $this->_connection->prepare("SELECT * FROM users WHERE uid ='{$_SESSION['uid']}' AND is_active = 1");
         $req->execute();
         $data = $req->fetch(\PDO::FETCH_ASSOC);
+
+        $languages = explode(',', $data['languages']);
+        $data['languages'] = $languages;
 
         return $data;
     }
@@ -286,9 +288,10 @@ class UserManager extends Manager
         $dob = $data['dob'];
         $gender = $data['gender'];
         $dateCreated = $data['date_created'];
-        $profileImgLocation = $data['profile_img'];
         $phoneNumber = $data['phone_number'];
         $bio = $data['bio'];
+        $profileImgLocation = $data['profile_img'];
+
         // ============Update profile photo ========//
         // Get file info
         if (!empty($_FILES["uploadFile"]["name"])) {
@@ -309,7 +312,6 @@ class UserManager extends Manager
 
         
         // update is_active status from 1 -> 0 =====//
-        //==========================================//
         $req2 = $this->_connection->prepare("UPDATE users SET is_active = 0 WHERE uid ='{$_SESSION['uid']}' ");
         $req2->execute();
      
@@ -327,16 +329,16 @@ class UserManager extends Manager
             'French' => 'FR', 'German' => 'DE', 'Hindi' => 'HI', 'Indonesian' => 'IN', 'Italian' => 'IT', 'Japanese' => 'JA',
             'Korean' => 'KO', 'Vietnamese' => 'VI', 'Portuguese' => 'PT', 'Russian' => 'RU', 'Spanish' => 'ES'
         );
-
         $userLang = explode(',', $_REQUEST['userLang'] ?? "");
-        !empty($userLang) and array_diff($userLang, $languages) === array() ? $language = implode(',', array_unique($userLang)) : $language = $data['languages'];
+        !empty($userLang) and array_diff($userLang, $languages) === array() ? $language = implode(',', array_unique($userLang)) : $language = null;
 
         // Check bio
-        !empty($_REQUEST['bio']) ? $bio = $_REQUEST['bio'] : $bio = $data['bio'];
+        !empty($_REQUEST['bio']) ? $bio = $_REQUEST['bio'] : $bio = null;
 
         // create a new row with the inherited and modified informaiton //
         $status = 1;
         if($phoneNumber != null){
+            
             $reqInsert = $this->_connection->prepare("INSERT INTO users (uid, first_name, last_name, email, password, dob, gender, languages, bio, phone_number, profile_img, is_active, date_created)
             VALUES ( :inuid, :infirst, :inlast, :inemail, :inpassword, :indob, :ingender, :inlanguages, :inbio, :inphoneNumber, :inprofileImg, :inactiveStatus, '$dateCreated') ");
 

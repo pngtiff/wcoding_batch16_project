@@ -13,7 +13,6 @@
     <div class="email">
         <input type="text" name="email" id="email" placeholder="Email" required> 
         <div class="emailError"><em>Please enter a valid email address</em></div>
-        <span class="emailErrorText">Email is already registered</span>
     </div>
     <div class="password">
         <input type="password" name="password"  id="password" placeholder="Password" required> 
