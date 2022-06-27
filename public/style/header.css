@@ -54,7 +54,11 @@ header {
     transform: scale(1);
     transform-origin: top center;
     transition: all 1s ease-in-out;
-  }
+}
+
+.dropbtn4 {
+    border-radius: 24px;
+}
   
 .dropdown, .dropdown2, .dropdown3, .dropdown4 {
     display: inline-block;
@@ -216,3 +220,38 @@ header {
     border: 1px; 
     margin-right: 10px;
 }
+
+.toast {
+
+    /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+    animation: fadein 0.6s, fadeout 2s 2.5s forwards;
+
+    height: 100px;
+    width: 300px;
+    position: absolute;
+
+    top: 100px;
+    right: 10px;
+
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+
+    background-color: rgba(41,163,118, 0.8);
+
+    z-index: 9999999;
+}
+
+@keyframes fadein {
+    from {opacity: 0; right: -500px}
+    to {opacity: 1; right: 10px}
+  }
+
+  
+  @keyframes fadeout {
+    0% {opacity: 1; right: 10px;}
+    50% {opacity: 0; right: 10px;}
+    100%{ opacity: 0; right: -500px;}
+  }

@@ -90,4 +90,9 @@
     cursor: pointer;
 }
 
+#modalBox {
+    z-index: 1000;
+}
+  
+
 

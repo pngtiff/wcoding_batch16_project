@@ -139,6 +139,7 @@
 .show{
     display: block;
     position: absolute;
+    z-index: 1;
 }
 .rotate180{
     transform: rotate(-180deg);

@@ -43,7 +43,7 @@ button {
 }
 
 
-button:not(nav button), input[type=submit] {
+button:not(nav button, .dropbtn4), input[type=submit] {
     font-family: inherit;
     background-color: #FFF;
     color: #464646;
