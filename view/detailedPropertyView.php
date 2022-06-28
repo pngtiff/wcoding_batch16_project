@@ -39,6 +39,7 @@
             <p>Size: <?=$propDetails[0]['size'];?>m² | <?=$propDetails[0]['room_num'];?> Bedroom(s) | <?=$propDetails[0]['bath_num'];?> Bathroom(s)</p>
             <p class='upperLowerBorders'><?= $propDetails[0]['description'];?></p>
             <p>Address: <?= $propDetails[0]['province_state'].', '.$propDetails[0]['city'];?></p>
+            <div id="map" style="width:100%;height:350px;"></div>
         </div>
         <div class='propResv flexColumn'>
             <p class='price'>Price: <span><?= number_format($propDetails[0]['monthly_price_won']);?></span>₩/month</p>
@@ -58,6 +59,7 @@
 
 </section>
 
+
 <!-- All property photos modal -->
 <div class="photoModalContainer">
     
@@ -74,6 +76,8 @@
 
 <script src="./public/js/propImagesCarousel.js"></script>
 <script src="./public/js/allPhoto.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2d4e6c65e087f4ced51eeb4ccd34262c"></script>
+<script src="./public/js/mapView.js"></script>
 
 <?php $content = ob_get_clean();?>
 <?php require('template.php');?>

@@ -95,6 +95,16 @@ class PropertyManager extends Manager
         return $propOwner;
     }
 
+    public function getPropertyZipCode($propId)
+    {
+        $req = $this->_connection->prepare("SELECT p.zipcode FROM properties p WHERE p.id = :propId");
+        $req->bindParam('propId', $propId);
+        $req->execute();
+        $propZipCode = $req->fetch(\PDO::FETCH_ASSOC);
+        $req->closeCursor();
+        return $propZipCode;
+    }
+
     public function prefillProperty($propId)
     {
         $req = $this->_connection->prepare("SELECT p.id AS propId, p.post_title, p.room_num, p.bed_num, p.bath_num, p.is_furnished, p.room_type_id, p.monthly_price_won, p.description, p.bank_account_num, p.validation, rt.room_type AS r_type, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description

@@ -42,24 +42,23 @@ try {
         case 'profile':
             showUserInfo($_REQUEST['action'], $_REQUEST['user']);
             break;
-
         case 'listProperties':
             listProperties();
             break;
         case 'property':
             getProperty($_REQUEST['propId']);
             break;
+        case 'getZipCode':
+            getZipCode($_REQUEST['propId']);
+            break;
         case 'signUp':
             if (preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}+$#", $_POST['email'])  and !empty($_POST['firstName']) and !empty($_POST['lastName']) and !empty($_POST['password']) and !empty($_POST['passwordConfirm']) and $_POST['passwordConfirm'] == $_POST['password'] and preg_match('/^(?=.*[!@#$%^&*-])(?=.*[0-9])(?=.*[A-Z]).{8,20}$/', $_POST['password']) and preg_match('/^(?![\s.]+$)[A-Z\-a-z\s.]{2,}$/', $_POST['firstName']) and preg_match('/^(?![\s.]+$)[A-Z\-a-z\s.]{2,}$/', $_POST['lastName'])) {
                 signUp($_REQUEST);
             }
             break;
-    
-
         case 'createProfile':
             createProfile();
             break;
-
         case 'checkProfile':
             checkProfile();
             break;
