@@ -116,7 +116,7 @@ function modifyProperty($params, $imgs) {
     }
 }
 
-function modifyProfile($userId) {
+function modifyProfileView($userId) {
     $userM = new UserManager($userId); 
     $data = $userM->viewUserData();
 

@@ -53,29 +53,59 @@
                 </div>
             </a>
             <button class='resvbutton'><a href="">Reserve now</a></button>
-            <!-- TODO: reservation action -->
         </div>
     </div>
-
 </section>
 
 
 <!-- All property photos modal -->
 <div class="photoModalContainer">
     
+    <!-- grid view -->
+    <p></p>
     <div class="innerContainer">
         <button class="pModalCloseButton">Close</button>
-        <!-- this grabs the related photos -->
         <div class="imgGrid">
-            <?php include('allPropertyImg.php');?> 
+        <?php
+        for($i=0; $i<count($propDetails); $i++) {?>
+            <div class="allPropImgContainer">
+                <img class="allPropImg" src="<?= "./public/images/property_images/{$propDetails[$i]['p_id']}/{$propDetails[$i]['p_img']}";?>" alt="<?= $propDetails[$i]['image_description'];?>">
+            </div>
+            <?php 
+        };
+        ?>
         </div>
     </div>
-
     
+    <!-- detailed view -->
+    <div class="detailedPhotoView">
+        <button class="detailedCloseButton">Close</button>
+
+        <div class="slideContainer">
+            <?php
+            for($i=0; $i<count($propDetails); $i++) {?>
+                <div class="detailedImgSlides fade">
+                    <img class="propertyGallery" src="<?= "./public/images/property_images/{$propDetails[$i]['p_id']}/{$propDetails[$i]['p_img']}";?>" alt="<?= $propDetails[$i]['image_description'];?>">
+                </div>
+            <?php
+            };
+            ?>
+            <a class="prev" onclick="nextSlide(-1)">&#10094;</a>
+            <a class="next" onclick="nextSlide(1)">&#10095;</a>
+        </div>
+        
+        <div style="text-align:center">
+            <?php if(count($propDetails)>1) {
+                for($i=0; $i<count($propDetails); $i++) {?>
+            <span class="propImgDots" onclick="currentSlideD(<?=$i+1?>)"></span>
+            <?php }};?>
+        </div>
+    </div>
 </div>
 
 <script src="./public/js/propImagesCarousel.js"></script>
-<script src="./public/js/allPhoto.js"></script>
+<script src="./public/js/viewAllPhoto.js"></script>
+
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2d4e6c65e087f4ced51eeb4ccd34262c"></script>
 <script src="./public/js/mapView.js"></script>
 

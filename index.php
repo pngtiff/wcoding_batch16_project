@@ -66,7 +66,7 @@ try {
             // loads modifyProfileView
         case 'modifyProfile':
             // displayDefaultInfo();
-            modifyProfile($_REQUEST['user']);
+            modifyProfileView($_REQUEST['user']);
             break;
 
             // trigger updating data - working without any issue at the moment
