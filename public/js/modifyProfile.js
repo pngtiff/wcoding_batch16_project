@@ -18,14 +18,14 @@ let userLang = document.querySelector('#userLang');
 
 
 
-// if user hovers on the profile photo, display the choose photo button
+// if user hovers on the profile photo, displays the choose photo button
 imgDiv.addEventListener('mouseenter', function(){
     uploadButton.style.display = "block";
-})
+});
 
 imgDiv.addEventListener('mouseleave', function(){
     uploadButton.style.display = "none";
-})
+});
 
 // change the photo by choosing the different files
 file.addEventListener('change', function(){   
