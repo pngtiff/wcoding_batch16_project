@@ -89,7 +89,19 @@ function modifyProperty($params, $imgs) {
         for($i=0; $i<count($imgs); $i++) {
             $imgDescriptions[] = $params["t-attachment-$i"];
         }
-        $propertyM->modifyProperty($params['propId'], $imgs, $imgDescriptions);
+        $i = 0;
+        while(true) {
+            if (!empty($_POST["imgName-$i"]) AND !empty($_POST["t-imgName-$i"])) {
+                if (strlen($_POST["t-imgName-$i"])>255) {
+                    throw (new Exception('Title is too long'));
+                } else {
+                    $oldImgs[strip_tags($_POST["imgName-$i"])] = strip_tags($_POST["t-imgName-$i"]);
+                    $i++;
+                }
+            } else
+                break;
+        }
+        $propertyM->modifyProperty($params['propId'], $imgs, $imgDescriptions, $oldImgs);
 
     } else {
         header("Location: index.php?action=property&propId={$params['propId']}");

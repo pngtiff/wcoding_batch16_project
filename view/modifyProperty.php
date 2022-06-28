@@ -51,16 +51,15 @@ ob_start(); ?>
             <button id="addImg">Add img</button>
             <span class="hide">(At least 2, at most 20)</span>
         </label>
-        <input type="hidden" id="imgLinks", name="imgLinks" value="<?=$imgs;?>">
         <div id="photosPreview">
             <?php 
             for($i=0; $i<count($propDetails); $i++) {
                 ?>
                 <div>
-                    <input value="<?=$propDetails[$i]['image_description']?>" name="f-attachment-<?=$i?>" type="text">
-                    <span>&times;</span>
+                    <input value="<?=$propDetails[$i]['image_description']?>" name="t-imgName-<?=$i?>" type="text">
+                    <span class="closeBttn">&times;</span>
                     <img src="./public/images/property_images/<?=$propDetails[$i]['propId']?>/<?=$propDetails[$i]['p_img']?>" alt="">
-                    <input value="<?=$propDetails[$i]['p_img']?>" name="attachment-<?=$i?>" type="hidden">
+                    <input value="<?=$propDetails[$i]['p_img']?>" name="imgName-<?=$i?>" type="hidden">
                 </div>
                 <?php
             }

@@ -29,3 +29,12 @@
     width: 200px
 }
 
+.closeBttn
+{
+    color: #aaaaaa;
+    font-size: 28px;
+    font-weight: bold;
+    z-index: 2;
+    right: 10px;
+    top: 10px;
+}
