@@ -79,10 +79,10 @@ function getPropertyOwner($propId) {
     require('./view/detailedPropertyView.php');
 }
 
-function modifyProperty($propId) {
+function prefillProperty($propId) {
     if(isset($_SESSION['uid']) and $_SESSION['uid'] === $_SESSION['user_uid']) {
         $propertyM = new PropertyManager();
-        $propDetails = $propertyM->modifyProperty($propId);
+        $propDetails = $propertyM->prefillProperty($propId);
         
         require('./view/modifyProperty.php');
     } else {
@@ -90,10 +90,31 @@ function modifyProperty($propId) {
     }
 }
 
-// function modifyProperty() {
-//     $propertyM = new PropertyManager();
-//     $propertyM->modifyProperty();
-// }
+function modifyProperty($params, $imgs) {
+    if(isset($_SESSION['uid']) and $_SESSION['uid'] === $_SESSION['user_uid']) {
+        $propertyM = new PropertyManager();
+        for($i=0; $i<count($imgs); $i++) {
+            $imgDescriptions[] = $params["t-attachment-$i"];
+        }
+        $i = 0;
+        while(true) {
+            if (!empty($_POST["imgName-$i"]) AND !empty($_POST["t-imgName-$i"])) {
+                if (strlen($_POST["t-imgName-$i"])>255) {
+                    throw (new Exception('Title is too long'));
+                } else {
+                    $oldImgs[strip_tags($_POST["imgName-$i"])] = strip_tags($_POST["t-imgName-$i"]);
+                    $i++;
+                }
+            } else
+                break;
+        }
+
+        $propertyM->modifyProperty($params['propId'], $imgs, $imgDescriptions, $oldImgs);
+
+    } else {
+        header("Location: index.php?action=property&propId={$params['propId']}");
+    }
+}
 
 function modifyProfile($userId) {
     $userM = new UserManager($userId); 

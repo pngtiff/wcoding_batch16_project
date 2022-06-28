@@ -47,14 +47,18 @@ header {
 .dropbtn, .dropbtn2, .dropbtn3, .dropbtn4 {
     background: none;
     color: black;
-    padding: 10px;
-    font-size: 16px;
+    padding: 0.5rem;
+    font-size: 1rem;
     border: none;
     transform: scale(1);
     transform-origin: top center;
     transition: all 1s ease-in-out;
   }
   
+  .dropbtn, .dropbtn2, .dropbtn3 {
+    padding-top: 2.2rem;
+  }
+
 .dropdown, .dropdown2, .dropdown3, .dropdown4 {
     display: inline-block;
 }

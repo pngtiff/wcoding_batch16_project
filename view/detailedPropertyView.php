@@ -18,7 +18,7 @@
         else?></p>
     <?php if(!empty($_SESSION['uid'])) {
     if($_SESSION['uid'] === $_SESSION['user_uid']) { ?>
-       <button><a href="index.php?action=modifyProperty&propId=<?= $_REQUEST['propId'];?>">Modify Property Details</a></button>
+       <button><a href="index.php?action=prefillProperty&propId=<?= $_REQUEST['propId'];?>">Modify Property Details</a></button>
     <?php }} ?>
     <div class='propertyImgContainer propImages'>
         <?php if(count($propDetails)>1) {
