@@ -1,25 +1,25 @@
-#postPropertyForm {
+#postPropertyForm, #modifyPropertyForm {
     display: flex;
     justify-content: center;
     flex-direction: column;
     
 }
 
-#postPropertyForm > * {
+#postPropertyForm > *, #modifyPropertyForm > * {
     display: flex;
     justify-content: space-between;
     width: 400px;
     position: relative;
 }
 
-#postPropertyForm #photosPreview > * {
+#postPropertyForm #photosPreview > *, #modifyPropertyForm #photosPreview > * {
     position: relative;
 }
 
-#postPropertyForm span.hide {
+#postPropertyForm span.hide, #modifyPropertyForm span.hide {
     display: none;
 }
-#postPropertyForm span.show {
+#postPropertyForm span.show, #modifyPropertyForm span.show {
     position: absolute;
     display: block;
     left: 100%;
@@ -48,3 +48,12 @@ input, select  {
     justify-content: center;
 }
 
+.closeBttn
+{
+    color: #aaaaaa;
+    font-size: 28px;
+    font-weight: bold;
+    z-index: 2;
+    right: 10px;
+    top: 10px;
+}

@@ -17,11 +17,6 @@ function checkSignIn($params){
     $signIn->checkSignIn($params['email'], $params['password']);
 }
 
-function verifyEmail($params){
-    $email = new UserManager();
-    $email->verifyEmail($params['email']);
-}
-
 function signOut(){
     $signOut = new UserManager();
     $signOut->signOut();
@@ -56,10 +51,10 @@ function listProperties() {
     return $properties;
 }
 
-function getLanding($userId) {
+function getLanding() {
     $properties = listProperties();
-    $userM = new UserManager($userId); 
-    $data = $userM->viewUserData();
+    // $userM = new UserManager(); 
+    // $data = $userM->viewUserData();
     require('./view/indexView.php');
 }
 
@@ -71,6 +66,13 @@ function getProperty($propId) {
     require('./view/detailedPropertyView.php');
 }
 
+function getZipCode($propId) {
+    $propertyM = new PropertyManager();
+    $zipcode = $propertyM->getPropertyZipCode($propId);
+
+    echo($zipcode['zipcode']); ///// ECHO the Corresponding Zipcode to the AJAX Request in ZipCodeAPI.js so that it can be used in front
+}
+
 function getPropertyOwner($propId) {
     $propertyM = new PropertyManager();
     $propOwner = $propertyM->getPropertyOwner($propId);
@@ -78,10 +80,10 @@ function getPropertyOwner($propId) {
     require('./view/detailedPropertyView.php');
 }
 
-function modifyProperty($propId) {
+function prefillProperty($propId) {
     if(isset($_SESSION['uid']) and $_SESSION['uid'] === $_SESSION['user_uid']) {
         $propertyM = new PropertyManager();
-        $propDetails = $propertyM->modifyProperty($propId);
+        $propDetails = $propertyM->prefillProperty($propId);
         
         require('./view/modifyProperty.php');
     } else {
@@ -89,14 +91,40 @@ function modifyProperty($propId) {
     }
 }
 
-// function modifyProperty() {
-//     $propertyM = new PropertyManager();
-//     $propertyM->modifyProperty();
-// }
+function modifyProperty($params, $imgs) {
+    if(isset($_SESSION['uid']) and $_SESSION['uid'] === $_SESSION['user_uid']) {
+        $propertyM = new PropertyManager();
+        for($i=0; $i<count($imgs); $i++) {
+            $imgDescriptions[] = $params["t-attachment-$i"];
+        }
+        $i = 0;
+        while(true) {
+            if (!empty($_POST["imgName-$i"]) AND !empty($_POST["t-imgName-$i"])) {
+                if (strlen($_POST["t-imgName-$i"])>255) {
+                    throw (new Exception('Title is too long'));
+                } else {
+                    $oldImgs[strip_tags($_POST["imgName-$i"])] = strip_tags($_POST["t-imgName-$i"]);
+                    $i++;
+                }
+            } else
+                break;
+        }
 
-function modifyProfile($userId) {
+        $propertyM->modifyProperty($params['propId'], $imgs, $imgDescriptions, $oldImgs);
+
+    } else {
+        header("Location: index.php?action=property&propId={$params['propId']}");
+    }
+}
+
+function modifyProfileView($userId) {
     $userM = new UserManager($userId); 
     $data = $userM->viewUserData();
+
+    for($i=0; $i<count($data['languages']); $i++) {
+        $selectedLang = $data['languages'][$i];
+        // echo $data['languages'][$i];
+    }
 
     require('./view/modifyProfileView.php');
 }

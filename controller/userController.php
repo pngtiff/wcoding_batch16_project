@@ -12,7 +12,6 @@
         require('./view/createProfile.php');
     }
 
-    //
     function cancelReservation($params){
        if (!empty($params['reservation_num'])){
         $userM = new UserManager();

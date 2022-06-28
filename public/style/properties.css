@@ -1,7 +1,11 @@
-/*** CSS for listPropertiesView and propertyCard pages ***/
+/*** CSS for listPropertiesView propertyCard & see all photo pages ***/
 #properties {
     width: 100%;
     padding: 20px 4% 0 4%;
+}
+
+#propertyDetails {
+    color: black;
 }
 
 #propertyDetails p {
@@ -69,6 +73,7 @@
 
 .propDesc {
     width: 60%;
+    color: #0A2239;
 }
 
 .upperLowerBorders {
@@ -82,6 +87,7 @@
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     border-radius: 10px;
     padding: 15px;
+    color: black;
 }
 
 .resvbutton {
@@ -163,3 +169,144 @@
     object-fit: cover;
     object-position: center;
 }
+
+
+/* ===================================== */
+/* See all photos of the current property*/
+/* ===================================== */
+
+.photoModalContainer{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    z-index: 1000;
+    pointer-events: none;
+    opacity: 0;
+    overflow-y: scroll;
+}
+
+.innerContainer{
+    width: 800px;
+    margin-top: 60px;
+}
+
+.imgGrid{
+    width: 100%;
+    display: grid;
+    grid-template-rows:auto auto;
+    grid-template-columns:1.2fr 1.2fr;
+    grid-template-areas:
+    "image-1 image-1"
+    "image-2 image-3";
+    overflow:hidden;
+    grid-gap:1px;
+}
+
+
+.allPropImgContainer{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.allPropImg{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform-origin: center center;
+    transition: transform 0.5s ease-in-out;
+}
+
+.allPropImgContainer:hover .allPropImg{
+    transform: scale(1.2);
+}
+
+.pModalCloseButton{
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    position: fixed;
+    top: 20px;
+    left: 50px;
+}
+
+/* specificity */
+div.showP{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ============= */
+/* detailed view */
+/* ============= */
+.detailedPhotoView{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    z-index: 1100;
+    pointer-events: none;
+    opacity: 0;
+}
+
+/* Slideshow container */
+.slideContainer {
+    width: 80%;
+    height: 80%;
+    position: relative;
+    margin-top: 60px;
+    display: flex;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.detailedImgSlides {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+.propertyGallery{
+    width: 100%;
+    height: 100%;
+}
+
+.detailedCloseButton{
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    position: fixed;
+    top: 20px;
+    left: 50px;
+}
+
+/* animation */
+/* ========= */
+.fade {
+    animation-name: fade;
+    animation-duration: 1.0s;
+}
+
+@keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+}
+
+
+

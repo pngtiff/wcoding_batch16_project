@@ -180,6 +180,7 @@
             <div id="terms"><a href="#"><h3>Terms</h3></a></div>
         </div>
     </footer>
+    <script src="public/js/header.js"></script>
     <script src="public/js/footerModal.js"></script>
     <script src="./public/js/search.js"></script> 
 
