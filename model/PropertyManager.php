@@ -5,9 +5,10 @@ namespace wcoding\batch16\finalproject\Model;
 use Exception;
 use TypeError;
 
-require_once ('Manager.php');
-class PropertyManager extends Manager {
-    public function __construct($user=0)
+require_once('Manager.php');
+class PropertyManager extends Manager
+{
+    public function __construct($user = 0)
     {
         parent::__construct();
         $this->_user_id = $user;
@@ -17,7 +18,7 @@ class PropertyManager extends Manager {
     public function getProperties($action = '')
     {
         if ($action == 'profile') {
-            $req = $this->_connection->prepare("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.city, p.address1, p.address2, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
+            $req = $this->_connection->prepare("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.latitude, p.longitude, p.city, p.address1, p.address2, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
             FROM properties p
             LEFT JOIN property_types pt
             ON p.property_type_id = pt.id
@@ -30,7 +31,7 @@ class PropertyManager extends Manager {
             $req->bindParam('uid', $_REQUEST['user']);
             $req->execute();
         } else {
-            $req = $this->_connection->query("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.city, p.address1, p.address2, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
+            $req = $this->_connection->query("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.latitude, p.longitude, p.city, p.address1, p.address2, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
             FROM properties p
             LEFT JOIN property_types pt
             ON p.property_type_id = pt.id
@@ -56,7 +57,7 @@ class PropertyManager extends Manager {
     // Single property detail for property listing page
     public function getProperty($propId)
     {
-        $req = $this->_connection->prepare("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.city, p.address1, p.address2, p.room_num, p.bed_num, p.bath_num, p.is_furnished, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
+        $req = $this->_connection->prepare("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.latitude, p.longitude, p.city, p.address1, p.address2, p.room_num, p.bed_num, p.bath_num, p.is_furnished, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
         FROM properties p
         LEFT JOIN property_types pt
         ON p.property_type_id = pt.id
@@ -94,9 +95,19 @@ class PropertyManager extends Manager {
         return $propOwner;
     }
 
-    public function modifyProperty($propId)
+    public function getPropertyZipCode($propId)
     {
-        $req = $this->_connection->prepare("SELECT p.post_title, p.room_num, p.bed_num, p.bath_num, p.is_furnished, p.room_type_id, p.monthly_price_won, p.description, p.bank_account_num, p.validation, rt.room_type AS r_type, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
+        $req = $this->_connection->prepare("SELECT p.zipcode FROM properties p WHERE p.id = :propId");
+        $req->bindParam('propId', $propId);
+        $req->execute();
+        $propZipCode = $req->fetch(\PDO::FETCH_ASSOC);
+        $req->closeCursor();
+        return $propZipCode;
+    }
+
+    public function prefillProperty($propId)
+    {
+        $req = $this->_connection->prepare("SELECT p.id AS propId, p.post_title, p.room_num, p.bed_num, p.bath_num, p.is_furnished, p.room_type_id, p.monthly_price_won, p.description, p.bank_account_num, p.validation, rt.room_type AS r_type, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
         FROM properties p
         LEFT JOIN property_types pt
         ON p.property_type_id = pt.id
@@ -107,17 +118,11 @@ class PropertyManager extends Manager {
         WHERE p.is_active = 1 AND p.id = :propId");
         $req->bindParam('propId', $propId);
         $req->execute();
-        $propDetails = $req->fetch(\PDO::FETCH_ASSOC);
+        $propDetails = $req->fetchAll(\PDO::FETCH_ASSOC);
         $req->closeCursor();
-    
+
         return $propDetails;
     }
-
-    // public function modifyProperty()
-    // {
-
-    // }
-
 
     // SEARCH FUNCTION : $search = "search" get parameter called from router
 
@@ -131,7 +136,8 @@ class PropertyManager extends Manager {
         $propertyType = ($propertyType == "any") ? "%%" : $propertyType;
         $roomType = ($roomType == "any") ? "%%" : $roomType;
 
-        $req = $this->_connection->prepare("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.city, p.address1, p.address2, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
+
+        $req = $this->_connection->prepare("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.latitude, p.longitude, p.city, p.address1, p.address2, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.img_url AS p_img, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
         FROM properties p
         LEFT JOIN property_types pt
         ON p.property_type_id = pt.id
@@ -181,7 +187,8 @@ class PropertyManager extends Manager {
         return $properties;
     }
 
-    public function postProperty($title, $country, $province, $city, $district, $address1, $address2, $zipcode, $propertyType, $roomType, $roomNum, $bedNum, $bathNum, $furnished, $size, $price, $description, $bankAccNum, $imgs, $imgDescriptions) {
+    public function postProperty($title, $country, $province, $city, $district, $address1, $address2, $zipcode, $propertyType, $roomType, $roomNum, $bedNum, $bathNum, $furnished, $size, $price, $description, $bankAccNum, $imgs, $imgDescriptions)
+    {
         $uid = $this->_connection->query("SELECT uid FROM users WHERE email='{$_SESSION['email']}'")->fetch(\PDO::FETCH_ASSOC)['uid'];
         // INFO validation
         // Address
@@ -252,17 +259,19 @@ class PropertyManager extends Manager {
         }
         // Create a folder for the property on the server
         $propertyId = $this->_connection->query("SELECT id FROM properties ORDER BY ID DESC LIMIT 0, 1")->fetch(\PDO::FETCH_ASSOC)['id'] + 1;
-        mkdir("./public/images/property_images/$propertyId");
+        if (!file_exists("./public/images/property_images/$propertyId")) {
+            mkdir("./public/images/property_images/$propertyId");
+        }
         foreach ($imgs as $file) {
             $fileName = pathinfo($file["name"]);
             $extension  = $fileName['extension'];
             $fileLocation = $file["tmp_name"];
             $bytes = bin2hex(random_bytes(16)); // generates secure pseudo random bytes and bin2hex converts to hexadecimal string
-            $imgName[] = $bytes.".".$extension;
-            move_uploaded_file($fileLocation, "./public/images/property_images/$propertyId/" . $imgName[count($imgName)-1]);
+            $imgName[] = $bytes . "." . $extension;
+            move_uploaded_file($fileLocation, "./public/images/property_images/$propertyId/" . $imgName[count($imgName) - 1]);
         }
-        
-        
+
+
         if ($furnished) {
             $this->_connection->exec("INSERT 
                 INTO properties (user_uid, post_title, country, province_state, zipcode, city, district, address1, address2, size, property_type_id, room_type_id, monthly_price_won, description, bank_account_num, room_num, bed_num, bath_num, is_furnished) 
@@ -274,13 +283,189 @@ class PropertyManager extends Manager {
             )");
         }
 
-        for($i=0; $i<count($imgName); $i++) {
+        for ($i = 0; $i < count($imgName); $i++) {
             $this->_connection->exec("INSERT
                 INTO property_imgs (property_id, img_url, description) 
                 VALUES ('$propertyId', '{$imgName[$i]}', '{$imgDescriptions[$i]}')
-            "); 
+            ");
         }
         header("Location:index.php?action=property&propId={$propertyId}");
     }
+    public function modifyProperty($propId, $imgs, $imgDescriptions, $oldImgs) {
+        // INFO validation
+        if ($propId < 0)
+            throw (new Exception('Invalid property id'));
 
+        if (strlen($_POST['title']) < 50 AND strlen($_POST['title']) > 0) {
+            $title = strip_tags($_POST['title']);
+        } else {
+            throw (new Exception('Title is too long'));
+        }
+
+        if ($_POST['roomType'] > 0 and $_POST['roomType'] < 5) {
+            $roomType = $_POST['roomType'];
+        } else {
+            throw (new TypeError("Invalid room type"));
+        }
+
+        if ($_POST['bedroom'] > 0 and $_POST['bedroom'] < 100) {
+            $bedrooms = $_POST['bedroom'];
+        } else {
+            throw (new TypeError("Invalid room number"));
+        }
+
+        if($_POST['bath'] > 0 and $_POST['bath'] < 100) {
+            $bathrooms = $_POST['bath'];
+        } else {
+            throw (new TypeError("Invalid room number"));
+        }
+
+        if (isset($_POST['furnished'])) {
+            $furnished = 1;
+            if ($_POST['bed']< 100) {
+                $beds = $_POST['bed'];
+            } else {
+                throw (new TypeError("Invalid bed number"));
+            }
+        } else {
+            $furnished = 0;
+            $beds = 0;
+        }
+
+        if($_POST['price'] > 0) {
+            $price = $_POST['price'];
+        } else {
+            throw (new TypeError("Invalid price"));
+        }
+
+        $description = strip_tags($_POST['description']);
+
+        if(strlen($_POST['bankAccNum']) < 21 AND strlen($_POST['bankAccNum']) > 0) {
+            $bankAccNum = strip_tags($_POST['bankAccNum']);
+        } else {
+            throw (new Exception('Bank Account Number is too long'));
+        }
+        // Img Check
+        foreach ($imgDescriptions as &$desc) {
+            if(strlen($desc) < 256 AND strlen($desc) > 0) {
+                $desc = htmlspecialchars($desc);
+            } else {
+                throw (new Exception('Description must be less than 256 characters'));
+            }
+        }
+        foreach ($imgs as $file) {
+            if ($file['size'] > 1048576) {
+                throw (new Exception('Image is too big'));
+            }
+        }
+        $imgsToDelete = 0;
+        foreach($oldImgs as $img=>&$desc) {
+            if (preg_match("/^delete\+".$img."/", $desc)) {
+                $imgsToDelete++;
+            }
+        }
+        if (count($imgs)+count($oldImgs)-$imgsToDelete < 2) {
+            throw (new Exception('At least 2 images'));
+        }
+        
+        // Copying previous entry
+        $copy = $this->_connection->prepare("INSERT INTO properties (user_uid, post_title, country, province_state, zipcode, city, district, address1, address2, size, property_type_id, room_type_id, monthly_price_won, description, bank_account_num, room_num, bed_num, bath_num, is_furnished)
+        SELECT user_uid, post_title, country, province_state, zipcode, city, district, address1, address2, size, property_type_id, room_type_id, monthly_price_won, description, bank_account_num, room_num, bed_num, bath_num, is_furnished
+        FROM properties
+        WHERE id = :propId");
+        $copy->bindParam('propId', $propId, \PDO::PARAM_INT);
+        $copy->execute();
+        $copy->closeCursor();
+        
+        $newPropId = $this->_connection->query("SELECT id FROM properties ORDER BY ID DESC LIMIT 0, 1")->fetch(\PDO::FETCH_ASSOC)['id'];
+        $dest = "./public/images/property_images/$newPropId/";
+        $src = "./public/images/property_images/$propId/";
+        
+        // Deleting images
+        foreach($oldImgs as $img=>&$desc) {
+            if (preg_match("/^delete\+".$img."/", $desc)) {
+                $delete = $this->_connection->prepare("DELETE FROM property_imgs WHERE property_id=:propId AND img_url=:img");
+                $delete->bindParam('img', $img, \PDO::PARAM_STR);
+                $delete->bindParam('propId', $propId, \PDO::PARAM_INT);
+                $delete->execute();
+                $delete->closeCursor();
+                unlink($src.$img);
+            } else {
+                $up = $this->_connection->prepare("UPDATE property_imgs SET property_id=$newPropId, description=:desc WHERE property_id=$propId AND img_url=:img");
+                $up->bindParam('img', $img, \PDO::PARAM_STR);
+                $up->bindParam('propId', $propId, \PDO::PARAM_INT);
+                $up->bindParam('desc', $desc, \PDO::PARAM_STR);
+                $up->execute();
+                $up->closeCursor();
+            }
+        }
+
+        // Create new folder for old images of updated property
+        if (!file_exists($dest)) { 
+            mkdir($dest);
+        }
+        // Getting all old images from the folder
+        $files = glob($src."*.{"."jpg,png,gif"."}", GLOB_BRACE);
+    
+        // Move all old images from old folder into a new one
+        if (count($files)>0) { 
+                foreach ($files as $f) {
+                $moveTo = $dest . basename($f);
+                rename($f, $moveTo);
+            }
+        }
+
+        // Move uploaded images into the folder
+        foreach ($imgs as $file) {
+            $fileName = pathinfo($file["name"]);
+            $extension  = $fileName['extension'];
+            $fileLocation = $file["tmp_name"];
+            $bytes = bin2hex(random_bytes(16)); // generates secure pseudo random bytes and bin2hex converts to hexadecimal string
+            $imgName[] = $bytes . "." . $extension;
+            move_uploaded_file($fileLocation, "./public/images/property_images/$newPropId/" . $imgName[count($imgName) - 1]);
+        }
+
+        // Deactivating previous entry
+        $req = $this->_connection->prepare("UPDATE properties SET is_active = 0 WHERE id = :propId");
+        $req->bindParam('propId', $propId, \PDO::PARAM_INT);
+        $req->execute();
+        $req->closeCursor();
+        
+        // Updating copy of an old entry
+        $update = $this->_connection->prepare("UPDATE properties 
+        SET post_title=:title, 
+            room_type_id=:roomType, 
+            monthly_price_won=:price, 
+            description=:description, 
+            bank_account_num=:bankAccNum, 
+            room_num=:bedrooms, 
+            bath_num=:bathrooms, 
+            is_furnished=:furnished, 
+            bed_num=:beds 
+        WHERE id=$newPropId");
+        $update->bindParam('title', $title, \PDO::PARAM_STR);
+        $update->bindParam('roomType', $roomType, \PDO::PARAM_INT);
+        $update->bindParam('price', $price, \PDO::PARAM_INT);
+        $update->bindParam('description', $description, \PDO::PARAM_STR);
+        $update->bindParam('bankAccNum', $bankAccNum, \PDO::PARAM_STR);
+        $update->bindParam('bedrooms', $bedrooms, \PDO::PARAM_INT);
+        $update->bindParam('bathrooms', $bathrooms, \PDO::PARAM_INT);
+        $update->bindParam('furnished', $furnished, \PDO::PARAM_INT);
+        $update->bindParam('beds', $beds, \PDO::PARAM_INT);
+        $update->execute();
+
+        // Adding images into the database
+        for ($i = 0; $i < count($imgName); $i++) {
+            $res = $this->_connection->prepare("INSERT
+                INTO property_imgs (property_id, img_url, description) 
+                VALUES ('$newPropId', :imgName, :imgDescription)
+            ");
+            $res->bindParam('imgName', $imgName[$i], \PDO::PARAM_STR);
+            $res->bindParam('imgDescription', $imgDescriptions[$i], \PDO::PARAM_STR);
+            $res->execute();
+            $res->closeCursor();
+        }
+
+        header("Location: index.php?action=property&propId={$newPropId}");
+    }
 }
