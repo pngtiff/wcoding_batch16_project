@@ -40,7 +40,7 @@ class UserManager extends Manager
             if ($userInfo['dob']) {
                 // checking dob when signing in. dob is mandatory submission so
                 // if it's in the database user has already created a profile.                
-                header("Location:index.php");
+                header("Location:index.php?action=loggedIn");
             } else {
                 header("Location:index.php?action=createProfile");
             }
@@ -123,9 +123,7 @@ class UserManager extends Manager
             } 
             // If user has a profile they are redirected to createProfile page
             else {
-                $uid = $this->createUID();
-                $_SESSION['uid'] = $uid;
-                $this->_connection->exec("INSERT INTO users (email, first_name, last_name, uid) VALUES ('$response->email','$response->given_name','$response->family_name', '$uid')");
+                $_SESSION['uid'] = $user['uid'];
                 header('Location:index.php?action=createProfile');
             }
         // Else they are redirected to createProfile page
@@ -248,7 +246,7 @@ class UserManager extends Manager
     {
         session_destroy();
         setcookie(session_name(), '', time() - 3600, '/');
-        header('Location:index.php');
+        header('Location:index.php?action=loggedOut');
     }
 
 
