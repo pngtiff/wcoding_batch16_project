@@ -49,6 +49,10 @@ try {
         case 'property':
             getProperty($_REQUEST['propId']);
             break;
+        case 'getZipCode':
+            getZipCode($_REQUEST['propId']);
+            break;
+
         case 'modifyProperty':
             modifyProperty($_REQUEST['propId']);
             break;

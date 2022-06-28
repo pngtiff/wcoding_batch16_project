@@ -59,6 +59,7 @@
 
 </section>
 
+
 <!-- All property photos modal -->
 <div class="photoModalContainer">
     
@@ -75,6 +76,8 @@
 
 <script src="./public/js/propImagesCarousel.js"></script>
 <script src="./public/js/allPhoto.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2d4e6c65e087f4ced51eeb4ccd34262c"></script>
+<script src="./public/js/mapView.js"></script>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2d4e6c65e087f4ced51eeb4ccd34262c"></script>
 <script src="./public/js/kakaoMap.js"></script>
