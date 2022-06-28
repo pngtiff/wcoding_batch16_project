@@ -162,3 +162,8 @@ function getDistricts($city) {
         echo '<option selected value="-1">No cities/districts in this area</option>';
     }
 }
+
+function reservations($params) {
+    $reservations = new UserManager();
+    $reservations->reservations($params ['cardholder'], $params['credit_card_num'], $params['cvv'], $params['exp_month'], $params['exp_year'], $params['uid']);
+}

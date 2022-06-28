@@ -4,6 +4,16 @@
     width: 100%;
 }
 
+.checkIn, .checkOut {
+    display: flex;
+    width: 345px;
+    margin-right: 20px;
+}
+
+#startDate {
+    margin-left: 10px;
+}
+
 .creditCardForm {
     max-width: 100%;
     background-color: #fff;
@@ -14,7 +24,7 @@
 }
 .creditCardForm label {
     width: 80%;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
 }
 .creditCardForm .heading h1 {
     text-align: center;
@@ -29,16 +39,13 @@
     position: relative;
 }
 
-#owner {
-    width: 85%;
+#owner, #cardNumber {
+    width: 80%;
 }
 
-#cardNumber {
-    width: 52%;
-}
 
 #cvv {
-    width: 27%;
+    width: 80%;
     margin-left: 47px;
 }
 
@@ -51,7 +58,8 @@
 }
 
 #month, #year {
-    width: 145px;
+    width: 175px;
+    margin-left: 20px;
 }
 
 /* #month, #year {
@@ -62,7 +70,7 @@
     float: left;
     margin-bottom: 15px;
 } */
-.creditCardForm .payment .form-control {
+.creditCardForm .payment .form-control, #start, #end  {
     line-height: 40px;
     height: auto;
     padding: 0 16px;
@@ -82,6 +90,13 @@
     font-size: 16px;
 }
 
+.expiry {
+    display: flex;
+    width: 80%;
+    /* margin-left: 17px; */
+    margin-top: 5px;
+}
+
 #dates, .creditCardForm #expiration-date {
     width: 49%;
 }
@@ -89,6 +104,10 @@
 #dates {
     font-size: 24px;
     width: 30%;
+}
+
+#year {
+    margin-left: 10px;
 }
 
 #available {
@@ -100,18 +119,40 @@
     margin-top: 25px;
     text-align: right;
 }
-.creditCardForm #pay-now {
+
+.buttons {
+    width: 425px;
+    display: flex;
+    justify-content: center;
+}
+
+#dateBtn, #reset, #confirm-purchase {
+    background-color: rgb(0, 128, 0);
+    color: white;
+    border: none;
+}
+
+#dateBtn {
+    margin-left: 15px;
+}
+
+#reset {
+    margin-left: 20px;
+}
+
+/* .creditCardForm #pay-now {
     width: 100%;
     margin-top: 25px;
-}
-.creditCardForm .payment .btn {
-    width: 44%;
+} */
+/* .creditCardForm .payment .btn, #reset {
+    width: 30%;
     margin-top: 10px;
     margin-left: 80px;
-    font-size: 24px;
+    font-size: 14px;
     background-color: #2ec4a5;
     color: white;
-}
+    display: flex;
+} */
 .creditCardForm .payment select {
     padding: 10px;
     margin-right: 15px;
@@ -141,5 +182,9 @@ textarea:focus, input:focus{
 }
 
 .numError {
+    visibility: hidden;
+}
+
+.cvvError {
     visibility: hidden;
 }

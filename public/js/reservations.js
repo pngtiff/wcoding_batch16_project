@@ -1,15 +1,17 @@
 let owner = document.querySelector('#owner');
-let number = document.querySelector('#cardNum')
+let number = document.querySelector('#cardNumber');
+let cvv = document.querySelector('#cvv'); 
 // let signUpForm = document.querySelector('#signUpForm'); 
 // let reset = document.querySelector('#reset'); 
 
 owner.addEventListener('keyup', checkCardholder);
 number.addEventListener('keyup', checkCardNumber);
+cvv.addEventListener('keyup', checkCVV); 
 // signUpForm.addEventListener('submit', submitForm); 
 // reset.addEventListener('click', resetForm); 
 
 function checkCardholder() {
-    let regex = /^(?![\s.]+$)[a-zA-Z\s.]*$/;
+    let regex = /^(?![\s.]+$)[A-Z\-a-z\s.]{2,}$/;
     if (regex.test(owner.value)) {
         owner.classList.add('green');
         owner.classList.remove('red'); 
@@ -39,3 +41,23 @@ function checkCardNumber() {
         return false; 
     }
     }
+
+function checkCVV() {
+    let regex = /^[0-9]{3,4}$/;
+    if (regex.test(cvv.value)) {
+        cvv.classList.add('green');
+        cvv.classList.remove('red'); 
+        cvv.nextElementSibling.classList.add('cvvError'); 
+        return true;
+    }
+    else {
+        cvv.classList.add('red');
+        cvv.classList.remove('green');
+        cvv.nextElementSibling.classList.remove('cvvError'); 
+        return false; 
+    }
+    }
+
+function resetForm() {
+    document.getElementById('paymentForm').reset(); 
+}
