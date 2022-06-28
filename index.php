@@ -24,7 +24,7 @@ try {
                 throw (new Exception('You tried to sign in without a password.'));
             }
             break;
-        // case for ajax request to check if email/password are correct without refreshing the page
+            // case for ajax request to check if email/password are correct without refreshing the page
         case 'checkSignIn':
             checkSignIn($_REQUEST);
             break;
@@ -42,7 +42,6 @@ try {
         case 'profile':
             showUserInfo($_REQUEST['action'], $_REQUEST['user']);
             break;
-
         case 'listProperties':
             listProperties();
             break;
@@ -52,24 +51,14 @@ try {
         case 'getZipCode': //////// Used for the single detailed property view @TODO : Merge with SearchMapView
             getZipCode($_REQUEST['propId']);
             break;
-
-        case 'modifyProperty':
-            modifyProperty($_REQUEST['propId']);
-            break;
-            // case 'modifyProperty':
-            //     modifyProperty();
-            //     break;
         case 'signUp':
-            if(preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}+$#", $_POST['email'])  AND !empty($_POST['firstName']) AND !empty($_POST['lastName']) AND !empty($_POST['password']) AND !empty($_POST['passwordConfirm']) AND $_POST['passwordConfirm']==$_POST['password'] AND preg_match('/^(?=.*[!@#$%^&*-])(?=.*[0-9])(?=.*[A-Z]).{8,20}$/', $_POST['password']) AND preg_match('/^(?![\s.]+$)[A-Z\-a-z\s.]{2,}$/', $_POST['firstName'])AND preg_match('/^(?![\s.]+$)[A-Z\-a-z\s.]{2,}$/', $_POST['lastName'])) {
+            if (preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}+$#", $_POST['email'])  and !empty($_POST['firstName']) and !empty($_POST['lastName']) and !empty($_POST['password']) and !empty($_POST['passwordConfirm']) and $_POST['passwordConfirm'] == $_POST['password'] and preg_match('/^(?=.*[!@#$%^&*-])(?=.*[0-9])(?=.*[A-Z]).{8,20}$/', $_POST['password']) and preg_match('/^(?![\s.]+$)[A-Z\-a-z\s.]{2,}$/', $_POST['firstName']) and preg_match('/^(?![\s.]+$)[A-Z\-a-z\s.]{2,}$/', $_POST['lastName'])) {
                 signUp($_REQUEST);
             }
             break;
-    
-
         case 'createProfile':
             createProfile();
             break;
-
         case 'checkProfile':
             checkProfile();
             break;
@@ -77,16 +66,16 @@ try {
             // loads modifyProfileView
         case 'modifyProfile':
             // displayDefaultInfo();
-            modifyProfile($_REQUEST['user']);
+            modifyProfileView($_REQUEST['user']);
             break;
 
             // trigger updating data - working without any issue at the moment
         case 'updateUserData':
-            if (!empty($_REQUEST['language']) OR !empty($_REQUEST['phone_number']) OR !empty($_REQUEST['bio']) OR !empty($_FILES["uploadFile"]["name"])) {
+            if (!empty($_REQUEST['language']) or !empty($_REQUEST['phone_number']) or !empty($_REQUEST['bio']) or !empty($_FILES["uploadFile"]["name"])) {
                 updateProfile();
             }
             break;
-            
+
             //Search//
         case 'search':
             $_REQUEST['province'] = !empty($_REQUEST['province']) ? strip_tags($_REQUEST['province']) : 'any';
@@ -95,37 +84,53 @@ try {
             $_REQUEST['city'] = $_REQUEST['city'] == -1 ? 'any' : $_REQUEST['city'];
             search($_REQUEST);
             break;
-        case 'postProperty': 
-            $bedNum = (!empty($_REQUEST['furnished']) AND !empty($_REQUEST['bedNum'])) ? !empty($_REQUEST['bedNum']) : empty($_REQUEST['furnished']) AND empty($_REQUEST['bedNum']) ? true : false;
-            $_REQUEST['district'] = (!empty($_REQUEST['city']) AND $_REQUEST['city'] == -1) ? -1 : $_REQUEST['district'];
-            if (!empty($_REQUEST['title']) 
-                AND !empty($_SESSION['email']) 
-                AND !empty($_REQUEST['city']) 
-                AND !empty($_REQUEST['country']) 
-                AND !empty($_REQUEST['province']) 
-                AND !empty($_REQUEST['address1']) 
-                AND !empty($_REQUEST['zipcode']) 
-                AND !empty($_REQUEST['propertyType']) 
-                AND !empty($_REQUEST['roomType']) 
-                AND !empty($_REQUEST['size']) 
-                AND !empty($_REQUEST['price']) 
-                AND !empty($_REQUEST['description']) 
-                AND count($_FILES) >= 2 
-                AND count($_FILES) <= 20 
-                AND !empty($_REQUEST['bankAccNum']) 
-                AND !empty($_REQUEST['roomNum']) 
-                AND !empty($_REQUEST['bathNum']) 
-                AND $bedNum 
-                AND !empty($_REQUEST['district'])) {
-                    for ($i=0; $i<count($_FILES); $i++) {
-                        if (empty($_REQUEST["t-attachment-$i"])) {
-                            throw (new Exception("Message description is empty"));
-                        }
+        case 'postProperty':
+            $bedNum = (!empty($_REQUEST['furnished']) and !empty($_REQUEST['bedNum'])) ? !empty($_REQUEST['bedNum']) : empty($_REQUEST['furnished']) and empty($_REQUEST['bedNum']) ? true : false;
+            $_REQUEST['district'] = (!empty($_REQUEST['city']) and $_REQUEST['city'] == -1) ? -1 : $_REQUEST['district'];
+            if (
+                !empty($_REQUEST['title'])
+                and !empty($_SESSION['email'])
+                and !empty($_REQUEST['city'])
+                and !empty($_REQUEST['country'])
+                and !empty($_REQUEST['province'])
+                and !empty($_REQUEST['address1'])
+                and !empty($_REQUEST['zipcode'])
+                and !empty($_REQUEST['propertyType'])
+                and !empty($_REQUEST['roomType'])
+                and !empty($_REQUEST['size'])
+                and !empty($_REQUEST['price'])
+                and !empty($_REQUEST['description'])
+                and count($_FILES) >= 2
+                and count($_FILES) <= 20
+                and !empty($_REQUEST['bankAccNum'])
+                and !empty($_REQUEST['roomNum'])
+                and !empty($_REQUEST['bathNum'])
+                and $bedNum
+                and !empty($_REQUEST['district'])
+            ) {
+                for ($i = 0; $i < count($_FILES); $i++) {
+                    if (empty($_REQUEST["t-attachment-$i"])) {
+                        throw (new Exception("Message description is empty"));
                     }
-                    postProperty($_REQUEST, $_FILES);
+                }
+                postProperty($_REQUEST, $_FILES);
             }
-            
+
             break;
+
+        case 'prefillProperty':
+            prefillProperty($_REQUEST['propId']);
+            break;
+
+        case 'modifyProperty':
+            // for ($i = 0; $i < count($_FILES); $i++) {
+            //     if (empty($_REQUEST["t-attachment-$i"])) {
+            //         throw (new Exception("Message description is empty"));
+            //     }
+            // }
+            modifyProperty($_REQUEST, $_FILES);
+            break;
+
         case 'viewPostProperty':
             if (!empty($_SESSION['email'])) {
                 viewPostProperty();
@@ -141,9 +146,14 @@ try {
                 getDistricts($_REQUEST['city']);
             }
             break;
+        case 'cancelReservation';
+            cancelReservation($_REQUEST);
+            break;
+
         default:
             getLanding();
             break;
+        
     }
 } catch (Exception $e) {
     die('error' . $e->getMessage());
