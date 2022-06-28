@@ -372,4 +372,10 @@ class UserManager extends Manager
     {
         $this->_connection->exec("UPDATE users SET last_online=NOW() WHERE email='{$_SESSION['email']}'");
     }
+
+    public function getReservationCost()
+    {
+        $req = $this->_connection->prepare("SELECT * FROM properties WHERE property_id ='{$_SESSION['propId']}' AND is_active = 1");
+    }
+
 }

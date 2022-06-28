@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="public/style/header.css">
     <link rel="stylesheet" href="public/style/footer.css">
     <link rel="stylesheet" href="public/style/postProperty.css">
+    <link rel="stylesheet" href="public/style/reservations.css">
     <script src="https://kit.fontawesome.com/949df75f70.js" crossorigin="anonymous"></script>
 
 </head>

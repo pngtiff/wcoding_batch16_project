@@ -128,6 +128,10 @@ try {
                 getDistricts($_REQUEST['city']);
             }
             break;
+        case 'reservations':
+            require('./view/reservations.php');
+            break;
+
         default:
             //////// If logged in : Load user data for profile picture, if not, load without user data///
             // (isset($_REQUEST['userid'])) ? getLanding($_REQUEST['userid']) : getLanding(0);

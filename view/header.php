@@ -97,11 +97,12 @@
                             // echo '<img src="' . $_SESSION['profile_img']. '" width="500px" height="400px">';
                             echo '<a href="index.php?action=profile&user='.$_SESSION['uid'].'">View My Profile</a>';
                             echo '<a href="index.php?action=modifyProfile&user='.$_SESSION['uid'].'">Edit My Profile</a>';
+                            echo '<a href="index.php?action=signOut">Sign Out</a>';
                             
                         }
                         ?>                    
-                        <?php echo (!empty($_SESSION['firstName'])) ? '' : '<button id="signUpButton"><a href="#">Register</a></button>'; ?>
-                        <?php echo (!empty($_SESSION['firstName'])) ? '<button id="signOutButton"><a href="index.php?action=signOut">Sign Out</a></button>' : '<button id="signInButton"><a href="#">Sign In</a></button>'; ?>
+                        <?php echo (!empty($_SESSION['firstName'])) ? '' : '<a href="#" id="signUpButton">Register</a>'; ?>
+                        <?php echo (!empty($_SESSION['firstName'])) ? '' : '<a href="#" id="signInButton">Sign In</a>'; ?>
                 </div>
             </div>
         </div>
