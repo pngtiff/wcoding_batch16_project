@@ -35,6 +35,7 @@ function signUp($params) {
 function showUserInfo($action, $userId) {
     $userM = new UserManager($userId);
     $user = $userM->getUserInfo();
+    $reservations = $userM->getReservations();
     // $data = $userM->viewUserData(); //// for header profile picture - @TODO Get user ID directly from GetUserInfo function to avoid calling 2 functions /// 
     
     $propertyM = new PropertyManager($userId);
@@ -190,3 +191,5 @@ function getDistricts($city) {
         echo '<option selected value="-1">No cities/districts in this area</option>';
     }
 }
+ 
+

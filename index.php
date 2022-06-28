@@ -146,9 +146,14 @@ try {
                 getDistricts($_REQUEST['city']);
             }
             break;
+        case 'cancelReservation';
+            cancelReservation($_REQUEST);
+            break;
+
         default:
             getLanding();
             break;
+        
     }
 } catch (Exception $e) {
     die('error' . $e->getMessage());
