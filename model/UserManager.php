@@ -378,23 +378,31 @@ class UserManager extends Manager
         $req = $this->_connection->prepare("SELECT * FROM properties WHERE property_id ='{$_SESSION['propId']}' AND is_active = 1");
     }
 
-    public function reservations($cardholder, $credit_card_num, $cvv, $exp_month, $exp_year, $uid)
+    public function reservations()
     {
-        $cardholder = addslashes(htmlspecialchars(htmlentities(trim($cardholder))));
-        $credit_card_num = addslashes(htmlspecialchars(htmlentities(trim($credit_card_num))));
-        $cvv = addslashes(htmlspecialchars(htmlentities(trim($cvv))));
-        $exp_month = addslashes(htmlspecialchars(htmlentities(trim($exp_month))));
-        $exp_year = addslashes(htmlspecialchars(htmlentities(trim($exp_year))));
-        $uid = addslashes(htmlspecialchars(htmlentities(trim($uid))));
-
-        $response = $this->_connection->prepare("INSERT INTO reservations (cardholder, credit_card_num, cvv, exp_month, exp_year, user_uid) VALUES (:cardholder, :credit_card_num, :cvv, :exp_month, :exp_year, :uid)");
-        $response->bindParam("cardholder", $cardholder, \PDO::PARAM_STR);
-        $response->bindParam("credit_card_num", $credit_card_num, \PDO::PARAM_STR);
-        $response->bindParam("cvv", $cvv, \PDO::PARAM_STR);
-        $response->bindParam("exp_month", $exp_month, \PDO::PARAM_STR);
-        $response->bindParam("exp_year", $exp_year, \PDO::PARAM_STR);
-        $response->bindParam("uid", $uid, \PDO::PARAM_STR);
-        $response->execute();
+        $req = $this->_connection->prepare("INSERT INTO reservations (reservation_num, start_date, end_date, cardholder, credit_card_num, cvv, exp_month, exp_year, user_uid) VALUES (:reservation_num, :start_date, :end_date, :cardholder, :credit_card_num, :cvv, :exp_month, :exp_year, :uid)");
+        
+        $reservation_num = bin2hex(random_bytes(3));
+        $start_date =  addslashes(htmlspecialchars(htmlentities(trim($_REQUEST['startDate']))));
+        $end_date =  addslashes(htmlspecialchars(htmlentities(trim($_REQUEST['endDate']))));
+        $cardholder = addslashes(htmlspecialchars(htmlentities(trim($_REQUEST['owner']))));
+        $credit_card_num = password_hash($_REQUEST['cardNumber'], PASSWORD_DEFAULT);
+        $cvv = addslashes(htmlspecialchars(htmlentities(trim($_REQUEST['cvv']))));
+        $exp_month = addslashes(htmlspecialchars(htmlentities(trim($_REQUEST['month']))));
+        $exp_year = addslashes(htmlspecialchars(htmlentities(trim($_REQUEST['year']))));
+        $uid = addslashes(htmlspecialchars(htmlentities(trim($_SESSION['uid']))));
+        
+        
+        $req->bindParam("reservation_num", $reservation_num, \PDO::PARAM_STR);
+        $req->bindParam("start_date", $start_date, \PDO::PARAM_STR);
+        $req->bindParam("end_date", $end_date, \PDO::PARAM_STR);
+        $req->bindParam("cardholder", $cardholder, \PDO::PARAM_STR);
+        $req->bindParam("credit_card_num", $credit_card_num, \PDO::PARAM_STR);
+        $req->bindParam("cvv", $cvv, \PDO::PARAM_INT);
+        $req->bindParam("exp_month", $exp_month, \PDO::PARAM_INT);
+        $req->bindParam("exp_year", $exp_year, \PDO::PARAM_INT);
+        $req->bindParam("uid", $uid, \PDO::PARAM_STR);
+        $req->execute();
         header('Location:index.php');
     
     }

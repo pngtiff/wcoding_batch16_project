@@ -51,7 +51,7 @@
                     </div>
                 </div>
             </a>
-            <button class='resvbutton'><a href="index.php?action=reservations">Reserve now</a></button>
+            <button class='resvbutton'><a href="index.php?action=reservations&propId=<?=$_REQUEST['propId']?>">Reserve now</a></button>
             <!-- TODO: reservation action -->
         </div>
     </div>

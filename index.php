@@ -128,8 +128,13 @@ try {
                 getDistricts($_REQUEST['city']);
             }
             break;
+
         case 'reservations':
-            require('./view/reservations.php');
+            reservationView(); // 'user' -> user uid
+            break;
+        
+        case 'addReservationInfo':
+            addReservationInfo();
             break;
 
         default:

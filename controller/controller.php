@@ -163,7 +163,26 @@ function getDistricts($city) {
     }
 }
 
-function reservations($params) {
-    $reservations = new UserManager();
-    $reservations->reservations($params ['cardholder'], $params['credit_card_num'], $params['cvv'], $params['exp_month'], $params['exp_year'], $params['uid']);
+function reservationView(){
+    // $userId = $_SESSION['uid'];
+    // // for reservation, we need both information from the user and the host's property
+    // $userM = new UserManager($userId); // user
+    // $userData = $userM->viewUserData($userId); // from property manager, grab a required function
+
+    // $propertyM = new PropertyManager($propId);
+    // $propDetails = $propertyM->getProperty($propId);
+    // $propOwner = $propertyM->getPropertyOwner($propId);
+
+    require('view/reservations.php'); // display the view of the reservation form
+}
+
+function addReservationInfo(){
+    
+    $userM = new UserManager(); // user
+    $userM->reservations();
+
+
+
+
+    // execute the function from the UserManager
 }

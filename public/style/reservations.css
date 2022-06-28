@@ -126,14 +126,24 @@
     justify-content: center;
 }
 
-#dateBtn, #reset, #confirm-purchase {
+#reset, #confirm-purchase {
     background-color: rgb(0, 128, 0);
     color: white;
     border: none;
+    width: 50%;
+
 }
 
 #dateBtn {
-    margin-left: 15px;
+    background-color: rgb(0, 128, 0);
+    color: white;
+    border: none;
+    width: 45%;
+    height: 36px;
+    margin: auto;
+    padding: 10px;
+    text-align: center;
+    border-radius: 25px;
 }
 
 #reset {

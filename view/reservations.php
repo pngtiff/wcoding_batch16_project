@@ -3,35 +3,39 @@ $title = "Reserve this property";
 ob_start();?>
 <br>
 <body>
-    <form id="dates" action="index.php" method="post">
-        <p id="available">How long do you wish to stay?</p><br>
-        <div class="checkIn">
-            <label for="startDate" id="start">Check-in date</label>
-            <input type="date" id="startDate" name="startDate" class="form-control">
-        </div><br>
-        <div class="checkOut">
-            <label for="endDate" id="end">Check-out date</label>
-            <input type="date" id="endDate" name="endDate" class="form-control"><br>
-        </div>
-        <button type="submit" id=dateBtn>Confirm Dates</button><br>
-        <?php 
-        echo '<p>Total Cost of your stay: </p>'
-        ?>
-    </form>
     <div class="creditCardForm">
         <div class="heading">
             <h1>Reservation Payment</h1>
         </div>
         <div class="payment">
             <form id="paymentForm" action="index.php" method="post">
+                <p id="available">How long do you wish to stay?</p><br>
+                <div class="checkIn">
+                <label for="startDate" id="start">Check-in date</label>
+                <input type="date" id="startDate" name="startDate" class="form-control">
+                </div><br>
+                <div class="checkOut">
+                <label for="endDate" id="end">Check-out date</label>
+                <input type="date" id="endDate" name="endDate" class="form-control">
+                </div><br><br>
+
+                <?php 
+                    $date1 = 'startDate.value';
+                    $date2 = 'endDate.value'
+                ?>
+
+                <div id=dateBtn>Click here for price</div><br><br>
+                <?php 
+                echo '<p>Total Cost of your stay: </p>'
+                ?><br>
                 <label for="owner">Cardholder</label>
-                <input type="text" class="form-control" id="owner" placeholder="Enter your name as shown on your credit card">
+                <input type="text" class="form-control" id="owner" name="owner" placeholder="Enter your name as shown on your credit card">
                 <div class="nameError"><em>Please enter your name as shown on your credit card (only letters)</em></div><br>
                 <label for="cardNumber" id="cardNum">Card #</label>
-                <input type="text" class="form-control" id="cardNumber" placeholder="Enter credit card number with no spaces or dashes">
+                <input type="text" class="form-control" id="cardNumber" name="cardNumber" placeholder="Enter credit card number with no spaces or dashes">
                 <div class="numError"><em>Please enter a correct card number</em></div><br>
                 <label for="cvv">CVV</label>
-                <input type="text" class="form-control" id="cvv" placeholder="Enter the 3 or 4 digit code">
+                <input type="text" class="form-control" id="cvv" name="cvv" placeholder="Enter the 3 or 4 digit code on the back of your card">
                 <div class="cvvError"><em>3 or 4 numbers only</em></div><br>
                 <div class="expiry">
                     <label>Expiry</label>
@@ -63,6 +67,7 @@ ob_start();?>
                     <div class="buttons">
                         <!-- <img src="public/images/Credit-Card-Icons.jpg" id="visa"> -->
                         <button type="submit" class="btn btn-default" id="confirm-purchase">Confirm Payment</button>
+                        <input type="hidden" value="addReservationInfo" name="action">
                         <button id="reset" type="reset">Reset the form</button>
                     </div>
                 </form>
