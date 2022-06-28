@@ -1,33 +1,40 @@
 // API key: 2d4e6c65e087f4ced51eeb4ccd34262c
 // dapi.kakao.com/v2/maps/sdk.js?appkey=2d4e6c65e087f4ced51eeb4ccd34262c
 
-var mapContainer = document.getElementById('map');
+var lat = 33.450701,
+    lon = 126.570667;
 
-const kakaoMap = function (lat, lon) {
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', '//dapi.kakao.com/v2/maps/sdk.js?appkey=2d4e6c65e087f4ced51eeb4ccd34262c');
+const kakaoMap = function (lat, long) {
+    var mapContainer = document.getElementById('map'),
+        mapOption = { 
+        center: new kakao.maps.LatLng(lat, long), // center point of map
+        level: 4 // map zoom level
+    };
 
-    xhr.addEventListener('readystatechange', function () {
-        if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-            var mapOption = { 
-                center: new kakao.maps.LatLng(lat, lon), // 지도의 중심좌표
-                level: 3 // 지도의 확대 레벨
-            };
+    var map = new kakao.maps.Map(mapContainer, mapOption); // create map
 
-            var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+    // location of map marker
+    var centerPosition  = new kakao.maps.LatLng(lat, long); 
 
-            // 마커가 표시될 위치입니다 
-            var markerPosition  = new kakao.maps.LatLng(lat, lon); 
+    // create map marker
+    // var marker = new kakao.maps.Marker({
+    //     position: centerPosition
+    // });
 
-            // 마커를 생성합니다
-            var marker = new kakao.maps.Marker({
-                position: markerPosition
-            });
+    var circle = new kakao.maps.Circle({ 
+        center : centerPosition,
+        radius: 300,
+        strokeColor: '#29A376',
+        strokeOpacity: 1,
+        strokeStyle: 'solid',
+        fillColor: '#29A376',
+        fillOpacity: 0.5
+    });
 
-            // 마커가 지도 위에 표시되도록 설정합니다
-            marker.setMap(map);
+    // display map marker
+    // marker.setMap(map);
+    circle.setMap(map);
 
-        }
-    })
-    xhr.send(null);
 }
+
+kakaoMap(lat, lon);
