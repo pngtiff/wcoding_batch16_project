@@ -3,7 +3,7 @@
         <div class='propertyImgContainer'><img alt="property main image" src="<?= "./public/images/property_images/{$property['p_id']}/{$property['p_img']}";?>"></div>
         <div id='propertyDetails'>
             <p class="price">Price: <span><?= number_format($property['monthly_price_won']);?></span>₩/month</p>
-            <p>Location: <?= $property['city'].', '.$property['country'];?></p>
+            <p>Location: <?= $property['province_state'].', '.$property['country'];?></p>
             <p>Type: <?= $property['p_type']?>, <?= $property['r_type'];?></p>
             <p><?php 
             if($property['post_title']==''){

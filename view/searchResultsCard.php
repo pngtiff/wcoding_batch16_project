@@ -4,14 +4,17 @@
         ?>
         
         <h2>Search Results for <?php echo $_REQUEST['province'].(!empty($_REQUEST['city']) ? ", {$_REQUEST['city']}" : '');?></h2>
-        <div id='propertiesSearchList'>
-            <?php
-            foreach($properties as $property)
-            {
-                include('propertyCard.php');
-            } ?>
+        <div id='searchResultsContainer'>
+            <div id='propertiesSearchList'>
+                <?php
+                foreach($properties as $property)
+                {
+                    include('propertyCard.php');
+                } ?>
+            </div>
+            
+            <div id="searchMap"></div>
         </div>
-        
     <?php
     }else {
         ?>

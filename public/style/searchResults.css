@@ -1,4 +1,3 @@
-/*** CSS for listPropertiesView and propertyCard pages ***/
 /* #properties {
     width: 95%;
     margin-top: 20px;
@@ -10,11 +9,24 @@
     flex-wrap: wrap;
 } */
 
+#searchResultsContainer {
+    margin-top: 40px;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+#searchMap {
+    width: 35%;
+    height: 100vh;
+}
+
 #propertiesSearchList
 {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    width: 65%;
 }
 
 #propertiesSearchList .property {

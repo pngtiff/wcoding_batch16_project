@@ -15,6 +15,7 @@ function loadSearch(e) {
         if (e.target.status === 200) {
             document.querySelector("section").innerHTML = ""
             document.querySelector("section").innerHTML = xhr.responseText
+            searchMap();
         } else {
             console.log("bad Request")
         }
