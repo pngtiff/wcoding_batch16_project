@@ -101,6 +101,7 @@ function modifyProperty($params, $imgs) {
             } else
                 break;
         }
+
         $propertyM->modifyProperty($params['propId'], $imgs, $imgDescriptions, $oldImgs);
 
     } else {

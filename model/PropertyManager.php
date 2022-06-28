@@ -286,7 +286,7 @@ class PropertyManager extends Manager
         if ($propId < 0)
             throw (new Exception('Invalid property id'));
 
-        if (strlen($_POST['title']) < 50) {
+        if (strlen($_POST['title']) < 50 AND strlen($_POST['title']) > 0) {
             $title = strip_tags($_POST['title']);
         } else {
             throw (new Exception('Title is too long'));
@@ -330,14 +330,14 @@ class PropertyManager extends Manager
 
         $description = strip_tags($_POST['description']);
 
-        if(strlen($_POST['bankAccNum']) < 21) {
+        if(strlen($_POST['bankAccNum']) < 21 AND strlen($_POST['bankAccNum']) > 0) {
             $bankAccNum = strip_tags($_POST['bankAccNum']);
         } else {
             throw (new Exception('Bank Account Number is too long'));
         }
         // Img Check
         foreach ($imgDescriptions as &$desc) {
-            if(strlen($desc) < 256) {
+            if(strlen($desc) < 256 AND strlen($desc) > 0) {
                 $desc = htmlspecialchars($desc);
             } else {
                 throw (new Exception('Description must be less than 256 characters'));
@@ -347,6 +347,15 @@ class PropertyManager extends Manager
             if ($file['size'] > 1048576) {
                 throw (new Exception('Image is too big'));
             }
+        }
+        $imgsToDelete = 0;
+        foreach($oldImgs as $img=>&$desc) {
+            if (preg_match("/^delete\+".$img."/", $desc)) {
+                $imgsToDelete++;
+            }
+        }
+        if (count($imgs)+count($oldImgs)-$imgsToDelete < 2) {
+            throw (new Exception('At least 2 images'));
         }
         
         // Copying previous entry
@@ -363,7 +372,7 @@ class PropertyManager extends Manager
         $src = "./public/images/property_images/$propId/";
         
         // Deleting images
-        foreach($oldImgs as $img=>$desc) {
+        foreach($oldImgs as $img=>&$desc) {
             if (preg_match("/^delete\+".$img."/", $desc)) {
                 $delete = $this->_connection->prepare("DELETE FROM property_imgs WHERE property_id=:propId AND img_url=:img");
                 $delete->bindParam('img', $img, \PDO::PARAM_STR);
@@ -372,9 +381,10 @@ class PropertyManager extends Manager
                 $delete->closeCursor();
                 unlink($src.$img);
             } else {
-                $up = $this->_connection->prepare("UPDATE property_imgs SET property_id=$newPropId WHERE property_id=$propId AND img_url=:img");
+                $up = $this->_connection->prepare("UPDATE property_imgs SET property_id=$newPropId, description=:desc WHERE property_id=$propId AND img_url=:img");
                 $up->bindParam('img', $img, \PDO::PARAM_STR);
                 $up->bindParam('propId', $propId, \PDO::PARAM_INT);
+                $up->bindParam('desc', $desc, \PDO::PARAM_STR);
                 $up->execute();
                 $up->closeCursor();
             }
@@ -436,10 +446,14 @@ class PropertyManager extends Manager
 
         // Adding images into the database
         for ($i = 0; $i < count($imgName); $i++) {
-            $this->_connection->exec("INSERT
+            $res = $this->_connection->prepare("INSERT
                 INTO property_imgs (property_id, img_url, description) 
-                VALUES ('$newPropId', '{$imgName[$i]}', '{$imgDescriptions[$i]}')
+                VALUES ('$newPropId', :imgName, :imgDescription)
             ");
+            $res->bindParam('imgName', $imgName[$i], \PDO::PARAM_STR);
+            $res->bindParam('imgDescription', $imgDescriptions[$i], \PDO::PARAM_STR);
+            $res->execute();
+            $res->closeCursor();
         }
 
         header("Location: index.php?action=property&propId={$newPropId}");
