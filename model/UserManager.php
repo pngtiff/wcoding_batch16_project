@@ -238,7 +238,7 @@ class UserManager extends Manager
         $req->bindParam('gender', $gender, \PDO::PARAM_STR);
         $req->bindParam('lang', $language, \PDO::PARAM_STR);
         $req->bindParam('bio', $bio, \PDO::PARAM_STR);
-        $req->bindParam('userImg', $folder, \PDO::PARAM_STR);
+        $req->bindParam('userImg', $imgName, \PDO::PARAM_STR);
         $req->execute();
         $_SESSION['profile_img'] = $imgName;
         header('Location:index.php');
