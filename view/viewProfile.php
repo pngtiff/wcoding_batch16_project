@@ -67,6 +67,9 @@
             </div>
         </div>
     </div>
+    
+    
+    <?php if (isset($_SESSION['email'])) include('reservationsView.php'); ?>
     <?php include('listPropertiesView.php'); ?> 
 </div>
 </section>

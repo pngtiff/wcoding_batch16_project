@@ -66,7 +66,7 @@
                 </select>
 
                 <select name="propertyType" id="propertyType" class="filter">
-                    <option value="any">Type of Property :</option>
+                    <option value="any">Property type :</option>
                     <option value="1">Apartment</option>
                     <option value="2">Officetel</option>
                     <option value="3">Villa</option>
