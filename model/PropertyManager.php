@@ -17,7 +17,7 @@ class PropertyManager extends Manager {
     public function getProperties($action = '')
     {
         if ($action == 'profile') {
-            $req = $this->_connection->prepare("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.city, p.address1, p.address2, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
+            $req = $this->_connection->prepare("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.latitude, p.longitude, p.city, p.address1, p.address2, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
             FROM properties p
             LEFT JOIN property_types pt
             ON p.property_type_id = pt.id
@@ -30,7 +30,7 @@ class PropertyManager extends Manager {
             $req->bindParam('uid', $_REQUEST['user']);
             $req->execute();
         } else {
-            $req = $this->_connection->query("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.city, p.address1, p.address2, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
+            $req = $this->_connection->query("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.latitude, p.longitude, p.city, p.address1, p.address2, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
             FROM properties p
             LEFT JOIN property_types pt
             ON p.property_type_id = pt.id
@@ -56,7 +56,7 @@ class PropertyManager extends Manager {
     // Single property detail for property listing page
     public function getProperty($propId)
     {
-        $req = $this->_connection->prepare("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.city, p.address1, p.address2, p.room_num, p.bed_num, p.bath_num, p.is_furnished, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
+        $req = $this->_connection->prepare("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.latitude, p.longitude, p.city, p.address1, p.address2, p.room_num, p.bed_num, p.bath_num, p.is_furnished, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
         FROM properties p
         LEFT JOIN property_types pt
         ON p.property_type_id = pt.id
@@ -142,7 +142,7 @@ class PropertyManager extends Manager {
         $roomType = ($roomType == "any") ? "%%" : $roomType;
 
 
-        $req = $this->_connection->prepare("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.city, p.address1, p.address2, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.img_url AS p_img, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
+        $req = $this->_connection->prepare("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.latitude, p.longitude, p.city, p.address1, p.address2, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.img_url AS p_img, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
         FROM properties p
         LEFT JOIN property_types pt
         ON p.property_type_id = pt.id

@@ -49,7 +49,7 @@ try {
         case 'property':
             getProperty($_REQUEST['propId']);
             break;
-        case 'getZipCode':
+        case 'getZipCode': //////// Used for the single detailed property view @TODO : Merge with SearchMapView
             getZipCode($_REQUEST['propId']);
             break;
 
