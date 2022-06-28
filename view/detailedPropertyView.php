@@ -51,7 +51,7 @@
                     </div>
                 </div>
             </a>
-            <button class='resvbutton'><a href="">Reserve now</a></button>
+            <button class='resvbutton primaryBtn primaryFill'><a href="" class="offsetColor">Reserve now</a></button>
             <!-- TODO: reservation action -->
         </div>
     </div>

@@ -86,12 +86,10 @@
 
 .resvbutton {
     font-size: 1.1rem;
-    background-color: rgba(41,163,118, 0.8);
-    color: #fff;
 }
 
 .resvbutton:hover {
-    color: inherit;
+    background-color: rgba(41,163,118, 0.95);
 }
 
 .prev, .next {

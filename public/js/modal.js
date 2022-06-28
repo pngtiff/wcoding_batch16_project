@@ -42,6 +42,7 @@ function showSignup() {
     let h3 = document.createElement('h2');
     h3.textContent = 'Click button below to sign in.';
     let bttn = document.createElement('button');
+    bttn.classList.add('primaryBtn', 'primaryColor');
     bttn.textContent = 'Sign in';
     bttn.addEventListener('click', moveBanner)
     banner.appendChild(h1);
@@ -57,6 +58,7 @@ function showSignin () {
     let h2 = document.createElement('h2');
     h2.textContent = 'Click button below to sign up.';
     let bttn = document.createElement('button');
+    bttn.classList.add('primaryBtn', 'primaryColor');
     bttn.textContent = 'Sign up';
     bttn.addEventListener('click', moveBanner)
     banner.appendChild(h1);
