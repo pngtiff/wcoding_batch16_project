@@ -18,7 +18,7 @@
         else?></p>
     <?php if(!empty($_SESSION['uid'])) {
     if($_SESSION['uid'] === $_SESSION['user_uid']) { ?>
-       <button><a href="index.php?action=prefillProperty&propId=<?= $_REQUEST['propId'];?>">Modify Property Details</a></button>
+       <button class="primaryBtn offsetFill"><a class="primaryColor" href="index.php?action=prefillProperty&propId=<?= $_REQUEST['propId'];?>">Modify Property Details</a></button>
     <?php }} ?>
     <div class='propertyImgContainer propImages'>
         <?php if(count($propDetails)>1) {
@@ -108,7 +108,7 @@
 <script src="./public/js/viewAllPhoto.js"></script>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2d4e6c65e087f4ced51eeb4ccd34262c"></script>
-<script src="./public/js/mapView.js"></script>
+<script src="./public/js/propertyMapView.js"></script>
 
 <?php $content = ob_get_clean();?>
 <?php require('template.php');?>

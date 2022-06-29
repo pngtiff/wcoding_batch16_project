@@ -31,7 +31,12 @@ footer {
     max-height: calc(100vh - 13.125rem);
     padding: 4% 6% 4% 6%;
     font-size: 100%;
-    overflow: scroll;
+    overflow: auto;
     text-align: justify;
     color: black;
 }
+
+
+/* .aboutUsContent::-webkit-scrollbar, .termsContent::-webkit-scrollbar, .privacyContent::-webkit-scrollbar {
+    display: none;
+} */
