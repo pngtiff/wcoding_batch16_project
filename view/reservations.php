@@ -12,30 +12,42 @@ ob_start();?>
                 <p id="available">How long do you wish to stay?</p><br>
                 <div class="checkIn">
                 <label for="startDate" id="start">Check-in date</label>
-                <input type="date" id="startDate" name="startDate" class="form-control">
+                <input type="date" id="startDate" name="startDate" class="form-control" value="<?php echo date('m-d-Y'); ?>">
                 </div><br>
                 <div class="checkOut">
                 <label for="endDate" id="end">Check-out date</label>
-                <input type="date" id="endDate" name="endDate" class="form-control">
+                <input type="date" id="endDate" name="endDate" class="form-control" value="<?php echo date('m-d-Y'); ?>">
                 </div><br><br>
-
+                <div id=dateBtn onclick="dateDiff()">Click here for the total days and price</div>
                 <?php 
-                    $date1 = 'startDate.value';
-                    $date2 = 'endDate.value'
-                ?>
+                    // $date1 = date_create('startDate.value');
+                    // $date2 = date_create('endDate.value');
+                    // $diff = date_diff($date1, $date2);
+                    // echo $diff->format("%R%a days");
+                    // $date1 = strtotime($_POST['startDate']);
+                    // echo $date1; 
+                    // $diff=date_diff($date1, $date2);
+                    // echo $diff->format("%R%a days");
+                    // if ($stayLength >= 30) {
+                    //     $price = "<span onclick=alert({$property['monthly_price_won']})><strong>click to see the price</strong></span>";
 
-                <div id=dateBtn>Click here for price</div><br><br>
-                <?php 
-                echo '<p>Total Cost of your stay: </p>'
+                    // }
+                    // elseif ($stayLength ){
+
+                    // }
+                    // else {
+                    //     $price = "Minimum stay is one month"; 
+                    // }
+
                 ?><br>
                 <label for="owner">Cardholder</label>
-                <input type="text" class="form-control" id="owner" name="owner" placeholder="Enter your name as shown on your credit card">
+                <input type="text" class="form-control" id="owner" name="owner" placeholder="Enter your name as shown on your credit card" required>
                 <div class="nameError"><em>Please enter your name as shown on your credit card (only letters)</em></div><br>
                 <label for="cardNumber" id="cardNum">Card #</label>
-                <input type="text" class="form-control" id="cardNumber" name="cardNumber" placeholder="Enter credit card number with no spaces or dashes">
+                <input type="text" class="form-control" id="cardNumber" name="cardNumber" placeholder="Enter credit card number with no spaces or dashes" required>
                 <div class="numError"><em>Please enter a correct card number</em></div><br>
                 <label for="cvv">CVV</label>
-                <input type="text" class="form-control" id="cvv" name="cvv" placeholder="Enter the 3 or 4 digit code on the back of your card">
+                <input type="text" class="form-control" id="cvv" name="cvv" placeholder="Enter the 3 or 4 digit code on the back of your card" required>
                 <div class="cvvError"><em>3 or 4 numbers only</em></div><br>
                 <div class="expiry">
                     <label>Expiry</label>

@@ -58,6 +58,54 @@ function checkCVV() {
     }
     }
 
+
 function resetForm() {
     document.getElementById('paymentForm').reset(); 
+}
+
+function dateDiff() {
+    var d2 = document.getElementById("startDate").value;
+    var d1 = document.getElementById("endDate").value;
+  
+    var t2 = new Date(d2);
+    var t1 = new Date(d1);
+  
+    document.getElementById("dateBtn").innerHTML = Math.round(((t1 - t2) / (24 * 3600 * 1000))/30) +" month(s)"; 
+  }
+
+function price() {
+
+}
+
+function submitForm(e) {
+
+    e.preventDefault();
+    if(checkCardholder() && checkCardNumber() && checkCVV() && dateDiff()) {
+        
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'index.php?action=reservations');
+        
+        var form = document.querySelector('#paymentForm'),
+        formData = new FormData(form);
+        xhr.addEventListener('readystatechange', function() {
+            if (xhr.readyState === 4) {
+                console.log(xhr.responseText); 
+                if (xhr.responseText == "") //1 denotes if email is already in the database
+                {
+                    alert("Please complete the reservation."); 
+                } else {
+                    document.querySelector("#reservations-container").innerHTML = ""
+                    document.querySelector("#reservations-container").innerHTML = "Reservation Successful!"
+                }
+            }
+        });
+        
+        // xhr.send();
+        xhr.send(formData);
+
+
+    } 
+    // else {
+    //     e.preventDefault();
+    // }
 }
