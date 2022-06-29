@@ -52,3 +52,6 @@ textarea:focus, input:focus{
     color: transparent;
 }
 
+#reset {
+    margin-left: 1.8rem;
+}

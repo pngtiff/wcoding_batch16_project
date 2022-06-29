@@ -18,7 +18,7 @@
         else?></p>
     <?php if(!empty($_SESSION['uid'])) {
     if($_SESSION['uid'] === $_SESSION['user_uid']) { ?>
-       <button><a href="index.php?action=prefillProperty&propId=<?= $_REQUEST['propId'];?>">Modify Property Details</a></button>
+       <button class="primaryBtn offsetFill"><a class="primaryColor" href="index.php?action=prefillProperty&propId=<?= $_REQUEST['propId'];?>">Modify Property Details</a></button>
     <?php }} ?>
     <div class='propertyImgContainer propImages'>
         <?php if(count($propDetails)>1) {
@@ -36,7 +36,7 @@
     <div class='propDetails'>
         <div class='propDesc'>
             <h3><?=$propDetails[0]['r_type']?> in <?= $propDetails[0]['p_type'];?></h3>
-            <p>Size: <?=$propDetails[0]['size'];?>m² | <?=$propDetails[0]['room_num'];?> Bedroom(s) | <?=$propDetails[0]['bath_num'];?> Bathroom(s)</p>
+            <p>Size: <?=$propDetails[0]['size'];?>m² | <?=$propDetails[0]['room_num'];?> <i class="fa-solid fa-people-roof primaryColor"></i> <?= $propDetails[0]['bed_num'] !== null ? '| '.$propDetails[0]['bed_num'].' <i class="fa-solid fa-bed primaryColor"></i>' : '';?> | <?=$propDetails[0]['bath_num'];?> <i class="fa-solid fa-bath primaryColor"></i></p>
             <p class='upperLowerBorders'><?= $propDetails[0]['description'];?></p>
             <p>Address: <?= $propDetails[0]['province_state'].', '.$propDetails[0]['city'];?></p>
             <div id="map" style="width:100%;height:350px;"></div>
@@ -52,9 +52,15 @@
                     </div>
                 </div>
             </a>
-            <button class='resvbutton'><a href="">Reserve now</a></button>
+            <button class='resvbutton primaryBtn primaryFill'><a href="" class="offsetColor">Reserve now</a></button>
+            <!-- TODO: reservation action -->
         </div>
     </div>
+    <!-- pass database parameters to frontend mapview.js -->
+    <input class="latitude" type="hidden" value = "<?= $propDetails[0]['latitude']?>">
+    <input class="longitude" type="hidden" value = "<?= $propDetails[0]['longitude']?>">
+    <!-- pass database parameters to frontend mapview.js -->
+
 </section>
 
 
@@ -64,7 +70,7 @@
     <!-- grid view -->
     <p></p>
     <div class="innerContainer">
-        <button class="pModalCloseButton">Close</button>
+        <button class="pModalCloseButton primaryBtn primaryColor">Close</button>
         <div class="imgGrid">
         <?php
         for($i=0; $i<count($propDetails); $i++) {?>
@@ -79,7 +85,7 @@
     
     <!-- detailed view -->
     <div class="detailedPhotoView">
-        <button class="detailedCloseButton">Close</button>
+        <button class="detailedCloseButton primaryBtn primaryFill offsetColor">Close</button>
 
         <div class="slideContainer">
             <?php
@@ -107,7 +113,7 @@
 <script src="./public/js/viewAllPhoto.js"></script>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2d4e6c65e087f4ced51eeb4ccd34262c"></script>
-<script src="./public/js/mapView.js"></script>
+<script src="./public/js/propertyMapView.js"></script>
 
 <?php $content = ob_get_clean();?>
 <?php require('template.php');?>

@@ -18,7 +18,7 @@ class PropertyManager extends Manager
     public function getProperties($action = '')
     {
         if ($action == 'profile') {
-            $req = $this->_connection->prepare("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.city, p.address1, p.address2, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
+            $req = $this->_connection->prepare("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.latitude, p.longitude, p.city, p.address1, p.address2, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
             FROM properties p
             LEFT JOIN property_types pt
             ON p.property_type_id = pt.id
@@ -31,7 +31,7 @@ class PropertyManager extends Manager
             $req->bindParam('uid', $_REQUEST['user']);
             $req->execute();
         } else {
-            $req = $this->_connection->query("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.city, p.address1, p.address2, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
+            $req = $this->_connection->query("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.latitude, p.longitude, p.city, p.address1, p.address2, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
             FROM properties p
             LEFT JOIN property_types pt
             ON p.property_type_id = pt.id
@@ -57,7 +57,7 @@ class PropertyManager extends Manager
     // Single property detail for property listing page
     public function getProperty($propId)
     {
-        $req = $this->_connection->prepare("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.city, p.address1, p.address2, p.room_num, p.bed_num, p.bath_num, p.is_furnished, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
+        $req = $this->_connection->prepare("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.latitude, p.longitude, p.city, p.address1, p.address2, p.room_num, p.bed_num, p.bath_num, p.is_furnished, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
         FROM properties p
         LEFT JOIN property_types pt
         ON p.property_type_id = pt.id
@@ -95,16 +95,6 @@ class PropertyManager extends Manager
         return $propOwner;
     }
 
-    public function getPropertyZipCode($propId)
-    {
-        $req = $this->_connection->prepare("SELECT p.zipcode FROM properties p WHERE p.id = :propId");
-        $req->bindParam('propId', $propId);
-        $req->execute();
-        $propZipCode = $req->fetch(\PDO::FETCH_ASSOC);
-        $req->closeCursor();
-        return $propZipCode;
-    }
-
     public function prefillProperty($propId)
     {
         $req = $this->_connection->prepare("SELECT p.id AS propId, p.post_title, p.room_num, p.bed_num, p.bath_num, p.is_furnished, p.room_type_id, p.monthly_price_won, p.description, p.bank_account_num, p.validation, rt.room_type AS r_type, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
@@ -137,7 +127,7 @@ class PropertyManager extends Manager
         $roomType = ($roomType == "any") ? "%%" : $roomType;
 
 
-        $req = $this->_connection->prepare("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.city, p.address1, p.address2, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.img_url AS p_img, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
+        $req = $this->_connection->prepare("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.latitude, p.longitude, p.city, p.address1, p.address2, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.img_url AS p_img, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
         FROM properties p
         LEFT JOIN property_types pt
         ON p.property_type_id = pt.id
@@ -272,14 +262,31 @@ class PropertyManager extends Manager
         }
 
 
+        //////////////API CALL to GeoCode to turn the zipcode into Long + latt///////////////////
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, "geocode.xyz/" . $zipcode . "?region=KR&json=1&auth=364183126080998536780x77547");
+        // return the transfer as a string, also with setopt()
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        // curl_exec() executes the started curl session
+        // $output contains the output string
+        $output = curl_exec($curl);
+        // close curl resource to free up system resources
+        // (deletes the variable made by curl_init)
+        curl_close($curl);
+
+        $outputArray = json_decode($output, true); ////// convert API JSON output into an Array
+
+        $latitude = $outputArray['latt'];
+        $longitude = $outputArray['longt'];
+    
         if ($furnished) {
             $this->_connection->exec("INSERT 
-                INTO properties (user_uid, post_title, country, province_state, zipcode, city, district, address1, address2, size, property_type_id, room_type_id, monthly_price_won, description, bank_account_num, room_num, bed_num, bath_num, is_furnished) 
-                VALUES ('$uid', '$title','$country','$province','$zipcode','$city',$district,'$address1','$address2',$size,$propertyType,$roomType,$price,'$description','$bankAccNum', $roomNum, $bedNum, $bathNum, $furnished)");
+                INTO properties (user_uid, post_title, country, province_state, zipcode, latitude, longitude, city, district, address1, address2, size, property_type_id, room_type_id, monthly_price_won, description, bank_account_num, room_num, bed_num, bath_num, is_furnished) 
+                VALUES ('$uid', '$title','$country','$province','$zipcode', '$latitude','$longitude','$city',$district,'$address1','$address2',$size,$propertyType,$roomType,$price,'$description','$bankAccNum', $roomNum, $bedNum, $bathNum, $furnished)");
         } else {
             $this->_connection->exec("INSERT 
-                INTO properties (user_uid, post_title, country, province_state, zipcode, city, district, address1, address2, size, property_type_id, room_type_id, monthly_price_won, description, bank_account_num, room_num, bath_num) 
-                VALUES ('$uid', '$title','$country','$province','$zipcode','$city','$district','$address1','$address2','$size','$propertyType','$roomType','$price','$description','$bankAccNum', '$roomNum','$bathNum'
+                INTO properties (user_uid, post_title, country, province_state, zipcode, latitude, longitude, city, district, address1, address2, size, property_type_id, room_type_id, monthly_price_won, description, bank_account_num, room_num, bath_num) 
+                VALUES ('$uid', '$title','$country','$province','$zipcode', '$latitude', '$longitude','$city','$district','$address1','$address2','$size','$propertyType','$roomType','$price','$description','$bankAccNum', '$roomNum','$bathNum'
             )");
         }
 
