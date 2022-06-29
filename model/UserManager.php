@@ -378,10 +378,13 @@ class UserManager extends Manager
     }
 
     public function getReservations() {
-        if ($this->_user_id == $_SESSION['uid']) {
-            $req = $this->_connection->query("SELECT * FROM reservations WHERE user_uid='{$_SESSION['uid']}' AND is_active=1");
-            $reservations = $req->fetchAll(\PDO::FETCH_ASSOC);
-        } else $reservations = [];
-        return $reservations;
+        if(isset($_SESSION['uid'])) {
+
+            if ($this->_user_id == $_SESSION['uid']) {
+                $req = $this->_connection->query("SELECT * FROM reservations WHERE user_uid='{$_SESSION['uid']}' AND is_active=1");
+                $reservations = $req->fetchAll(\PDO::FETCH_ASSOC);
+            } else $reservations = [];
+            return $reservations;
+        }
     }
 }
