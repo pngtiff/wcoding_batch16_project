@@ -22,7 +22,7 @@
         <input type="password" name="passwordConfirm" id="passwordConfirm" class="field" placeholder="Password Confirm" required> 
         <div class="passwordConfirmError"><em>Password must match</em></div>
     </div>
-    <button id="submit "type="submit" name="signUp" class="button primaryBtn primaryColor">Create Account</button>
+    <button id="submit"type="submit" name="signUp" class="button primaryBtn primaryColor">Create Account</button>
     <input type="hidden" name="action" value="signUp">
     <button id="reset" type="reset" class="primaryBtn primaryColor">Reset the form</button>
 </form>

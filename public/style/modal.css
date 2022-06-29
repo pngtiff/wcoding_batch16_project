@@ -31,6 +31,7 @@
 #banner-container {
     position: absolute;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 50%;
@@ -40,7 +41,15 @@
     background-color: #29A376;
     z-index: 1;
     text-align: center;
-    border-radius: 1.25rem;
+    /* border-radius: 1.25rem; */
+}
+
+.right {
+    border-radius: 0 1.25rem 1.25rem 0;
+}
+
+.left {
+    border-radius: 1.25rem 0 0 1.25rem;
 }
 
 #banner-container h2{

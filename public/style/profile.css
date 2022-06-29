@@ -1,10 +1,9 @@
-
 :root{
     /* color */
     --white-color: white;
     --black-color: black;
     --gray-color: gray;
-    --profile-border-color: #B0E0E6; 
+    --profile-border-color: #29A376; 
     --red-color: red;
     --green-color: green;
 
@@ -78,9 +77,8 @@
     margin-bottom: 0.25rem;
 }
 
-.flexRow {
-    display: flex;
-    justify-content: space-between;
+#langDetails {
+    margin-left: 0.5rem;
 }
 
 #createProfileDetails>div, #langDetails>div {
@@ -104,34 +102,39 @@
 .multi-selector{
     width: 15.5rem;
 }
+
 .select-field{
     cursor: pointer;
     width: 15.5rem;
-    border: 1px solid rgb(187, 187, 187);
-    border-radius: 0.25rem;
+    border: 1px solid rgb(128, 128, 128);
+    border-radius: 0.1rem;
 }
+
 .select-field,.lang,.list{
     background-color: white;
     padding: 0.25rem 0.5rem;
 }
-.list{
+
+.list {
     width: 15.5rem;
     box-shadow: 0 30px 60px rgb(0,0,0,0.2);
     display: none;
 }
-.down-arrow{
+.down-arrow {
     font-size: 1.2rem;
     display: inline-block;
     transition: 0.2s linear;
 }
+
 .lang{
     display: block;
     padding-left: 0;
 }
+
 .lang span{
     float: right;
     font-size: 0.6rem;
-    padding-top: 6px;
+    padding-top: 0.375rem;
 }
 .lang:hover{
     background-color: aliceblue;
@@ -164,6 +167,9 @@
 /* =============== */
 /* PROFILE VIEW   */
 /* =============== */
+#homeButton:hover {
+    background-color: rgba(41,163,118, 0.90);
+}
 
 #profileContainer { 
     justify-content: center;
@@ -182,11 +188,15 @@
     padding: 3rem 2rem;
 }
 
+#userInfo form {
+    align-self: flex-end;
+}
+
 #userName {
     font-size: 1.8rem;
 }
 
-#userInfo>div {
+#userMain {
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -208,10 +218,37 @@
     min-width: 18.75rem;
 }
 
-#userDetails ul {
-    padding-left: 2.5rem;
+#userDetails {
+    padding-top: 3rem;
+    display: flex;
 }
 
+#userDetails > *:not(:nth-child(1)) {
+    margin-left: 5rem;
+}
+
+#userDetails ul {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#userDetails ul > *:not(:nth-child(1)) {
+    margin-left: 2rem;
+}
+
+#superBio {
+    align-self: flex-start;
+    margin: 2rem 0 2rem 5rem;
+}
+
+#contact {
+    margin-top: 2rem;
+}
+
+#viewProfile > p {
+    text-align: center;
+    padding-top: 5rem;
+}
 
 /* =============== */
 /* Modify Profile  */
@@ -248,10 +285,6 @@
     margin-bottom: 10px;
     position: relative;
     margin-top: 1em;
-<<<<<<< HEAD
-    z-index: 1;
-=======
->>>>>>> master
 }
 
 #photoM{
@@ -283,7 +316,7 @@
 }
 
 #phoneBox {
-    margin-top: 3rem;
+    margin: 3rem 0;
     display: flex;
     flex-direction: column;
 }

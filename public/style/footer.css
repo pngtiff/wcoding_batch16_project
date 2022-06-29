@@ -11,12 +11,12 @@ footer {
 .contact {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-}
-
-.contact{
     line-height: 0.5;
     padding-right: 10%;
+}
+
+.contact > * {
+    margin-bottom: 0.7rem;
 }
 
 .footerRight a {

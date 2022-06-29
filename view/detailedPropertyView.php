@@ -36,7 +36,7 @@
     <div class='propDetails'>
         <div class='propDesc'>
             <h3><?=$propDetails[0]['r_type']?> in <?= $propDetails[0]['p_type'];?></h3>
-            <p>Size: <?=$propDetails[0]['size'];?>m² | <?=$propDetails[0]['room_num'];?> <i class="fa-solid fa-door-open"></i> <?= $propDetails[0]['bed_num'] !== null ? '| '.$propDetails[0]['bed_num'].' <i class="fa-solid fa-bed"></i>' : '';?> | <?=$propDetails[0]['bath_num'];?> <i class="fa-solid fa-shower"></i></p>
+            <p>Size: <?=$propDetails[0]['size'];?>m² | <?=$propDetails[0]['room_num'];?> <i class="fa-solid fa-people-roof primaryColor"></i> <?= $propDetails[0]['bed_num'] !== null ? '| '.$propDetails[0]['bed_num'].' <i class="fa-solid fa-bed primaryColor"></i>' : '';?> | <?=$propDetails[0]['bath_num'];?> <i class="fa-solid fa-bath primaryColor"></i></p>
             <p class='upperLowerBorders'><?= $propDetails[0]['description'];?></p>
             <p>Address: <?= $propDetails[0]['province_state'].', '.$propDetails[0]['city'];?></p>
             <div id="map" style="width:100%;height:350px;"></div>
@@ -65,7 +65,7 @@
     <!-- grid view -->
     <p></p>
     <div class="innerContainer">
-        <button class="pModalCloseButton">Close</button>
+        <button class="pModalCloseButton primaryBtn primaryColor">Close</button>
         <div class="imgGrid">
         <?php
         for($i=0; $i<count($propDetails); $i++) {?>
@@ -80,7 +80,7 @@
     
     <!-- detailed view -->
     <div class="detailedPhotoView">
-        <button class="detailedCloseButton">Close</button>
+        <button class="detailedCloseButton primaryBtn primaryFill offsetColor">Close</button>
 
         <div class="slideContainer">
             <?php

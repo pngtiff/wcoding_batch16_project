@@ -5,7 +5,8 @@
 }
 
 html {
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Manrope', sans-serif;
+  overflow-x: hidden;
 }
 
 body {
@@ -73,7 +74,7 @@ select {
   will-change: transform, opacity;
 }
 
-.primaryBtn:not(.resvbutton):hover {
+.primaryBtn:not(.resvbutton,.detailedCloseButton, #homeButton):hover {
   background: #F5F5F5;
 }
 

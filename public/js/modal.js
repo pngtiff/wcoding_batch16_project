@@ -5,6 +5,7 @@ let modalBox
 if (modalBox = document.getElementById("modalBox")) {
     let id = null;
     function moveBanner() {
+        banner.classList.remove('right','left');
         let left = parseInt(getComputedStyle(banner).left);
         if (left > 0) {
             clearInterval(id);
@@ -16,6 +17,7 @@ if (modalBox = document.getElementById("modalBox")) {
                 } else {
                     left -= 4; 
                     banner.style.left = left + "px"; 
+                    banner.classList.add('left');
                 }
             }
         } else {
@@ -28,6 +30,7 @@ if (modalBox = document.getElementById("modalBox")) {
                 } else {
                     left += 4; 
                     banner.style.left = left + "px"; 
+                    banner.classList.add('right');
                 }
             }
         }
@@ -60,7 +63,7 @@ function showSignin () {
     let bttn = document.createElement('button');
     bttn.classList.add('primaryBtn', 'primaryColor');
     bttn.textContent = 'Sign up';
-    bttn.addEventListener('click', moveBanner)
+    bttn.addEventListener('click', moveBanner);
     banner.appendChild(h1);
     banner.appendChild(h2);
     banner.appendChild(bttn);
@@ -71,6 +74,8 @@ function showSignin () {
     //// open the modal on SignUp/Sign In button click
     document.getElementById("signUpButton").addEventListener("click", function(e) {
         banner.style.left = 0; 
+        banner.classList.remove('right','left');
+        banner.classList.add('left');
         e.preventDefault()
         showSignup();
         modalBox.style.display = "block";
@@ -78,7 +83,9 @@ function showSignin () {
     })
 
     document.getElementById("signInButton").addEventListener("click", function(e) {
-        banner.style.left = '50%'; 
+        banner.style.left = '50%';
+        banner.classList.remove('right','left');
+        banner.classList.add('right');
         e.preventDefault();
         showSignin();
         modalBox.style.display = "block";
