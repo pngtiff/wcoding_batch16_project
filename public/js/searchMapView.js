@@ -1,75 +1,100 @@
-let coords = [
-    {
-        title: 'house 1',
-        latitude: 33.450701, 
-        longitude: 126.570667
-    },
-    {   
-        title: 'house 2',
-        latitude: 37.55807,
-        longitude: 126.84785
-    },
-    {
-        title: 'house 3',
-        latitude: 35.09951,
-        longitude: 129.01340
-    },
-    {
-        title: 'house 4',
-        latitude: 37.54001,
-        longitude: 127.21551
-    }
-]
+const searchMap = async function (coords) {
+// let coords = [
+//     {
+//         title: 'house 1',
+//         latitude: 33.450701, 
+//         longitude: 126.570667
+//     },
+//     {   
+//         title: 'house 2',
+//         latitude: 37.55807,
+//         longitude: 126.84785
+//     },
+//     {
+//         title: 'house 3',
+//         latitude: 35.09951,
+//         longitude: 129.01340
+//     },
+//     {
+//         title: 'house 4',
+//         latitude: 37.54001,
+//         longitude: 127.21551
+//     },
+//     {
+//         title: 'house 5',
+//         latitude: 37.5364,
+//         longitude: 126.896
+//     },
+//     {
+//         title: 'house 6',
+//         latitude: 37.540,
+//         longitude: 127.2155
+//     }
+// ]
 
-
-const searchMap = function () {
-    getLatLngCenter(coords);
+    const centerLoc = await getLatLngCenter(coords);
 
     let mapContainer = document.getElementById('searchMap'),
     mapOption = { 
         center: new kakao.maps.LatLng(centerLoc[0], centerLoc[1]), // center point of map
-        level: 12 // map zoom level
+        level: 13 // map zoom level
     };
     let map = new kakao.maps.Map(mapContainer, mapOption); // create map
 
     // location of map markers
     let positions = [];
     for(i=0; i<coords.length; i++) {
-        positions.push({title: coords[i].title, latlng: new kakao.maps.LatLng(coords[i].latitude, coords[i].longitude)});
+        positions.push({title: coords[i].title, content: coords[i].content, link: coords[i].link, latlng: new kakao.maps.LatLng(coords[i].latitude, coords[i].longitude)});
     }
-    // let positions = [
-    //     {
-    //         title: '카카오', 
-    //         latlng: new kakao.maps.LatLng(33.450701, 126.570667)
-    //     },
-    //     {
-    //         title: '생태연못', 
-    //         latlng: new kakao.maps.LatLng(37.55807, 126.84785)
-    //     },
-    //     {
-    //         title: '텃밭', 
-    //         latlng: new kakao.maps.LatLng(35.09951, 129.01340)
-    //     },
-    //     {
-    //         title: '근린공원',
-    //         latlng: new kakao.maps.LatLng(37.54001, 127.21551)
-    //     }
-    // ];
-    // console.log(positions);
-
+    
     // create map markers
     for (i=0; i<positions.length; i++) {
         let marker = new kakao.maps.Marker({
             map: map,
             position: positions[i].latlng,
-            title: positions[i].title
+            title: positions[i].title,
+            clickable: true
         });
+
+        // create infoWindow for each marker
+        var infowindow = new kakao.maps.InfoWindow({
+            content: positions[i].content // 인포윈도우에 표시할 내용
+        });
+
+        // marker.addListener('click', function() {
+        //     window.location = positions[i].link;
+        // })
+
+        // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+        // 이벤트 리스너로는 클로저를 만들어 등록합니다 
+        // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+        kakao.maps.event.addListener(marker, 'click', makeOverListener(map, marker, infowindow));
+        // kakao.maps.event.addListener(marker, 'click', function() {
+        //     window.location = positions[i].link;
+        // });
+        kakao.maps.event.addListener(map, 'click', makeOutListener(infowindow));
     }
 
     // display map markers
     // marker.setMap(map);
 }
 
+
+// closure for displaying infoWindow
+function makeOverListener(map, marker, infowindow) {
+    return function() {
+        infowindow.open(map, marker);
+    };
+}
+
+// closure for closing infoWindow
+function makeOutListener(infowindow) {
+    return function() {
+        infowindow.close();
+    };
+}
+
+// calculate center point of the search result property coordinates
 function rad2degr(rad) { return rad * 180 / Math.PI; }
 function degr2rad(degr) { return degr * Math.PI / 180; }
 
@@ -81,7 +106,7 @@ function degr2rad(degr) { return degr * Math.PI / 180; }
  * @return array with the center latitude longtitude pairs in 
  *   degrees.
  */
-function getLatLngCenter(coords) {
+async function getLatLngCenter(coords) {
     var latitude = 0;
     var longitude = 1;
     var sumX = 0;
@@ -106,5 +131,5 @@ function getLatLngCenter(coords) {
     var hyp = Math.sqrt(avgX * avgX + avgY * avgY);
     var lat = Math.atan2(avgZ, hyp);
 
-    return centerLoc = ([rad2degr(lat), rad2degr(lng)]);
+    return ([rad2degr(lat), rad2degr(lng)]);
 }

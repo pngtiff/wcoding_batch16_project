@@ -16,6 +16,9 @@ footer{
     padding-right: 10%;
 }
 
+.contact p {
+    color: #FFF;
+}
 .aboutUsContent, .termsContent, .privacyContent{
     padding: 4% 6% 4% 6%;
     /* padding-left: 3%; */

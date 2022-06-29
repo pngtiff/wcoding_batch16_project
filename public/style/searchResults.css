@@ -9,9 +9,10 @@
     flex-wrap: wrap;
 } */
 
+
 #searchResultsContainer {
     margin-top: 40px;
-    width: 100vw;
+    width: 100%;
     display: flex;
     justify-content: space-between;
 }

@@ -60,6 +60,10 @@ header {
     border-radius: 24px;
 }
   
+  .dropbtn, .dropbtn2, .dropbtn3 {
+    padding-top: 2.2rem;
+  }
+
 .dropdown, .dropdown2, .dropdown3, .dropdown4 {
     display: inline-block;
 }

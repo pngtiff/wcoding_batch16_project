@@ -39,7 +39,7 @@
 
             <form id="searchBarContainer" method="post" action="index.php">
                 <select name="province" id="province"> 
-                    <option selected value="-1">Select a Province/Special City</option>
+                    <option selected value="-1">Province/Special City</option>
                     <option value="1">Busan</option>
                     <option value="2">Chungcheongbuk-do</option>
                     <option value="3">Chungcheongnam-do</option>

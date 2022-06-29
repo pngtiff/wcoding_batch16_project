@@ -247,8 +247,8 @@
     border: 1px solid var(--gray-color);
     margin-bottom: 10px;
     position: relative;
-    overflow: hidden;
     margin-top: 1em;
+    z-index: 1;
 }
 
 #photoM{
@@ -276,6 +276,7 @@
     font-size: 15px;
     cursor: pointer;
     display: none;
+    pointer-events: auto;
 }
 
 #phoneBox {
