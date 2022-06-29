@@ -2,6 +2,9 @@
 
 function loadSearch(e) {
     e.preventDefault()
+    // e.preventDefault();
+    // window.location = `index.php?action=search&search=${search}&rangeMin=${rangeMin}&rangeMax=${rangeMax}&propertyType=${propertyType}&roomType=${roomType}` 
+    // window.history.pushState('', '', `index.php?action=search&search=${search}&rangeMin=${rangeMin}&rangeMax=${rangeMax}&propertyType=${propertyType}&roomType=${roomType}` );
     const xhr = new XMLHttpRequest()
 
     ////// LOAD THE ROUTER with action "Search"////////
