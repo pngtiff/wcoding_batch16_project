@@ -1,11 +1,8 @@
-
-/* MODAL CSS */
-
 .modal {
     display: none; 
     position: fixed; 
     z-index: 1000; 
-    padding-top: 100px; 
+    padding-top: 6.25rem; 
     left: 0;
     top: 0;
     width: 100%; 
@@ -20,11 +17,8 @@
     background-color: white;
     margin: auto;
     width: 80%;
-    height: 600px;
-    /* border: 1px solid #888; */
-    border-radius: 20px;
-    /* overflow: scroll; */
-    /* text-align: center; */
+    height: 37.5rem;
+    border-radius: 1.25rem;
 }
 
 .form-container {
@@ -34,29 +28,33 @@
 
 }
 
-
 #banner-container {
     position: absolute;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     width: 50%;
     height: 100%;
     left: 50%;
     color: white;
-    background-color: #53a2be;
+    background-color: #29A376;
     z-index: 1;
-    /* in order to close by clicking x */
     text-align: center;
-    border-radius: 20px;
+    /* border-radius: 1.25rem; */
+}
 
+.right {
+    border-radius: 0 1.25rem 1.25rem 0;
+}
+
+.left {
+    border-radius: 1.25rem 0 0 1.25rem;
 }
 
 #banner-container h2{
     font-size: .9rem;
     margin-top: 3%;
-}
-
-#banner-container h1 {
-    margin-top: 13%;
 }
 
 
@@ -67,19 +65,27 @@
 
 #signIn-container, #signUp-container {
     flex: 1;
-    padding: 20px;
-    /* text-align: center; */
+    padding: 1.25rem;
+}
+
+.field {
+    width: 80%;
+    height: 2.5rem;
+}
+
+.password {
+    height: 3.75rem;
 }
 
 .close 
 {
     color: #aaaaaa;
     position: absolute;
-    font-size: 28px;
+    font-size: 1.75rem;
     font-weight: bold;
     z-index: 2;
-    right: 10px;
-    top: 10px;
+    right: 1.5rem;
+    top: 0.625rem;
 }
   
 .close:hover,
@@ -93,6 +99,3 @@
 #modalBox {
     z-index: 1000;
 }
-  
-
-

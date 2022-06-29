@@ -27,7 +27,7 @@ function kakaoMap(latitude,longitude) {
     var mapContainer = document.getElementById('map'),
         mapOption = { 
         center: new kakao.maps.LatLng(latitude, longitude), // center point of map
-        level: 4 // map zoom level
+        level: 5 // map zoom level
     };
 
     var map = new kakao.maps.Map(mapContainer, mapOption); // create map
