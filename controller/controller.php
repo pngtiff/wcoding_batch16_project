@@ -177,6 +177,7 @@ function getCities($province) {
         echo '<option selected value="-1">No cities/districts in this area</option>';
     }
 }
+
 function getDistricts($city) {
     $propertyM = new PropertyManager();
     $districts = $propertyM->getDistricts($city);

@@ -5,6 +5,7 @@
 <div>
     <button id='homeButton'><a href='index.php'>Home</a></button>
 </div>
+
 <div id='profileContainer' class='flexColumn'>
     <div id='userInfo' class='flexColumn'>
         <div id='userMain'>
