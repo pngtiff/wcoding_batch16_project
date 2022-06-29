@@ -2,8 +2,8 @@
     <h2>Sign In:</h2>
     <br>
     <!-- calling rememberMe feature function -->
-    <input type="email" name="email" value="<?=!empty($_COOKIE['email']) ? $_COOKIE['email'] : ''?>" id="emailIn" placeholder="Email"> <br><br>
-    <input type="password" name="password"  id="passwordIn" placeholder="Password"> <br><br>
+    <input type="email" name="email" class="field" value="<?=!empty($_COOKIE['email']) ? $_COOKIE['email'] : ''?>" id="emailIn" placeholder="Email"> <br><br>
+    <input type="password" name="password" id="passwordIn" class="field" placeholder="Password"> <br><br>
     <!-- <a href="#">Forgot your password?</a> <br><br> -->
     
     <div>
@@ -11,7 +11,7 @@
         <input type="checkbox" name="rememberMe" id="rememberMe">
     </div>
     
-    <button class="button" type="submit">Sign In</button>
+    <button class="button primaryBtn primaryColor" type="submit">Sign In</button>
     <input type="hidden" name="action" value="signIn">
     <span class="errorText">Please try again</span>    
 </form>

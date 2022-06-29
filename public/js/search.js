@@ -15,6 +15,22 @@ function loadSearch(e) {
         if (e.target.status === 200) {
             document.querySelector("section").innerHTML = ""
             document.querySelector("section").innerHTML = xhr.responseText
+            
+            let coords = []
+            
+            for (let i=0; i<document.querySelectorAll("input.postTitle").length; i++)
+            {
+                let coord = {
+                    "title" : document.querySelectorAll("input.postTitle")[i].value,
+                    "content" : document.querySelectorAll("input.content")[i].value,
+                    "link" : document.querySelectorAll("input.link")[i].value,
+                    "latitude" : parseFloat(document.querySelectorAll("input.latitude")[i].value),
+                    "longitude" : parseFloat(document.querySelectorAll("input.longitude")[i].value)
+                }
+                coords.push(coord)
+            }
+            searchMap(coords);
+            
         } else {
             console.log("bad Request")
         }
