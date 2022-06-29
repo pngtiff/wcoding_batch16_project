@@ -8,7 +8,11 @@
             <?php
             foreach($properties as $property)
             {
-                include('propertyCard.php');
+                include('propertyCard.php'); ?>
+                <input class="postTitle" type="hidden" value = "<?= $property['post_title']?>">
+                <input class="latitude" type="hidden" value = "<?= $property['latitude']?>">
+                <input class="longitude" type="hidden" value = "<?= $property['longitude']?>">
+                <?php
             } ?>
         </div>
         

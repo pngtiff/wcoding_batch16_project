@@ -119,7 +119,7 @@ ob_start();?>
         </label>
         <label for="description">
             Description
-            <textarea name="description" id="description" ></textarea>
+            <textarea name="description" id="description" cols="23" rows="12" charswidth="100" name="text_body"></textarea>
             <span class="hide">At least 6 charachters</span>
         </label>
         <label for="bankAccNum">
@@ -133,7 +133,8 @@ ob_start();?>
             <span class="hide">(At least 2, at most 20)</span>
         </label>
         <div id="photosPreview"></div>
-        <button type="submit">SUBMIT</button>
+        <input type="hidden" name="action" value="postProperty">
+        <button type="submit" id="postPropertyButton">SUBMIT</button>
     </form>
 
 </section>

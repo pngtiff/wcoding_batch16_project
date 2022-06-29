@@ -93,8 +93,8 @@
             <button id='contact' class='primaryBtn primaryColor'>Contact</button>
         </div>
     </div>
+    <?php if (isset($_SESSION['email'])) include('reservationsView.php'); ?>
     <?php include('listPropertiesView.php'); ?>
-    </div>
 </section>
 
 <?php $content = ob_get_clean(); ?>

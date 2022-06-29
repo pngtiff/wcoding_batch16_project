@@ -36,3 +36,12 @@
         $userM = new UserManager();
         $userM -> updateLastActive();
     }
+
+    function cancelReservation($params){
+       if (!empty($params['reservation_num'])){
+        $userM = new UserManager();
+        $params['reservation_num'] = strip_tags($params['reservation_num']);
+        $userM-> cancelReservation($params['reservation_num']);
+        header("Location:index.php?action=profile&user={$_SESSION['uid']}");
+       }   
+    }
