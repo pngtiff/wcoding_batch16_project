@@ -4,7 +4,7 @@
 
 <?php ob_start();?>
 
-<section class="flexColumn">
+<section>
 
   <div class="landingHeader">
     <h3 id="slogan">Your hassle-free housing search starts with Room-EZ</h3>

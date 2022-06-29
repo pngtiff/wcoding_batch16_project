@@ -258,7 +258,19 @@ class PropertyManager extends Manager
             }
         }
         // Create a folder for the property on the server
-        $propertyId = $this->_connection->query("SELECT id FROM properties ORDER BY ID DESC LIMIT 0, 1")->fetch(\PDO::FETCH_ASSOC)['id'] + 1;
+
+        if ($furnished) {
+            $this->_connection->exec("INSERT 
+                INTO properties (user_uid, post_title, country, province_state, zipcode, city, district, address1, address2, size, property_type_id, room_type_id, monthly_price_won, description, bank_account_num, room_num, bed_num, bath_num, is_furnished) 
+                VALUES ('$uid', '$title','$country','$province','$zipcode','$city',$district,'$address1','$address2',$size,$propertyType,$roomType,$price,'$description','$bankAccNum', $roomNum, $bedNum, $bathNum, $furnished)");
+        } else {
+            $this->_connection->exec("INSERT 
+                INTO properties (user_uid, post_title, country, province_state, zipcode, city, district, address1, address2, size, property_type_id, room_type_id, monthly_price_won, description, bank_account_num, room_num, bath_num) 
+                VALUES ('$uid', '$title','$country','$province','$zipcode','$city','$district','$address1','$address2','$size','$propertyType','$roomType','$price','$description','$bankAccNum', '$roomNum','$bathNum'
+            )");
+        }
+
+        $propertyId = $this->_connection->query("SELECT id FROM properties ORDER BY ID DESC LIMIT 0, 1")->fetch(\PDO::FETCH_ASSOC)['id'];
         if (!file_exists("./public/images/property_images/$propertyId")) {
             mkdir("./public/images/property_images/$propertyId");
         }
@@ -272,16 +284,6 @@ class PropertyManager extends Manager
         }
 
 
-        if ($furnished) {
-            $this->_connection->exec("INSERT 
-                INTO properties (user_uid, post_title, country, province_state, zipcode, city, district, address1, address2, size, property_type_id, room_type_id, monthly_price_won, description, bank_account_num, room_num, bed_num, bath_num, is_furnished) 
-                VALUES ('$uid', '$title','$country','$province','$zipcode','$city',$district,'$address1','$address2',$size,$propertyType,$roomType,$price,'$description','$bankAccNum', $roomNum, $bedNum, $bathNum, $furnished)");
-        } else {
-            $this->_connection->exec("INSERT 
-                INTO properties (user_uid, post_title, country, province_state, zipcode, city, district, address1, address2, size, property_type_id, room_type_id, monthly_price_won, description, bank_account_num, room_num, bath_num) 
-                VALUES ('$uid', '$title','$country','$province','$zipcode','$city','$district','$address1','$address2','$size','$propertyType','$roomType','$price','$description','$bankAccNum', '$roomNum','$bathNum'
-            )");
-        }
 
         for ($i = 0; $i < count($imgName); $i++) {
             $this->_connection->exec("INSERT
