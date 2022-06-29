@@ -35,3 +35,8 @@ footer {
     text-align: justify;
     color: black;
 }
+
+
+/* .aboutUsContent::-webkit-scrollbar, .termsContent::-webkit-scrollbar, .privacyContent::-webkit-scrollbar {
+    display: none;
+} */
