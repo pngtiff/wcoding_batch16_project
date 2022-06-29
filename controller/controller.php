@@ -1,5 +1,6 @@
 <?php
 require_once('userController.php');
+require_once('propertyController.php');
 require_once('model/PropertyManager.php');
 
 use wcoding\batch16\finalproject\Model\UserManager;
@@ -44,125 +45,12 @@ function showUserInfo($action, $userId) {
     require('./view/viewProfile.php');
 }
 
-function listProperties() {
-    $propertyM = new PropertyManager();
-    $properties = $propertyM->getProperties();
-
-    return $properties;
-}
-
-function getLanding() {
-    $properties = listProperties();
-    // $userM = new UserManager(); 
-    // $data = $userM->viewUserData();
-    require('./view/indexView.php');
-}
-
-function getProperty($propId) {
-    $propertyM = new PropertyManager();
-    $propDetails = $propertyM->getProperty($propId);
-    $propOwner = $propertyM->getPropertyOwner($propId);
-
-    require('./view/detailedPropertyView.php');
-}
-
-function getZipCode($propId) {
-    $propertyM = new PropertyManager();
-    $zipcode = $propertyM->getPropertyZipCode($propId);
-
-    echo($zipcode['zipcode']); ///// ECHO the Corresponding Zipcode to the AJAX Request in ZipCodeAPI.js so that it can be used in front
-}
-
-function getPropertyOwner($propId) {
-    $propertyM = new PropertyManager();
-    $propOwner = $propertyM->getPropertyOwner($propId);
-
-    require('./view/detailedPropertyView.php');
-}
-
-function prefillProperty($propId) {
-    if(isset($_SESSION['uid']) and $_SESSION['uid'] === $_SESSION['user_uid']) {
-        $propertyM = new PropertyManager();
-        $propDetails = $propertyM->prefillProperty($propId);
-        
-        require('./view/modifyProperty.php');
-    } else {
-        header('Location: index.php');
-    }
-}
-
-function modifyProperty($params, $imgs) {
-    if(isset($_SESSION['uid']) and $_SESSION['uid'] === $_SESSION['user_uid']) {
-        $propertyM = new PropertyManager();
-        for($i=0; $i<count($imgs); $i++) {
-            $imgDescriptions[] = $params["t-attachment-$i"];
-        }
-        $i = 0;
-        while(true) {
-            if (!empty($_POST["imgName-$i"]) AND !empty($_POST["t-imgName-$i"])) {
-                if (strlen($_POST["t-imgName-$i"])>255) {
-                    throw (new Exception('Title is too long'));
-                } else {
-                    $oldImgs[strip_tags($_POST["imgName-$i"])] = strip_tags($_POST["t-imgName-$i"]);
-                    $i++;
-                }
-            } else
-                break;
-        }
-
-        $propertyM->modifyProperty($params['propId'], $imgs, $imgDescriptions, $oldImgs);
-
-    } else {
-        header("Location: index.php?action=property&propId={$params['propId']}");
-    }
-}
-
-function modifyProfileView($userId) {
-    $userM = new UserManager($userId); 
-    $data = $userM->viewUserData();
-
-    for($i=0; $i<count($data['languages']); $i++) {
-        $selectedLang = $data['languages'][$i];
-        // echo $data['languages'][$i];
-    }
-
-    require('./view/modifyProfileView.php');
-}
-
-function updateProfile () {
-    $userM = new UserManager();
-    $data = $userM->viewUserData();
-    $userM->updateUserData($data);
-
-    header("Location: index.php?action=profile&user={$_SESSION['uid']}");
-}
-
-function updateLastActive() {
-    $userM = new UserManager();
-    $userM -> updateLastActive();
-}
-
 function search($params) {
     $propertyM = new PropertyManager();
     $rangeMin = $params["rentRange"] != "any" ? $params['rentRange']-500000 : "any";
     $rangeMax = $params["rentRange"] != "any" ? $params['rentRange'] : "any";
     $properties = $propertyM->searchProperties($params['province'], $params['city'], $rangeMin, $rangeMax, $params['propertyType'], $params['roomType']);
     require('./view/searchResultsCard.php');
-}
-function postProperty($params, $imgs) {
-    $propertyM = new PropertyManager();
-    for($i=0; $i<count($imgs); $i++) {
-        $imgDescriptions[] = $params["t-attachment-$i"];
-    }
-    if (!empty($params['furnished'])) {
-        $propertyM->postProperty($params['title'], $params['country'], $params['province'], $params['city'], $params['district'], $params['address1'], $params['address2'], $params['zipcode'], $params['propertyType'], $params['roomType'], $params['roomNum'], $params['bedNum'], $params['bathNum'],$params['furnished'], $params['size'], $params['price'], $params['description'], $params['bankAccNum'], $imgs, $imgDescriptions);
-    } else {
-        $propertyM->postProperty($params['title'], $params['country'], $params['province'], $params['city'], $params['district'], $params['address1'], $params['address2'], $params['zipcode'], $params['propertyType'], $params['roomType'], $params['roomNum'], null, $params['bathNum'], null, $params['size'], $params['price'], $params['description'], $params['bankAccNum'], $imgs, $imgDescriptions);
-    }
-}
-
-function viewPostProperty() {
-    require('view/postPropertyView.php');
 }
 
 function getCities($province) {

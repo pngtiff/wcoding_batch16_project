@@ -1,4 +1,3 @@
-/* header  */
 header {
     z-index: 999;
 }
@@ -7,18 +6,17 @@ header {
     width: 100%;
     display: flex;
     flex-direction: row;
-    /* background-color: rgb(215, 215, 244); */
 }
 
-.headerBackgroundColor {
-    background-color: #53A2BE;
-    height: 100px;
+.headerBackground {
+    height: 6.25rem;
     width: 100%;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 5;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 
 .logo {
@@ -29,153 +27,79 @@ header {
 }
 
 .nav {
-    width: 80%;
-    color: white;
+    width: 62rem;
     display: flex;
     overflow: hidden;
     z-index: 10;
 
 }
 
-.signInUp {
-    margin-left: auto; 
-    margin-right: 120px;
-    z-index: 10;
+/* nav div {
+    display: inline-block;
+} */
 
+.dropdown:hover, .dropdown2:hover, .dropdown3:hover {
+    background-color: #29A376;
+}
+
+.dropdown:hover .dropbtn, .dropdown2:hover .dropbtn2, .dropdown3:hover .dropbtn3 {
+    color: #FFF;
+    transition: all 0s;
 }
 
 .dropbtn, .dropbtn2, .dropbtn3, .dropbtn4 {
     background: none;
-    color: black;
-    padding: 0.5rem;
+    padding: 0.625rem;
     font-size: 1rem;
     border: none;
     transform: scale(1);
     transform-origin: top center;
     transition: all 1s ease-in-out;
-  }
-  
-  .dropbtn, .dropbtn2, .dropbtn3 {
-    padding-top: 2.2rem;
-  }
-
-.dropdown, .dropdown2, .dropdown3, .dropdown4 {
-    display: inline-block;
 }
 
-.dropdown-content, .dropdown-content2, .dropdown-content3, .dropdown-content4 {
-    display: none;
-    position: absolute;
-    /* background-color: #f1f1f1; */
-    min-width: 160px;
-    /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
-    /* z-index: 1; */
-}
-
-.dropdown-content a {
-    color: peachpuff;
-    background: rgba(0,0,0, 0.8);
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content2 a {
-    color: peachpuff;
-    background: rgba(0,0,0, 0.8);
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content3 a {
-    color: peachpuff;
-    background: rgba(0,0,0, 0.8);
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content4 a {
-    /* color: peachpuff;
-    background: rgba(0,0,0, 0.8); */
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-  
-.dropdown-content a:hover {
-    background-color: rgba(222, 217, 217, 0.969);
-    color: black; 
-    transform: scale(1.1);
-    transform-origin: top center;
-    transition: all 300ms ease-in-out;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.dropdown:hover .dropbtn {
-    background-color: peachpuff;
-}
-
-.dropdown-content2 a:hover {
-    background-color: rgba(222, 217, 217, 0.969);
-    color: black; 
-    transform: scale(1.1);
-    transform-origin: top center;
-    transition: all 300ms ease-in-out;
-}
-
-.dropdown2:hover .dropdown-content2 {
-    display: block;
-}
-
-.dropdown2:hover .dropbtn2 {
-    /* background-color:aliceblue; */
-    background-color: peachpuff;
-}
-
-.dropdown-content3 a:hover {
-    background-color: rgba(222, 217, 217, 0.969);
-    color: black; 
-    transform: scale(1.1);
-    transform-origin: top center;
-    transition: all 300ms ease-in-out;
-}
-
-.dropdown3:hover .dropdown-content3 {
-    display: block;
-}
-
-.dropdown3:hover .dropbtn3 {
-    background-color: peachpuff;
-    /* background-color: rgba(219, 9, 170, 0.9); */
-}
-
-.dropdown-content4 a:hover {
-    /* background-color: rgba(222, 217, 217, 0.969); */
-    background-color: #53a2be;
-    color: black; 
-    transform: scale(1.1);
-    transform-origin: top center;
-    transition: all 300ms ease-in-out;
-}
-
-.dropdown4:hover .dropdown-content4 {
-    display: block;
-}
-
-.dropdown4:hover .dropbtn4 {
-    background-color: peachpuff;
-    /* background-color: rgba(219, 9, 170, 0.9); */
-
+.dropbtn, .dropbtn2, .dropbtn3 {
+    margin-top: 1.5rem;
 }
 
 .dropbtn4 {
-    width: 65px;
-    height: 65px;
+    margin-top: 0.5rem;
+    border-radius: 1.5rem;
+}
+  
+.dropdown-content, .dropdown-content2, .dropdown-content3, .dropdown-content4 {
+    display: none;
+    position: absolute;
+    min-width: 10rem;
+}
+
+.dropdown-content a, .dropdown-content2 a, .dropdown-content3 a, .dropdown-content4 a {
+    color: #29A376;
+    background: #fff;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover, .dropdown-content2 a:hover, .dropdown-content3 a:hover, .dropdown-content4 a:not(#signUpButton a, #signInButton a):hover {
+    background-color: rgba(41,163,118, 0.8);
+    color: #fff; 
+    transform: scale(1.1);
+    transform-origin: top center;
+    transition: all 300ms ease-in-out;
+}
+
+.dropdown:hover .dropdown-content, .dropdown2:hover .dropdown-content2, .dropdown3:hover .dropdown-content3, .dropdown4:hover .dropdown-content4 {
+    display: block;
+}
+
+.dropdown-content4 {
+    position: absolute;
+    right: 0.5rem;
+}
+
+.dropbtn4 {
+    width: 4rem;
+    height: 4rem;
     overflow: hidden;
 }
 
@@ -187,84 +111,69 @@ header {
     object-position: center;
 }
 
-#searchBarContainer {
-    display: flex;
-    height:50%;
-    width: 70%;
-    /* padding: 10px 35px 10px 15px; */
-    border-radius: 100px;
-    background-color: white;
-    overflow: hidden;
-    margin-top: 20px;
-    margin-left: 25px;
-    border: black 1px solid;
+#signUpButton, #signInButton {
+    position: relative;
+    width: 8.5rem;
+    right: 27%;
 }
 
-#searchBar {
-    border: none;
-    outline: none;
-    margin-left: 5%;
+#signUpButton:hover a, #signInButton:hover a {
+    background-color: #F5F5F5;
+}
+
+#searchBarContainer {
     display: flex;
-    flex: 1;
-    align-items: center;
+    justify-content: space-around;
+    height:50%;
+    width: 74%;
+    padding: 0.625rem 2.25rem 0.625rem 0.625rem;
+    border-radius: 6.25rem;
+    color: #464646;
+    overflow: hidden;
+    margin-top: 1.25rem;
+    margin-left: 1.5rem;
+    border: #464646 1px solid;
+    position: relative;
 }
 
 .searchButton {
-    background: transparent;
+    border-radius: 50%;
     border: none;
     outline: none;
-    /* margin-left: 100px; */
-    display: flex;
-    align-items: center;
-    padding-top: -20px;
+    position: absolute;
+    right: 0.2rem;
+    bottom: 0.2rem;
+    cursor: pointer;
 }
 
-#settingsButton, #signOutButton {
-    font-size: 15px;
-    overflow: hidden;
-    vertical-align: middle;
-    text-align: center;
-    margin: 0 auto;
-    display: table-cell;
-    background-color: aliceblue;
-    line-height: 5px;
-    border-radius: 12px;
+.fa-magnifying-glass {
+    position: relative;
+    top: 0.6rem;
 }
 
 #magnifying {
-    width: 30px;
-    height: 30px;
-    object-fit: cover;
-    /* display: flex; */
-    
+    width: 2.375rem;
+    height: 2.25rem;
+    object-fit: cover;    
 }
 
-.form{
-    display: flex;
-    flex-direction: row;
-    background-color: white;
-    width: 50%;
-    height: 50px;
-    margin-top: -60px;
-    margin-left: 30%;
-    border-radius: 100px;
-    align-items: center;
-
-}
-
-.form input{
-    width: 100%;
-    height: 50px;
-    font-size: 2rem;
-}
 #searchBarContainer select { 
-    width: 200px;
+    width: fit-content;
     border: 1px; 
+    margin-right: 0.625rem;
 }
 
 #searchBarContainer select.filter {
-    width: 100px;
+    width: fit-content;
     border: 1px; 
+    margin-right: 0.625rem;
+}
+
+.signInUp {
+    margin-left: auto; 
+    margin-right: 2rem;
+    z-index: 10;
+
 }
 
 .toast {
@@ -273,31 +182,32 @@ header {
   However, delay the fade out process for 2.5 seconds */
     animation: fadein 0.6s, fadeout 2s 2.5s forwards;
 
-    height: 100px;
-    width: 300px;
+    height: 6.25rem;
+    width: 18.75rem;
     position: absolute;
 
-    top: 10px;
-    right: 10px;
+    top: 6.25rem;
+    right: 0.625rem;
 
     display: flex;
     flex-direction: column;
     text-align: center;
     justify-content: center;
 
-    background-color: magenta;
+    background-color: rgba(41,163,118, 0.8);
+    color: #FFF;
 
     z-index: 9999999;
 }
 
 @keyframes fadein {
-    from {opacity: 0; right: -500px}
-    to {opacity: 1; right: 10px}
+    from {opacity: 0; right: -31.25rem}
+    to {opacity: 1; right: 0.625rem}
   }
 
   
   @keyframes fadeout {
-    0% {opacity: 1; right: 10px;}
-    50% {opacity: 0; right: 10px;}
-    100%{ opacity: 0; right: -500px;}
+    0% {opacity: 1; right: 0.625rem;}
+    50% {opacity: 0; right: 0.625rem;}
+    100%{ opacity: 0; right: -31.25rem;}
   }
