@@ -69,43 +69,24 @@ function dateDiff() {
   
     var t2 = new Date(d2);
     var t1 = new Date(d1);
-  
-    document.getElementById("dateBtn").innerHTML = Math.round(((t1 - t2) / (24 * 3600 * 1000))/30) +" month(s)"; 
-  }
 
-function price() {
+    var currentLocation = window.location.href;
+    console.log(currentLocation);
+    var url = new URL(currentLocation);
+    var price = url.searchParams.get("price");
 
+    for (let i = 0; i < price.length; i++){
+        price = price.replace(',', ''); // go through all the characters and replace commas if they are present
+    }
+    console.log(price);
+
+    if (((t1 - t2) / (24 * 3600 * 1000)) >= 30){
+    document.getElementById("dateBtn").innerHTML = "Your total price is " + Math.round(((t1 - t2) / (24 * 3600 * 1000))/30 * parseInt(price)).toLocaleString('en-US') + "₩"; 
+    }
+    else {
+        document.getElementById("dateBtn").innerHTML = "Minimum stay is 30 days. Please enter new dates"; 
+    }
 }
 
-function submitForm(e) {
-
-    e.preventDefault();
-    if(checkCardholder() && checkCardNumber() && checkCVV() && dateDiff()) {
-        
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'index.php?action=reservations');
-        
-        var form = document.querySelector('#paymentForm'),
-        formData = new FormData(form);
-        xhr.addEventListener('readystatechange', function() {
-            if (xhr.readyState === 4) {
-                console.log(xhr.responseText); 
-                if (xhr.responseText == "") //1 denotes if email is already in the database
-                {
-                    alert("Please complete the reservation."); 
-                } else {
-                    document.querySelector("#reservations-container").innerHTML = ""
-                    document.querySelector("#reservations-container").innerHTML = "Reservation Successful!"
-                }
-            }
-        });
-        
-        // xhr.send();
-        xhr.send(formData);
 
 
-    } 
-    // else {
-    //     e.preventDefault();
-    // }
-}

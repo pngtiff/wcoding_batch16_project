@@ -15,6 +15,11 @@
     width: 300px;
 }
 
+#creditCards {
+    width: 125px;
+    height: 25px;
+}
+
 .creditCardForm {
     max-width: 100%;
     background-color: #fff;
@@ -127,25 +132,46 @@
     justify-content: center;
 }
 
-#reset, #confirm-purchase {
-    background-color: rgb(0, 128, 0);
-    color: white;
-    border: none;
-    width: 50%;
-
-}
-
-#dateBtn {
-    background-color: rgb(0, 128, 0);
-    color: white;
-    border: none;
-    width: 80%;
-    height: 36px;
-    margin: auto;
-    padding: 10px;
+#reset, #confirm-purchase, #dateBtn {
+    background-color: rgb(41, 163, 118);
+    color: rgb(247, 238, 238); 
+    font-weight: bold;
+    padding: 0.25rem 0.5rem;
+    border: 2px solid #000;
+    margin: 1.25rem 0;
+    cursor: pointer;
+    align-items: center;
+    appearance: none;
+    border-radius: 2.5rem;
+    border-style: none;
+    box-shadow: rgb(0 0 0 / 20%) 0 3px 5px -1px, rgb(0 0 0 / 14%) 0 6px 10px 0, rgb(0 0 0 / 12%) 0 1px 18px 0;
+    box-sizing: border-box;
+    display: inline-flex;
+    fill: currentcolor;
+    font-size: 1rem;
+    font-weight: 500;
+    height: 3rem;
+    justify-content: center;
+    letter-spacing: .25px;
+    line-height: normal;
+    max-width: 100%;
+    overflow: visible;
+    padding: 0.125rem 1.5rem;
+    position: relative;
     text-align: center;
-    border-radius: 25px;
+    text-transform: none;
+    transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1), opacity 15ms linear 30ms, transform 270ms cubic-bezier(0, 0, .2, 1) 0ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: auto;
+    will-change: transform, opacity;
 }
+
+#reset:hover, #confirm-purchase:hover, #dateBtn:hover {
+    background-color: rgba(41,163,118, 0.90);
+}
+
 
 #reset {
     margin-left: 20px;

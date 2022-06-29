@@ -17,8 +17,8 @@ ob_start();?>
                 <div class="checkOut">
                 <label for="endDate" id="end">Check-out date</label>
                 <input type="date" id="endDate" name="endDate" class="form-control" value="<?php echo date('m-d-Y'); ?>">
-                </div><br><br>
-                <div id=dateBtn onclick="dateDiff()">Click here for the total days and price</div>
+                </div>
+                <div id=dateBtn onclick="dateDiff()">Click here for the total cost</div><br><br>
                 <?php 
                     // $date1 = date_create('startDate.value');
                     // $date2 = date_create('endDate.value');
@@ -40,6 +40,9 @@ ob_start();?>
                     // }
 
                 ?><br>
+                <div class="creditCards">
+                    <img id="creditCards"src="public/images/capture.JPG" alt="creditCards">
+                </div><br>
                 <label for="owner">Cardholder</label>
                 <input type="text" class="form-control" id="owner" name="owner" placeholder="Enter your name as shown on your credit card" required>
                 <div class="nameError"><em>Please enter your name as shown on your credit card (only letters)</em></div><br>
@@ -75,7 +78,7 @@ ob_start();?>
                         <option value="26"> 2026</option>
                         <option value="27"> 2027</option>
                     </select>
-                </div>
+                </div><br><br>
                     <div class="buttons">
                         <!-- <img src="public/images/Credit-Card-Icons.jpg" id="visa"> -->
                         <button type="submit" class="btn btn-default" id="confirm-purchase">Confirm Payment</button>
