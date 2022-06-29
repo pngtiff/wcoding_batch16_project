@@ -45,7 +45,7 @@ let bio = document.querySelector('#bio');
 let imgContainer = document.querySelector('#profilePhoto div');
 
 let imgError = document.createElement('div');
-imgError.style.marginTop = '10px';
+imgError.style.marginTop = '0.625rem';
 imgDiv.parentNode.appendChild(imgError);
 
 // change the photo by choosing the different files

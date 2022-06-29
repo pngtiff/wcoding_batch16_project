@@ -30,20 +30,18 @@
     width: 200px
 }
 
-<<<<<<< HEAD
+
 input, select {
     width: 200px;
 }
 
-=======
 input, select  {
     width: 200px;
     justify-content: center;
 }
 
-/* #furnished {
-    
-} */
+
+
 
 #description {
     resize: none;
@@ -63,4 +61,3 @@ input, select  {
     right: 10px;
     top: 10px;
 }
->>>>>>> master

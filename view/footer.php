@@ -1,13 +1,15 @@
-    <footer class="footer">
+    <footer class="footer primaryFill offsetColor">
         <div class="contact">
             <h3>Contact</h3>
             <p>23, SeonYu-Ro 49-gil, Suite 1101</p>
             <p>YeongDeungPo-Gu, Seoul, South Korea</p>
             <p>02-123-4567</p>
-            <a href="mailto:info@room-ez.com"><p>info@room-ez.com</p></a>
-            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>        
-            <a href="#"><i class="fa-brands fa-instagram-square"></i></i></a>        
-            <a href="#"><i class="fa-brands fa-twitter"></i></a> 
+            <a href="#" class="offsetColor"><p>info@room-ez.com</p></a>
+            <div>
+                <a href="#"><i class="fa-brands fa-facebook-f offsetColor"></i></a>        
+                <a href="#"><i class="fa-brands fa-instagram-square offsetColor"></i></i></a>        
+                <a href="#"><i class="fa-brands fa-twitter offsetColor"></i></a> 
+            </div>
         </div>
 
         
@@ -183,6 +185,7 @@
     <script src="public/js/header.js"></script>
     <script src="public/js/modal.js"></script> 
     <script src="public/js/footerModal.js"></script>
-    <script src="public/js/search.js"></script> 
-    <script src="public/js/searchMapView.js"></script>
+    <script src="./public/js/search.js"></script>     
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2d4e6c65e087f4ced51eeb4ccd34262c"></script>
+    <script src="./public/js/searchMapView.js"></script>
 

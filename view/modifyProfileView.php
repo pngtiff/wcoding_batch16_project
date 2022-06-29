@@ -9,18 +9,18 @@
      
         <form action="index.php" method = "post" id = "modifyFormM" enctype="multipart/form-data">
             
-            <div id = "photoContainerM">
-                <div id = "profilePhotoM">
-                    <img id = "photoM" src= "./profile_images/<?= $data['profile_img']?>"/>
+            <div id="photoContainerM">
+                <div id="profilePhotoM">
+                    <img id="photoM" src= "./profile_images/<?= $data['profile_img']?>"/>
                     <input type="file" id = "fileM" name = "uploadFile">
                     <label for="fileM" id = "uploadButtonM">Choose Photo</label>
                     <input type="hidden" name="action" value="uploadImg">
                 </div>
             </div>
             
-            <div id="row1" class="flexRow">
+            <div id="row1">
                 
-                <div id = "phoneBox" >
+                <div id="phoneBox">
                     <div>
                         <label for="phoneNumber">Phone Number:</label>
                         <span id="alertMesg">Please Check Your Phone Number</span>
@@ -126,7 +126,7 @@
             </div>
 
             <div class = "bottomContainerM">
-                <button type="submit" class="buttons" id="save" name="save">Save Profile Changes</button>
+                <button type="submit" class="buttons primaryBtn primaryColor" id="save" name="save">Save Profile Changes</button>
             </div>
             <input type="hidden" name="action" value="updateUserData">
 
