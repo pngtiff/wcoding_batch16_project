@@ -63,23 +63,23 @@ let formContainer = document.querySelector("#formContainer"),
 
 
 regionSearch.addEventListener('click', e=> {
-    let curr = document.querySelector('#searchBarContainer .active');
-    if (curr && curr != e.target) curr.classList.remove('active');
-    e.target.classList.add('active');
+    // let curr = document.querySelector('#searchBarContainer .active');
+    // if (curr && curr != e.target) curr.classList.remove('active');
+    currentSlide(1);
     formContainer.style.display = 'block';
     searchForm.style.display = 'block';
 })
 priceSearch.addEventListener('click', e=> {
-    let curr = document.querySelector('#searchBarContainer .active');
-    if (curr) curr.classList.remove('active');
-    e.target.classList.add('active');
+    // let curr = document.querySelector('#searchBarContainer .active');
+    // if (curr) curr.classList.remove('active');
+    currentSlide(2);
     formContainer.style.display = 'block';
     searchForm.style.display = 'block';
 })
 propertyTypeSearch.addEventListener('click', e=> {
-    let curr = document.querySelector('#searchBarContainer .active');
-    if (curr) curr.classList.remove('active');
-    e.target.classList.add('active');
+    // let curr = document.querySelector('#searchBarContainer .active');
+    // if (curr) curr.classList.remove('active');
+    currentSlide(3);
     formContainer.style.display = 'block';
     searchForm.style.display = 'block';
 })
@@ -93,3 +93,28 @@ window.addEventListener('click', (e) => {
         searchForm.style.display = 'none';
     }
 }, true)
+
+
+// Search Bar Carousel
+function currentSlide(n) {
+    showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+    let i;
+    let slides = document.getElementsByClassName("searchBarSlides");
+    let dots = document.getElementsByClassName("searchBarDots");
+    if (n > slides.length) {slideIndex = 1}    
+    if (n < 1) {slideIndex = slides.length}
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+    }
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" searchBarDotActive", "");
+    }
+    slides[slideIndex-1].style.display = "block";
+    dots[slideIndex-1].className += " searchBarDotActive";
+}
+
+let slideIndex = 1;
+showSlides(slideIndex);
