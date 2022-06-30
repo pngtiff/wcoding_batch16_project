@@ -10,6 +10,10 @@ function loadSearch(e) {
     ////// LOAD THE ROUTER with action "Search"////////
     xhr.open("post", `index.php`)
     let formData = new FormData(e.target)
+    let ranges = range.noUiSlider.get()
+    formData.append('rangeMin', ranges[0].replace(/[( ₩),]/g, ''))
+    formData.append('rangeMax', ranges[1].replace(/[( ₩),]/g, ''))
+    console.dir(formData)
     ////// Response = searchResultsCard with $_get parameters loaded in xhr.open above //////////
     xhr.addEventListener("load", function(e) {
         if (e.target.status === 200) {
@@ -63,22 +67,16 @@ let formContainer = document.querySelector("#formContainer"),
 
 
 regionSearch.addEventListener('click', e=> {
-    // let curr = document.querySelector('#searchBarContainer .active');
-    // if (curr && curr != e.target) curr.classList.remove('active');
     currentSlide(1);
     formContainer.style.display = 'block';
     searchForm.style.display = 'block';
 })
 priceSearch.addEventListener('click', e=> {
-    // let curr = document.querySelector('#searchBarContainer .active');
-    // if (curr) curr.classList.remove('active');
     currentSlide(2);
     formContainer.style.display = 'block';
     searchForm.style.display = 'block';
 })
 propertyTypeSearch.addEventListener('click', e=> {
-    // let curr = document.querySelector('#searchBarContainer .active');
-    // if (curr) curr.classList.remove('active');
     currentSlide(3);
     formContainer.style.display = 'block';
     searchForm.style.display = 'block';
@@ -118,35 +116,35 @@ function showSlides(n) {
 
 let slideIndex = 1;
 showSlides(slideIndex);
-var lowerSlider = document.querySelector('#lower'),
-   upperSlider = document.querySelector('#upper'),
-   lowerVal = parseInt(lowerSlider.value);
-   upperVal = parseInt(upperSlider.value);
 
-upperSlider.oninput = function() {
-   lowerVal = parseInt(lowerSlider.value);
-   upperVal = parseInt(upperSlider.value);
-   
-    if (upperVal < lowerVal + 4) {
-        lowerSlider.value = upperVal - 4;
-        
-        if (lowerVal == lowerSlider.min) {
-            upperSlider.value = 4;
-        }
-    }
-};
+var range = document.getElementById('range');
 
+noUiSlider.create(range, {
+    connect: true,
+    range: {
+        'min': 0,
+        'max': 1000000  
+    },
+    step: 25000,
+    start: [0, 1000000],
+    margin: 25000,
+    format: wNumb({
+        decimals: 0,
+        thousand: ',',
+        suffix: ' ₩',
+    }),
+    pips: {
+        mode: 'positions',
+        values: [0, 20, 40, 60, 80, 100],
+        density: 3,
+        stepped: true,
+        format: wNumb({
+            decimals: 0,
+            thousand: ',',
+            suffix: ' ₩',
+        }),
+    },
+    tooltips: true
+});
 
-lowerSlider.oninput = function() {
-    lowerVal = parseInt(lowerSlider.value);
-    upperVal = parseInt(upperSlider.value);
-    
-    if (lowerVal > upperVal - 4) {
-        upperSlider.value = lowerVal + 4;
-        
-        if (upperVal == upperSlider.max) {
-            lowerSlider.value = parseInt(upperSlider.max) - 4;
-        }
-
-    }
-};
+document.querySelector('#range > div.noUi-pips.noUi-pips-horizontal > div:nth-child(42)').textContent = '1M +'

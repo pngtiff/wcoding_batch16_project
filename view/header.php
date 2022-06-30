@@ -37,16 +37,19 @@
             </div>
 
             <form id="searchBarContainer" class="offsetFill" >
-                <span id="regionSearch">Anywhere</span>
-                <span id="priceSearch">Any price</span>
-                <span id="propertyTypeSearch">Any type</span>
+                <div>
+                    <span id="regionSearch">Anywhere</span>
+                    <span id="priceSearch">Any price</span>
+                    <span id="propertyTypeSearch">Any type</span>
+                </div>
                 <button class="searchButton primaryFill"><i id="magnifying" class="fa-solid fa-magnifying-glass offsetColor"></i></button>
                 <div id="formContainer"></div>
                 <div id="searchForm" method="post" action="index.php">
                     <div>
                         <span id="regionSearch" class="searchBarDots" onclick="currentSlide(1)">Region</span>
                         <span id="priceSearch" class="searchBarDots" onclick="currentSlide(2)">Price Range</span>
-                        <span id="propertyTypeSearch" class="searchBarDots" onclick="currentSlide(3)">Property Type</span>
+                        <span id="propertyTypeSearch" class="searchBarDots" onclick="currentSlide(3)">Type </span>
+                        <button class="searchButton primaryFill"><i id="magnifying" class="fa-solid fa-magnifying-glass offsetColor"></i></button>
                     </div>
                     <input type="hidden" name="action" value="search">
                     <div>
@@ -75,10 +78,7 @@
                             </select>
                         </div>
                         <div class="searchBarSlides">
-                            <span class="multi-range">
-                                <input type="range" min="0" max="50" value="0" id="lower">
-                                <input type="range" min="0" max="50" value="50" id="upper">
-                            </span>
+                            <div id="range"></div>
                         </div>
                         <div class="searchBarSlides">
                             <select name="propertyType" id="propertyType" class="filter">
@@ -97,7 +97,6 @@
                                 <option value="3">Entire Place</option>
                             </select>
                         </div>
-                        <button class="searchButton primaryFill"><i id="magnifying" class="fa-solid fa-magnifying-glass offsetColor"></i><span>Search</span></button>
                     </div>
                 </div>
             </form>
