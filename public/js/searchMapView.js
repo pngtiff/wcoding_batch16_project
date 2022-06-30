@@ -1,4 +1,4 @@
-const searchMap = async function (coords) {
+const searchMap = function (coords) {
 // let coords = [
 //     {
 //         title: 'house 1',
@@ -32,12 +32,15 @@ const searchMap = async function (coords) {
 //     }
 // ]
 
-    const centerLoc = await getLatLngCenter(coords);
+    const centerLoc = getLatLngCenter(coords);
+    const zoom = getMapZoomLevel(coords);
+    
 
     let mapContainer = document.getElementById('searchMap'),
     mapOption = { 
         center: new kakao.maps.LatLng(centerLoc[0], centerLoc[1]), // center point of map
-        level: 13 // map zoom level
+        // map zoom level
+        level: zoom 
     };
     let map = new kakao.maps.Map(mapContainer, mapOption); // create map
 
@@ -65,9 +68,7 @@ const searchMap = async function (coords) {
         //     window.location = positions[i].link;
         // })
 
-        // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
-        // 이벤트 리스너로는 클로저를 만들어 등록합니다 
-        // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+        // if the closure is not made in the for loop, only the last marker will have the event
         kakao.maps.event.addListener(marker, 'click', makeOverListener(map, marker, infowindow));
         // kakao.maps.event.addListener(marker, 'click', function() {
         //     window.location = positions[i].link;
@@ -94,6 +95,54 @@ function makeOutListener(infowindow) {
     };
 }
 
+
+function getMinMaxCoords(coords) {
+    let latitudes = [],
+        longitudes = [];
+    for(i=0; i<coords.length; i++) {
+        latitudes.push(coords[i].latitude),
+        longitudes.push(coords[i].longitude);
+    }
+
+    let minLat = Math.min(...latitudes),
+        maxLat = Math.max(...latitudes),
+        minLng = Math.min(...longitudes),
+        maxLng = Math.max(...longitudes);
+    
+    return [[minLat, minLng], [maxLat, maxLng]]
+}
+
+// calculate distance between mix and max coordinates
+function getMapZoomLevel(coords) {
+    const minMaxCoords = getMinMaxCoords(coords);
+    let maxLat = minMaxCoords[1][0],
+        minLat = minMaxCoords[0][0],
+        maxLng = minMaxCoords[1][1],
+        minLng = minMaxCoords[0][1];
+
+    let latDiff = maxLat - minLat,
+        lngDiff = maxLng - minLng;
+    console.log(latDiff, lngDiff);
+
+    let zoom;
+    if(latDiff == 0 || lngDiff == 0) {
+        zoom = 5;
+    } else if(lngDiff < 0.2) {
+        zoom = 9;
+    } else if(lngDiff < 0.5) {
+        zoom = 10;
+    } else if(lngDiff < 1.5){
+        zoom = 11;
+    } else if(lngDiff < 2) {
+        zoom = 12;
+    } else {
+        zoom = 13;
+    }
+
+    return zoom;
+}
+
+
 // calculate center point of the search result property coordinates
 function rad2degr(rad) { return rad * 180 / Math.PI; }
 function degr2rad(degr) { return degr * Math.PI / 180; }
@@ -106,25 +155,27 @@ function degr2rad(degr) { return degr * Math.PI / 180; }
  * @return array with the center latitude longtitude pairs in 
  *   degrees.
  */
-async function getLatLngCenter(coords) {
+function getLatLngCenter(coords) {
+    const minMaxCoords = getMinMaxCoords(coords);
+    // console.log(minMaxCoords);
     var latitude = 0;
     var longitude = 1;
     var sumX = 0;
     var sumY = 0;
     var sumZ = 0;
 
-    for (var i=0; i<coords.length; i++) {
-        var lat = degr2rad(coords[i].latitude);
-        var lng = degr2rad(coords[i].longitude);
+    for (var i=0; i<minMaxCoords.length; i++) {
+        var lat = degr2rad(minMaxCoords[i][0]);
+        var lng = degr2rad(minMaxCoords[i][1]);
         // sum of cartesian coordinates
         sumX += Math.cos(lat) * Math.cos(lng);
         sumY += Math.cos(lat) * Math.sin(lng);
         sumZ += Math.sin(lat);
     }
 
-    var avgX = sumX / coords.length;
-    var avgY = sumY / coords.length;
-    var avgZ = sumZ / coords.length;
+    var avgX = sumX / minMaxCoords.length;
+    var avgY = sumY / minMaxCoords.length;
+    var avgZ = sumZ / minMaxCoords.length;
 
     // convert average x, y, z coordinate to latitude and longtitude
     var lng = Math.atan2(avgY, avgX);

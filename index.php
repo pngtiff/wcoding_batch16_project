@@ -141,8 +141,13 @@ try {
                 getDistricts($_REQUEST['city']);
             }
             break;
-        case 'cancelReservation';
-            cancelReservation($_REQUEST);
+
+        case 'reservations':
+            reservationView();
+            break;
+        
+        case 'addReservationInfo':
+            addReservationInfo();
             break;
 
         default:

@@ -52,8 +52,7 @@
                     </div>
                 </div>
             </a>
-            <button class='resvbutton primaryBtn primaryFill'><a href="" class="offsetColor">Reserve now</a></button>
-            <!-- TODO: reservation action -->
+            <button class='resvbutton primaryBtn primaryFill'><a href="index.php?action=reservations&propId=<?=$_REQUEST['propId']?>&price=<?= number_format($propDetails[0]['monthly_price_won']);?>">Reserve now</a></button>
         </div>
     </div>
     <!-- pass database parameters to frontend mapview.js -->
