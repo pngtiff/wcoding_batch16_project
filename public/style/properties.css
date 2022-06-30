@@ -58,7 +58,11 @@
     border-radius: 2px 2px 0 0;
     margin-bottom: 20px;
     overflow: hidden;
-    z-index: -99;
+    z-index: 99;
+}
+
+#detailedView .propertyImgContainer {
+    width: 70%;
 }
 
 .propertyImgContainer img {
@@ -97,7 +101,7 @@
     position: absolute;
     bottom: -0.8rem;
     left: 1rem;
-    z-index: 1;
+    z-index: -11;
 }
 
 .propDetails {
@@ -108,7 +112,7 @@
 }
 
 .propDesc {
-    width: 60%;
+    width: 70%;
     color: #0A2239;
 }
 
@@ -119,6 +123,10 @@
 }
 
 .propResv {
+    position: fixed;
+    top : 210px;
+    right: 7%;
+
     width: 21.875rem;
     justify-content: center;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
@@ -381,6 +389,12 @@ div.showP{
 @keyframes fade {
     from {opacity: .4}
     to {opacity: 1}
+}
+
+.slideButtons
+{
+    text-align:center;
+    width: 70%;
 }
 
 
