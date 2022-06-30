@@ -143,8 +143,13 @@ try {
                 getDistricts($_REQUEST['city']);
             }
             break;
-        case 'cancelReservation';
-            cancelReservation($_REQUEST);
+
+        case 'reservations':
+            reservationView(); // 'user' -> user uid
+            break;
+        
+        case 'addReservationInfo':
+            addReservationInfo();
             break;
 
         default:
