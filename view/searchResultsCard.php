@@ -11,7 +11,7 @@
                 {
                     include('propertyCard.php');?>
                     <input class="postTitle" type="hidden" value = "<?= $property['post_title']?>">
-                    <input class="content" type="hidden" value = '<?= "<a href=index.php?action=property&propId={$property['id']}>View Details</a>"?>'>
+                    <input class="content" type="hidden" value = '<?= "<a href=index.php?action=property&propId={$property['id']}>-View Details</a>"?>'>
                     <input class="link" type="hidden" value = '<?= "index.php?action=property&propId={$property['id']}"?>'>
                     <input class="latitude" type="hidden" value = "<?= $property['latitude']?>">
                     <input class="longitude" type="hidden" value = "<?= $property['longitude']?>">

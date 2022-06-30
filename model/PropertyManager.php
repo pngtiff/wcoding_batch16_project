@@ -41,7 +41,7 @@ class PropertyManager extends Manager
             ON p.id = pi.property_id
             WHERE p.is_active = 1
             GROUP BY pi.property_id
-            ORDER BY date_created DESC LIMIT 0,8");
+            ORDER BY date_created DESC LIMIT 0,9");
         }
         $properties = $req->fetchAll(\PDO::FETCH_ASSOC);
 
@@ -247,20 +247,6 @@ class PropertyManager extends Manager
                 throw(new Exception('Image is too big'));
             }
         }
-        // Create a folder for the property on the server
-        $propertyId = $this->_connection->query("SELECT id FROM properties ORDER BY ID DESC LIMIT 0, 1")->fetch(\PDO::FETCH_ASSOC)['id'] + 1;
-        if (!file_exists("./public/images/property_images/$propertyId")) {
-            mkdir("./public/images/property_images/$propertyId");
-        }
-        foreach ($imgs as $file) {
-            $fileName = pathinfo($file["name"]);
-            $extension  = $fileName['extension'];
-            $fileLocation = $file["tmp_name"];
-            $bytes = bin2hex(random_bytes(16)); // generates secure pseudo random bytes and bin2hex converts to hexadecimal string
-            $imgName[] = $bytes . "." . $extension;
-            move_uploaded_file($fileLocation, "./public/images/property_images/$propertyId/" . $imgName[count($imgName) - 1]);
-        }
-
 
         //////////////API CALL to GeoCode to turn the zipcode into Long + latt///////////////////
         $curl = curl_init();
@@ -290,6 +276,20 @@ class PropertyManager extends Manager
             )");
         }
 
+        // Create a folder for the property on the server
+        $propertyId = $this->_connection->query("SELECT id FROM properties ORDER BY ID DESC LIMIT 0, 1")->fetch(\PDO::FETCH_ASSOC)['id'];
+        if (!file_exists("./public/images/property_images/$propertyId")) {
+            mkdir("./public/images/property_images/$propertyId");
+        }
+        foreach ($imgs as $file) {
+            $fileName = pathinfo($file["name"]);
+            $extension  = $fileName['extension'];
+            $fileLocation = $file["tmp_name"];
+            $bytes = bin2hex(random_bytes(16)); // generates secure pseudo random bytes and bin2hex converts to hexadecimal string
+            $imgName[] = $bytes . "." . $extension;
+            move_uploaded_file($fileLocation, "./public/images/property_images/$propertyId/" . $imgName[count($imgName) - 1]);
+        }
+
         for ($i = 0; $i < count($imgName); $i++) {
             $this->_connection->exec("INSERT
                 INTO property_imgs (property_id, img_url, description) 
@@ -298,6 +298,8 @@ class PropertyManager extends Manager
         }
         header("Location:index.php?action=property&propId={$propertyId}");
     }
+
+    
     public function modifyProperty($propId, $imgs, $imgDescriptions, $oldImgs) {
         // INFO validation
         if ($propId < 0)
