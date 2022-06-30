@@ -60,13 +60,10 @@ try {
             checkProfile();
             break;
 
-            // loads modifyProfileView
         case 'modifyProfile':
-            // displayDefaultInfo();
             modifyProfileView($_REQUEST['user']);
             break;
 
-            // trigger updating data - working without any issue at the moment
         case 'updateUserData':
             if (!empty($_REQUEST['language']) or !empty($_REQUEST['phone_number']) or !empty($_REQUEST['bio']) or !empty($_FILES["uploadFile"]["name"])) {
                 updateProfile();
