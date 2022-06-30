@@ -2,17 +2,6 @@
 
 <?php ob_start(); ?>
 <section id="viewProfile">
-<<<<<<< HEAD
-<div>
-    <button id='homeButton'><a href='index.php'>Home</a></button>
-</div>
-
-<div id='profileContainer' class='flexColumn'>
-    <div id='userInfo' class='flexColumn'>
-        <div id='userMain'>
-            <div><div id='userImgContainer'><img id='userImg' src="<?php if($userImg = $user['profile_img']) {echo './profile_images/'.$user['profile_img'];} else {echo './public/images/defaultProfile.jpg';}?>" alt="<?= $user['id'].'profile image';?>"></div></div>
-            <div>
-=======
     <div>
         <button id='homeButton' class='primaryBtn primaryFill'><a href='index.php' class='offsetColor'>Home</a></button>
     </div>
@@ -28,13 +17,13 @@
             <?php }
             } ?>
             <div id='userMain'>
->>>>>>> master
                 <div>
                     <div id='userImgContainer'><img id='userImg' src="<?php if ($userImg = $user['profile_img']) {
-                                                                            echo './profile_images/' . $user['profile_img'];
-                                                                        } else {
-                                                                            echo './public/images/defaultProfile.jpg';
-                                                                        } ?>" alt="<?= $user['id'] . 'profile image'; ?>"></div>
+                            echo './profile_images/' . $user['profile_img'];
+                        } else {
+                            echo './public/images/defaultProfile.jpg';
+                        } ?>" alt="<?= $user['id'] . 'profile image'; ?>">
+                    </div>
                 </div>
                 <div>
                     <div>
