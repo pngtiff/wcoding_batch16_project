@@ -40,6 +40,7 @@ function loadSearch(e) {
 
 let provinceSearch = document.querySelector('#province');
 let citySearch = document.querySelector('#city');
+let searchBar = document.querySelector("#searchBarContainer");
 provinceSearch.addEventListener('change', function(e) {
     let xhr = new XMLHttpRequest();
     xhr.open('GET', `index.php?action=getCities&province=${e.target.options[e.target.selectedIndex].text}`);
@@ -52,4 +53,43 @@ provinceSearch.addEventListener('change', function(e) {
 })
 
 //// CLICK ICON///////
-document.querySelector("#searchBarContainer").addEventListener("submit", loadSearch)
+
+searchBar.addEventListener("submit", loadSearch)
+let formContainer = document.querySelector("#formContainer"),
+    searchForm = document.querySelector('#searchForm')
+    regionSearch = document.querySelector("#regionSearch"),
+    priceSearch = regionSearch.nextElementSibling,
+    propertyTypeSearch = priceSearch.nextElementSibling
+
+
+regionSearch.addEventListener('click', e=> {
+    let curr = document.querySelector('#searchBarContainer .active');
+    if (curr && curr != e.target) curr.classList.remove('active');
+    e.target.classList.add('active');
+    formContainer.style.display = 'block';
+    searchForm.style.display = 'block';
+})
+priceSearch.addEventListener('click', e=> {
+    let curr = document.querySelector('#searchBarContainer .active');
+    if (curr) curr.classList.remove('active');
+    e.target.classList.add('active');
+    formContainer.style.display = 'block';
+    searchForm.style.display = 'block';
+})
+propertyTypeSearch.addEventListener('click', e=> {
+    let curr = document.querySelector('#searchBarContainer .active');
+    if (curr) curr.classList.remove('active');
+    e.target.classList.add('active');
+    formContainer.style.display = 'block';
+    searchForm.style.display = 'block';
+})
+
+window.addEventListener('click', (e) => {
+    if (e.target == formContainer) {
+
+        let curr = document.querySelector('#searchBarContainer .active');
+        if (curr) curr.classList.remove('active');
+        formContainer.style.display = 'none'
+        searchForm.style.display = 'none';
+    }
+}, true)

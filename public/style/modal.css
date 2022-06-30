@@ -103,3 +103,38 @@
 #modalBox {
     z-index: 1000;
 }
+
+.animate-left {
+    animation-name: animate-left;
+    animation-duration: 1.5s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+}
+
+.animate-right {
+    animation-name: animate-right;
+    animation-duration: 1.5s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+}
+  
+@keyframes animate-left {
+    from {
+        left: 50%
+
+    }
+    to {
+        left: 0
+
+    }
+}
+@keyframes animate-right {
+    from {
+        left: 0
+    }
+    to {
+        left: 50%
+    }
+}
