@@ -13,21 +13,56 @@
 }
 
 .property {
-    padding: 0.625rem 0;
-    border-bottom: 1px solid grey;
+    padding-bottom: 20px;
     margin: 1.25rem;
     width: 21rem;
+    border-radius: 4px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* justify-content: center; */
+    position: relative;
+
+    transition: 0.2s;
 }
 
+.validation
+{
+    border: 1px solid rgb(229, 229, 229);
+
+}
+
+.validation1
+{
+    border: 3px solid rgb(41, 163, 118);
+    /* padding: -3px */
+    /* position: inherit;
+    z-index: 999999; */
+}
+
+/* #propertiesSearchList .property
+{
+    padding: 0;
+} */
+
+.property:hover {
+    transform: scale(1.01);
+}
+
+
 .propertyImgContainer {
-    width: 18.75rem;
+    width: 100%;
     height: 15.625rem;
-    border-radius: 1.25rem;
+    border-radius: 2px 2px 0 0;
+    margin-bottom: 20px;
     overflow: hidden;
+    z-index: 99;
+}
+
+#detailedView .propertyImgContainer {
+    width: 70%;
 }
 
 .propertyImgContainer img {
@@ -35,6 +70,8 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
+    /* position: inherit;
+    z-index: -99; */
 }
 
 .price {
@@ -64,7 +101,7 @@
     position: absolute;
     bottom: -0.8rem;
     left: 1rem;
-    z-index: 1;
+    z-index: -11;
 }
 
 .propDetails {
@@ -75,7 +112,7 @@
 }
 
 .propDesc {
-    width: 60%;
+    width: 70%;
     color: #0A2239;
 }
 
@@ -86,6 +123,10 @@
 }
 
 .propResv {
+    position: fixed;
+    top : 210px;
+    right: 7%;
+
     width: 21.875rem;
     justify-content: center;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
@@ -310,6 +351,34 @@ div.showP{
     background-color: rgba(41,163,118, 0.90);
 }
 
+.validatedBorder
+{
+    color: white;
+    font-size: 80%;
+    background-color: #29A376;
+    padding: 5px;
+    border-radius: 10px 10px 0 0;
+    position: absolute;
+    top: -31px;
+
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+
+    visibility: hidden;
+}
+
+.display1
+{
+    visibility: visible;
+}
+
+.validatedBorder img
+{
+    width: 20px;
+    height: 20px;
+}
+
+
 /* animation */
 /* ========= */
 .fade {
@@ -320,6 +389,12 @@ div.showP{
 @keyframes fade {
     from {opacity: .4}
     to {opacity: 1}
+}
+
+.slideButtons
+{
+    text-align:center;
+    width: 70%;
 }
 
 
