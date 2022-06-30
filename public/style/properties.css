@@ -28,9 +28,10 @@
     height: 15.625rem;
     border-radius: 1.25rem;
     overflow: hidden;
+    margin-top: 1rem;
 }
 
-.propertyImgContainer img {
+.propertyImgContainer img, .propImages img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -52,19 +53,6 @@
 .validatedCheck {
     width: 1.5rem;
     vertical-align: bottom;
-}
-
-.propImages, .propImgSlides {
-    width: 100%;
-    height: 28.125rem;
-    position: relative;
-}
-
-.allPropPhotos {
-    position: absolute;
-    bottom: -0.8rem;
-    left: 1rem;
-    z-index: 1;
 }
 
 .propDetails {
@@ -104,6 +92,45 @@
 
 .resvbutton:hover {
     background-color: rgba(41,163,118, 0.90);
+}
+
+
+.propOwnerInfo {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #000;
+}
+
+.propOwnerIcon {
+    width: 6.25rem;
+    height: 6.25rem;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.propOwnerIcon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+/* ======================= */
+/* Property Image Carousel */
+/* ======================= */
+
+.propImages, .propImgSlides {
+    width: 100%;
+    height: 28.125rem;
+    position: relative;
+}
+
+.allPropPhotos {
+    position: absolute;
+    bottom: -0.8rem;
+    left: 1rem;
+    z-index: 1;
 }
 
 .prev, .next {
@@ -161,25 +188,6 @@
     background-color: #29A376;
 }
 
-.propOwnerInfo {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #000;
-}
-
-.propOwnerIcon {
-    width: 6.25rem;
-    height: 6.25rem;
-    border-radius: 50%;
-    overflow: hidden;
-}
-
-.propOwnerIcon img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-}
 
 
 /* ===================================== */
@@ -294,6 +302,21 @@ div.showP{
     object-position: center;
 }
 
+.detailedImgDots {
+    cursor: pointer;
+    height: 0.625rem;
+    width: 0.625rem;
+    margin: 0 0.125rem;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.detailedImgDotsActive, .detailedImgDots:hover {
+    background-color: #29A376;
+}
+
 .propertyGallery{
     width: 100%;
     height: 100%;
@@ -324,3 +347,68 @@ div.showP{
 
 
 
+@media screen and (max-width: 650px) {
+    .propImages {
+        position: absolute;
+        left: 0;
+        width: 100vw;
+        border-radius: 0;
+    }
+
+    .propImages + div {
+        margin-top: 16.125rem;
+    }
+    
+    .propImgSlides {
+        width: 100%;
+        height: 16.125rem;
+    }
+
+    .prev, .next {
+        top: 26%;
+    }
+
+    .allPropPhotos {
+        top: 0;
+        left: 1rem;
+        z-index: 1;
+    }
+
+    .propResv {
+        width: 100vw;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        z-index: 1;
+        background-color: #fff;
+        /* flex-direction: row; */
+    }
+
+    .propResv>p:nth-child(2) {
+        display: none;
+    }
+
+    .propOwnerInfo {
+        display: none;
+    }
+
+    .propResv > * {
+        margin-bottom: 0.2rem;
+    }
+
+    .propDesc {
+        width: 100%;
+    }
+
+    .modifyPropBtn, .allPropPhotos {
+        font-size: .8rem;
+    }
+
+    .allPropPhotos {
+        opacity: 70%;
+    }
+
+    .allPropPhotos span, .modifyPropBtn span {
+        display: none;
+    }
+}

@@ -18,9 +18,9 @@
         else?></p>
     <?php if(!empty($_SESSION['uid'])) {
     if($_SESSION['uid'] === $_SESSION['user_uid']) { ?>
-       <button class="primaryBtn offsetFill"><a class="primaryColor" href="index.php?action=prefillProperty&propId=<?= $_REQUEST['propId'];?>">Modify Property Details</a></button>
+       <button class="primaryBtn offsetFill modifyPropBtn"><a class="primaryColor" href="index.php?action=prefillProperty&propId=<?= $_REQUEST['propId'];?>"><span>Modify Property Details </span><i class="fa-solid fa-pen-to-square"></i></a></button>
     <?php }} ?>
-    <div class='propertyImgContainer propImages'>
+    <div class='propImages'>
         <?php if(count($propDetails)>1) {
             include('propImagesCarousel.php');
         } else {
@@ -103,7 +103,7 @@
         <div style="text-align:center">
             <?php if(count($propDetails)>1) {
                 for($i=0; $i<count($propDetails); $i++) {?>
-            <span class="propImgDots" onclick="currentSlideD(<?=$i+1?>)"></span>
+            <span class="detailedImgDots" onclick="currentSlideD(<?=$i+1?>)"></span>
             <?php }};?>
         </div>
     </div>
