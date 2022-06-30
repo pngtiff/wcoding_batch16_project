@@ -23,7 +23,7 @@
     
         require('./view/detailedPropertyView.php');
     }
-
+    
     function getPropertyOwner($propId) {
         $propertyM = new PropertyManager();
         $propOwner = $propertyM->getPropertyOwner($propId);

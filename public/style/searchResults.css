@@ -7,32 +7,37 @@
 
 #searchMap {
     width: 35%;
-    height: 100vh;
+    height: 40rem;
 }
 
 #propertiesSearchList
 {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
-    width: 65%;
+    width: 62%;
 }
 
 #propertiesSearchList .property {
-    padding: 0.625rem 0;
-    border-bottom: 1px solid grey;
-    margin: 1.25rem;
-    width: 50rem;
-
-    display: flex;
+    width: 105%;
+    margin-left: 0;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
 
+#propertiesSearchList .price {
+    width: 11rem;
+}
+
+/* #propertiesSearchList .price span {
+    display: block;
+} */
+
 #propertiesSearchList #propertyDetails {
-    display: flex;
+    /* display: flex; */
     align-items: center;
-    width: 60%;
+    width: 19rem;
 }
 
 #propertyDetails p {
@@ -40,8 +45,8 @@
 }
 
 #propertiesSearchList .propertyImgContainer {
-    width: 12.5rem;
-    height: 9.375rem;
+    width: 13.75rem;
+    height: 10.625rem;
     border-radius: 1.25rem;
     overflow: hidden;
 }

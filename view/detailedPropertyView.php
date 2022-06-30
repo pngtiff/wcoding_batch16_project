@@ -52,10 +52,15 @@
                     </div>
                 </div>
             </a>
-            <button class='resvbutton primaryBtn primaryFill'><a href="" class="offsetColor">Reserve now</a></button>
+            <button class='resvbutton primaryBtn primaryFill'><a href="index.php?action=reservations&propId=<?=$_REQUEST['propId']?>&price=<?= number_format($propDetails[0]['monthly_price_won']);?>">Reserve now</a></button>
             <!-- TODO: reservation action -->
         </div>
     </div>
+    <!-- pass database parameters to frontend mapview.js -->
+    <input class="latitude" type="hidden" value = "<?= $propDetails[0]['latitude']?>">
+    <input class="longitude" type="hidden" value = "<?= $propDetails[0]['longitude']?>">
+    <!-- pass database parameters to frontend mapview.js -->
+
 </section>
 
 
