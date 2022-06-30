@@ -30,19 +30,6 @@
     width: 12.5rem;
 }
 
-
-input, select {
-    width: 200px;
-}
-
-input, select  {
-    width: 200px;
-    justify-content: center;
-}
-
-
-
-
 #description {
     resize: none;
 }
