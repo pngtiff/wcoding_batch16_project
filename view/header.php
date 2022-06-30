@@ -75,12 +75,10 @@
                             </select>
                         </div>
                         <div class="searchBarSlides">
-                            <select name="rentRange" id="rentRange" class="filter">
-                                <option value="any">Price Range (monthly)</option>
-                                <option value="500000">Less than 500k</option>
-                                <option value="1000000">Between 500k and 1M</option>
-                                <option value="1500000">More than 1M</option>
-                            </select>
+                            <span class="multi-range">
+                                <input type="range" min="0" max="50" value="0" id="lower">
+                                <input type="range" min="0" max="50" value="50" id="upper">
+                            </span>
                         </div>
                         <div class="searchBarSlides">
                             <select name="propertyType" id="propertyType" class="filter">
@@ -143,7 +141,7 @@
             </div>
         </div>
     <?php } ?>
-
 </header>
+
 
 <div class="headerBackground offsetFill" ></div>
