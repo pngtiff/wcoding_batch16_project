@@ -371,6 +371,20 @@ class UserManager extends Manager
         $this->_connection->exec("UPDATE users SET last_online=NOW() WHERE email='{$_SESSION['email']}'");
     }
 
+    public function cancelReservation($reservationNum) {
+        $req = $this->_connection->prepare("UPDATE reservations SET is_active = 0 WHERE reservation_num = :reservationNum AND user_uid = '{$_SESSION ['uid']}'");
+            $req->bindParam("reservationNum", $reservationNum, \PDO::PARAM_STR);
+            $req->execute();
+    }
+
+    public function getReservations() {
+        if ($this->_user_id == $_SESSION['uid']) {
+            $req = $this->_connection->query("SELECT * FROM reservations WHERE user_uid='{$_SESSION['uid']}' AND is_active=1");
+            $reservations = $req->fetchAll(\PDO::FETCH_ASSOC);
+        } else $reservations = [];
+        return $reservations;
+    }
+    
     public function getReservationCost()
     {
         $req = $this->_connection->prepare("SELECT * FROM properties WHERE property_id ='{$_SESSION['propId']}' AND is_active = 1");
