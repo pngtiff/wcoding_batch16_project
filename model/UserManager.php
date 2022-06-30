@@ -270,7 +270,6 @@ class UserManager extends Manager
         $req = $this->_connection->prepare("SELECT * FROM users WHERE uid ='{$_SESSION['uid']}' AND is_active = 1");
         $req->execute();
         $data = $req->fetch(\PDO::FETCH_ASSOC);
-
         $languages = explode(',', $data['languages']);
         $data['languages'] = $languages;
 
@@ -371,7 +370,7 @@ class UserManager extends Manager
         $this->_connection->exec("UPDATE users SET last_online=NOW() WHERE email='{$_SESSION['email']}'");
     }
 
-    public function cancelReservation($reservationNum){
+    public function cancelReservation($reservationNum) {
         $req = $this->_connection->prepare("UPDATE reservations SET is_active = 0 WHERE reservation_num = :reservationNum AND user_uid = '{$_SESSION ['uid']}'");
             $req->bindParam("reservationNum", $reservationNum, \PDO::PARAM_STR);
             $req->execute();

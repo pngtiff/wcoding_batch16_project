@@ -1,17 +1,5 @@
-/* #properties {
-    width: 95%;
-    margin-top: 20px;
-}
-
-#propertiesContainer {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-} */
-
-
 #searchResultsContainer {
-    margin-top: 40px;
+    margin-top: 2.5rem;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -31,10 +19,10 @@
 }
 
 #propertiesSearchList .property {
-    padding: 10px 0;
+    padding: 0.625rem 0;
     border-bottom: 1px solid grey;
-    margin: 20px;
-    width: 800px;
+    margin: 1.25rem;
+    width: 50rem;
 
     display: flex;
     justify-content: space-between;
@@ -47,16 +35,13 @@
     width: 60%;
 }
 
+#propertyDetails p {
+    margin-right: 1rem;
+}
+
 #propertiesSearchList .propertyImgContainer {
-    width: 200px;
-    height: 150px;
-    border-radius: 20px;
+    width: 12.5rem;
+    height: 9.375rem;
+    border-radius: 1.25rem;
     overflow: hidden;
 }
-/* 
-.propertyImgContainer img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-} */

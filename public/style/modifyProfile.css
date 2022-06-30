@@ -10,14 +10,8 @@ section{
     justify-content: center;
 }
 
-.profileFormsBorder{
-    border: 2px solid #FFBD00;
-    border-radius: 20px;
-    padding: 30px;
-}
-
 .personalInformationContainer form div{
-    margin-bottom: 30px;
+    margin-bottom: 1.875rem;
 }
 
 #languageSelection{
@@ -28,12 +22,12 @@ section{
 /* profile photo */
 
 #profilePhotoM{
-    height: 200px;
-    width: 200px;
+    height: 12.5rem;
+    width: 12.5rem;
     border-radius: 50%;
     overflow: hidden;
     border: 1px solid grey;
-    margin-bottom: 10px;
+    margin-bottom: 0.625rem;
     position: relative;
 }
 
@@ -48,7 +42,7 @@ section{
 
 
 #uploadButtonM{
-    height: 40px;
+    height: 2.5rem;
     width: 100%;
     position: absolute;
     bottom: 0;
@@ -57,20 +51,20 @@ section{
     transform: translateX(-50%);
     background-color: rgb(0, 0, 0, 0.7);
     color: white;
-    line-height: 30px;
-    font-size: 15px;
+    line-height: 1.875rem;
+    font-size: 1rem;
     cursor: pointer;
     display: none;
 }
 
 #sendPhotoButton{
-    width: 100px;
-    height: 30px;
-    font-size: 18px;
+    width: 6.25rem;
+    height: 1.875rem;
+    font-size: 1.125rem;
 }
 
 .container{
-    width: 600px;
+    width: 37.5rem;
     display: flex;
 }
 
@@ -79,23 +73,23 @@ section{
 }
 
 .labelM{
-    width: 130px;
+    width: 8.125rem;
 }
 
 /* for all the input boxes */
 .boxM{
-    width: 200px;
-    height: 30px;
+    width: 12.5rem;
+    height: 1.875rem;
 }
 
 /* for bio  and phoneNumber input box */
 #bioM{
     width: 70%;
-    height: 200px;
+    height: 12.5rem;
 }
 
 #phoneNumberM{
-    margin-left: 50px;
+    margin-left: 3.125rem;
 }
 
 #buttonContainer{
