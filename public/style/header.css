@@ -143,8 +143,8 @@ header {
     position: absolute;
     transform: translate(-50%,-50%); 
 
-    right: -16px;
-    bottom: -16px;
+    right: -17px;
+    bottom: -17px;
     cursor: pointer;
 }
 
