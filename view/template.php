@@ -19,6 +19,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300&family=Montserrat:wght@300&family=Quicksand:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="public/style/reservations.css">
     <script src="https://kit.fontawesome.com/949df75f70.js" crossorigin="anonymous"></script>
 
 </head>
