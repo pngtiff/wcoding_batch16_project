@@ -1,17 +1,5 @@
-/* #properties {
-    width: 95%;
-    margin-top: 20px;
-}
-
-#propertiesContainer {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-} */
-
-
 #searchResultsContainer {
-    margin-top: 40px;
+    margin-top: 2.5rem;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -50,6 +38,10 @@
     /* display: flex; */
     align-items: center;
     width: 19rem;
+}
+
+#propertyDetails p {
+    margin-right: 1rem;
 }
 
 #propertiesSearchList .propertyImgContainer {

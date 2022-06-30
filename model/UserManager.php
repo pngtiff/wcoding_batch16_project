@@ -270,7 +270,6 @@ class UserManager extends Manager
         $req = $this->_connection->prepare("SELECT * FROM users WHERE uid ='{$_SESSION['uid']}' AND is_active = 1");
         $req->execute();
         $data = $req->fetch(\PDO::FETCH_ASSOC);
-
         $languages = explode(',', $data['languages']);
         $data['languages'] = $languages;
 
