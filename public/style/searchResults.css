@@ -1,17 +1,5 @@
-/* #properties {
-    width: 95%;
-    margin-top: 20px;
-}
-
-#propertiesContainer {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-} */
-
-
 #searchResultsContainer {
-    margin-top: 40px;
+    margin-top: 2.5rem;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -36,6 +24,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    padding-bottom: 0;
 }
 
 #propertiesSearchList .price {
@@ -52,9 +41,14 @@
     width: 19rem;
 }
 
+#propertyDetails p {
+    margin-right: 1rem;
+}
+
 #propertiesSearchList .propertyImgContainer {
     width: 13.75rem;
-    height: 10.625rem;
-    border-radius: 1.25rem;
+    max-height: 10.625rem;
+    margin-bottom: 0;
+    border-radius: 3px, 3px, 0, 0;
     overflow: hidden;
 }

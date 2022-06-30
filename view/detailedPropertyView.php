@@ -5,7 +5,7 @@
     };;?>
 
 <?php ob_start();?>
-<section>
+<section id="detailedView">
 <h2><?php 
     if($propDetails[0]['post_title']==''){
         echo $propDetails[0]['p_type'].' in '.$propDetails[0]['province_state'].', '.$propDetails[0]['city'];
@@ -27,7 +27,7 @@
             echo "<img alt=".$propDetails[0]['image_description']." src=./public/images/property_images/{$propDetails[0]['p_id']}/{$propDetails[0]['p_img']}>";
         } ?>
     </div>
-    <div style="text-align:center">
+    <div class="slideButtons">
         <?php if(count($propDetails)>1) {
             for($i=0; $i<count($propDetails); $i++) {?>
         <span class="propImgDots" onclick="currentSlide(<?=$i+1?>)"></span>

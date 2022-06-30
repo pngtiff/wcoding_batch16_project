@@ -15,6 +15,7 @@ const alertMesg = document.querySelector('#alertMesg');
 let languages = document.querySelectorAll('.list input[type="checkbox"]');
 let langArray = [];
 let userLang = document.querySelector('#userLang');
+let langList = Array.apply(null, document.querySelectorAll('.list > *'));
 
 
 
@@ -44,10 +45,22 @@ file.addEventListener('change', function(){
 
 // multi language selection
 document.querySelector('.select-field').addEventListener('click', () => {
+    document.querySelector('#absolute').style.display='block';
     document.querySelector('.list').classList.toggle('show');
     document.querySelector('.down-arrow').classList.toggle('rotate180');
-
 });
+
+// closes languages list when clicking outside .select-field
+window.addEventListener('click', (e) => {
+    console.log(e.target);
+    if (e.target == document.querySelector('#absolute')) {
+        document.querySelector('#absolute').style.display='none';
+        if(document.querySelector('.list').classList.contains('show')) {
+            document.querySelector('.list').classList.remove('show');
+            document.querySelector('.down-arrow').classList.remove('rotate180');
+        }
+    }
+})
 
 for (i = 0; i < languages.length; i++) {
     if(languages[i].checked) {
@@ -117,7 +130,7 @@ const display = function(element){
 const countStr = function(phoneNum){
     let count = phoneNum.value.length; // add more condition
     console.log(count);
-    if(count < 11 || count >= 12){
+    if(count < 11 || count >= 15){
         phoneNum.classList.remove("green");
         phoneNum.classList.add("red"); // display the input box in red color
     } else{
@@ -128,7 +141,7 @@ const countStr = function(phoneNum){
 }
 
 // to alert the user while they type their phone number
-inputBoxes[3].addEventListener('input', function(){
+inputBoxes[3].addEventListener('change', function(){
     countStr(phoneNumInput);
 });
 
