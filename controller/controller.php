@@ -41,6 +41,8 @@ function showUserInfo($action, $userId) {
     $propertyM = new PropertyManager($userId);
     $properties = $propertyM->getProperties($action);
 
+    $reservations = $userM->getReservations();
+
     require('./view/viewProfile.php');
 }
 
