@@ -28,7 +28,7 @@ function checkCardholder() {
 
 function checkCardNumber() {
     let regex = /^4[0-9]{12}(?:[0-9]{3})?|(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}|3[47][0-9]{13}$/;
-    if (regex.test(number.value)) {
+    if (regex.test(number.value.replace(/-/g, ''))) {
         number.classList.add('green');
         number.classList.remove('red'); 
         number.nextElementSibling.classList.add('numError'); 
@@ -86,6 +86,14 @@ function dateDiff() {
     else {
         document.getElementById("dateBtn").innerHTML = "Minimum stay is 30 days. Please enter new dates"; 
     }
+}
+
+function formatCreditCard() {
+    var x = document.getElementById("cardNumber");
+    var index = x.value.lastIndexOf('-');
+    var test = x.value.substr(index + 1);
+    if (test.length === 4 && x.value.length < 19)
+         x.value = x.value + '-';
 }
 
 
