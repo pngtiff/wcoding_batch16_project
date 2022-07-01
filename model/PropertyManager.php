@@ -121,10 +121,10 @@ class PropertyManager extends Manager
 
         $province = ($province == "any") ? "%%" : $province-1; //// If search input is empty, show all results ("%%" is regex that catches any string)
         $city = ($city == "any") ? "%%" : $city-1; //// If search input is empty, show all results ("%%" is regex that catches any string)
-        $rangeMin = ($rangeMin == "any") ? 0 : $rangeMin;
-        $rangeMax = (($rangeMax == "any") OR ($rangeMax > 1000000)) ? 10000000 : $rangeMax; /// default number large enough to catch all properties
-        $propertyType = ($propertyType == "any") ? "%%" : $propertyType;
-        $roomType = ($roomType == "any") ? "%%" : $roomType;
+        $rangeMin = strip_tags($rangeMin);
+        $rangeMax = ($rangeMax == 1000000) ? 100000000000 : strip_tags($rangeMax); /// default number large enough to catch all properties
+        $propertyType = ($propertyType == "any") ? "%%" : $propertyType + 0;
+        $roomType = ($roomType == "any") ? "%%" : $roomType + 0;
 
 
         $req = $this->_connection->prepare("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.latitude, p.longitude, p.city, p.address1, p.address2, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.img_url AS p_img, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description

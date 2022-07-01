@@ -46,9 +46,7 @@ function showUserInfo($action, $userId) {
 
 function search($params) {
     $propertyM = new PropertyManager();
-    $rangeMin = $params["rentRange"] != "any" ? $params['rentRange']-500000 : "any";
-    $rangeMax = $params["rentRange"] != "any" ? $params['rentRange'] : "any";
-    $properties = $propertyM->searchProperties($params['province'], $params['city'], $rangeMin, $rangeMax, $params['propertyType'], $params['roomType']);
+    $properties = $propertyM->searchProperties($params['province'], $params['city'], $params['rangeMin'], $params['rangeMax'], $params['propertyType'], $params['roomType']);
     require('./view/searchResultsCard.php');
 }
 
@@ -56,7 +54,19 @@ function getCities($province) {
     $propertyM = new PropertyManager();
     $cities = $propertyM->getCities($province);
     if ($cities) {
-        echo "<option selected disabled>Select a city</option>";
+        if (
+            $province == 'Busan' OR
+            $province == 'Daegu' OR
+            $province == 'Daejeon' OR
+            $province == 'Gwangju' OR
+            $province == 'Incheon' OR
+            $province == 'Jeju-do' OR
+            $province == 'Sejong' OR
+            $province == 'Seoul'
+        )
+            echo "<option selected disabled>Select a district</option>";
+        else
+            echo "<option selected disabled>Select a city</option>";
         foreach($cities as $key=>$city) {
             $key+=1;
             echo "<option value='{$key}'>$city</option>";
@@ -75,7 +85,7 @@ function getDistricts($city) {
             echo "<option value='$key'>$district</option>";
         }
     } else {
-        echo '<option selected value="-1">No cities/districts in this area</option>';
+        echo '<option selected value="-1">No districts in this area</option>';
     }
 }
 

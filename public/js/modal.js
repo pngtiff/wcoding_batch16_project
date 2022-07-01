@@ -1,80 +1,61 @@
 function opacity (opacity, modalContainer) {
     modalContainer.style.opacity = opacity;
 }
-let modalBox
 if (modalBox = document.getElementById("modalBox")) {
-    let id = null;
     function moveBanner() {
-        banner.classList.remove('right','left');
         let left = parseInt(getComputedStyle(banner).left);
+        console.log(left);
         if (left > 0) {
-            clearInterval(id);
             showSignup();
-            id = setInterval(frame, 1);
-            function frame() {
-                if (left <= 0) {
-                    clearInterval(id);
-                } else {
-                    left -= 4; 
-                    banner.style.left = left + "px"; 
-                    banner.classList.add('left');
-                }
-            }
+            banner.classList.remove('right', 'animate-right');
+            banner.classList.add('left', 'animate-left');
+            
         } else {
-            clearInterval(id);
             showSignin();
-            id = setInterval(frame, 1);
-            function frame() {
-                if (left >= banner.offsetWidth) {
-                    clearInterval(id);
-                } else {
-                    left += 4; 
-                    banner.style.left = left + "px"; 
-                    banner.classList.add('right');
-                }
-            }
+            banner.classList.remove('left', 'animate-left');
+            banner.classList.add('right', 'animate-right');
         }
     }
 
-function showSignup() {
-    banner.innerHTML = '';
-    let h1 = document.createElement('h1');
-    h1.textContent = 'Welcome Back!';
-    let h2 = document.createElement('h2');
-    h2.textContent = 'Already have an account?';
-    let h3 = document.createElement('h2');
-    h3.textContent = 'Click button below to sign in.';
-    let bttn = document.createElement('button');
-    bttn.classList.add('primaryBtn', 'primaryColor');
-    bttn.textContent = 'Sign in';
-    bttn.addEventListener('click', moveBanner)
-    banner.appendChild(h1);
-    banner.appendChild(h2);
-    banner.appendChild(h3 );
-    banner.appendChild(bttn);
-}
+    function showSignup() {
+        banner.innerHTML = '';
+        let h1 = document.createElement('h1');
+        h1.textContent = 'Welcome Back!';
+        let h2 = document.createElement('h2');
+        h2.textContent = 'Already have an account?';
+        let h3 = document.createElement('h2');
+        h3.textContent = 'Click button below to sign in.';
+        let bttn = document.createElement('button');
+        bttn.classList.add('primaryBtn', 'primaryColor');
+        bttn.textContent = 'Sign in';
+        bttn.addEventListener('click', moveBanner)
+        banner.appendChild(h1);
+        banner.appendChild(h2);
+        banner.appendChild(h3 );
+        banner.appendChild(bttn);
+    }
 
-function showSignin () {
-    banner.innerHTML = '';
-    let h1 = document.createElement('h1');
-    h1.textContent = 'New Here?';
-    let h2 = document.createElement('h2');
-    h2.textContent = 'Click button below to sign up.';
-    let bttn = document.createElement('button');
-    bttn.classList.add('primaryBtn', 'primaryColor');
-    bttn.textContent = 'Sign up';
-    bttn.addEventListener('click', moveBanner);
-    banner.appendChild(h1);
-    banner.appendChild(h2);
-    banner.appendChild(bttn);
-}
+    function showSignin () {
+        banner.innerHTML = '';
+        let h1 = document.createElement('h1');
+        h1.textContent = 'New Here?';
+        let h2 = document.createElement('h2');
+        h2.textContent = 'Click button below to sign up.';
+        let bttn = document.createElement('button');
+        bttn.classList.add('primaryBtn', 'primaryColor');
+        bttn.textContent = 'Sign up';
+        bttn.addEventListener('click', moveBanner);
+        banner.appendChild(h1);
+        banner.appendChild(h2);
+        banner.appendChild(bttn);
+    }
 
     let banner = document.querySelector('#banner-container');
 
     //// open the modal on SignUp/Sign In button click
     document.getElementById("signUpButton").addEventListener("click", function(e) {
         banner.style.left = 0; 
-        banner.classList.remove('right','left');
+        banner.classList.remove('right','left', 'animate-right', 'animate-left');
         banner.classList.add('left');
         e.preventDefault()
         showSignup();
@@ -84,7 +65,7 @@ function showSignin () {
 
     document.getElementById("signInButton").addEventListener("click", function(e) {
         banner.style.left = '50%';
-        banner.classList.remove('right','left');
+        banner.classList.remove('right','left','animate-right', 'animate-left');
         banner.classList.add('right');
         e.preventDefault();
         showSignin();
