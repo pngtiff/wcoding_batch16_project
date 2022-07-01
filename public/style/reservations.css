@@ -63,7 +63,7 @@
     display: flexbox; 
 }
 
-#month, #year {
+.expiry #month, .expiry #year {
     width: 175px;
     margin-left: 20px;
 }
@@ -110,10 +110,6 @@
 #dates {
     font-size: 24px;
     width: 30%;
-}
-
-#year {
-    margin-left: 10px;
 }
 
 #available {
