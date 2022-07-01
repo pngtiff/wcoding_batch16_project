@@ -6,16 +6,16 @@
 
 <?php ob_start();?>
 <section id="detailedView">
-<h2><?php 
-    if($propDetails[0]['post_title']==''){
-        echo $propDetails[0]['p_type'].' in '.$propDetails[0]['province_state'].', '.$propDetails[0]['city'];
-    } else {
-        echo $propDetails[0]['post_title'];
-    };?></h2>
+    <h2><?php 
+        if($propDetails[0]['post_title']==''){
+            echo $propDetails[0]['p_type'].' in '.$propDetails[0]['province_state'].', '.$propDetails[0]['city'];
+        } else {
+            echo $propDetails[0]['post_title'];
+        };?></h2>
     <p><?= $propDetails[0]['province_state'].', '.$propDetails[0]['city'];?><?php
-    if($propDetails[0]['validation']) {
-        echo ' ‣ Validated Property'?> <img class='validatedCheck' src="./public/images/validatedPropertyCheck.png" alt="validation green check"><?php ;}
-        else?></p>
+        if($propDetails[0]['validation']) {
+            echo ' ‣ Validated Property'?> <img class='validatedCheck' src="./public/images/validatedPropertyCheck.png" alt="validation green check"><?php ;}
+            else?></p>
     <?php if(!empty($_SESSION['uid'])) {
     if($_SESSION['uid'] === $_SESSION['user_uid']) { ?>
        <button class="primaryBtn offsetFill modifyPropBtn"><a class="primaryColor" href="index.php?action=prefillProperty&propId=<?= $_REQUEST['propId'];?>"><span>Modify Property Details </span><i class="fa-solid fa-pen-to-square"></i></a></button>
@@ -24,7 +24,7 @@
         <?php if(count($propDetails)>1) {
             include('propImagesCarousel.php');
         } else {
-            echo "<img alt=".$propDetails[0]['image_description']." src=./public/images/property_images/{$propDetails[0]['p_id']}/{$propDetails[0]['p_img']}>";
+            echo "<div class='propImgSlides'><img alt=".$propDetails[0]['image_description']." src=./public/images/property_images/{$propDetails[0]['p_id']}/{$propDetails[0]['p_img']}></div>";
         } ?>
     </div>
     <div class="slideButtons">
@@ -36,7 +36,7 @@
     <div class='propDetails'>
         <div class='propDesc'>
             <h3><?=$propDetails[0]['r_type']?> in <?= $propDetails[0]['p_type'];?></h3>
-            <p>Size: <?=$propDetails[0]['size'];?>m² | <?=$propDetails[0]['room_num'];?> <i class="fa-solid fa-people-roof primaryColor"></i> <?= $propDetails[0]['bed_num'] !== null ? '| '.$propDetails[0]['bed_num'].' <i class="fa-solid fa-bed primaryColor"></i>' : '';?> | <?=$propDetails[0]['bath_num'];?> <i class="fa-solid fa-bath primaryColor"></i></p>
+            <p>Size: <?=$propDetails[0]['size'];?>m²<span class='roomDetails'> | <?='<span> '.$propDetails[0]['room_num'].'</span>';?> <i class="fa-solid fa-people-roof primaryColor"></i> <?= $propDetails[0]['bed_num'] !== null ? '| <span>'.$propDetails[0]['bed_num'].'</span> <i class="fa-solid fa-bed primaryColor"></i>' : '';?> | <?='<span> '.$propDetails[0]['bath_num'].'</span>';?> <i class="fa-solid fa-bath primaryColor"></i></span></p>
             <p class='upperLowerBorders'><?= $propDetails[0]['description'];?></p>
             <p>Address: <?= $propDetails[0]['province_state'].', '.$propDetails[0]['city'];?></p>
             <div id="map" style="width:100%;height:350px;"></div>
