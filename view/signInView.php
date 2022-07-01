@@ -7,8 +7,10 @@
     <!-- <a href="#">Forgot your password?</a> <br><br> -->
     
     <div>
-        <label for="rememberMe">Remember Me</label>
-        <input type="checkbox" name="rememberMe" id="rememberMe">
+        <label for="rememberMe" class="switch">Remember Me
+            <input type="checkbox" name="rememberMe" id="rememberMe">
+            <span class="slider round"></span>
+        </label>
     </div>
     
     <button class="button primaryBtn primaryColor" type="submit">Sign In</button>
