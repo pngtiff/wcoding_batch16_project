@@ -131,6 +131,8 @@ try {
         case 'viewPostProperty':
             if (!empty($_SESSION['email'])) {
                 viewPostProperty();
+            } else {
+                header('Location:index.php');
             }
             break;
         case 'getCities':

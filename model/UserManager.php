@@ -20,7 +20,7 @@ class UserManager extends Manager
         $email = htmlspecialchars($email);
         $password = htmlspecialchars($password);
 
-        $response = $this->_connection->query("SELECT email, password, dob, first_name, id, uid, profile_img FROM users WHERE email = '$email'");
+        $response = $this->_connection->query("SELECT email, password, dob, first_name, id, uid, profile_img FROM users WHERE email = '$email' AND is_active = 1");
         $userInfo = $response->fetch(\PDO::FETCH_ASSOC);
         $passwordHashed = $userInfo['password'];
         $response->closeCursor();
@@ -270,7 +270,6 @@ class UserManager extends Manager
         $req = $this->_connection->prepare("SELECT * FROM users WHERE uid ='{$_SESSION['uid']}' AND is_active = 1");
         $req->execute();
         $data = $req->fetch(\PDO::FETCH_ASSOC);
-
         $languages = explode(',', $data['languages']);
         $data['languages'] = $languages;
 
@@ -371,25 +370,23 @@ class UserManager extends Manager
         $this->_connection->exec("UPDATE users SET last_online=NOW() WHERE email='{$_SESSION['email']}'");
     }
 
-    public function getReservationCost()
-    {
-        $req = $this->_connection->prepare("SELECT * FROM properties WHERE property_id ='{$_SESSION['propId']}' AND is_active = 1");
-    }
-
-    public function getReservations() {
-        if(isset($_SESSION['uid'])) {
-
-            if ($this->_user_id == $_SESSION['uid']) {
-                $req = $this->_connection->query("SELECT * FROM reservations WHERE user_uid='{$_SESSION['uid']}' AND is_active=1");
-                $reservations = $req->fetchAll(\PDO::FETCH_ASSOC);
-            } else $reservations = [];
-            return $reservations;
-        }
-    }
     public function cancelReservation($reservationNum) {
         $req = $this->_connection->prepare("UPDATE reservations SET is_active = 0 WHERE reservation_num = :reservationNum AND user_uid = '{$_SESSION ['uid']}'");
             $req->bindParam("reservationNum", $reservationNum, \PDO::PARAM_STR);
             $req->execute();
+    }
+
+    public function getReservations() {
+        if ($this->_user_id == $_SESSION['uid']) {
+            $req = $this->_connection->query("SELECT * FROM reservations WHERE user_uid='{$_SESSION['uid']}' AND is_active=1");
+            $reservations = $req->fetchAll(\PDO::FETCH_ASSOC);
+        } else $reservations = [];
+        return $reservations;
+    }
+    
+    public function getReservationCost()
+    {
+        $req = $this->_connection->prepare("SELECT * FROM properties WHERE property_id ='{$_SESSION['propId']}' AND is_active = 1");
     }
 
     public function reservations()

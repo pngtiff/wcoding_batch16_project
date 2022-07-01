@@ -14,7 +14,6 @@
 
 ///////////SIGN OUT TOAST BUTTON//////////////
 document.addEventListener("DOMContentLoaded", function (e) {
-    document.querySelector(".toast").style.display = "flex";
-    console.log("test")
-
+    let msg = document.querySelector(".toast")
+    if (msg) msg.style.display = "flex";
 })

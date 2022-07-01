@@ -41,7 +41,7 @@ class PropertyManager extends Manager
             ON p.id = pi.property_id
             WHERE p.is_active = 1
             GROUP BY pi.property_id
-            ORDER BY date_created DESC LIMIT 0,8");
+            ORDER BY date_created DESC LIMIT 0,9");
         }
         $properties = $req->fetchAll(\PDO::FETCH_ASSOC);
 
@@ -87,7 +87,7 @@ class PropertyManager extends Manager
 
     public function getPropertyOwner($propId)
     {
-        $req = $this->_connection->prepare("SELECT u.uid, u.first_name, u.profile_img, p.user_uid FROM users u JOIN properties p ON u.uid = p.user_uid WHERE p.id = :propId");
+        $req = $this->_connection->prepare("SELECT u.uid, u.first_name, u.profile_img, p.user_uid FROM users u JOIN properties p ON u.uid = p.user_uid AND u.is_active = 1 WHERE p.id = :propId");
         $req->bindParam('propId', $propId);
         $req->execute();
         $propOwner = $req->fetch(\PDO::FETCH_ASSOC);
@@ -121,10 +121,10 @@ class PropertyManager extends Manager
 
         $province = ($province == "any") ? "%%" : $province-1; //// If search input is empty, show all results ("%%" is regex that catches any string)
         $city = ($city == "any") ? "%%" : $city-1; //// If search input is empty, show all results ("%%" is regex that catches any string)
-        $rangeMin = ($rangeMin == "any") ? 0 : $rangeMin;
-        $rangeMax = (($rangeMax == "any") OR ($rangeMax > 1000000)) ? 10000000 : $rangeMax; /// default number large enough to catch all properties
-        $propertyType = ($propertyType == "any") ? "%%" : $propertyType;
-        $roomType = ($roomType == "any") ? "%%" : $roomType;
+        $rangeMin = strip_tags($rangeMin);
+        $rangeMax = ($rangeMax == 1000000) ? 100000000000 : strip_tags($rangeMax); /// default number large enough to catch all properties
+        $propertyType = ($propertyType == "any") ? "%%" : $propertyType + 0;
+        $roomType = ($roomType == "any") ? "%%" : $roomType + 0;
 
 
         $req = $this->_connection->prepare("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.latitude, p.longitude, p.city, p.address1, p.address2, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.img_url AS p_img, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
@@ -247,20 +247,6 @@ class PropertyManager extends Manager
                 throw(new Exception('Image is too big'));
             }
         }
-        // Create a folder for the property on the server
-        $propertyId = $this->_connection->query("SELECT id FROM properties ORDER BY ID DESC LIMIT 0, 1")->fetch(\PDO::FETCH_ASSOC)['id'] + 1;
-        if (!file_exists("./public/images/property_images/$propertyId")) {
-            mkdir("./public/images/property_images/$propertyId");
-        }
-        foreach ($imgs as $file) {
-            $fileName = pathinfo($file["name"]);
-            $extension  = $fileName['extension'];
-            $fileLocation = $file["tmp_name"];
-            $bytes = bin2hex(random_bytes(16)); // generates secure pseudo random bytes and bin2hex converts to hexadecimal string
-            $imgName[] = $bytes . "." . $extension;
-            move_uploaded_file($fileLocation, "./public/images/property_images/$propertyId/" . $imgName[count($imgName) - 1]);
-        }
-
 
         //////////////API CALL to GeoCode to turn the zipcode into Long + latt///////////////////
         $curl = curl_init();
@@ -290,6 +276,20 @@ class PropertyManager extends Manager
             )");
         }
 
+        // Create a folder for the property on the server
+        $propertyId = $this->_connection->query("SELECT id FROM properties ORDER BY ID DESC LIMIT 0, 1")->fetch(\PDO::FETCH_ASSOC)['id'];
+        if (!file_exists("./public/images/property_images/$propertyId")) {
+            mkdir("./public/images/property_images/$propertyId");
+        }
+        foreach ($imgs as $file) {
+            $fileName = pathinfo($file["name"]);
+            $extension  = $fileName['extension'];
+            $fileLocation = $file["tmp_name"];
+            $bytes = bin2hex(random_bytes(16)); // generates secure pseudo random bytes and bin2hex converts to hexadecimal string
+            $imgName[] = $bytes . "." . $extension;
+            move_uploaded_file($fileLocation, "./public/images/property_images/$propertyId/" . $imgName[count($imgName) - 1]);
+        }
+
         for ($i = 0; $i < count($imgName); $i++) {
             $this->_connection->exec("INSERT
                 INTO property_imgs (property_id, img_url, description) 
@@ -298,6 +298,8 @@ class PropertyManager extends Manager
         }
         header("Location:index.php?action=property&propId={$propertyId}");
     }
+
+    
     public function modifyProperty($propId, $imgs, $imgDescriptions, $oldImgs) {
         // INFO validation
         if ($propId < 0)
