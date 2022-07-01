@@ -149,7 +149,6 @@ try {
         case 'reservations':
             reservationView(); // 'user' -> user uid
             break;
-        
         case 'addReservationInfo':
             addReservationInfo();
             break;

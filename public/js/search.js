@@ -1,10 +1,10 @@
 /////////// trigger search on icon click//////////////
     // Search Bar Carousel
-function currentSlide(n) {
-    showSlides(n);
+function currentSearch(n) {
+    showSearch(n);
 }
 
-function showSlides(n) {
+function showSearch(n) {
     let i;
     let slides = document.getElementsByClassName("searchBarSlides");
     let dots = document.getElementsByClassName("searchBarDots");
