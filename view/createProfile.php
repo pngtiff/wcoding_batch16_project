@@ -2,8 +2,8 @@
 
 <?php ob_start(); ?>
 <section>
-    <form action="index.php?action=checkProfile" method="POST" id="newProfile" enctype="multipart/form-data" class="profileFormsBorder">
-        <div id="line 1">
+    <form action="index.php?action=checkProfile" method="POST" id="newProfile" enctype="multipart/form-data">
+        <div id="line1">
             <h1>Let's create a profile for you</h1>
             <p></p>
         </div>
@@ -11,7 +11,7 @@
             <div></div>
         </div>
         <input type="file" id="file" name="uploadFile">
-        <label for="file" class="uploadPhoto primaryBtn primaryColor offsetFill">Upload Profile Photo</label>
+        <label for="file" class="uploadPhoto primaryBtn primaryColor offsetFill">Choose Profile Photo</label>
         </div>
         <div class="flexRow">
             <div id="createProfileDetails">

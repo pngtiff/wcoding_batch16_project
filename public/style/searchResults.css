@@ -48,3 +48,9 @@
     border-radius: 3px, 3px, 0, 0;
     overflow: hidden;
 }
+
+@media screen and (max-width: 650px) {
+    #searchMap {
+        display: none;
+    }
+}
