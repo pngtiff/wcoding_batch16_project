@@ -87,7 +87,7 @@ class PropertyManager extends Manager
 
     public function getPropertyOwner($propId)
     {
-        $req = $this->_connection->prepare("SELECT u.uid, u.first_name, u.profile_img, p.user_uid FROM users u JOIN properties p ON u.uid = p.user_uid WHERE p.id = :propId");
+        $req = $this->_connection->prepare("SELECT u.uid, u.first_name, u.profile_img, p.user_uid FROM users u JOIN properties p ON u.uid = p.user_uid AND u.is_active = 1 WHERE p.id = :propId");
         $req->bindParam('propId', $propId);
         $req->execute();
         $propOwner = $req->fetch(\PDO::FETCH_ASSOC);
