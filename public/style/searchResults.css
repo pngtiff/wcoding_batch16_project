@@ -41,10 +41,6 @@
     width: 19rem;
 }
 
-#propertyDetails p {
-    margin-right: 1rem;
-}
-
 #propertiesSearchList .propertyImgContainer {
     width: 13.75rem;
     max-height: 10.625rem;

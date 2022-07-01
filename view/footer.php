@@ -185,7 +185,8 @@
     <script src="public/js/header.js"></script>
     <script src="public/js/modal.js"></script> 
     <script src="public/js/footerModal.js"></script>
-    <script src="./public/js/search.js"></script>     
+    <script src="public/js/wNumb.js"></script>
+    <script src="public/js/nouislider.js"></script>
+    <script src="public/js/search.js"></script> 
+    <script src="public/js/searchMapView.js"></script>  
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2d4e6c65e087f4ced51eeb4ccd34262c"></script>
-    <script src="./public/js/searchMapView.js"></script>
-

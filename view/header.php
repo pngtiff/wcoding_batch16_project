@@ -36,59 +36,81 @@
                 </div>
             </div>
 
-            <form id="searchBarContainer" class="offsetFill" method="post" action="index.php">
-                <select name="province" id="province">
-                    <option selected value="-1">Province/Special City</option>
-                    <option value="1">Busan</option>
-                    <option value="2">Chungcheongbuk-do</option>
-                    <option value="3">Chungcheongnam-do</option>
-                    <option value="4">Daegu</option>
-                    <option value="5">Daejeon</option>
-                    <option value="6">Gangwon-do</option>
-                    <option value="7">Gwangju</option>
-                    <option value="8">Gyeonggi-do</option>
-                    <option value="9">Gyeongsangbuk-do</option>
-                    <option value="10">Gyeongsangnam-do</option>
-                    <option value="11">Incheon</option>
-                    <option value="12">Jeju-do</option>
-                    <option value="13">Jeollabuk-do</option>
-                    <option value="14">Jeollanam-do</option>
-                    <option value="15">Sejong-si</option>
-                    <option value="16">Seoul</option>
-                </select>
-                <select name="city" id="city"></select>
-                <select name="rentRange" id="rentRange" class="filter">
-                    <option value="any">Price Range (monthly)</option>
-                    <option value="500000">Less than 500k</option>
-                    <option value="1000000">Between 500k and 1M</option>
-                    <option value="1500000">More than 1M</option>
-                </select>
-
-                <select name="propertyType" id="propertyType" class="filter">
-                    <option value="any">Property Type</option>
-                    <option value="1">Apartment</option>
-                    <option value="2">Officetel</option>
-                    <option value="3">Villa</option>
-                    <option value="4">House</option>
-                    <option value="5">Shared House</option>
-                    <option value="6">Residential Hotel</option>
-                </select>
-
-                <select name="roomType" id="roomType" class="filter">
-                    <option value="any">Room Type</option>
-                    <option value="1">Private Room</option>
-                    <option value="2">Shared Room</option>
-                    <option value="3">Entire Place</option>
-                </select>
+            <form id="searchBarContainer" class="offsetFill" >
+                <div>
+                    <span id="regionSearch">Anywhere</span>
+                    <span id="priceSearch">Any price</span>
+                    <span id="propertyTypeSearch">Any type</span>
+                </div>
                 <button class="searchButton primaryFill"><i id="magnifying" class="fa-solid fa-magnifying-glass offsetColor"></i></button>
-                <input type="hidden" name="action" value="search">
+                <div id="formContainer"></div>
+                <div id="searchForm" method="post" action="index.php">
+                    <div>
+                        <span id="regionSearch" class="searchBarDots" onclick="currentSlide(1)">Region</span>
+                        <span id="priceSearch" class="searchBarDots" onclick="currentSlide(2)">Price Range</span>
+                        <span id="propertyTypeSearch" class="searchBarDots" onclick="currentSlide(3)">Type </span>
+                        <button class="searchButton primaryFill"><i id="magnifying" class="fa-solid fa-magnifying-glass offsetColor"></i></button>
+                    </div>
+                    <input type="hidden" name="action" value="search">
+                    <div>
+                        <div class="searchBarSlides">
+                            <select name="province" id="province">
+                                <option selected value="-1">Province/Special City</option>
+                                <option value="1">Busan</option>
+                                <option value="2">Chungcheongbuk-do</option>
+                                <option value="3">Chungcheongnam-do</option>
+                                <option value="4">Daegu</option>
+                                <option value="5">Daejeon</option>
+                                <option value="6">Gangwon-do</option>
+                                <option value="7">Gwangju</option>
+                                <option value="8">Gyeonggi-do</option>
+                                <option value="9">Gyeongsangbuk-do</option>
+                                <option value="10">Gyeongsangnam-do</option>
+                                <option value="11">Incheon</option>
+                                <option value="12">Jeju-do</option>
+                                <option value="13">Jeollabuk-do</option>
+                                <option value="14">Jeollanam-do</option>
+                                <option value="15">Sejong-si</option>
+                                <option value="16">Seoul</option>
+                            </select>
+                            <select name="city" id="city">
+                                <option value="-1">Select Province/City First</option>
+                            </select>
+                        </div>
+                        <div class="searchBarSlides">
+                            <div id="range"></div>
+                        </div>
+                        <div class="searchBarSlides">
+                            <select name="propertyType" id="propertyType" class="filter">
+                                <option value="any">Property Type</option>
+                                <option value="1">Apartment</option>
+                                <option value="2">Officetel</option>
+                                <option value="3">Villa</option>
+                                <option value="4">House</option>
+                                <option value="5">Shared House</option>
+                                <option value="6">Residential Hotel</option>
+                            </select>
+                            <select name="roomType" id="roomType" class="filter">
+                                <option value="any">Room Type</option>
+                                <option value="1">Private Room</option>
+                                <option value="2">Shared Room</option>
+                                <option value="3">Entire Place</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
             </form>
         </nav>
 
         <div class="signInUp">
             <!-- Changing interface once signed in/signed out -->
             <div class="dropdown4">
-                <button class="dropbtn4"><a href="<?= (isset($_SESSION['uid'])) ? "index.php?action=profile&user={$_SESSION['uid']}" : "#"; ?>"><img src="<?= (isset($_SESSION['profile_img'])) ? './profile_images/' . $_SESSION['profile_img'] : "./public/images/defaultProfile.jpg" ?>" alt="defaultPic"></a></button>
+                <?php if(empty($_SESSION['firstName'])): echo '<div id="noUser">'?>
+                    <button class="dropbtn4"><a href="<?= (isset($_SESSION['uid'])) ? "index.php?action=profile&user={$_SESSION['uid']}" : "#"; ?>"><img src="<?= (isset($_SESSION['profile_img'])) ? './profile_images/' . $_SESSION['profile_img'] : "./public/images/defaultProfile.jpg" ?>" alt="defaultPic"></a></button>
+                    <?php echo '</div>'; endif; ?>
+                <?php if(!empty($_SESSION['firstName'])): ?> 
+                    <button class="dropbtn4"><a href="<?= (isset($_SESSION['uid'])) ? "index.php?action=profile&user={$_SESSION['uid']}" : "#"; ?>"><img src="<?= (isset($_SESSION['profile_img'])) ? './profile_images/' . $_SESSION['profile_img'] : "./public/images/defaultProfile.jpg" ?>" alt="defaultPic"></a></button>
+                    <?php endif; ?>
                 <div class="dropdown-content4">
 
                     <?php
@@ -123,7 +145,7 @@
             </div>
         </div>
     <?php } ?>
-
 </header>
+
 
 <div class="headerBackground offsetFill" ></div>

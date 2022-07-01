@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="public/style/header.css">
     <link rel="stylesheet" href="public/style/footer.css">
     <link rel="stylesheet" href="public/style/postProperty.css">
+    <link rel="stylesheet" href="public/style/nouislider.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300&family=Montserrat:wght@300&family=Quicksand:wght@500&display=swap" rel="stylesheet">
@@ -28,8 +29,6 @@
     <?php require "header.php"; ?>
     <?= $content; ?>
     <?php require "footer.php"; ?>
-    <script src="./public/js/modal.js"></script>
-
 </body>
 
 </html>

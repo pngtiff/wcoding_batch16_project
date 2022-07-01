@@ -18,7 +18,7 @@ document.querySelector('form button#addImg').addEventListener('click', function(
         title.name = 't-' + evt.target.name;
         title.type = 'text';
         // title.setAttribute('required', true);
-        title.placeholder = "Enter a short description for an image";
+        title.placeholder = "Write a short description";
         let closeBttn = document.createElement('span');
         closeBttn.innerHTML = '&times;';
         closeBttn.className = 'closeBttn';
@@ -158,5 +158,15 @@ postPropertyForm.addEventListener('submit', (e)=> {
         for (i=0; i<errorMsgs.length; i++) {
             errorMsgs[i].className = 'show'
         }
+    }
+})
+
+let furniture = document.querySelector('#furnished');
+let bedField = document.querySelector('#bedField');
+furniture.addEventListener('click', () => {
+    if(furniture.checked) {
+        bedField.classList.add('slideDown');
+    } else {
+        bedField.classList.remove('slideDown');
     }
 })

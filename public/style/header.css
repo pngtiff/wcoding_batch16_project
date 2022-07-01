@@ -1,5 +1,6 @@
 header {
     z-index: 999;
+    height: fit-content;
 }
 
 .headerContainer {
@@ -29,7 +30,7 @@ header {
 .nav {
     width: 62rem;
     display: flex;
-    overflow: hidden;
+    /* overflow: hidden; */
     z-index: 10;
 
 }
@@ -92,6 +93,15 @@ header {
     display: block;
 }
 
+#noUser {
+    width: 5rem;
+    height: 5rem;
+}
+
+.dropdown4:hover #noUser {
+    display: none;
+}
+
 .dropdown-content4 {
     position: absolute;
     right: 0.5rem;
@@ -111,52 +121,134 @@ header {
     object-position: center;
 }
 
-#signUpButton, #signInButton {
-    position: relative;
-    width: 8.5rem;
-    right: 27%;
-}
-
 #signUpButton:hover a, #signInButton:hover a {
     background-color: #F5F5F5;
 }
 
-#searchBarContainer {
+#searchBarContainer 
+{
     display: flex;
-    justify-content: space-around;
-    height:50%;
+    align-items: center;
+    height: 2.6em;
     width: 74%;
-    padding: 0.625rem 2.25rem 0.625rem 0.625rem;
+    /* padding: 0.625rem 2.25rem 0.625rem 0.625rem; */
     border-radius: 6.25rem;
     color: #464646;
-    overflow: hidden;
+    /* overflow: hidden; */
     margin-top: 1.25rem;
     margin-left: 1.5rem;
-    border: #464646 1px solid;
+    /* border: #464646 1px solid; */
     position: relative;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+#searchBarContainer #formContainer
+{
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%;
+    background-color: rgba(220, 220, 220, 0.242);
+}
+
+#searchBarContainer>div:first-child{
+    height: 2.6rem;
+    width: calc(100% - 2.5rem);
+    display: flex;
+    justify-content: space-around;
+}
+
+#searchBarContainer>div:first-child>*
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#searchBarContainer #searchForm 
+{
+    border-radius: 1.5rem;
+    align-self: baseline;
+    display: none;
+    position: absolute;
+    width: 100%;
+    align-content: center;
+    flex-direction: column;
+    width: 100%; height: 30vh;
+    background-color: #FFF;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+#searchBarContainer #searchForm>*
+{
+    text-align: center;
+    flex: 1
+}
+
+#searchBarContainer #searchForm>div:first-child {
+    height: 2.6rem;
+    width: calc(100% - 2.5rem);
+    display: flex;
+}
+
+#searchBarContainer #searchForm>div:first-child>* {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#range {
+    height: 10px;
+    width: calc(100% - 4rem);
+    margin: 2rem;
+    font-size: .7rem;
+}
+
+#range .noUi-connect {
+    background: rgb(41, 163, 118);
+}
+
+#range .noUi-handle {
+    height: 18px;
+    width: 18px;
+    top: -5px;
+    right: -9px; /* half the width */
+    border-radius: 9px;
+}
+
+#range .noUi-tooltip {
+    display: none;
+}
+#range .noUi-active .noUi-tooltip {
+    display: block;
+}
+
+#searchBarContainer span
+{
+    cursor: pointer;
 }
 
 .searchButton {
-    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 100rem;
     border: none;
     outline: none;
     position: absolute;
-    transform: translate(-50%,-50%); 
-
-    right: -17px;
-    bottom: -17px;
+    right: 0.2rem;
+    top: 0.2rem;
     cursor: pointer;
 }
 
 .fa-magnifying-glass {
     position: relative;
     top: 0.6rem;
-}
-
-#magnifying {
     width: 2.375rem;
     height: 2.25rem;
-    object-fit: cover;    
+    object-fit: cover;
 }
 
 #searchBarContainer select { 
@@ -171,11 +263,34 @@ header {
     margin-right: 0.625rem;
 }
 
+/* Search Bar Carousel */
+.searchBarSlides {
+    display: none;
+    position: relative;
+}
+
+.searchBarDots {
+    cursor: pointer;
+    /* height: 0.625rem;
+    width: 0.625rem; */
+    flex: 1;
+    margin: 0.125rem 0.5rem;
+    padding: 0.125rem 0.5rem;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    border-radius: 1rem;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.searchBarDotActive, .searchBarDots:hover {
+    background-color: rgba(41,163,118, 0.8);
+    color: #fff
+}
+
 .signInUp {
     margin-left: auto; 
     margin-right: 2rem;
     z-index: 10;
-
 }
 
 .toast {
