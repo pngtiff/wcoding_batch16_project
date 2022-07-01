@@ -47,7 +47,9 @@ ob_start();?>
                 <input type="text" class="form-control" id="owner" name="owner" placeholder="Enter your name as shown on your credit card" required>
                 <div class="nameError"><em>Please enter your name as shown on your credit card (only letters)</em></div><br>
                 <label for="cardNumber" id="cardNum">Card #</label>
-                <input type="text" class="form-control" id="cardNumber" name="cardNumber" placeholder="Enter credit card number with no spaces or dashes" required>
+                <!-- <input type="text" class="form-control" onkeyup="formatCreditCard()" placeholder="xxxx-xxxx-xxxx-xxxx" name="card-number" id="credit-card" value="" > -->                
+                
+                <input type="text" class="form-control" onkeyup="formatCreditCard()" id="cardNumber" name="cardNumber" placeholder="Enter credit card number with no spaces or dashes" required>
                 <div class="numError"><em>Please enter a correct card number</em></div><br>
                 <label for="cvv">CVV</label>
                 <input type="text" class="form-control" id="cvv" name="cvv" placeholder="Enter the 3 or 4 digit code on the back of your card" required>
@@ -84,6 +86,9 @@ ob_start();?>
                         <button type="submit" class="btn btn-default" id="confirm-purchase">Confirm Payment</button>
                         <input type="hidden" value="addReservationInfo" name="action">
                         <button id="reset" type="reset">Reset the form</button>
+                        <input type="hidden" name="propId" value="<?=$_REQUEST['propId']?>">
+                        <input type="hidden" name="price" value="<?=$_REQUEST['price']?>">
+                
                     </div>
                 </form>
         </div>

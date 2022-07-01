@@ -153,7 +153,9 @@ try {
         case 'addReservationInfo':
             addReservationInfo();
             break;
-
+        case 'cancelReservation':
+            cancelReservation($_REQUEST);
+            break;
         default:
             getLanding();
             break;
