@@ -81,21 +81,31 @@
                             <div id="range"></div>
                         </div>
                         <div class="searchBarSlides">
-                            <select name="propertyType" id="propertyType" class="filter">
-                                <option value="any">Property Type</option>
-                                <option value="1">Apartment</option>
-                                <option value="2">Officetel</option>
-                                <option value="3">Villa</option>
-                                <option value="4">House</option>
-                                <option value="5">Shared House</option>
-                                <option value="6">Residential Hotel</option>
-                            </select>
-                            <select name="roomType" id="roomType" class="filter">
-                                <option value="any">Room Type</option>
-                                <option value="1">Private Room</option>
-                                <option value="2">Shared Room</option>
-                                <option value="3">Entire Place</option>
-                            </select>
+                            <div id="propertyTypeSearch" class="multi-selector">
+                                <div class="select-field">
+                                    <p class="choose">Any Property Type</p>
+                                    <p class="down-arrow">&blacktriangledown;</p>
+                                </div>
+                                <div id="langList" class="list">
+                                    <label for="apartmentSearch"><input type="radio" id="apartmentSearch" name="propertyType" value="1">Apartment</label>
+                                    <label for="officetelSearch"><input type="radio" id="officetelSearch" name="propertyType" value="2">Officetel</label>
+                                    <label for="villaSearch"><input type="radio" id="villaSearch" name="propertyType" value="3">Villa</label>
+                                    <label for="houseSearch"><input type="radio" id="houseSearch" name="propertyType" value="4">House</label>
+                                    <label for="sharedHouseSearch"><input type="radio" id="sharedHouseSearch" name="propertyType" value="5">Shared House</label>
+                                    <label for="residentialHotelSearch"><input type="radio" id="residentialHotelSearch" name="propertyType" value="6">Residential Hotel</label>
+                                </div>
+                            </div>
+                            <div id="roomTypeSearch" class="multi-selector">
+                                <div class="select-field">
+                                    <p class="choose">Any Room Type</p>
+                                    <p class="down-arrow">&blacktriangledown;</p>
+                                </div>
+                                <div id="langList" class="list">
+                                    <label for=""><input type="radio" id="" name="roomType" value="1">Private Room</label>
+                                    <label for=""><input type="radio" id="" name="roomType" value="2">Shared Room</label>
+                                    <label for=""><input type="radio" id="" name="roomType" value="3">Entire Place</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
