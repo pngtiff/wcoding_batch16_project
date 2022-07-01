@@ -40,7 +40,7 @@ function showUserInfo($action, $userId) {
     
     $propertyM = new PropertyManager($userId);
     $properties = $propertyM->getProperties($action);
-
+    $reservations = $userM-> getReservations();
     require('./view/viewProfile.php');
 }
 
@@ -102,13 +102,8 @@ function reservationView(){
     require('view/reservations.php'); // display the view of the reservation form
 }
 
-function addReservationInfo(){
-    
+function addReservationInfo(){ 
     $userM = new UserManager(); // user
     $userM->reservations();
-
-
-
-
     // execute the function from the UserManager
 }
