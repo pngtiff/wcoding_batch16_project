@@ -41,7 +41,7 @@ class PropertyManager extends Manager
             ON p.id = pi.property_id
             WHERE p.is_active = 1
             GROUP BY pi.property_id
-            ORDER BY date_created DESC LIMIT 0,8");
+            ORDER BY date_created DESC LIMIT 0,9");
         }
         $properties = $req->fetchAll(\PDO::FETCH_ASSOC);
 
@@ -93,16 +93,6 @@ class PropertyManager extends Manager
         $propOwner = $req->fetch(\PDO::FETCH_ASSOC);
         $req->closeCursor();
         return $propOwner;
-    }
-
-    public function getPropertyZipCode($propId)
-    {
-        $req = $this->_connection->prepare("SELECT p.zipcode FROM properties p WHERE p.id = :propId");
-        $req->bindParam('propId', $propId);
-        $req->execute();
-        $propZipCode = $req->fetch(\PDO::FETCH_ASSOC);
-        $req->closeCursor();
-        return $propZipCode;
     }
 
     public function prefillProperty($propId)
@@ -257,8 +247,37 @@ class PropertyManager extends Manager
                 throw(new Exception('Image is too big'));
             }
         }
+
+        //////////////API CALL to GeoCode to turn the zipcode into Long + latt///////////////////
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, "geocode.xyz/" . $zipcode . "?region=KR&json=1&auth=364183126080998536780x77547");
+        // return the transfer as a string, also with setopt()
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        // curl_exec() executes the started curl session
+        // $output contains the output string
+        $output = curl_exec($curl);
+        // close curl resource to free up system resources
+        // (deletes the variable made by curl_init)
+        curl_close($curl);
+
+        $outputArray = json_decode($output, true); ////// convert API JSON output into an Array
+
+        $latitude = $outputArray['latt'];
+        $longitude = $outputArray['longt'];
+    
+        if ($furnished) {
+            $this->_connection->exec("INSERT 
+                INTO properties (user_uid, post_title, country, province_state, zipcode, latitude, longitude, city, district, address1, address2, size, property_type_id, room_type_id, monthly_price_won, description, bank_account_num, room_num, bed_num, bath_num, is_furnished) 
+                VALUES ('$uid', '$title','$country','$province','$zipcode', '$latitude','$longitude','$city',$district,'$address1','$address2',$size,$propertyType,$roomType,$price,'$description','$bankAccNum', $roomNum, $bedNum, $bathNum, $furnished)");
+        } else {
+            $this->_connection->exec("INSERT 
+                INTO properties (user_uid, post_title, country, province_state, zipcode, latitude, longitude, city, district, address1, address2, size, property_type_id, room_type_id, monthly_price_won, description, bank_account_num, room_num, bath_num) 
+                VALUES ('$uid', '$title','$country','$province','$zipcode', '$latitude', '$longitude','$city','$district','$address1','$address2','$size','$propertyType','$roomType','$price','$description','$bankAccNum', '$roomNum','$bathNum'
+            )");
+        }
+
         // Create a folder for the property on the server
-        $propertyId = $this->_connection->query("SELECT id FROM properties ORDER BY ID DESC LIMIT 0, 1")->fetch(\PDO::FETCH_ASSOC)['id'] + 1;
+        $propertyId = $this->_connection->query("SELECT id FROM properties ORDER BY ID DESC LIMIT 0, 1")->fetch(\PDO::FETCH_ASSOC)['id'];
         if (!file_exists("./public/images/property_images/$propertyId")) {
             mkdir("./public/images/property_images/$propertyId");
         }
@@ -271,18 +290,6 @@ class PropertyManager extends Manager
             move_uploaded_file($fileLocation, "./public/images/property_images/$propertyId/" . $imgName[count($imgName) - 1]);
         }
 
-
-        if ($furnished) {
-            $this->_connection->exec("INSERT 
-                INTO properties (user_uid, post_title, country, province_state, zipcode, city, district, address1, address2, size, property_type_id, room_type_id, monthly_price_won, description, bank_account_num, room_num, bed_num, bath_num, is_furnished) 
-                VALUES ('$uid', '$title','$country','$province','$zipcode','$city',$district,'$address1','$address2',$size,$propertyType,$roomType,$price,'$description','$bankAccNum', $roomNum, $bedNum, $bathNum, $furnished)");
-        } else {
-            $this->_connection->exec("INSERT 
-                INTO properties (user_uid, post_title, country, province_state, zipcode, city, district, address1, address2, size, property_type_id, room_type_id, monthly_price_won, description, bank_account_num, room_num, bath_num) 
-                VALUES ('$uid', '$title','$country','$province','$zipcode','$city','$district','$address1','$address2','$size','$propertyType','$roomType','$price','$description','$bankAccNum', '$roomNum','$bathNum'
-            )");
-        }
-
         for ($i = 0; $i < count($imgName); $i++) {
             $this->_connection->exec("INSERT
                 INTO property_imgs (property_id, img_url, description) 
@@ -291,6 +298,8 @@ class PropertyManager extends Manager
         }
         header("Location:index.php?action=property&propId={$propertyId}");
     }
+
+    
     public function modifyProperty($propId, $imgs, $imgDescriptions, $oldImgs) {
         // INFO validation
         if ($propId < 0)

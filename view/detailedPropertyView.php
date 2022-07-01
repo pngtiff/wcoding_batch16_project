@@ -5,7 +5,7 @@
     };;?>
 
 <?php ob_start();?>
-<section>
+<section id="detailedView">
 <h2><?php 
     if($propDetails[0]['post_title']==''){
         echo $propDetails[0]['p_type'].' in '.$propDetails[0]['province_state'].', '.$propDetails[0]['city'];
@@ -18,16 +18,16 @@
         else?></p>
     <?php if(!empty($_SESSION['uid'])) {
     if($_SESSION['uid'] === $_SESSION['user_uid']) { ?>
-       <button><a href="index.php?action=prefillProperty&propId=<?= $_REQUEST['propId'];?>">Modify Property Details</a></button>
+       <button class="primaryBtn offsetFill modifyPropBtn"><a class="primaryColor" href="index.php?action=prefillProperty&propId=<?= $_REQUEST['propId'];?>"><span>Modify Property Details </span><i class="fa-solid fa-pen-to-square"></i></a></button>
     <?php }} ?>
-    <div class='propertyImgContainer propImages'>
+    <div class='propImages'>
         <?php if(count($propDetails)>1) {
             include('propImagesCarousel.php');
         } else {
             echo "<img alt=".$propDetails[0]['image_description']." src=./public/images/property_images/{$propDetails[0]['p_id']}/{$propDetails[0]['p_img']}>";
         } ?>
     </div>
-    <div style="text-align:center">
+    <div class="slideButtons">
         <?php if(count($propDetails)>1) {
             for($i=0; $i<count($propDetails); $i++) {?>
         <span class="propImgDots" onclick="currentSlide(<?=$i+1?>)"></span>
@@ -52,10 +52,15 @@
                     </div>
                 </div>
             </a>
-            <button class='resvbutton primaryBtn primaryFill'><a href="" class="offsetColor">Reserve now</a></button>
+            <button class='resvbutton primaryBtn primaryFill'><a href="index.php?action=reservations&propId=<?=$_REQUEST['propId']?>&price=<?= number_format($propDetails[0]['monthly_price_won']);?>">Reserve now</a></button>
             <!-- TODO: reservation action -->
         </div>
     </div>
+    <!-- pass database parameters to frontend mapview.js -->
+    <input class="latitude" type="hidden" value = "<?= $propDetails[0]['latitude']?>">
+    <input class="longitude" type="hidden" value = "<?= $propDetails[0]['longitude']?>">
+    <!-- pass database parameters to frontend mapview.js -->
+
 </section>
 
 
@@ -98,7 +103,7 @@
         <div style="text-align:center">
             <?php if(count($propDetails)>1) {
                 for($i=0; $i<count($propDetails); $i++) {?>
-            <span class="propImgDots" onclick="currentSlideD(<?=$i+1?>)"></span>
+            <span class="detailedImgDots" onclick="currentSlideD(<?=$i+1?>)"></span>
             <?php }};?>
         </div>
     </div>
@@ -108,7 +113,7 @@
 <script src="./public/js/viewAllPhoto.js"></script>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2d4e6c65e087f4ced51eeb4ccd34262c"></script>
-<script src="./public/js/mapView.js"></script>
+<script src="./public/js/propertyMapView.js"></script>
 
 <?php $content = ob_get_clean();?>
 <?php require('template.php');?>

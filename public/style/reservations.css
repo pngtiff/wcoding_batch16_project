@@ -1,0 +1,227 @@
+#dates {
+    margin-top: 100px;
+    font-size: 24px;
+    width: 100%;
+}
+
+.checkIn, .checkOut {
+    display: flex;
+    width: 345px;
+    margin-right: 20px;
+}
+
+
+#startDate, #endDate {
+    width: 300px;
+}
+
+#creditCards {
+    width: 125px;
+    height: 25px;
+}
+
+.creditCardForm {
+    max-width: 100%;
+    background-color: #fff;
+    margin: 100px auto;
+    overflow: hidden;
+    padding: 25px;
+    color: #4c4e56;
+}
+.creditCardForm label {
+    width: 80%;
+    /* margin-bottom: 10px; */
+}
+.creditCardForm .heading h1 {
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    color: #4c4e56;
+}
+.creditCardForm .payment {
+    float: left;
+    font-size: 15px;
+    padding: 10px 25px;
+    margin-top: 20px;
+    position: relative;
+}
+
+#owner, #cardNumber {
+    width: 80%;
+}
+
+
+#cvv {
+    width: 80%;
+    margin-left: 47px;
+}
+
+#cardNum {
+    margin-right: 30px;
+}
+
+#cardNumber, #cvv {
+    display: flexbox; 
+}
+
+#month, #year {
+    width: 175px;
+    margin-left: 20px;
+}
+
+/* #month, #year {
+    width: 20%;
+} */
+
+/* .creditCardForm .payment .form-group {
+    float: left;
+    margin-bottom: 15px;
+} */
+.creditCardForm .payment .form-control, #start, #end  {
+    line-height: 40px;
+    height: auto;
+    padding: 0 16px;
+}
+/* .creditCardForm .owner {
+    width: 63%;
+    margin-right: 10px;
+} */
+/* .creditCardForm .CVV {
+    width: 35%;
+} */
+/* .creditCardForm #card-number-field {
+    width: 100%;
+} */
+
+#start, #end {
+    font-size: 16px;
+}
+
+.expiry {
+    display: flex;
+    width: 80%;
+    /* margin-left: 17px; */
+    margin-top: 5px;
+}
+
+#dates, .creditCardForm #expiration-date {
+    width: 49%;
+}
+
+#dates {
+    font-size: 24px;
+    width: 30%;
+}
+
+#year {
+    margin-left: 10px;
+}
+
+#available {
+    font-size: 30px;
+}
+
+.creditCardForm #credit_cards {
+    width: 50%;
+    margin-top: 25px;
+    text-align: right;
+}
+
+.buttons {
+    width: 425px;
+    display: flex;
+    justify-content: center;
+}
+
+#reset, #confirm-purchase, #dateBtn {
+    background-color: rgb(41, 163, 118);
+    color: rgb(247, 238, 238); 
+    font-weight: bold;
+    padding: 0.25rem 0.5rem;
+    border: 2px solid #000;
+    margin: 1.25rem 0;
+    cursor: pointer;
+    align-items: center;
+    appearance: none;
+    border-radius: 2.5rem;
+    border-style: none;
+    box-shadow: rgb(0 0 0 / 20%) 0 3px 5px -1px, rgb(0 0 0 / 14%) 0 6px 10px 0, rgb(0 0 0 / 12%) 0 1px 18px 0;
+    box-sizing: border-box;
+    display: inline-flex;
+    fill: currentcolor;
+    font-size: 1rem;
+    font-weight: 500;
+    height: 3rem;
+    justify-content: center;
+    letter-spacing: .25px;
+    line-height: normal;
+    max-width: 100%;
+    overflow: visible;
+    padding: 0.125rem 1.5rem;
+    position: relative;
+    text-align: center;
+    text-transform: none;
+    transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1), opacity 15ms linear 30ms, transform 270ms cubic-bezier(0, 0, .2, 1) 0ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: auto;
+    will-change: transform, opacity;
+}
+
+#reset:hover, #confirm-purchase:hover, #dateBtn:hover {
+    background-color: rgba(41,163,118, 0.90);
+}
+
+
+#reset {
+    margin-left: 20px;
+}
+
+/* .creditCardForm #pay-now {
+    width: 100%;
+    margin-top: 25px;
+} */
+/* .creditCardForm .payment .btn, #reset {
+    width: 30%;
+    margin-top: 10px;
+    margin-left: 80px;
+    font-size: 14px;
+    background-color: #2ec4a5;
+    color: white;
+    display: flex;
+} */
+.creditCardForm .payment select {
+    padding: 10px;
+    margin-right: 15px;
+}
+.transparent {
+    opacity: 0.2;
+}
+
+textarea {
+    outline: none;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
+.red {
+    border: 2px solid red;
+}
+
+.green {
+    border: 2px solid green;
+}
+
+.nameError {
+    visibility: hidden;
+}
+
+.numError {
+    visibility: hidden;
+}
+
+.cvvError {
+    visibility: hidden;
+}

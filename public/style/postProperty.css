@@ -8,7 +8,7 @@
 #postPropertyForm > *, #modifyPropertyForm > * {
     display: flex;
     justify-content: space-between;
-    width: 400px;
+    width: 25rem;
     position: relative;
 }
 
@@ -27,17 +27,8 @@
 }
 
 #photosPreview img {
-    width: 200px
+    width: 12.5rem;
 }
-
-input, select  {
-    width: 200px;
-    justify-content: center;
-}
-
-/* #furnished {
-    
-} */
 
 #description {
     resize: none;
@@ -51,9 +42,9 @@ input, select  {
 .closeBttn
 {
     color: #aaaaaa;
-    font-size: 28px;
+    font-size: 1.75rem;
     font-weight: bold;
     z-index: 2;
-    right: 10px;
-    top: 10px;
+    right: 0.625rem;
+    top: 0.625rem;
 }

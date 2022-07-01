@@ -4,7 +4,7 @@
 
 <?php ob_start();?>
 <section id = "modifyProfileSection">
-    <div class = "personalInformationContainer profileFormsBorder">
+    <div class = "personalInformationContainer">
         <h2>Modify Profile</h2>
      
         <form action="index.php" method = "post" id = "modifyFormM" enctype="multipart/form-data">
@@ -30,14 +30,16 @@
                     </div>
                 </div>
     
-                <div id="langDetails">
+                <div id="langDetails" class="modifyLang">
                 <p>Which languages can you speak?</p>
                 <div>
                     <div id="language" class="multi-selector">
                         <div class="select-field">
-                            <p>Choose one or multiple <span class="down-arrow">&blacktriangledown;</span></p>
+                        <p class="choose">Choose one or multiple</p>
+                        <p class="down-arrow">&blacktriangledown;</p>
                         </div>
-                        <div class="list">
+                        <div id="absolute"></div>
+                        <div class="list modifyList">
                             <label for="HK" class="lang"><input type="checkbox" id="HK" name="HK" value="HK" 
                             <?php for($i=0; $i<count($data['languages']); $i++) {
                                 if($data['languages'][$i]=="HK")
@@ -114,6 +116,7 @@
                                 echo "checked";
                             }?>> Spanish</label>
                         </div>
+                    
                     </div>
                     <input type="hidden" id="userLang" name="userLang" value="">
                 </div>
@@ -122,7 +125,7 @@
             </div>
             
             <div class = "bottomContainerM">
-                <input type="textarea" id="userBio" class="box" name="bio" value = "<?= $data['bio']?>">
+                <textarea id="userBio" class="box" name="bio"><?= $data['bio']?></textarea>
             </div>
 
             <div class = "bottomContainerM">
