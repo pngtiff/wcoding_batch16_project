@@ -24,13 +24,6 @@
         require('./view/detailedPropertyView.php');
     }
     
-    function getZipCode($propId) {
-        $propertyM = new PropertyManager();
-        $zipcode = $propertyM->getPropertyZipCode($propId);
-    
-        echo($zipcode['zipcode']); ///// ECHO the Corresponding Zipcode to the AJAX Request in ZipCodeAPI.js so that it can be used in front
-    }
-    
     function getPropertyOwner($propId) {
         $propertyM = new PropertyManager();
         $propOwner = $propertyM->getPropertyOwner($propId);

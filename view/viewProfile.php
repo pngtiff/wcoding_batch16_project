@@ -54,7 +54,7 @@
                                             // echo '</pre>';
                                         } ?></p>
                         <div id='userDetails'>
-                            <p>Age: <?php if ($dob = $user['dob']) {
+                            <p>Age:<?php if ($dob = $user['dob']) {
                                         $dob = $user['dob'];
                                         $today = date('Y-m-d');
                                         $diff = date_diff(date_create($dob), date_create($today));
@@ -62,7 +62,7 @@
                                         echo $age;
                                     }
                                     ?></p>
-                            <p>Gender: <?php if ($gender = $user['gender']) {
+                            <p>Gender:<?php if ($gender = $user['gender']) {
                                             if ($gender == 'F') {
                                                 echo 'Female';
                                             } elseif ($gender == 'M') {

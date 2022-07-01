@@ -141,8 +141,10 @@ header {
     border: none;
     outline: none;
     position: absolute;
-    right: 0.2rem;
-    bottom: 0.15rem;
+    transform: translate(-50%,-50%); 
+
+    right: -17px;
+    bottom: -17px;
     cursor: pointer;
 }
 

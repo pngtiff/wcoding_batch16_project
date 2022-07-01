@@ -34,6 +34,7 @@ let profileForm = document.querySelector('#newProfile');
 let contact;
 let profilePic = document.querySelector('#file');
 let phoneNum = document.querySelector('#phoneNum');
+const inputBoxes = document.querySelectorAll('input');
 let years = document.querySelector('#year');
 let months = document.querySelector('#month');
 let days = document.querySelector('#day');
@@ -43,7 +44,6 @@ let langArray = [];
 let userLang = document.querySelector('#userLang');
 let bio = document.querySelector('#bio');
 let imgContainer = document.querySelector('#profilePhoto div');
-
 let imgError = document.createElement('div');
 imgError.style.marginTop = '0.625rem';
 imgDiv.parentNode.appendChild(imgError);
@@ -107,9 +107,9 @@ years.addEventListener('change', () => {
 })
 
 document.querySelector('.select-field').addEventListener('click', () => {
+    document.querySelector('#absolute').style.display='block';
     document.querySelector('.list').classList.toggle('show');
     document.querySelector('.down-arrow').classList.toggle('rotate180');
-
 });
 
 for (i = 0; i < languages.length; i++) {
@@ -129,6 +129,44 @@ profileForm.addEventListener('submit', (e) => {
         let alert = document.querySelector('#line1 p');
         if (!alert.textContent) {
             alert.textContent = "Please check that all fields were filled out correctly";
+        }
+    }
+})
+
+// hide and show message
+const display = function(element){
+    alertMesg.style.display = "none";
+    if(element.classList.contains("red")){
+        alertMesg.style.display = "block";
+    }
+}
+
+// function to check the condition
+const countStr = function(phoneNum){
+    let count = phoneNum.value.length; // add more condition
+    console.log(count);
+    if(count < 11 || count >= 15){
+        phoneNum.classList.remove("green");
+        phoneNum.classList.add("red"); // display the input box in red color
+    } else{
+        phoneNum.classList.remove("red");
+        phoneNum.classList.add("green");    
+    }
+    display(phoneNum); // display the alert message
+}
+
+// to alert the user while they type their phone number
+inputBoxes[2].addEventListener('change', function(){
+    countStr(phoneNum);
+});
+
+// closes languages list when clicking outside .select-field
+window.addEventListener("click", (e) => {
+    if (e.target == document.querySelector('#absolute')) {
+        document.querySelector('#absolute').style.display='none';
+        if(document.querySelector('.list').classList.contains('show')) {
+            document.querySelector('.list').classList.remove('show');
+            document.querySelector('.down-arrow').classList.remove('rotate180');
         }
     }
 })
