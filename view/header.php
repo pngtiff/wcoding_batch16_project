@@ -46,9 +46,9 @@
                 <div id="formContainer"></div>
                 <div id="searchForm" method="post" action="index.php">
                     <div>
-                        <span id="regionSearch" class="searchBarDots" onclick="currentSlide(1)">Region</span>
-                        <span id="priceSearch" class="searchBarDots" onclick="currentSlide(2)">Price Range</span>
-                        <span id="propertyTypeSearch" class="searchBarDots" onclick="currentSlide(3)">Type </span>
+                        <span id="regionSearch" class="searchBarDots" onclick="currentSearch(1)">Region</span>
+                        <span id="priceSearch" class="searchBarDots" onclick="currentSearch(2)">Price Range</span>
+                        <span id="propertyTypeSearch" class="searchBarDots" onclick="currentSearch(3)">Type </span>
                         <button class="searchButton primaryFill"><i id="magnifying" class="fa-solid fa-magnifying-glass offsetColor"></i></button>
                     </div>
                     <input type="hidden" name="action" value="search">

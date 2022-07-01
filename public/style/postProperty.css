@@ -17,6 +17,7 @@
     display: flex;
     justify-content: space-between;
     margin: 0 0.2rem 0.5rem 0;
+    position: relative;
 }
 
 #postPropertyForm input, #postPropertyForm select, #modifyPropertyForm input, #modifyPropertyForm select,
@@ -49,12 +50,16 @@
 }
 
 #postPropertyForm span.hide, #modifyPropertyForm span.hide {
-    display: none;
+    display: flex;
+    opacity: 0;
+    height: fit-content;
+    position: absolute;
+    right: 12.5rem;
 }
 #postPropertyForm span.show, #modifyPropertyForm span.show {
     position: absolute;
-    display: block;
-    left: 100%;
+    right: 12.5rem;
+    opacity: 1;
     width: 100%;
 }
 
