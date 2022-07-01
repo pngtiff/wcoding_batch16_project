@@ -1,5 +1,6 @@
 header {
     z-index: 999;
+    height: fit-content;
 }
 
 .headerContainer {
@@ -92,6 +93,15 @@ header {
     display: block;
 }
 
+#noUser {
+    width: 5rem;
+    height: 5rem;
+}
+
+.dropdown4:hover #noUser {
+    display: none;
+}
+
 .dropdown-content4 {
     position: absolute;
     right: 0.5rem;
@@ -109,12 +119,6 @@ header {
     height: 100%;
     object-fit: cover;
     object-position: center;
-}
-
-#signUpButton, #signInButton {
-    position: relative;
-    width: 8.5rem;
-    right: 27%;
 }
 
 #signUpButton:hover a, #signInButton:hover a {

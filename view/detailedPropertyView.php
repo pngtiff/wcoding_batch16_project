@@ -52,7 +52,7 @@
                     </div>
                 </div>
             </a>
-            <button class='resvbutton primaryBtn primaryFill'><a href="index.php?action=reservations&propId=<?=$_REQUEST['propId']?>&price=<?= number_format($propDetails[0]['monthly_price_won']);?>">Reserve now</a></button>
+            <button class='resvbutton primaryBtn primaryFill'><a href="index.php?action=reservations&propId=<?=$_REQUEST['propId']?>&price=<?= number_format($propDetails[0]['monthly_price_won']);?>" class="offsetColor">Reserve now</a></button>
             <!-- TODO: reservation action -->
         </div>
     </div>

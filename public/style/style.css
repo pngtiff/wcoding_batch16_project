@@ -80,39 +80,9 @@ textarea {
   will-change: transform, opacity;
 }
 
-.primaryBtn:not(.resvbutton,.detailedCloseButton, #homeButton):hover {
+.primaryBtn:not(.resvbutton,.detailedCloseButton, #homeButton, #addImg):hover {
   background: #F5F5F5;
 }
-
-/* button:not(nav button):active, input[type=submit]:active {
-  box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%), 0 8px 12px 6px rgb(60 64 67 / 15%);
-  outline: none;
-}
-
-button:not(nav button):focus, input[type=submit]:focus {
-  outline: none;
-  border: 2px solid black;
-} */
-
-/* button:not(nav button):not(:disabled), input[type=submit]:not(:disabled){
-  box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
-}
-
-button:not(nav button):not(:disabled):hover, input[type=submit]:not(:disabled):hover {
-  box-shadow: rgba(60, 64, 67, .3) 0 2px 3px 0, rgba(60, 64, 67, .15) 0 6px 10px 4px;
-} */
-
-/* button:not(nav button):not(:disabled):focus, input[type=submit]:not(:disabled):focus {
-  box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
-}
-
-button:not(nav button):not(:disabled):active, input[type=submit]:not(:disabled):active {
-  box-shadow: rgba(60, 64, 67, .3) 0 4px 4px 0, rgba(60, 64, 67, .15) 0 8px 12px 6px;
-} */
-
-/* button:not(nav button):disabled, input[type=submit]:disabled {
-  box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
-} */
 
 a {
   text-decoration: none;
