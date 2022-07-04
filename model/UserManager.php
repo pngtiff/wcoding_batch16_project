@@ -336,8 +336,8 @@ class UserManager extends Manager
         !empty($_REQUEST['bio']) ? $bio = $_REQUEST['bio'] : $bio = null;
 
         // create a new row with the inherited and modified informaiton //
-        $status = 1;
         if($phoneNumber != null){
+            $status = 1;
             
             $reqInsert = $this->_connection->prepare("INSERT INTO users (uid, first_name, last_name, email, password, dob, gender, languages, bio, phone_number, profile_img, is_active, date_created)
             VALUES ( :inuid, :infirst, :inlast, :inemail, :inpassword, :indob, :ingender, :inlanguages, :inbio, :inphoneNumber, :inprofileImg, :inactiveStatus, '$dateCreated') ");
@@ -387,33 +387,53 @@ class UserManager extends Manager
     
     public function getReservationCost()
     {
-        $req = $this->_connection->prepare("SELECT * FROM properties WHERE property_id ='{$_SESSION['propId']}' AND is_active = 1");
+        $req = $this->_connection->prepare("SELECT * FROM properties WHERE property_id ='{$_REQUEST['propId']}' AND is_active = 1");
     }
 
     public function reservations()
-    {
-        $req = $this->_connection->prepare("INSERT INTO reservations (reservation_num, start_date, end_date, cardholder, credit_card_num, cvv, exp_month, exp_year, user_uid) VALUES (:reservation_num, :start_date, :end_date, :cardholder, :credit_card_num, :cvv, :exp_month, :exp_year, :uid)");
+    {   
+        // calculate the number of days
+        $date1 = $_REQUEST['startDate'];
+        $date2 = $_REQUEST['endDate'];
+        $diff = strtotime($date2) - strtotime($date1);
+        $numDays = abs(round($diff / 86400));
+
+        // calculate the total price
+        $monthlyPrice = str_replace(",", "", $_REQUEST['price']);
+        $monthlyPrice =  (int)$_REQUEST['price'] * 1000;
+        $total_pay = $monthlyPrice * $numDays / 30;
+
+
+        $req = $this->_connection->prepare("INSERT INTO reservations (property_id, reservation_num, start_date, end_date, cardholder, credit_card_num, cvv, exp_month, exp_year, user_uid, total_payment_won, transaction_complete, is_active) 
+        VALUES (:propertyId, :reservation_num, :startDate, :endDate, :cardOwner, :creditCardNum, :cvv, :expMonth, :expYear, :uid, :totalPay, :transactionStatus, :activeStatus)");
         
         $reservation_num = bin2hex(random_bytes(3));
+        $propertyId = addslashes(htmlspecialchars(htmlentities(trim((int)$_REQUEST['propId']))));
         $start_date =  addslashes(htmlspecialchars(htmlentities(trim($_REQUEST['startDate']))));
         $end_date =  addslashes(htmlspecialchars(htmlentities(trim($_REQUEST['endDate']))));
         $cardholder = addslashes(htmlspecialchars(htmlentities(trim($_REQUEST['owner']))));
         $credit_card_num = password_hash($_REQUEST['cardNumber'], PASSWORD_DEFAULT);
-        $cvv = addslashes(htmlspecialchars(htmlentities(trim($_REQUEST['cvv']))));
+        $cvv = password_hash($_REQUEST['cvv'], PASSWORD_DEFAULT);
         $exp_month = addslashes(htmlspecialchars(htmlentities(trim($_REQUEST['month']))));
         $exp_year = addslashes(htmlspecialchars(htmlentities(trim($_REQUEST['year']))));
         $uid = addslashes(htmlspecialchars(htmlentities(trim($_SESSION['uid']))));
+        $transaction = 1;
+        $activeStatus = 1;
         
-        
+        $req->bindParam(":propertyId", $propertyId, \PDO::PARAM_INT);
         $req->bindParam("reservation_num", $reservation_num, \PDO::PARAM_STR);
-        $req->bindParam("start_date", $start_date, \PDO::PARAM_STR);
-        $req->bindParam("end_date", $end_date, \PDO::PARAM_STR);
-        $req->bindParam("cardholder", $cardholder, \PDO::PARAM_STR);
-        $req->bindParam("credit_card_num", $credit_card_num, \PDO::PARAM_STR);
-        $req->bindParam("cvv", $cvv, \PDO::PARAM_INT);
-        $req->bindParam("exp_month", $exp_month, \PDO::PARAM_INT);
-        $req->bindParam("exp_year", $exp_year, \PDO::PARAM_INT);
+        $req->bindParam("startDate", $start_date, \PDO::PARAM_STR);
+        $req->bindParam("endDate", $end_date, \PDO::PARAM_STR);
+        $req->bindParam("cardOwner", $cardholder, \PDO::PARAM_STR);
+        $req->bindParam("creditCardNum", $credit_card_num, \PDO::PARAM_STR);
+        $req->bindParam("cvv", $cvv, \PDO::PARAM_STR);
+        $req->bindParam("expMonth", $exp_month, \PDO::PARAM_INT);
+        $req->bindParam("expYear", $exp_year, \PDO::PARAM_INT);
         $req->bindParam("uid", $uid, \PDO::PARAM_STR);
+        $req->bindParam("totalPay", $total_pay, \PDO::PARAM_INT);
+        $req->bindParam("transactionStatus", $transaction, \PDO::PARAM_INT);
+        $req->bindParam("activeStatus", $activeStatus, \PDO::PARAM_INT);
+
         $req->execute();
         header('Location:index.php');
     

@@ -10,36 +10,13 @@ ob_start();?>
         <div class="payment">
             <form id="paymentForm" action="index.php" method="post">
                 <p id="available">How long do you wish to stay?</p><br>
-                <div class="checkIn">
-                <label for="startDate" id="start">Check-in date</label>
-                <input type="date" id="startDate" name="startDate" class="form-control" value="<?php echo date('m-d-Y'); ?>">
-                </div><br>
-                <div class="checkOut">
-                <label for="endDate" id="end">Check-out date</label>
-                <input type="date" id="endDate" name="endDate" class="form-control" value="<?php echo date('m-d-Y'); ?>">
-                </div>
-                <div id=dateBtn onclick="dateDiff()">Click here for the total cost</div><br><br>
-                <?php 
-                    // $date1 = date_create('startDate.value');
-                    // $date2 = date_create('endDate.value');
-                    // $diff = date_diff($date1, $date2);
-                    // echo $diff->format("%R%a days");
-                    // $date1 = strtotime($_POST['startDate']);
-                    // echo $date1; 
-                    // $diff=date_diff($date1, $date2);
-                    // echo $diff->format("%R%a days");
-                    // if ($stayLength >= 30) {
-                    //     $price = "<span onclick=alert({$property['monthly_price_won']})><strong>click to see the price</strong></span>";
+                
+                
 
-                    // }
-                    // elseif ($stayLength ){
+                
 
-                    // }
-                    // else {
-                    //     $price = "Minimum stay is one month"; 
-                    // }
-
-                ?><br>
+                <div id=dateBtn onclick="dateDiff()">Click here for the total cost</div>
+                <br><br>
                 <div class="creditCards">
                     <img id="creditCards"src="public/images/capture.JPG" alt="creditCards">
                 </div><br>
@@ -80,12 +57,32 @@ ob_start();?>
                     </select>
                 </div><br><br>
                     <div class="buttons">
-                        <!-- <img src="public/images/Credit-Card-Icons.jpg" id="visa"> -->
                         <button type="submit" class="btn btn-default" id="confirm-purchase">Confirm Payment</button>
                         <input type="hidden" value="addReservationInfo" name="action">
                         <button id="reset" type="reset">Reset the form</button>
+                        <input type="hidden" name="propId" value="<?=$_REQUEST['propId']?>">
+                        <input type="hidden" name="price" value="<?=$_REQUEST['price']?>">
                     </div>
                 </form>
+
+                <!-- <div class="confirmationPage">
+                    <div class="messageDisplay">
+                        <span>Request Sent</span>
+                        <span>This is not a confirmed booking - at least not yet. You'll get a response within 24 hours</span>
+                    </div>
+
+                    <div class="reservationInfo">
+                        <h2><?php 
+                            if($propDetails[0]['post_title']==''){
+                                echo $propDetails[0]['p_type'].' in '.$propDetails[0]['province_state'].', '.$propDetails[0]['city'];
+                            } else {
+                                echo $propDetails[0]['post_title'];
+                            };?>
+                        </h2>
+                        <h3><?=$propDetails[0]['r_type']?> in <?= $propDetails[0]['p_type'];?></h3>
+                    </div>
+                </div> -->
+            </form>
         </div>
     </div>
 </body>

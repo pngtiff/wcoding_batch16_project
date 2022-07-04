@@ -90,6 +90,9 @@ function reservationView(){
     // $propertyM = new PropertyManager($propId);
     // $propDetails = $propertyM->getProperty($propId);
     // $propOwner = $propertyM->getPropertyOwner($propId);
+    // $propertyM = new PropertyManager();
+    // $propDetails = $propertyM->getProperty($propId);
+    // $propOwner = $propertyM->getPropertyOwner($propId);
 
     require('view/reservations.php'); // display the view of the reservation form
 }

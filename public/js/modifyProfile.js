@@ -63,18 +63,6 @@ for (i = 0; i < languages.length; i++) {
     })
 }
 
-
-// languages.addEventListener('change', (e) => {
-//     for (i = 0; i < options.length; i++) {
-//         if(options[i].id === e.target.value) {
-//             options[i].setAttribute('disabled', 'disabled');
-//             langArray.push(e.target.value);
-//         }
-//     }
-//     userLang.value = langArray;
-// });
-
-
 for (i = 0; i < languages.length; i++) {
     if(languages[i].checked) {
         langArray.push(languages[i].value);
@@ -89,19 +77,7 @@ for (i = 0; i < languages.length; i++) {
     })
 }
 
-
-// languages.addEventListener('change', (e) => {
-//     for (i = 0; i < options.length; i++) {
-//         if(options[i].id === e.target.value) {
-//             options[i].setAttribute('disabled', 'disabled');
-//             langArray.push(e.target.value);
-//         }
-//     }
-//     userLang.value = langArray;
-// });
-
-
-
+// =======================================//
 // frontend checking for the phone number //
 // =======================================//
 

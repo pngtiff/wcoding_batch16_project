@@ -299,6 +299,21 @@ div.showP{
     height: 100%;
 }
 
+.detailedImgDots {
+    cursor: pointer;
+    height: 0.625rem;
+    width: 0.625rem;
+    margin: 0 0.125rem;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+span.viewOn, span.detailedImgDots:hover {
+    background-color: #29A376;
+}
+
 .detailedCloseButton{
     cursor: pointer;
     position: fixed;
