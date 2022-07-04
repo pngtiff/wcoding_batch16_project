@@ -525,14 +525,12 @@ class PropertyManager extends Manager
         header("Location: index.php?action=property&propId={$newPropId}");
     }
 
-    public function reservationCalendar (){
-        $req = $this->_connection->prepare("SELECT * FROM reservations WHERE user_uid = '{$_SESSION['uid']}' AND property_id ='{$_REQUEST['propId']}' AND is_active = 1 ");
-        $req->execute();
+    public function getReservations() {
+        
+        $req = $this->_connection->query("SELECT * FROM reservations WHERE property_id='{$_REQUEST['propId']}' AND is_active=1");
         $reservations = $req->fetchAll(\PDO::FETCH_ASSOC);
-        $reservations['start_date'];
-        $reservations['end_date'];
-
-
+       
+        return $reservations;
     }
 
 }

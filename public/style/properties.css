@@ -492,11 +492,11 @@ span.viewOn, span.detailedImgDots:hover {
     } */
 
     .propResv {
-        width: 100vw;
-        position: fixed;
+        width: 80vw;
+        /* position: fixed; */
         left: 0;
         bottom: 0;
-        z-index: 1;
+        /* z-index: 1; */
         /* flex-direction: row; */
         top: auto;
         height: 10rem;

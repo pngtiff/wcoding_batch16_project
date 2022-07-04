@@ -171,10 +171,14 @@
     width: 80%;
 }
 
+/* #owner {
+    margin-left: 20px;
+} */
+
 
 #cvv {
     width: 80%;
-    margin-left: 47px;
+    margin-left: 51px;
 }
 
 #cardNum {
@@ -185,9 +189,13 @@
     display: flexbox; 
 }
 
-.expiry #month, .expiry #year {
+.expiry #month {
     width: 175px;
-    margin-left: 20px;
+    margin-left: 31px;
+}
+
+.expiry #year {
+    width: 175px;
 }
 
 /* #month, #year {
@@ -250,7 +258,7 @@
     justify-content: center;
 }
 
-#reset, #confirm-purchase, #dateBtn {
+#reset, #confirm-purchase {
     background-color: rgb(41, 163, 118);
     color: rgb(247, 238, 238); 
     font-weight: bold;
@@ -343,3 +351,5 @@ textarea:focus, input:focus{
 .cvvError {
     visibility: hidden;
 }
+
+
