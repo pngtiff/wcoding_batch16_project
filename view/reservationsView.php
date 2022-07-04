@@ -13,23 +13,23 @@
         </div>
     </div>
     <div id="cancellation">
-        <!-- <div id="reservationInfo">
-            <div class="column">Reservation Number</div>
-            <div class="column">Start Date</div>
-            <div class="column">End Date</div>
-            <div class="column">Total price</div>
-        </div> -->
-        <?php foreach($reservations as $reservation){?>
-        <form action="index.php" method="post" id="reservationsViewForm">
-            <div id="reservationUpdate">
-                <button id="cancelReservation">Cancel </button> &nbsp&nbsp&nbsp              
-                <p><strong>Reservation: &nbsp&nbsp&nbsp</strong><a href="index.php?action=property&propId=<?=$reservation['property_id']?>"><?= $reservation['reservation_num']?></a></p>
-                <p><strong>&nbsp&nbsp&nbsp Start:</strong><span><?= str_replace('-', '/', $reservation['start_date'])?></span></p>
-                <p><strong>&nbsp&nbsp&nbsp End :</strong><span><?= str_replace('-', '/', $reservation['end_date'])?></span></p>
-                <p><b>&nbsp&nbsp&nbsp Total :</b><span><?= number_format($reservation['total_payment_won'])?>₩</span></p>
-                <input name="reservation_num" type="hidden" value="<?= $reservation['reservation_num']?>">
-                <input name="action" type="hidden" value="cancelReservation">
-            </div>
+        <div>
+            <div>Reservation Number</div>
+            <div>Start Date</div>
+            <div>End Date</div>
+            <div>Total price</div>
+        </div>
+    <?php foreach($reservations as $reservation){?>
+        <form action="index.php" method="post">
+            <a href="index.php?action=property&propId=<?=$reservation['property_id']?>"><?= $reservation['reservation_num']?></a>
+            <span><?= str_replace('-', '/', $reservation['start_date'])?></span>
+            <span><?= str_replace('-', '/', $reservation['end_date'])?></span>
+            <span><?= number_format($reservation['total_payment_won'])?>₩</span>
+            <button id="cancelReservation">Cancel Reservation</button>
+            <input name="reservation_num" type="hidden" value="<?= $reservation['reservation_num']?>">
+            <input name="action" type="hidden" value="cancelReservation">
+
+            <script>console.log("test")</script>
         </form>
         <?php }?>
     </div>

@@ -30,14 +30,10 @@ header {
 .nav {
     width: 62rem;
     display: flex;
-    /* overflow: hidden; */
+    justify-content: center;
     z-index: 10;
 
 }
-
-/* nav div {
-    display: inline-block;
-} */
 
 .dropdown:hover, .dropdown2:hover, .dropdown3:hover {
     background-color: #29A376;
@@ -130,14 +126,11 @@ header {
     display: flex;
     align-items: center;
     height: 2.6em;
-    width: 74%;
-    /* padding: 0.625rem 2.25rem 0.625rem 0.625rem; */
+    width: 50%;
     border-radius: 6.25rem;
     color: #464646;
-    /* overflow: hidden; */
     margin-top: 1.25rem;
     margin-left: 1.5rem;
-    /* border: #464646 1px solid; */
     position: relative;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
