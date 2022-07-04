@@ -104,13 +104,8 @@ function reservationView(){
     require('view/reservations.php'); // display the view of the reservation form
 }
 
-function addReservationInfo(){
-    
+function addReservationInfo(){ 
     $userM = new UserManager(); // user
     $userM->reservations();
-
-
-
-
     // execute the function from the UserManager
 }

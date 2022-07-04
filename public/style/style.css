@@ -7,6 +7,7 @@
 html {
   font-family: 'Manrope', sans-serif;
   overflow-x: hidden;
+  overscroll-behavior-y: none;
 }
   
 
@@ -122,8 +123,5 @@ a {
   -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
 }
 
-/* .column {
-  float: left;
-  width: 20%;
-  padding: 8px;
-} */
+
+
