@@ -2,26 +2,27 @@
 
 <?php ob_start(); ?>
 <section>
-    <form action="index.php?action=checkProfile" method="POST" id="newProfile" enctype="multipart/form-data" class="profileFormsBorder">
-        <div id="line 1">
+    <form action="index.php?action=checkProfile" method="POST" id="newProfile" enctype="multipart/form-data">
+        <div id="line1">
             <h1>Let's create a profile for you</h1>
             <p></p>
         </div>
-        <div>
-
-            <div id="profilePhoto">
-                <div>
-
-                </div>
-            </div>
-            <input type="file" id="file" name="uploadFile">
-            <label for="file" class="customFileButton">Upload Profile Photo</label>
+        <div id="profilePhoto">
+            <div></div>
+        </div>
+        <input type="file" id="file" name="uploadFile">
+        <label for="file" class="uploadPhoto primaryBtn primaryColor offsetFill">Choose Profile Photo</label>
         </div>
         <div class="flexRow">
             <div id="createProfileDetails">
-                <div>
-                    <label for="phoneNum">Phone Number:</label>
-                    <input type="text" id="phoneNum" name="phoneNum">
+                <div id="phoneBox">
+                    <div>
+                        <label for="phoneNum">Phone Number:</label>
+                        <span id="alertMesg">Please Check Your Phone Number</span>
+                    </div>
+                    <div>
+                        <input type="text" id="phoneNum" name="phoneNum">
+                    </div>
                 </div>
                 <div>
                     <label for="birthdate">Birthdate:</label>
@@ -62,9 +63,11 @@
                 <div>
                     <div id="language" class="multi-selector">
                         <div class="select-field">
-                            <p>Choose one or multiple <span class="down-arrow">&blacktriangledown;</span></p>
+                            <p class="choose">Choose one or multiple</p>
+                            <p class="down-arrow">&blacktriangledown;</p>
                         </div>
-                        <div class="list">
+                        <div id="absolute"></div>
+                        <div id="langList" class="list">
                             <label for="HK" class="lang"><input type="checkbox" id="HK" name="HK" value="HK"> Cantonese</label>
                             <label for="ZH" class="lang"><input type="checkbox" id="ZH" name="ZH" value="ZH"> Chinese(Mandarin)</label>
                             <label for="NL" class="lang"><input type="checkbox" id="NL" name="NL" value="NL"> Dutch</label>
@@ -87,9 +90,9 @@
             </div>
         </div>
         <div>
-            <input type="textarea" id="bio" name="bio" placeholder="Introduce yourself" rows="4">
+            <textarea id="bio" name="bio" rows="4">Introduce yourself</textarea>
         </div>
-        <input type="submit" id="create" name="create" value="Create profile">
+        <input type="submit" id="create" name="create" class="primaryBtn primaryColor offsetFill" value="Create profile">
     </form>
 </section>
 <script src="./public/js/createProfile.js"></script>

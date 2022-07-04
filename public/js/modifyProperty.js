@@ -25,7 +25,7 @@ document.querySelector('form button#addImg').addEventListener('click', function 
         let title = document.createElement('input');
         title.name = 't-' + evt.target.name;
         title.type = 'text';
-        title.placeholder = "Enter a short description for an image";
+        title.placeholder = "Write short description";
         title.className = 'added'
         let closeBttn = document.createElement('span');
         closeBttn.innerHTML = '&times;';
@@ -96,3 +96,14 @@ let bathNum = document.querySelector('#bathNum');
 let price = document.querySelector('#price');
 let description = document.querySelector('#description');
 let bankAccNum = document.querySelector('#bankAccNum');
+
+
+let furniture = document.querySelector('#furnished');
+let bedField = document.querySelector('#bedField');
+furniture.addEventListener('click', () => {
+    if(furniture.checked) {
+        bedField.classList.add('slideDown');
+    } else {
+        bedField.classList.remove('slideDown');
+    }
+})

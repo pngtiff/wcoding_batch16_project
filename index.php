@@ -128,6 +128,8 @@ try {
         case 'viewPostProperty':
             if (!empty($_SESSION['email'])) {
                 viewPostProperty();
+            } else {
+                header('Location:index.php');
             }
             break;
         case 'getCities':
@@ -144,11 +146,12 @@ try {
         case 'reservations':
             reservationView(); // 'user' -> user uid
             break;
-        
         case 'addReservationInfo':
             addReservationInfo();
             break;
-
+        case 'cancelReservation':
+            cancelReservation($_REQUEST);
+            break;
         default:
             getLanding();
             break;

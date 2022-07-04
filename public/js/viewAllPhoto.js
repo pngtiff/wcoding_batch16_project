@@ -16,17 +16,17 @@ function currentSlideD(n) {
 function displaySlides(n) {
     let i;
     let slides = document.getElementsByClassName("detailedImgSlides");
-    let dots = document.getElementsByClassName("propImgDots");
+    let dots = document.getElementsByClassName("detailedImgDots");
     if (n > slides.length) {slideNum = 1};    
     if (n < 1) {slideNum = slides.length};
     for (i = 0; i < slides.length; i++) {
         slides[i].style.display = "none";  
     };
     for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
+        dots[i].className = dots[i].className.replace(" detailedImgDotsActive", "");
     };
     slides[slideNum-1].style.display = "block";
-    dots[slideNum-1].className += " active";
+    dots[slideNum-1].className += " detailedImgDotsActive";
 }
 
 // let modalBox = document.querySelector("#modalBox");
