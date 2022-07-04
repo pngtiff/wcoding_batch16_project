@@ -87,7 +87,7 @@ class PropertyManager extends Manager
 
     public function getPropertyOwner($propId)
     {
-        $req = $this->_connection->prepare("SELECT u.uid, u.first_name, u.profile_img, p.user_uid FROM users u JOIN properties p ON u.uid = p.user_uid WHERE p.id = :propId");
+        $req = $this->_connection->prepare("SELECT u.uid, u.first_name, u.profile_img, p.user_uid FROM users u JOIN properties p ON u.uid = p.user_uid AND u.is_active = 1 WHERE p.id = :propId");
         $req->bindParam('propId', $propId);
         $req->execute();
         $propOwner = $req->fetch(\PDO::FETCH_ASSOC);
@@ -121,10 +121,10 @@ class PropertyManager extends Manager
 
         $province = ($province == "any") ? "%%" : $province-1; //// If search input is empty, show all results ("%%" is regex that catches any string)
         $city = ($city == "any") ? "%%" : $city-1; //// If search input is empty, show all results ("%%" is regex that catches any string)
-        $rangeMin = ($rangeMin == "any") ? 0 : $rangeMin;
-        $rangeMax = (($rangeMax == "any") OR ($rangeMax > 1000000)) ? 10000000 : $rangeMax; /// default number large enough to catch all properties
-        $propertyType = ($propertyType == "any") ? "%%" : $propertyType;
-        $roomType = ($roomType == "any") ? "%%" : $roomType;
+        $rangeMin = strip_tags($rangeMin);
+        $rangeMax = ($rangeMax == 1000000) ? 100000000000 : strip_tags($rangeMax); /// default number large enough to catch all properties
+        $propertyType = ($propertyType == "any") ? "%%" : $propertyType + 0;
+        $roomType = ($roomType == "any") ? "%%" : $roomType + 0;
 
 
         $req = $this->_connection->prepare("SELECT p.id, p.user_uid, p.post_title, p.country, p.province_state, p.zipcode, p.latitude, p.longitude, p.city, p.address1, p.address2, p.size, p.property_type_id, p.room_type_id, p.monthly_price_won, p.description, p.validation, p.date_created, pt.property_type AS p_type, pt.description AS property_type_description, rt.room_type AS r_type, rt.description AS room_type_description, pi.img_url AS p_img, pi.property_id AS p_id, pi.img_url AS p_img, pi.description AS image_description
@@ -218,10 +218,13 @@ class PropertyManager extends Manager
             throw(new TypeError("Invalid room type"));
         if ($roomNum <= 0 OR $roomNum >= 100)
             throw(new TypeError("Invalid room number"));
-        $furnished = $furnished ? 1 : null;
+        $furnished = $furnished ? 1 : 0;
         if ($furnished AND $bedNum >= 100)
             throw(new TypeError("Invalid bed number")); 
-        else if (!$furnished) {
+        else if ($furnished) {
+            $bedNum = strip_tags($bedNum);
+        } 
+        else {
             $bedNum = 0;
         }
         if ($bathNum <= 0 OR $bathNum >= 100)
@@ -262,19 +265,58 @@ class PropertyManager extends Manager
 
         $outputArray = json_decode($output, true); ////// convert API JSON output into an Array
 
-        $latitude = $outputArray['latt'];
-        $longitude = $outputArray['longt'];
+        $latitude = strval($outputArray['latt']);
+        $longitude = strval($outputArray['longt']);
     
-        if ($furnished) {
-            $this->_connection->exec("INSERT 
-                INTO properties (user_uid, post_title, country, province_state, zipcode, latitude, longitude, city, district, address1, address2, size, property_type_id, room_type_id, monthly_price_won, description, bank_account_num, room_num, bed_num, bath_num, is_furnished) 
-                VALUES ('$uid', '$title','$country','$province','$zipcode', '$latitude','$longitude','$city',$district,'$address1','$address2',$size,$propertyType,$roomType,$price,'$description','$bankAccNum', $roomNum, $bedNum, $bathNum, $furnished)");
-        } else {
-            $this->_connection->exec("INSERT 
-                INTO properties (user_uid, post_title, country, province_state, zipcode, latitude, longitude, city, district, address1, address2, size, property_type_id, room_type_id, monthly_price_won, description, bank_account_num, room_num, bath_num) 
-                VALUES ('$uid', '$title','$country','$province','$zipcode', '$latitude', '$longitude','$city','$district','$address1','$address2','$size','$propertyType','$roomType','$price','$description','$bankAccNum', '$roomNum','$bathNum'
-            )");
-        }
+        $req = $this->_connection->prepare("INSERT 
+            INTO properties (user_uid, post_title, country, province_state, zipcode, latitude, longitude, city, district, address1, address2, size, property_type_id, room_type_id, monthly_price_won, description, bank_account_num, room_num, bed_num, bath_num, is_furnished) 
+            VALUES (
+                :uid, 
+                :title,
+                :country,
+                :province,
+                :zipcode, 
+                :latitude,
+                :longitude,
+                :city,
+                :district,
+                :address1,
+                :address2,
+                :size,
+                :propertyType,
+                :roomType,
+                :price,
+                :description,
+                :bankAccNum, 
+                :roomNum, 
+                :bedNum, 
+                :bathNum, 
+                :furnished)");
+
+            $req->bindParam('uid',$uid,\PDO::PARAM_STR );
+            $req->bindParam('title',$title,\PDO::PARAM_STR);
+            $req->bindParam('country',$country,\PDO::PARAM_INT);
+            $req->bindParam('province',$province,\PDO::PARAM_INT);
+            $req->bindParam('zipcode',$zipcode,\PDO::PARAM_STR );
+            $req->bindParam('latitude',$latitude,\PDO::PARAM_STR);
+            $req->bindParam('longitude',$longitude,\PDO::PARAM_STR);
+            $req->bindParam('city',$city,\PDO::PARAM_INT);
+            $req->bindParam('district',$district,\PDO::PARAM_INT);
+            $req->bindParam('address1',$address1,\PDO::PARAM_STR);
+            $req->bindParam('address2',$address2,\PDO::PARAM_STR);
+            $req->bindParam('size',$size,\PDO::PARAM_INT);
+            $req->bindParam('propertyType',$propertyType,\PDO::PARAM_INT);
+            $req->bindParam('roomType',$roomType,\PDO::PARAM_INT);
+            $req->bindParam('price',$price,\PDO::PARAM_INT);
+            $req->bindParam('description',$description,\PDO::PARAM_STR);
+            $req->bindParam('bankAccNum',$bankAccNum,\PDO::PARAM_STR );
+            $req->bindParam('roomNum',$roomNum,\PDO::PARAM_INT );
+            $req->bindParam('bedNum',$bedNum,\PDO::PARAM_INT );
+            $req->bindParam('bathNum',$bathNum,\PDO::PARAM_INT );
+            $req->bindParam('furnished',$furnished,\PDO::PARAM_INT);
+            $req->execute();
+            $req->closeCursor();
+        
 
         // Create a folder for the property on the server
         $propertyId = $this->_connection->query("SELECT id FROM properties ORDER BY ID DESC LIMIT 0, 1")->fetch(\PDO::FETCH_ASSOC)['id'];
@@ -291,10 +333,15 @@ class PropertyManager extends Manager
         }
 
         for ($i = 0; $i < count($imgName); $i++) {
-            $this->_connection->exec("INSERT
+            $req = $this->_connection->prepare("INSERT
                 INTO property_imgs (property_id, img_url, description) 
-                VALUES ('$propertyId', '{$imgName[$i]}', '{$imgDescriptions[$i]}')
+                VALUES (:propertyId, :imgName, :imgDescription)
             ");
+            $req->bindParam('propertyId', $propertyId, \PDO::PARAM_INT);
+            $req->bindParam('imgName', $imgName[$i], \PDO::PARAM_STR);
+            $req->bindParam('imgDescription', $imgDescriptions[$i], \PDO::PARAM_STR);
+            $req->execute();
+            $req->closeCursor();
         }
         header("Location:index.php?action=property&propId={$propertyId}");
     }

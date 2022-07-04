@@ -41,14 +41,16 @@
     width: 19rem;
 }
 
-#propertyDetails p {
-    margin-right: 1rem;
-}
-
 #propertiesSearchList .propertyImgContainer {
     width: 13.75rem;
     max-height: 10.625rem;
     margin-bottom: 0;
     border-radius: 3px, 3px, 0, 0;
     overflow: hidden;
+}
+
+@media screen and (max-width: 650px) {
+    #searchMap {
+        display: none;
+    }
 }
