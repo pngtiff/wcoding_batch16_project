@@ -22,7 +22,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300&family=Montserrat:wght@300&family=Quicksand:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="public/style/reservations.css">
     <script src="https://kit.fontawesome.com/949df75f70.js" crossorigin="anonymous"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.0/dist/index.umd.min.js"></script>
 </head>
 
 <body class="flexColumn">
