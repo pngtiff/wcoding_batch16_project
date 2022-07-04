@@ -121,3 +121,9 @@ a {
   box-shadow: 0 0 1px rgba(255,255,255,.5);
   -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
 }
+
+/* .column {
+  float: left;
+  width: 20%;
+  padding: 8px;
+} */

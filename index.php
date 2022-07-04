@@ -156,6 +156,10 @@ try {
         case 'cancelReservation':
             cancelReservation($_REQUEST);
             break;
+        // case 'cancelConfirm':
+        //     getLanding();
+        //     include("view/cancelConfirmToast.php"); ///// cancel confirmation toaster
+        //     break;
         default:
             getLanding();
             break;

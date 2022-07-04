@@ -13,11 +13,11 @@
         </div>
     </div>
     <div id="cancellation">
-        <div>
-            <div>Reservation Number</div>
-            <div>Start Date</div>
-            <div>End Date</div>
-            <div>Total price</div>
+        <div id="reservationInfo">
+            <div class="column">Reservation Number</div>
+            <div class="column">Start Date</div>
+            <div class="column">End Date</div>
+            <div class="column">Total price</div>
         </div>
     <?php foreach($reservations as $reservation){?>
         <form action="index.php" method="post">
@@ -26,6 +26,7 @@
             <span><?= str_replace('-', '/', $reservation['end_date'])?></span>
             <span><?= number_format($reservation['total_payment_won'])?>₩</span>
             <button id="cancelReservation">Cancel Reservation</button>
+            <!-- <button class='cancelButton primaryBtn primaryFill'><a href="index.php?action=cancelConfirm">Cancel Reservation</a></button> -->
             <input name="reservation_num" type="hidden" value="<?= $reservation['reservation_num']?>">
             <input name="action" type="hidden" value="cancelReservation">
         </form>
