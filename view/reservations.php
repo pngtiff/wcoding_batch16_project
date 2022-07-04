@@ -49,7 +49,7 @@ ob_start();?>
                 <label for="cardNumber" id="cardNum">Card #</label>
                 <!-- <input type="text" class="form-control" onkeyup="formatCreditCard()" placeholder="xxxx-xxxx-xxxx-xxxx" name="card-number" id="credit-card" value="" > -->                
                 
-                <input type="text" class="form-control" onkeyup="formatCreditCard()" id="cardNumber" name="cardNumber" placeholder="Enter credit card number with no spaces or dashes" required>
+                <input type="text" class="form-control" onkeyup="formatCreditCard()" id="cardNumber" name="cardNumber" placeholder="Enter a valid credit card number" required>
                 <div class="numError"><em>Please enter a correct card number</em></div><br>
                 <label for="cvv">CVV</label>
                 <input type="text" class="form-control" id="cvv" name="cvv" placeholder="Enter the 3 or 4 digit code on the back of your card" pattern="^[0-9]{3,4}" required>
@@ -83,7 +83,7 @@ ob_start();?>
                 </div><br><br>
                     <div class="buttons">
                         <!-- <img src="public/images/Credit-Card-Icons.jpg" id="visa"> -->
-                        <button type="submit" class="btn btn-default" id="confirm-purchase"><a href="index.php?action=reserveComplete">Confirm Payment</a></button>
+                        <button type="submit" class="btn btn-default" id="confirm-purchase">Confirm Payment</button>
                         <input type="hidden" value="addReservationInfo" name="action">
                         <button id="reset" type="reset">Reset the form</button>
                         <input type="hidden" name="propId" value="<?=$_REQUEST['propId']?>">
@@ -101,3 +101,4 @@ ob_start();?>
 $content = ob_get_clean();
 include('template.php');
 ?>
+

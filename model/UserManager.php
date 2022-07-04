@@ -392,14 +392,18 @@ class UserManager extends Manager
     public function reservations()
     {
        // calculate the number of days
+       $req = $this->_connection->prepare("SELECT monthly_price_won FROM properties WHERE id =:propertyId AND is_active = 1");
+       $propertyId = addslashes(htmlspecialchars(htmlentities(trim((int)$_REQUEST['propId']))));
+       $req->bindParam(":propertyId", $propertyId, \PDO::PARAM_INT);
+       $req->execute();
+       $monthlyPrice = $req->fetch(\PDO::FETCH_ASSOC)['monthly_price_won'];
+    
        $date1 = $_REQUEST['startDate'];
        $date2 = $_REQUEST['endDate'];
        $diff = strtotime($date2) - strtotime($date1);
        $numDays = abs(round($diff / 86400));
 
        // calculate the total price
-       $monthlyPrice = str_replace(",", "", $_REQUEST['price']);
-       $monthlyPrice =  (int)$_REQUEST['price'] * 1000;
        $total_pay = $monthlyPrice * $numDays / 30;
 
 
@@ -411,7 +415,7 @@ class UserManager extends Manager
        $start_date =  addslashes(htmlspecialchars(htmlentities(trim($_REQUEST['startDate']))));
        $end_date =  addslashes(htmlspecialchars(htmlentities(trim($_REQUEST['endDate']))));
        $cardholder = addslashes(htmlspecialchars(htmlentities(trim($_REQUEST['owner']))));
-       $credit_card_num = password_hash($_REQUEST['cardNumber'], PASSWORD_DEFAULT);
+       $credit_card_num = password_hash(str_replace('-','',$_POST['cardNumber']), PASSWORD_DEFAULT);
        $cvv = password_hash($_REQUEST['cvv'], PASSWORD_DEFAULT);       
        $exp_month = addslashes(htmlspecialchars(htmlentities(trim($_REQUEST['month']))));
        $exp_year = addslashes(htmlspecialchars(htmlentities(trim($_REQUEST['year']))));
@@ -435,7 +439,7 @@ class UserManager extends Manager
        $req->bindParam("activeStatus", $activeStatus, \PDO::PARAM_INT);
 
        $req->execute();
-       header('Location:index.php');
+       header('location:index.php?action=reserveComplete');
    
     
     }
