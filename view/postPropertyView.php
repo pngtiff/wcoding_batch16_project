@@ -59,7 +59,6 @@ ob_start(); ?>
                 <label for="address2">
                     <span>Address 2</span>
                     <input type="text" name="address2" id="address2">
-                    <span class='hide'>At least 6 charachters</span>
                 </label>
                 <label for="zipcode">
                     <span>Zipcode</span>
@@ -100,7 +99,6 @@ ob_start(); ?>
                 <label for="furnished">
                     <span>Furnished</span>
                     <input type="checkbox" name="furnished" id="furnished">
-                    <span class="hide">Check if furnished</span>
                 </label>
                 <label for="bedNum" id="bedField">
                     <span>Number of beds</span>
@@ -137,7 +135,7 @@ ob_start(); ?>
                 <label for="addImg" id="newPropImg">
                     <span>Add an Image</span>
                     <button id="addImg" class="primaryBtn primaryFill offsetColor">Add</button>
-                    <span class="hide">(At least 2, at most 20)</span>
+                    <span id="photos" class="hide">(At least 2, at most 20)</span>
                 </label>
                 <div id="photosPreview"></div>
                 <input type="hidden" name="action" value="postProperty">
