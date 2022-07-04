@@ -109,6 +109,8 @@ function instantiate (){
             searchForm.style.display = 'none';
         }
     }, true)
+
+    
 }
 
 instantiate()
