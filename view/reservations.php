@@ -1,7 +1,20 @@
 <?php
 $title = "Reserve this property";
 ob_start();?>
-<br>
+
+<!-- create an array of all reservations start and end date -->
+<?php 
+        ?> <script> const reservedList = []; </script> <?php
+        foreach ($reservations as $reservation) {
+
+            ?> <script> 
+                reservedList.push(["<?=($reservation['start_date']);?>", "<?=($reservation['end_date']);?>"])
+                console.log(reservedList)
+            </script>    
+        <?php }
+    ?>
+
+
 <body>
     <div class="creditCardForm">
         <div class="heading">
@@ -10,15 +23,72 @@ ob_start();?>
         <div class="payment">
             <form id="paymentForm" action="index.php" method="post">
                 <p id="available">How long do you wish to stay?</p><br>
-                <div class="checkIn">
-                <label for="startDate" id="start">Check-in date</label>
-                <input type="date" id="startDate" name="startDate" class="form-control" value="<?php echo date('m-d-Y'); ?>" required>
-                </div><br>
-                <div class="checkOut">
-                <label for="endDate" id="end">Check-out date</label>
-                <input type="date" id="endDate" name="endDate" class="form-control" value="<?php echo date('m-d-Y'); ?>" required>
-                </div>
-                <div id=dateBtn onclick="dateDiff()">Click here for the total cost</div><br><br>
+                
+                <input id="datepicker" placeholder="Pick your dates"/>
+                <br>
+
+                                <!-- CALENDAR JS -->
+
+                                <script>
+                    const DateTime = easepick.DateTime;
+                    const bookedDates = reservedList.map(d => {
+                        if (d instanceof Array) {
+                            const start = new DateTime(d[0], 'YYYY-MM-DD');
+                            const end = new DateTime(d[1], 'YYYY-MM-DD');
+
+                            return [start, end];
+                        }
+                        
+                        return new DateTime(d, 'YYYY-MM-DD');
+                    });
+                    const picker = new easepick.create({
+                        element: document.getElementById('datepicker'),
+                        css: [
+                        'https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.0/dist/index.css',
+                        'https://easepick.com/css/demo_hotelcal.css',
+                        ],
+                        plugins: ['RangePlugin', 'LockPlugin'],
+                        RangePlugin: {
+                        tooltipNumber(num) {
+                            return num - 1;
+                        },
+                        locale: {
+                            one: 'night',
+                            other: 'nights',
+                        },
+                        },
+                        LockPlugin: {
+                        minDate: new Date(),
+                        minDays: 2,
+                        inseparable: true,
+                        filter(date, picked) {
+                            if (picked.length === 1) {
+                            const incl = date.isBefore(picked[0]) ? '[)' : '(]';
+                            return !picked[0].isSame(date, 'day') && date.inArray(bookedDates, incl);
+                            }
+
+                            let selectedRange = document.getElementById("datepicker").value.split(" - ")
+                            if (document.getElementById("datepicker").value) {
+                                document.getElementById("startDate").value = selectedRange[0]
+                                document.getElementById("endDate").value = selectedRange[1]
+                                dateDiff()
+                            } 
+
+                            return date.inArray(bookedDates, '[)');
+                        },
+                        }
+                    });
+
+    
+                    </script>
+
+                <!-- CALENDAR JS -->
+
+             
+                <input type="hidden" id="startDate" name="startDate"  value="<?php echo date('m-d-Y'); ?>">
+                <input type="hidden" id="endDate" name="endDate"  value="<?php echo date('m-d-Y'); ?>">
+               
+                <div id=dateBtn>Select dates to see prices</div><br><br>
                 <?php 
                     // $date1 = date_create('startDate.value');
                     // $date2 = date_create('endDate.value');
@@ -94,6 +164,9 @@ ob_start();?>
                 </form>
         </div>
     </div>
+
+
+
 </body>
 <script src="public/js/reservations.js"></script>
 

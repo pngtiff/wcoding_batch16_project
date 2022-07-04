@@ -9,33 +9,6 @@
         </div>
         <nav class="nav offsetColor">
 
-            <div class="dropdown2">
-                <button class="dropbtn2">Browse</button>
-                <div class="dropdown-content2">
-                    <a href="#propertiesContainer">Search Most Recent Listings</a>
-                    <a href="#propertiesContainer">Search All Listings</a>
-                    <a href="">Search for a renter</a>
-                    <a href="">Find a Roommate</a>
-                </div>
-            </div>
-
-            <div class="dropdown3">
-                <button class="dropbtn3">Post</button>
-                <div class="dropdown-content3">
-                    <a href="">Become a Host</a>
-                    <a href="index.php?action=viewPostProperty">Post a New Listing</a>
-                </div>
-            </div>
-
-            <div class="dropdown">
-                <button class="dropbtn">About Us</button>
-                <div class="dropdown-content">
-                    <a href="view/footer.php/.modal-content">Who are we?</a>
-                    <a href="">What do we do?</a>
-                    <a href="view/footer.php/.contact">Contact us</a>
-                </div>
-            </div>
-
             <form id="searchBarContainer" class="offsetFill" >
                 <div>
                     <span id="regionSearch">Anywhere</span>
@@ -118,6 +91,7 @@
                         // echo '<img src="' . $_SESSION['profile_img']. '" width="500px" height="400px">';
                         echo '<a href="index.php?action=profile&user=' . $_SESSION['uid'] . '">View My Profile</a>';
                         echo '<a href="index.php?action=modifyProfile&user=' . $_SESSION['uid'] . '">Edit My Profile</a>';
+                        echo '<a href="index.php?action=viewPostProperty">Post a New Listing</a>';
                     }
                     ?>
                     <?php echo (!empty($_SESSION['firstName'])) ? '' : '<button id="signUpButton" class="primaryBtn"><a href="#">Register</a></button>'; ?>
