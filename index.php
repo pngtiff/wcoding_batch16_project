@@ -156,6 +156,14 @@ try {
             getLanding();
             break;
         
+        case 'reserveComplete':
+            getLanding();
+            include("view/reserveToaster.php"); ///// reservation toaster
+            break;
+        case 'reserveIncomplete':
+            getLanding();
+            include("view/reserveToaster.php"); ///// reservation toaster
+            break;
     }
 } catch (Exception $e) {
     die('error' . $e->getMessage());

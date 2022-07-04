@@ -12,11 +12,11 @@ ob_start();?>
                 <p id="available">How long do you wish to stay?</p><br>
                 <div class="checkIn">
                 <label for="startDate" id="start">Check-in date</label>
-                <input type="date" id="startDate" name="startDate" class="form-control" value="<?php echo date('m-d-Y'); ?>">
+                <input type="date" id="startDate" name="startDate" class="form-control" value="<?php echo date('m-d-Y'); ?>" required>
                 </div><br>
                 <div class="checkOut">
                 <label for="endDate" id="end">Check-out date</label>
-                <input type="date" id="endDate" name="endDate" class="form-control" value="<?php echo date('m-d-Y'); ?>">
+                <input type="date" id="endDate" name="endDate" class="form-control" value="<?php echo date('m-d-Y'); ?>" required>
                 </div>
                 <div id=dateBtn onclick="dateDiff()">Click here for the total cost</div><br><br>
                 <?php 
@@ -44,17 +44,17 @@ ob_start();?>
                     <img id="creditCards"src="public/images/capture.JPG" alt="creditCards">
                 </div><br>
                 <label for="owner">Cardholder</label>
-                <input type="text" class="form-control" id="owner" name="owner" placeholder="Enter your name as shown on your credit card" required>
+                <input type="text" class="form-control" id="owner" name="owner" placeholder="Enter your name as shown on your credit card" pattern="^(?![\s.]+$)[A-Z\-a-z\s.]{2,}" required >
                 <div class="nameError"><em>Please enter your name as shown on your credit card (only letters)</em></div><br>
                 <label for="cardNumber" id="cardNum">Card #</label>
-                <input type="text" class="form-control" id="cardNumber" name="cardNumber" placeholder="Enter credit card number with no spaces or dashes" required>
+                <input type="text" class="form-control" id="cardNumber" name="cardNumber" placeholder="Enter credit card number with no spaces or dashes" pattern="^4[0-9]{12}(?:[0-9]{3})?|(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}|3[47][0-9]{13}" required >
                 <div class="numError"><em>Please enter a correct card number</em></div><br>
                 <label for="cvv">CVV</label>
-                <input type="text" class="form-control" id="cvv" name="cvv" placeholder="Enter the 3 or 4 digit code on the back of your card" required>
+                <input type="text" class="form-control" id="cvv" name="cvv" placeholder="Enter the 3 or 4 digit code on the back of your card" pattern="^[0-9]{3,4}" required>
                 <div class="cvvError"><em>3 or 4 numbers only</em></div><br>
                 <div class="expiry">
                     <label>Expiry</label>
-                    <select name="month" id="month">
+                    <select name="month" id="month" required>
                         <option value="" selected disabled hidden>Select month</option>
                         <option value="01">January</option>
                         <option value="02">February </option>
@@ -69,7 +69,7 @@ ob_start();?>
                         <option value="11">November</option>
                         <option value="12">December</option>
                     </select>
-                    <select name="year" id="year">
+                    <select name="year" id="year" required>
                         <option value="" selected disabled hidden>Select year</option>
                         <option value="22"> 2022</option>
                         <option value="23"> 2023</option>
@@ -81,10 +81,11 @@ ob_start();?>
                 </div><br><br>
                     <div class="buttons">
                         <!-- <img src="public/images/Credit-Card-Icons.jpg" id="visa"> -->
-                        <button type="submit" class="btn btn-default" id="confirm-purchase">Confirm Payment</button>
+                        <button type="submit" class="btn btn-default" id="confirm-purchase"><a href="index.php?action=reserveComplete">Confirm Payment</a></button>
                         <input type="hidden" value="addReservationInfo" name="action">
                         <button id="reset" type="reset">Reset the form</button>
                     </div>
+
                 </form>
         </div>
     </div>
