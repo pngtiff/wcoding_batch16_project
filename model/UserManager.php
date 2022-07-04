@@ -256,10 +256,14 @@ class UserManager extends Manager
         $req->execute(array($this->_user_id));
         $user = $req->fetch(\PDO::FETCH_ASSOC);
         $req->closeCursor();
-        $languages = explode(',', $user['languages'] ?? "");
+        if($user['languages']){
+            $languages = explode(',', $user['languages'] ?? "");
+        }
+
         foreach ($languages as &$language) {
             $language = $this->getLangauges($language);
         }
+
         $user['languages'] = $languages;
         return $user;
     }

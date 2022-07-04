@@ -60,7 +60,7 @@ window.addEventListener('click', (e) => {
             document.querySelector('.down-arrow').classList.remove('rotate180');
         }
     }
-})
+});
 
 for (i = 0; i < languages.length; i++) {
     if(languages[i].checked) {
@@ -73,21 +73,8 @@ for (i = 0; i < languages.length; i++) {
             langArray = langArray.filter(lang => lang != e.target.value);
         }
         userLang.value = langArray;
-    })
-}
-
-for (i = 0; i < languages.length; i++) {
-    if(languages[i].checked) {
-        langArray.push(languages[i].value);
-    }
-    languages[i].addEventListener('change', (e) => {
-        if (e.target.checked) {
-            langArray.push(e.target.value);
-        } else if (!e.target.checked) {
-            langArray = langArray.filter(lang => lang != e.target.value);
-        }
-        userLang.value = langArray;
-    })
+    });
+    userLang.value = langArray;
 }
 
 // =======================================//

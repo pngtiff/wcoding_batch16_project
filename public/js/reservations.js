@@ -92,28 +92,30 @@ cvv.addEventListener('keyup', checkCVV);
 // =================== //
 // reservation calendar//
 // =================== //
-let dateOpenButton = document.querySelector('.stayingDuration');
-let dateCloseButton = document.querySelector('.dateCloseButton');
-let bookingCalendar = document.querySelector('.bookingCalendar');
+// let dateOpenButton = document.querySelector('.stayingDuration');
+// let dateCloseButton = document.querySelector('.dateCloseButton');
+
+let datePicker = document.getElementById('datepicker');
+let calendarContainer = document.querySelector('.calendarContainer');
 let checkIn = document.querySelector('.checkIn');
 let checkOut = document.querySelector('.checkOut');
 let dateSelection = document.querySelectorAll('.dateFilled');
 
 // when we first click the calendar button
-dateOpenButton.addEventListener("click", function(e) { 
+datePicker.addEventListener("click", function(e) { 
     e.preventDefault();
-    checkIn.classList.add('selectedFunction');
-    bookingCalendar.classList.remove('calendarUp');
-    bookingCalendar.classList.add('calendarExtension');
+    // checkIn.classList.add('selectedFunction');
+    calendarContainer.classList.remove('calendarUp');
+    calendarContainer.classList.add('calendarExtension');
 });
 
 // when we click the close button
 dateCloseButton.addEventListener("click", function(e) {
     e.preventDefault();
-    checkIn.classList.remove('selectedFunction');
-    checkOut.classList.remove('selectedFunction');
-    bookingCalendar.classList.remove('calendarExtension');
-    bookingCalendar.classList.add('calendarUp');
+    // checkIn.classList.remove('selectedFunction');
+    // checkOut.classList.remove('selectedFunction');
+    calendarContainer.classList.remove('calendarExtension');
+    calendarContainer.classList.add('calendarUp');
 });
 
 
