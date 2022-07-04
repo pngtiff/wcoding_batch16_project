@@ -34,15 +34,21 @@
     object-position: center;
 }
 
-.profileFormsBorder {
+/* .profileFormsBorder {
     border: 2px solid var(--profile-border-color);
     border-radius: 1.25rem;
     padding: 5rem 7rem;
-}
+} */
 
 /* =============== */
 /* Create Profile  */
 /* =============== */
+
+#newProfile {
+    border: 2px solid var(--profile-border-color);
+    border-radius: 1.25rem;
+    padding: 5rem 7rem;
+}
 
 #newProfile h1 {
     margin: 0;
@@ -64,21 +70,16 @@
     display: none;
 }
 
-.customFileButton {
-    color: var(--gray-color);
-    padding: 0.25rem 0.5rem;
-    border: 2px solid var(--gray-color);
-    border-radius: 0.25rem;
-    cursor: pointer;
-    font-size: 0.9rem;
+.uploadPhoto {
+    width: 14rem;
 }
 
 #newProfile label {
     margin-bottom: 0.25rem;
 }
 
-#langDetails {
-    margin-left: 0.5rem;
+.modifyLang div {
+    margin-left: 0.2rem;
 }
 
 #createProfileDetails>div, #langDetails>div {
@@ -91,12 +92,14 @@
     width: 15.5rem;
     padding: 0.25rem 0.5rem;
     font-size: 1rem;
+    margin-top: 0.5rem;
 }
 
 #birthdate select {
     font-size: 1rem;
     padding: 0.25rem 0.5rem;
-    width: 5rem;
+    width: 5.5rem;
+    margin-right: 0.5rem;
 }
 
 .multi-selector{
@@ -104,6 +107,9 @@
 }
 
 .select-field{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     cursor: pointer;
     width: 15.5rem;
     border: 1px solid rgb(128, 128, 128);
@@ -120,6 +126,11 @@
     box-shadow: 0 30px 60px rgb(0,0,0,0.2);
     display: none;
 }
+
+#langList {
+    z-index: 1000000;   
+}
+
 .down-arrow {
     font-size: 1.2rem;
     display: inline-block;
@@ -175,17 +186,17 @@
     justify-content: center;
 }
 
-#userInfo #userMain #userImgContainer {
-    right: 25%;
+#editProfileButton {
+    margin: 0;
 }
 
 #userInfo {
     width: 100%;
-    min-width: 34.375rem;
+    /* min-width: 34.375rem; */
     justify-content: center;
     border: 2px solid var(--profile-border-color);
     border-radius: 1.25rem;
-    padding: 3rem 2rem;
+    padding: 2rem 2rem;
 }
 
 #userInfo form {
@@ -199,7 +210,7 @@
 #userMain {
     display: flex;
     align-items: flex-start;
-    justify-content: center;
+    justify-content: space-between;
     padding: 1.25rem;
     margin: 0 0.5rem;
     width: 90%;
@@ -209,36 +220,51 @@
     border-bottom: 1px solid var(--gray-color);
 }
 
-#userInfo>div>div:first-child {
-    min-width: 12.5rem;
+#userMain>div:first-child {
+    margin-right: 3rem;
 }
 
-#userInfo>div>div:last-child {
+/* #userInfo #userMain #userImgContainer {
+    right: 25%;
+} */
+
+#userMain>div:last-child {
     width: 75%;
-    min-width: 18.75rem;
+    /* min-width: 18.75rem; */
 }
 
 #userDetails {
     padding-top: 3rem;
     display: flex;
+    flex-wrap: wrap;
+    /* justify-content: space-between; */
 }
 
-#userDetails > *:not(:nth-child(1)) {
-    margin-left: 5rem;
+#userDetails div p:first-child{
+    font-weight: bold;
+}
+
+#userDetails > *:not(:nth-child(3)) {
+    margin-right: 20%;
+    margin-bottom: 1rem;
 }
 
 #userDetails ul {
+    /* width: 30rem;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between; */
+    column-count: 2;
+    column-gap: 2rem;
+    margin-left: 1rem;
+    /* display: grid;
+    grid-template-columns: repeat(3, 10.3rem); */
 }
 
-#userDetails ul > *:not(:nth-child(1)) {
-    margin-left: 2rem;
-}
 
 #superBio {
     align-self: flex-start;
-    margin: 2rem 0 2rem 5rem;
+    margin: 2rem 4rem;
 }
 
 #contact {
@@ -253,24 +279,45 @@
 /* =============== */
 /* Modify Profile  */
 /* =============== */
-#modifyProfileSection{
-    width: 80%;
+
+#modifyProfileSection {
     display: flex;
     justify-content: center;
+    width: 22rem;
 }
 
-.personalInformationContainer{
+.personalInformationContainer {
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* align-items: center; */
+    align-items: center;
+    border: 2px solid var(--profile-border-color);
+    border-radius: 1.25rem;
 }
 
-.profileFormsBorder{
-    border: 2px solid var(--profile-border-color);
-    border-radius: 20px;
-    padding: 30px;
+.personalInformationContainer h2 {
+    margin-top: 0.5rem;
+}
+
+#photoContainerM {
+    margin-left: 3rem;
+}
+
+.modifyList {
+    height: 10rem;
+    overflow-y: scroll;
+    z-index: 1000000;
+}
+
+#absolute {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 1000000;
 }
 
 /*  profile photo  */
@@ -282,7 +329,7 @@
     border-radius: 50%;
     overflow: hidden;
     border: 1px solid var(--gray-color);
-    margin-bottom: 10px;
+    margin-bottom: 0.625rem;
     position: relative;
     margin-top: 1em;
     z-index: 1;
@@ -300,7 +347,7 @@
 }
 
 #uploadButtonM{
-    height: 40px;
+    height: 2.5rem;
     width: 100%;
     position: absolute;
     bottom: 0;
@@ -309,22 +356,21 @@
     transform: translateX(-50%);
     background-color: rgb(0, 0, 0, 0.7);
     color: var(--white-color);
-    line-height: 30px;
-    font-size: 15px;
+    line-height: 1.875rem;
+    font-size: 1rem;
     cursor: pointer;
     display: none;
     pointer-events: auto;
 }
 
 #phoneBox {
-    margin: 3rem 0;
+    margin: 1rem 0;
     display: flex;
     flex-direction: column;
 }
 
 #row1 {
     width: 100%;
-    margin-bottom: 5rem;
 }
 
 #phoneNumber {
@@ -334,10 +380,6 @@
 #userBio {
     margin-left: 0.5rem;
     
-}
-
-#save {
-    margin-top: 7rem;
 }
 
 .bottomContainerM{
@@ -360,3 +402,46 @@
     border: 1px solid var(--green-color);
 }
 
+
+@media screen and (max-width: 650px) {
+    /* Profile View Page */
+    #editProfileButton span {
+        display: none;
+    }
+
+    #userMain {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    #userMain>div:first-child {
+        margin-bottom: 1rem;
+        margin-right: 0;
+        align-self: center;
+    }
+
+    #userDetails ul {
+        column-count: 1;
+    }
+
+    #superBio {
+        margin: 2rem 0;
+    }
+
+    /* Modify Profile Page */
+    .personalInformationContainer {
+        border: none;
+        width: 100%;
+    }
+
+
+    /* Create Profile Page */
+    #newProfile {
+        border: none;
+        padding: 0;
+    }
+
+    #line1, #newProfile #profilePhoto, #newProfile .uploadPhoto {
+        align-self: center;
+    }
+}

@@ -23,10 +23,10 @@ function displaySlides(n) {
         slides[i].style.display = "none";  
     };
     for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" viewOn", "");
+        dots[i].className = dots[i].className.replace(" detailedImgDotsActive", "");
     };
     slides[slideNum-1].style.display = "block";
-    dots[slideNum-1].className += " viewOn";
+    dots[slideNum-1].className += " detailedImgDotsActive";
 }
 
 // let modalBox = document.querySelector("#modalBox");

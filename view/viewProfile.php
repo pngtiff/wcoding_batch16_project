@@ -10,7 +10,7 @@
             <?php if (!empty($_SESSION['uid'])) {
                 if ($_REQUEST['user'] == $_SESSION['uid']) { ?>
                     <form action="index.php" method='GET'>
-                        <button type='submit' id='editProfileButton' class='primaryBtn primaryColor'>Edit Profile</button>
+                        <button type='submit' id='editProfileButton' class='primaryBtn primaryColor'><i class="fa-solid fa-pen-to-square"></i> <span> Edit Profile</span></button>
                         <input type="hidden" name="action" value="modifyProfile">
                         <input type="hidden" name="user" value="<?= $_SESSION['uid'] ?>">
                     </form>
@@ -55,7 +55,8 @@
                                             // echo '</pre>';
                                         } ?></p>
                         <div id='userDetails'>
-                            <p>Age: <?php if ($dob = $user['dob']) {
+                            <div>
+                                <p>Age: </p></p><?php if ($dob = $user['dob']) {
                                         $dob = $user['dob'];
                                         $today = date('Y-m-d');
                                         $diff = date_diff(date_create($dob), date_create($today));
@@ -63,23 +64,33 @@
                                         echo $age;
                                     }
                                     ?></p>
-                            <p>Gender: <?php if ($gender = $user['gender']) {
-                                            if ($gender == 'F') {
-                                                echo 'Female';
-                                            } elseif ($gender == 'M') {
-                                                echo 'Male';
-                                            } else {
-                                                echo 'Non-binary';
-                                            }
-                                        }; ?></p>
-                            <p>Language(s):</p>
-                            <ul>
-                                <?php
-                                $languages = $user['languages'];
-                                foreach ($languages as $language) {
-                                    echo '<li>' . $language . '</li>';
-                                } ?>
-                            </ul>
+                            </div>
+                            <div>
+                                <p>Gender: </p></p><?php if ($gender = $user['gender']) {
+                                        if ($gender == 'F') {
+                                            echo 'Female';
+                                        } elseif ($gender == 'M') {
+                                            echo 'Male';
+                                        } else {
+                                            echo 'Non-binary';
+                                        }
+                                    }; ?></p>
+                            </div>
+                            <div>
+                                <p>Language(s): <p>
+                                    <?php 
+                                    $languages = $user['languages'];
+                                    if(count($languages) == 1) {
+                                        echo '<p>'.$languages[0].'</p>';
+                                    } else {
+                                        echo '<ul>';
+                                        foreach ($languages as $language) {
+                                            echo '<li>' . $language . '</li>';
+                                        }
+                                        echo '</ul>';
+                                    }
+                                    ?>
+                            </div>
                         </div>
                     </div>
                 </div>

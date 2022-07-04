@@ -55,10 +55,12 @@
 }
 
 #propertiesContainer {
-    width: 100%;
-    margin-left: 5rem;
+    /* width: 100%; */
+    width: 100vw;
+    padding-top: 2rem;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 #propertyDetails p {
