@@ -4,7 +4,6 @@ function opacity (opacity, modalContainer) {
 if (modalBox = document.getElementById("modalBox")) {
     function moveBanner() {
         let left = parseInt(getComputedStyle(banner).left);
-        console.log(left);
         if (left > 0) {
             showSignup();
             banner.classList.remove('right', 'animate-right');
@@ -75,7 +74,6 @@ if (modalBox = document.getElementById("modalBox")) {
 
     // close the modal when click X
     document.querySelector(".close").addEventListener("click", function() {
-        console.log("one");
         modalBox.style.display = "none";
         document.body.style.overflowY = "visible";
         opacity(0, modalBox);

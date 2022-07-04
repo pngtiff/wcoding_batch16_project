@@ -7,7 +7,6 @@ function checkInput(e){
     xhr.open('GET', `index.php?action=checkSignIn&email=${signInForm.email.value}&password=${signInForm.password.value}`);
     xhr.onload = function () {
         if (xhr.status == 200) {
-            console.log(xhr.responseText)
             if (xhr.responseText==1) {
                 signInForm.submit();
             } else {

@@ -46,47 +46,60 @@
                 <div id="formContainer"></div>
                 <div id="searchForm" method="post" action="index.php">
                     <div>
-                        <span id="regionSearch" class="searchBarDots" onclick="currentSlide(1)">Region</span>
-                        <span id="priceSearch" class="searchBarDots" onclick="currentSlide(2)">Price Range</span>
-                        <span id="propertyTypeSearch" class="searchBarDots" onclick="currentSlide(3)">Type </span>
+                        <span id="regionSearch" class="searchBarDots" onclick="currentSearch(1)">Region</span>
+                        <span id="priceSearch" class="searchBarDots" onclick="currentSearch(2)">Price Range</span>
+                        <span id="propertyTypeSearch" class="searchBarDots" onclick="currentSearch(3)">Type </span>
                         <button class="searchButton primaryFill"><i id="magnifying" class="fa-solid fa-magnifying-glass offsetColor"></i></button>
                     </div>
                     <input type="hidden" name="action" value="search">
                     <div>
                         <div class="searchBarSlides">
-                            <select name="province" id="province">
-                                <option selected value="-1">Province/Special City</option>
-                                <option value="1">Busan</option>
-                                <option value="2">Chungcheongbuk-do</option>
-                                <option value="3">Chungcheongnam-do</option>
-                                <option value="4">Daegu</option>
-                                <option value="5">Daejeon</option>
-                                <option value="6">Gangwon-do</option>
-                                <option value="7">Gwangju</option>
-                                <option value="8">Gyeonggi-do</option>
-                                <option value="9">Gyeongsangbuk-do</option>
-                                <option value="10">Gyeongsangnam-do</option>
-                                <option value="11">Incheon</option>
-                                <option value="12">Jeju-do</option>
-                                <option value="13">Jeollabuk-do</option>
-                                <option value="14">Jeollanam-do</option>
-                                <option value="15">Sejong-si</option>
-                                <option value="16">Seoul</option>
-                            </select>
-                            <select name="city" id="city">
-                                <option value="-1">Select Province/City First</option>
-                            </select>
+                            <div id="provinceSearchMenu" class="multi-selector">
+                                <div class="provinceSearchBar select-field">
+                                    <p class="choose">Any Province/Special City</p>
+                                    <p class="down-arrow">&blacktriangledown;</p>
+                                </div>
+                                <div id="provinceSearchList" class="list modifyList">
+                                    <label><input type="radio" name="province" checked value="-1">Province/Special City</label>
+                                    <label><input type="radio" name="province" value="1">Busan</label>
+                                    <label><input type="radio" name="province" value="2">Chungcheongbuk-do</label>
+                                    <label><input type="radio" name="province" value="3">Chungcheongnam-do</label>
+                                    <label><input type="radio" name="province" value="4">Daegu</label>
+                                    <label><input type="radio" name="province" value="5">Daejeon</label>
+                                    <label><input type="radio" name="province" value="6">Gangwon-do</label>
+                                    <label><input type="radio" name="province" value="7">Gwangju</label>
+                                    <label><input type="radio" name="province" value="8">Gyeonggi-do</label>
+                                    <label><input type="radio" name="province" value="9">Gyeongsangbuk-do</label>
+                                    <label><input type="radio" name="province" value="10">Gyeongsangnam-do</label>
+                                    <label><input type="radio" name="province" value="11">Incheon</label>
+                                    <label><input type="radio" name="province" value="12">Jeju-do</label>
+                                    <label><input type="radio" name="province" value="13">Jeollabuk-do</label>
+                                    <label><input type="radio" name="province" value="14">Jeollanam-do</label>
+                                    <label><input type="radio" name="province" value="15">Sejong-si</label>
+                                    <label><input type="radio" name="province" value="16">Seoul</label>
+                                </div>
+                            </div>
+                            <div id="citySearchMenu" class="multi-selector">
+                                <div class="citySearchBar select-field">
+                                    <p class="choose">Any City/District</p>
+                                    <p class="down-arrow">&blacktriangledown;</p>
+                                </div>
+                                <div id="citySearchList" class="list modifyList">
+                                    <label><input type="radio" value="-1" checked>Select Province/City First</label>
+                                </div>
+                            </div>
                         </div>
                         <div class="searchBarSlides">
                             <div id="range"></div>
                         </div>
                         <div class="searchBarSlides">
-                            <div id="propertyTypeSearch" class="multi-selector">
-                                <div class="select-field">
+                            <div id="propertySearchMenu" class="multi-selector">
+                                <div class="propertySearchBar select-field">
                                     <p class="choose">Any Property Type</p>
                                     <p class="down-arrow">&blacktriangledown;</p>
                                 </div>
-                                <div id="langList" class="list">
+                                <div id="propertySearchList" class="list modifyList">
+                                    <label><input type="radio" name="propertyType" value="any" checked>Any Property Type</label>
                                     <label><input type="radio" name="propertyType" value="1">Apartment</label>
                                     <label><input type="radio" name="propertyType" value="2">Officetel</label>
                                     <label><input type="radio" name="propertyType" value="3">Villa</label>
@@ -95,12 +108,13 @@
                                     <label><input type="radio" name="propertyType" value="6">Residential Hotel</label>
                                 </div>
                             </div>
-                            <div id="roomTypeSearch" class="multi-selector">
-                                <div class="select-field">
+                            <div id="roomSearchMenu" class="multi-selector">
+                                <div class="roomSearchBar select-field">
                                     <p class="choose">Any Room Type</p>
                                     <p class="down-arrow">&blacktriangledown;</p>
                                 </div>
-                                <div id="langList" class="list">
+                                <div id="roomSearchList" class="list modifyList">
+                                    <label><input type="radio" name="roomType" value="any" checked>Any Room Type</label>
                                     <label><input type="radio" name="roomType" value="1">Private Room</label>
                                     <label><input type="radio" name="roomType" value="2">Shared Room</label>
                                     <label><input type="radio" name="roomType" value="3">Entire Place</label>

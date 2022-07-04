@@ -71,14 +71,12 @@ function dateDiff() {
     var t1 = new Date(d1);
 
     var currentLocation = window.location.href;
-    console.log(currentLocation);
     var url = new URL(currentLocation);
     var price = url.searchParams.get("price");
 
     for (let i = 0; i < price.length; i++){
         price = price.replace(',', ''); // go through all the characters and replace commas if they are present
     }
-    console.log(price);
 
     if (((t1 - t2) / (24 * 3600 * 1000)) >= 30){
     document.getElementById("dateBtn").innerHTML = "Your total price is " + Math.round(((t1 - t2) / (24 * 3600 * 1000))/30 * parseInt(price)).toLocaleString('en-US') + "₩"; 

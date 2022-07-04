@@ -12,43 +12,66 @@ ob_start(); ?>
                 </label>
                 <label for="country">
                     <span>Country</span>
-                    <select name="country" id="country">
-                        <!-- TODO: Add more countries -->
-                        <option value="KR">South Korea</option>
-                    </select>
+                    <div id="countryPostMenu" class="multi-selector">
+                        <div class="countryPostBar select-field">
+                            <p class="choose">Select a country</p>
+                            <p class="down-arrow">&blacktriangledown;</p>
+                        </div>
+                        <div id="countryList" class="list">
+                            <label><input type="radio" value="KR" name="country">South Korea</label>
+                        </div>
+                    </div>
                     <span class="hide">Select one</span>
                 </label>
                 <label for="provincePost">
                     <span>Province/Special City</span>
-                    <select name="province" id="provincePost">
-                        <option selected disabled>Select a Province/Special City</option>
-                        <option value="1">Busan</option>
-                        <option value="2">Chungcheongbuk-do</option>
-                        <option value="3">Chungcheongnam-do</option>
-                        <option value="4">Daegu</option>
-                        <option value="5">Daejeon</option>
-                        <option value="6">Gangwon-do</option>
-                        <option value="7">Gwangju</option>
-                        <option value="8">Gyeonggi-do</option>
-                        <option value="9">Gyeongsangbuk-do</option>
-                        <option value="10">Gyeongsangnam-do</option>
-                        <option value="11">Incheon</option>
-                        <option value="12">Jeju-do</option>
-                        <option value="13">Jeollabuk-do</option>
-                        <option value="14">Jeollanam-do</option>
-                        <option value="15">Sejong-si</option>
-                        <option value="16">Seoul</option>
-                    </select>
+                    <div id="provincePostMenu" class="multi-selector">
+                        <div class="provincePostBar select-field">
+                            <p class="choose">Select Province/Special City</p>
+                            <p class="down-arrow">&blacktriangledown;</p>
+                        </div>
+                        <div id="provincePostList" class="list">
+                            <label><input type="radio" name="province" checked value="-1">Province/Special City</label>
+                            <label><input type="radio" name="province" value="1">Busan</label>
+                            <label><input type="radio" name="province" value="2">Chungcheongbuk-do</label>
+                            <label><input type="radio" name="province" value="3">Chungcheongnam-do</label>
+                            <label><input type="radio" name="province" value="4">Daegu</label>
+                            <label><input type="radio" name="province" value="5">Daejeon</label>
+                            <label><input type="radio" name="province" value="6">Gangwon-do</label>
+                            <label><input type="radio" name="province" value="7">Gwangju</label>
+                            <label><input type="radio" name="province" value="8">Gyeonggi-do</label>
+                            <label><input type="radio" name="province" value="9">Gyeongsangbuk-do</label>
+                            <label><input type="radio" name="province" value="10">Gyeongsangnam-do</label>
+                            <label><input type="radio" name="province" value="11">Incheon</label>
+                            <label><input type="radio" name="province" value="12">Jeju-do</label>
+                            <label><input type="radio" name="province" value="13">Jeollabuk-do</label>
+                            <label><input type="radio" name="province" value="14">Jeollanam-do</label>
+                            <label><input type="radio" name="province" value="15">Sejong-si</label>
+                            <label><input type="radio" name="province" value="16">Seoul</label>
+                        </div>
+                    </div>
                     <span class="hide">Select one</span>
                 </label>
-                <label for="cityPost">
+                <label>
                     <span>City/District</span>
-                    <select name="city" id="cityPost"></select>
+                    <div id="cityPostMenu" class="multi-selector">
+                        <div class="cityPostBar select-field">
+                            <p class="choose">-=-=-</p>
+                            <p class="down-arrow">&blacktriangledown;</p>
+                        </div>
+                        <div id="cityPostList" class="list"></div>
+                    </div>
                     <span class="hide">Select one</span>
                 </label>
-                <label for="district">
+                <label>
                     <span>District</span>
-                    <select name="district" id="district"></select>
+                    <div id="districtPostMenu" class="multi-selector">
+                        <div class="districtPostBar select-field">
+                            <p class="choose">-=-=-</p>
+                            <p class="down-arrow">&blacktriangledown;</p>
+                        </div>
+                        <div id="districtPostList" class="list"></div>
+                    </div>
                     <span class="hide">Select one</span>
                 </label>
                 <label for="address1">
@@ -68,23 +91,37 @@ ob_start(); ?>
                 </label>
                 <label for="propertyTypePost">
                     <span>Property Type</span>
-                    <select name="propertyType" id="propertyTypePost">
-                        <option value="1">Apartment</option>
-                        <option value="2">Officetel</option>
-                        <option value="3">Villa</option>
-                        <option value="4">House</option>
-                        <option value="5">Sharehouse</option>
-                        <option value="6">Residential hotel</option>
-                    </select>
+                    <div id="propertyPostMenu" class="multi-selector">
+                        <div class="propertyPostBar select-field">
+                            <p class="choose">Any Property Type</p>
+                            <p class="down-arrow">&blacktriangledown;</p>
+                        </div>
+                        <div id="propertyPostList" class="list">
+                            <label><input type="radio" name="propertyType" value="any" checked>Any Property Type</label>
+                            <label><input type="radio" name="propertyType" value="1">Apartment</label>
+                            <label><input type="radio" name="propertyType" value="2">Officetel</label>
+                            <label><input type="radio" name="propertyType" value="3">Villa</label>
+                            <label><input type="radio" name="propertyType" value="4">House</label>
+                            <label><input type="radio" name="propertyType" value="5">Shared House</label>
+                            <label><input type="radio" name="propertyType" value="6">Residential Hotel</label>
+                        </div>
+                    </div>
                     <span class="hide">Select one</span>
                 </label>
                 <label for="roomTypePost">
                     <span>Room Type</span>
-                    <select name="roomType" id="roomTypePost">
-                        <option value="1">Private room</option>
-                        <option value="2">Shared room</option>
-                        <option value="3">Entire place</option>
-                    </select>
+                    <div id="roomPostMenu" class="multi-selector">
+                        <div class="roomPostBar select-field">
+                            <p class="choose">Any Room Type</p>
+                            <p class="down-arrow">&blacktriangledown;</p>
+                        </div>
+                        <div id="roomPostList" class="list">
+                            <label><input type="radio" name="roomType" value="any" checked>Any Room Type</label>
+                            <label><input type="radio" name="roomType" value="1">Private Room</label>
+                            <label><input type="radio" name="roomType" value="2">Shared Room</label>
+                            <label><input type="radio" name="roomType" value="3">Entire Place</label>
+                        </div>
+                    </div>
                     <span class="hide">Select one</span>
                 </label>
                 <label for="roomNum">
