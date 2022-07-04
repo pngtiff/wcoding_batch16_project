@@ -28,6 +28,8 @@
             <button id="cancelReservation">Cancel Reservation</button>
             <input name="reservation_num" type="hidden" value="<?= $reservation['reservation_num']?>">
             <input name="action" type="hidden" value="cancelReservation">
+
+            <script>console.log("test")</script>
         </form>
         <?php }?>
     </div>

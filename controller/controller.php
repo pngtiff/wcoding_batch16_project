@@ -101,6 +101,9 @@ function reservationView(){
     // $propDetails = $propertyM->getProperty($propId);
     // $propOwner = $propertyM->getPropertyOwner($propId);
 
+    $propertyM = new PropertyManager();
+    $reservations = $propertyM->getReservations();
+
     require('view/reservations.php'); // display the view of the reservation form
 }
 
