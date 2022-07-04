@@ -128,7 +128,7 @@
     justify-content: center;
 }
 
-#reset, #confirm-purchase, #dateBtn {
+#reset, #confirm-purchase {
     background-color: rgb(41, 163, 118);
     color: rgb(247, 238, 238); 
     font-weight: bold;

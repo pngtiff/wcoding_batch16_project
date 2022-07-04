@@ -524,4 +524,13 @@ class PropertyManager extends Manager
 
         header("Location: index.php?action=property&propId={$newPropId}");
     }
+
+    public function getReservations() {
+        
+        $req = $this->_connection->query("SELECT * FROM reservations WHERE property_id='{$_REQUEST['propId']}' AND is_active=1");
+        $reservations = $req->fetchAll(\PDO::FETCH_ASSOC);
+       
+        return $reservations;
+    }
+
 }
