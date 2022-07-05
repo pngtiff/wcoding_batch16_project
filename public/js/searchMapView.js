@@ -122,7 +122,6 @@ function getMapZoomLevel(coords) {
 
     let latDiff = maxLat - minLat,
         lngDiff = maxLng - minLng;
-    console.log(latDiff, lngDiff);
 
     let zoom;
     if(latDiff == 0 || lngDiff == 0) {
@@ -157,7 +156,6 @@ function degr2rad(degr) { return degr * Math.PI / 180; }
  */
 function getLatLngCenter(coords) {
     const minMaxCoords = getMinMaxCoords(coords);
-    // console.log(minMaxCoords);
     var latitude = 0;
     var longitude = 1;
     var sumX = 0;

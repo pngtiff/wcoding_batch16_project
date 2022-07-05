@@ -41,7 +41,6 @@
     background-color: #29A376;
     z-index: 1;
     text-align: center;
-    /* border-radius: 1.25rem; */
 }
 
 .right {
@@ -86,7 +85,13 @@
     right: 1.5rem;
     top: 0.625rem;
 }
-  
+
+@media only screen and (max-width: 650px) {
+    .close {
+        right: 0.5rem;
+    }
+}
+
 .close:hover,
 .close:focus 
 {

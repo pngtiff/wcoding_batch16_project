@@ -124,7 +124,6 @@ try {
             // }
             modifyProperty($_REQUEST, $_FILES);
             break;
-
         case 'viewPostProperty':
             if (!empty($_SESSION['email'])) {
                 viewPostProperty();
@@ -142,7 +141,6 @@ try {
                 getDistricts($_REQUEST['city']);
             }
             break;
-
         case 'reservations':
             reservationView(); // 'user' -> user uid
             break;

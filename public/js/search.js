@@ -16,7 +16,7 @@ function showSearch(n) {
     for (i = 0; i < dots.length; i++) {
         dots[i].className = dots[i].className.replace(" searchBarDotActive", "");
     }
-    slides[n-1].style.display = "block";
+    slides[n-1].style.display = "flex";
     dots[n-1].className += " searchBarDotActive";
 }
 
@@ -52,7 +52,7 @@ function loadSearch(e) {
             searchMap(coords);
             
         } else {
-            console.log("bad Request")
+            window.location = 'index.php';
         }
     })
 
@@ -60,53 +60,114 @@ function loadSearch(e) {
 }
 
 function instantiate (){
-    let provinceSearch = document.querySelector('#province');
-    let citySearch = document.querySelector('#city');
     let searchBar = document.querySelector("#searchBarContainer");
-    provinceSearch.addEventListener('change', function(e) {
-        let xhr = new XMLHttpRequest();
-        xhr.open('GET', `index.php?action=getCities&province=${e.target.options[e.target.selectedIndex].text}`);
-        xhr.onload = function (e) {
-            if (xhr.status == 200) {
-                citySearch.innerHTML = xhr.responseText
-            }
-        }
-        xhr.send(null)
-    })
 
     //// CLICK ICON///////
 
     searchBar.addEventListener("submit", loadSearch)
-    let formContainer = document.querySelector("#formContainer"),
-        searchForm = document.querySelector('#searchForm')
-        regionSearch = document.querySelector("#regionSearch"),
-        priceSearch = regionSearch.nextElementSibling,
-        propertyTypeSearch = priceSearch.nextElementSibling
-
+    let formContainer = document.querySelector("#formContainer");
+    let searchForm = document.querySelector('#searchForm');
+    let regionSearch = document.querySelector("#regionSearch");
+    let priceSearch = regionSearch.nextElementSibling;
+    let propertyTypeSearch = priceSearch.nextElementSibling;
+    let propertySearchMenu = document.querySelector('.propertySearchBar');
+    let propertyList = propertySearchMenu.nextElementSibling;
+    let roomSearchMenu = document.querySelector('.roomSearchBar');
+    let roomList = roomSearchMenu.nextElementSibling;
+    let provinceSearchMenu = document.querySelector('.provinceSearchBar');
+    let provinceList = provinceSearchMenu.nextElementSibling;
+    let citySearchMenu = document.querySelector('.citySearchBar');
+    let cityList = citySearchMenu.nextElementSibling;
 
     regionSearch.addEventListener('click', e=> {
-        currentSlide(1);
+        currentSearch(1);
         formContainer.style.display = 'block';
         searchForm.style.display = 'block';
     })
     priceSearch.addEventListener('click', e=> {
-        currentSlide(2);
+        currentSearch(2);
         formContainer.style.display = 'block';
         searchForm.style.display = 'block';
     })
     propertyTypeSearch.addEventListener('click', e=> {
-        currentSlide(3);
+        currentSearch(3);
         formContainer.style.display = 'block';
         searchForm.style.display = 'block';
     })
 
+    let inputs = roomList.querySelectorAll('input')
+    for (let i=0; i<inputs.length; i++) {
+        inputs[i].addEventListener('click', (e)=> {
+            roomSearchMenu.firstElementChild.textContent = e.target.nextSibling.textContent
+        })
+    };
+
+    inputs = propertyList.querySelectorAll('input')
+    for (let i=0; i<inputs.length; i++) {
+        inputs[i].addEventListener('click', (e)=> {
+            propertySearchMenu.firstElementChild.textContent = e.target.nextSibling.textContent
+        })
+    };
+
+    inputs = provinceList.querySelectorAll('input')
+    for (let i=0; i<inputs.length; i++) {
+        inputs[i].addEventListener('click', (e)=> {
+            provinceSearchMenu.firstElementChild.textContent = e.target.nextSibling.textContent
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', `index.php?action=getCities&province=${e.target.nextSibling.textContent}`);
+            xhr.onload = function (e) {
+                if (xhr.status == 200) {
+                    cityList.innerHTML = xhr.responseText
+                    inputs = cityList.querySelectorAll('input')
+                    for (let i=0; i<inputs.length; i++) {
+                        inputs[i].addEventListener('click', (e)=> {
+                            citySearchMenu.firstElementChild.textContent = e.target.nextSibling.textContent
+                        })
+                    };
+                    citySearchMenu.firstElementChild.textContent = cityList.firstElementChild.lastChild.textContent
+                }
+            }
+            xhr.send(null)
+        })
+    };
+    
     window.addEventListener('click', (e) => {
         if (e.target == formContainer) {
-
             let curr = document.querySelector('#searchBarContainer .active');
             if (curr) curr.classList.remove('active');
             formContainer.style.display = 'none'
             searchForm.style.display = 'none';
+        } 
+        if (e.target === roomSearchMenu || roomSearchMenu.contains(e.target)) {
+            document.querySelector('#roomSearchList').classList.toggle('show');
+            document.querySelector('#roomSearchMenu .down-arrow').classList.toggle('rotate180');
+        } else {
+            document.querySelector('#roomSearchList').classList.remove('show');
+            document.querySelector('#roomSearchMenu .down-arrow').classList.remove('rotate180');
+        }
+        
+        if (e.target == propertySearchMenu || propertySearchMenu.contains(e.target)) {
+            document.querySelector('#propertySearchList').classList.toggle('show');
+            document.querySelector('#propertySearchMenu .down-arrow').classList.toggle('rotate180');
+        } else {
+            document.querySelector('#propertySearchList').classList.remove('show');
+            document.querySelector('#propertySearchMenu .down-arrow').classList.remove('rotate180');
+        }
+        
+        if (e.target == provinceSearchMenu || provinceSearchMenu.contains(e.target)) {
+            document.querySelector('#provinceSearchList').classList.toggle('show');
+            document.querySelector('#provinceSearchMenu .down-arrow').classList.toggle('rotate180');
+        } else {
+            document.querySelector('#provinceSearchList').classList.remove('show');
+            document.querySelector('#provinceSearchMenu .down-arrow').classList.remove('rotate180');
+        }
+        
+        if (e.target == citySearchMenu || citySearchMenu.contains(e.target)) {
+            document.querySelector('#citySearchList').classList.toggle('show');
+            document.querySelector('#citySearchMenu .down-arrow').classList.toggle('rotate180');
+        } else {
+            document.querySelector('#citySearchList').classList.remove('show');
+            document.querySelector('#citySearchMenu .down-arrow').classList.remove('rotate180');
         }
     }, true)
 }
