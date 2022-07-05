@@ -27,6 +27,12 @@ header {
     z-index: 10;
 }
 
+@media only screen and (max-width: 650px) {
+    .logo {
+        display: none;
+    }
+}
+
 .nav {
     width: 62rem;
     display: flex;
@@ -133,6 +139,12 @@ header {
     margin-left: 1.5rem;
     position: relative;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+@media only screen and (max-width: 600px) {
+    #searchBarContainer  {
+       width: 100%;
+    }
 }
 
 #searchBarContainer #formContainer
@@ -264,8 +276,6 @@ header {
 
 .searchBarDots {
     cursor: pointer;
-    /* height: 0.625rem;
-    width: 0.625rem; */
     flex: 1;
     margin: 0.125rem 0.5rem;
     padding: 0.125rem 0.5rem;
@@ -284,6 +294,12 @@ header {
     margin-left: auto; 
     margin-right: 2rem;
     z-index: 10;
+}
+
+@media only screen and (max-width: 650px) {
+    .signInUp {
+        margin-right: 0;
+    }
 }
 
 .toast {
