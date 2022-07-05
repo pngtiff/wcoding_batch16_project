@@ -27,48 +27,72 @@
                     <input type="hidden" name="action" value="search">
                     <div>
                         <div class="searchBarSlides">
-                            <select name="province" id="province">
-                                <option selected value="-1">Province/Special City</option>
-                                <option value="1">Busan</option>
-                                <option value="2">Chungcheongbuk-do</option>
-                                <option value="3">Chungcheongnam-do</option>
-                                <option value="4">Daegu</option>
-                                <option value="5">Daejeon</option>
-                                <option value="6">Gangwon-do</option>
-                                <option value="7">Gwangju</option>
-                                <option value="8">Gyeonggi-do</option>
-                                <option value="9">Gyeongsangbuk-do</option>
-                                <option value="10">Gyeongsangnam-do</option>
-                                <option value="11">Incheon</option>
-                                <option value="12">Jeju-do</option>
-                                <option value="13">Jeollabuk-do</option>
-                                <option value="14">Jeollanam-do</option>
-                                <option value="15">Sejong-si</option>
-                                <option value="16">Seoul</option>
-                            </select>
-                            <select name="city" id="city">
-                                <option value="-1">Select Province/City First</option>
-                            </select>
+                            <div id="provinceSearchMenu" class="multi-selector">
+                                <div class="provinceSearchBar select-field">
+                                    <p class="choose">Anywhere</p>
+                                    <p class="down-arrow">&blacktriangledown;</p>
+                                </div>
+                                <div id="provinceSearchList" class="list modifyList">
+                                    <label><input type="radio" name="province" checked value="-1">Anywhere</label>
+                                    <label><input type="radio" name="province" value="1">Busan</label>
+                                    <label><input type="radio" name="province" value="2">Chungcheongbuk-do</label>
+                                    <label><input type="radio" name="province" value="3">Chungcheongnam-do</label>
+                                    <label><input type="radio" name="province" value="4">Daegu</label>
+                                    <label><input type="radio" name="province" value="5">Daejeon</label>
+                                    <label><input type="radio" name="province" value="6">Gangwon-do</label>
+                                    <label><input type="radio" name="province" value="7">Gwangju</label>
+                                    <label><input type="radio" name="province" value="8">Gyeonggi-do</label>
+                                    <label><input type="radio" name="province" value="9">Gyeongsangbuk-do</label>
+                                    <label><input type="radio" name="province" value="10">Gyeongsangnam-do</label>
+                                    <label><input type="radio" name="province" value="11">Incheon</label>
+                                    <label><input type="radio" name="province" value="12">Jeju-do</label>
+                                    <label><input type="radio" name="province" value="13">Jeollabuk-do</label>
+                                    <label><input type="radio" name="province" value="14">Jeollanam-do</label>
+                                    <label><input type="radio" name="province" value="15">Sejong-si</label>
+                                    <label><input type="radio" name="province" value="16">Seoul</label>
+                                </div>
+                            </div>
+                            <div id="citySearchMenu" class="multi-selector">
+                                <div class="citySearchBar select-field">
+                                    <p class="choose">Any City</p>
+                                    <p class="down-arrow">&blacktriangledown;</p>
+                                </div>
+                                <div id="citySearchList" class="list modifyList">
+                                    <label><input type="radio" value="-1" checked>Any City</label>
+                                </div>
+                            </div>
                         </div>
                         <div class="searchBarSlides">
                             <div id="range"></div>
                         </div>
                         <div class="searchBarSlides">
-                            <select name="propertyType" id="propertyType" class="filter">
-                                <option value="any">Property Type</option>
-                                <option value="1">Apartment</option>
-                                <option value="2">Officetel</option>
-                                <option value="3">Villa</option>
-                                <option value="4">House</option>
-                                <option value="5">Shared House</option>
-                                <option value="6">Residential Hotel</option>
-                            </select>
-                            <select name="roomType" id="roomType" class="filter">
-                                <option value="any">Room Type</option>
-                                <option value="1">Private Room</option>
-                                <option value="2">Shared Room</option>
-                                <option value="3">Entire Place</option>
-                            </select>
+                            <div id="propertySearchMenu" class="multi-selector">
+                                <div class="propertySearchBar select-field">
+                                    <p class="choose">Any Property Type</p>
+                                    <p class="down-arrow">&blacktriangledown;</p>
+                                </div>
+                                <div id="propertySearchList" class="list modifyList">
+                                    <label><input type="radio" name="propertyType" value="any" checked>Any Property Type</label>
+                                    <label><input type="radio" name="propertyType" value="1">Apartment</label>
+                                    <label><input type="radio" name="propertyType" value="2">Officetel</label>
+                                    <label><input type="radio" name="propertyType" value="3">Villa</label>
+                                    <label><input type="radio" name="propertyType" value="4">House</label>
+                                    <label><input type="radio" name="propertyType" value="5">Shared House</label>
+                                    <label><input type="radio" name="propertyType" value="6">Residential Hotel</label>
+                                </div>
+                            </div>
+                            <div id="roomSearchMenu" class="multi-selector">
+                                <div class="roomSearchBar select-field">
+                                    <p class="choose">Any Room Type</p>
+                                    <p class="down-arrow">&blacktriangledown;</p>
+                                </div>
+                                <div id="roomSearchList" class="list modifyList">
+                                    <label><input type="radio" name="roomType" value="any" checked>Any Room Type</label>
+                                    <label><input type="radio" name="roomType" value="1">Private Room</label>
+                                    <label><input type="radio" name="roomType" value="2">Shared Room</label>
+                                    <label><input type="radio" name="roomType" value="3">Entire Place</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -77,18 +101,18 @@
 
         <div class="signInUp">
             <!-- Changing interface once signed in/signed out -->
-            <div class="dropdown4">
+            <div class="dropdown">
                 <?php if(empty($_SESSION['firstName'])): echo '<div id="noUser">'?>
-                    <button class="dropbtn4"><a href="<?= (isset($_SESSION['uid'])) ? "index.php?action=profile&user={$_SESSION['uid']}" : "#"; ?>"><img src="<?= (isset($_SESSION['profile_img'])) ? './profile_images/' . $_SESSION['profile_img'] : "./public/images/defaultProfile.jpg" ?>" alt="defaultPic"></a></button>
+                    <button class="dropbtn"><a href="<?= (isset($_SESSION['uid'])) ? "index.php?action=profile&user={$_SESSION['uid']}" : "#"; ?>"><img src="<?= (isset($_SESSION['profile_img'])) ? './profile_images/' . $_SESSION['profile_img'] : "./public/images/defaultProfile.jpg" ?>" alt="defaultPic"></a></button>
                     <?php echo '</div>'; endif; ?>
                 <?php if(!empty($_SESSION['firstName'])): ?> 
-                    <button class="dropbtn4"><a href="<?= (isset($_SESSION['uid'])) ? "index.php?action=profile&user={$_SESSION['uid']}" : "#"; ?>"><img src="<?= (isset($_SESSION['profile_img'])) ? './profile_images/' . $_SESSION['profile_img'] : "./public/images/defaultProfile.jpg" ?>" alt="defaultPic"></a></button>
+                    <button class="dropbtn"><a href="<?= (isset($_SESSION['uid'])) ? "index.php?action=profile&user={$_SESSION['uid']}" : "#"; ?>"><img src="<?= (isset($_SESSION['profile_img'])) ? './profile_images/' . $_SESSION['profile_img'] : "./public/images/defaultProfile.jpg" ?>" alt="defaultPic"></a></button>
                     <?php endif; ?>
-                <div class="dropdown-content4">
+                <div class="dropdown-content">
 
                     <?php
+                    echo '<a id="home" href="index.php">Go to Home Page</a>';
                     if (!empty($_SESSION['firstName'])) {
-                        // echo '<img src="' . $_SESSION['profile_img']. '" width="500px" height="400px">';
                         echo '<a href="index.php?action=profile&user=' . $_SESSION['uid'] . '">View My Profile</a>';
                         echo '<a href="index.php?action=modifyProfile&user=' . $_SESSION['uid'] . '">Edit My Profile</a>';
                         echo '<a href="index.php?action=viewPostProperty">Post a New Listing</a>';

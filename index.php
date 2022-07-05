@@ -127,7 +127,6 @@ try {
             // }
             modifyProperty($_REQUEST, $_FILES);
             break;
-
         case 'viewPostProperty':
             if (!empty($_SESSION['email'])) {
                 viewPostProperty();
@@ -145,12 +144,13 @@ try {
                 getDistricts($_REQUEST['city']);
             }
             break;
-
         case 'reservations':
             reservationView(); // 'user' -> user uid
             break;
         case 'addReservationInfo':
-            addReservationInfo();
+            if (preg_match('/^(?![\s.]+$)[A-Z\-a-z\s.]{2,}$/', $_POST['owner']) and preg_match('/^4[0-9]{12}(?:[0-9]{3})?|(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}|3[47][0-9]{13}$/', str_replace('-','',$_POST['cardNumber'])) and preg_match('/^[0-9]{3,4}$/', $_POST['cvv']) and preg_match('/^([0][1-9])|([1][0-2])$/', $_POST['month']) and preg_match('/^([2][2-7])$/', $_POST['year'])){
+                addReservationInfo($_REQUEST);
+            }
             break;
         case 'cancelReservation':
             cancelReservation($_REQUEST);
@@ -159,6 +159,14 @@ try {
             getLanding();
             break;
         
+        case 'reserveComplete':
+            getLanding();
+            include("view/reserveToaster.php"); ///// reservation toaster
+            break;
+        case 'reserveIncomplete':
+            getLanding();
+            include("view/reserveToaster.php"); ///// reservation toaster
+            break;
     }
 } catch (Exception $e) {
     die('error' . $e->getMessage());

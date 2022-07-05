@@ -425,8 +425,8 @@ class PropertyManager extends Manager
         }
         
         // Copying previous entry
-        $copy = $this->_connection->prepare("INSERT INTO properties (user_uid, post_title, country, province_state, zipcode, city, district, address1, address2, size, property_type_id, room_type_id, monthly_price_won, description, bank_account_num, room_num, bed_num, bath_num, is_furnished)
-        SELECT user_uid, post_title, country, province_state, zipcode, city, district, address1, address2, size, property_type_id, room_type_id, monthly_price_won, description, bank_account_num, room_num, bed_num, bath_num, is_furnished
+        $copy = $this->_connection->prepare("INSERT INTO properties (user_uid, post_title, country, province_state, zipcode, city, district, address1, address2, size, property_type_id, room_type_id, monthly_price_won, description, bank_account_num, room_num, bed_num, bath_num, is_furnished, latitude, longitude)
+        SELECT user_uid, post_title, country, province_state, zipcode, city, district, address1, address2, size, property_type_id, room_type_id, monthly_price_won, description, bank_account_num, room_num, bed_num, bath_num, is_furnished, latitude, longitude
         FROM properties
         WHERE id = :propId");
         $copy->bindParam('propId', $propId, \PDO::PARAM_INT);
@@ -449,7 +449,6 @@ class PropertyManager extends Manager
             } else {
                 $up = $this->_connection->prepare("UPDATE property_imgs SET property_id=$newPropId, description=:desc WHERE property_id=$propId AND img_url=:img");
                 $up->bindParam('img', $img, \PDO::PARAM_STR);
-                $up->bindParam('propId', $propId, \PDO::PARAM_INT);
                 $up->bindParam('desc', $desc, \PDO::PARAM_STR);
                 $up->execute();
                 $up->closeCursor();
@@ -465,7 +464,7 @@ class PropertyManager extends Manager
     
         // Move all old images from old folder into a new one
         if (count($files)>0) { 
-                foreach ($files as $f) {
+            foreach ($files as $f) {
                 $moveTo = $dest . basename($f);
                 rename($f, $moveTo);
             }
@@ -479,6 +478,10 @@ class PropertyManager extends Manager
             $bytes = bin2hex(random_bytes(16)); // generates secure pseudo random bytes and bin2hex converts to hexadecimal string
             $imgName[] = $bytes . "." . $extension;
             move_uploaded_file($fileLocation, "./public/images/property_images/$newPropId/" . $imgName[count($imgName) - 1]);
+        }
+
+        if (empty($imgName)) {
+            $imgName = [];
         }
 
         // Deactivating previous entry
@@ -524,4 +527,13 @@ class PropertyManager extends Manager
 
         header("Location: index.php?action=property&propId={$newPropId}");
     }
+
+    public function getReservations() {
+        
+        $req = $this->_connection->query("SELECT * FROM reservations WHERE property_id='{$_REQUEST['propId']}' AND is_active=1");
+        $reservations = $req->fetchAll(\PDO::FETCH_ASSOC);
+       
+        return $reservations;
+    }
+
 }
