@@ -1,4 +1,8 @@
 /*** CSS for listPropertiesView propertyCard & see all photo pages ***/
+.indexProperties {
+    margin-top: 25%;
+}
+
 #properties {
     width: 100%;
     padding-top: 1.25rem;

@@ -1,14 +1,4 @@
 /* INDEX VIEW */
-
-.landingHeader
-{
-    margin-top: 15rem;
-    height: 6.25rem;
-    color: white;
-    text-align: right;
-    text-overflow:ellipsis;
-}
-
 .slideshow
 {
     background-color: beige;
@@ -33,19 +23,6 @@
     animation: shrink 20s infinite alternate;  
 }
 
-#slogan {
-    position: absolute;
-    top: 21.875rem;
-    right: -25rem;
-    margin-right: 7.5rem;
-    width: 100%;
-    height: 6.25rem;
-    -webkit-animation: slide 3.5s forwards; 
-    animation: slide 5.5s forwards;
-    color: rgb(237, 230, 230);
-    font-size: 3.125rem;
-    z-index: 7;
-}
 
 #properties {
     margin-top: 5rem;
