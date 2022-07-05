@@ -39,7 +39,6 @@
     position: relative;
 }
 
-
 .topContainer{
     display: flex;
     flex-direction: column;
@@ -80,15 +79,6 @@
     color: rgb(41, 163, 118);
 }
 
-#selectedCheckInDate{
-}
-
-#selectedCheckOutDate{
-}
-
-
-
-
 
 /* ================ */
 /* Calendar section */
@@ -97,47 +87,58 @@
 .calendarContainer{
     display: flex;
     justify-content: center;
-    
+    margin-top: 20px;
 }    
 
 #datepicker{
     width: 240px;
     height: 45px;
-    border: 1px solid green;
+    border: 1px solid rgba(41,163,118, 0.90);
     border-radius: 10px;
     text-align: center;
     cursor: pointer;
     z-index: 10;
     color: black;
-    font-size: 20px;
+    font-size: 18px;
 }
 
-.daysB{
-    margin-top: 15px;
+.hiddenContainer{
+    width: 240px;
+    height: 45px;
+    border: 1px solid rgba(41,163,118, 0.90);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 5;
+    color: black;
+    font-size: 18px;
+    opacity: 0;
+    position: relative;
+    top: 65px;
+    background-color: white;
+}
+
+.showP{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.placeAbove{
+    z-index: 15;
 }
 
 /* ==================== */
-/* reservation calendar */
 /* ==================== */
 
-
-
-
-
-
-
-
-/* ==================== */
-/* ==================== */
-/* ==================== */
+#dateBtn{
+    text-align: center;
+}
 
 #owner, #cardNumber {
     width: 80%;
 }
-
-/* #owner {
-    margin-left: 20px;
-} */
 
 
 #cvv {

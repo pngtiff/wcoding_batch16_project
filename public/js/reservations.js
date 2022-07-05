@@ -1,9 +1,6 @@
 let owner = document.querySelector('#owner');
 let number = document.querySelector('#cardNumber');
-let cvv = document.querySelector('#cvv'); 
-
-// let signUpForm = document.querySelector('#signUpForm'); 
-// let reset = document.querySelector('#reset'); 
+let cvv = document.querySelector('#cvv');  
 let confirmButton = document.querySelector('#confirm-purchase');
 
 
@@ -85,92 +82,22 @@ function dateDiff(){
 
 owner.addEventListener('keyup', checkCardholder);
 number.addEventListener('keyup', checkCardNumber);
-cvv.addEventListener('keyup', checkCVV); 
-
-
-// =================== //
-// reservation calendar//
-// =================== //
+cvv.addEventListener('keyup', checkCVV);
 
 let datePicker = document.getElementById('datepicker');
-let calendarContainer = document.querySelector('.calendarContainer');
-let checkIn = document.querySelector('.checkIn');
-let checkOut = document.querySelector('.checkOut');
-let dateSelection = document.querySelectorAll('.dateFilled');
+let hiddenContainer = document.querySelector('.hiddenContainer');
 
-// =======Calendar function ====== //
-// =============================== //
-const DateTime = easepick.DateTime;
-
-const bookedDates = [
-    // '2022-07-02',
-    // ['2022-07-06', '2022-07-11'],
-    
-].map(d => {
-    if (d instanceof Array) {
-        const start = new DateTime(d[0], 'YYYY-MM-DD');
-        const end = new DateTime(d[1], 'YYYY-MM-DD');
-
-        return [start, end];
-    }
-    
-    return new DateTime(d, 'YYYY-MM-DD');
+datePicker.addEventListener('click', function(e){
+    e.preventDefault();
+    hiddenContainer.classList.add('showP');
+    hiddenContainer.classList.add('placeAbove');
 });
 
-const picker = new easepick.create({
-    element: document.getElementById('datepicker'),
-
-    css: [
-    'public/style/bookingCalendar.css',
-    ],
-
-
-    plugins: ['RangePlugin', 'LockPlugin'],
-    RangePlugin: {
-    tooltipNumber(num) {
-        return num - 1;
-    },
-
-    locale: {
-        one: 'night',
-        other: 'nights',
-    },
-    },
-
-    LockPlugin: {
-    minDate: new Date(),
-    minDays: 2,
-    inseparable: true,
-    filter(date, picked) {
-        if (picked.length === 1) {
-        const incl = date.isBefore(picked[0]) ? '[)' : '(]';
-        return !picked[0].isSame(date, 'day') && date.inArray(bookedDates, incl);
-        }
-
-        if(datePicker.value){
-            let selectedRange = datePicker.value.split(" - ");
-            document.getElementById("startDate").value = selectedRange[0];
-            document.getElementById("endDate").value = selectedRange[1];
-        }
-        
-        // to display dates inside check in & check out
-        let selectedCheckInDate = document.querySelector('#selectedCheckInDate');
-        let selectedCheckOutDate = document.querySelector('#selectedCheckOutDate');
-        selectedCheckInDate.textContent = selectedRange[0];
-        selectedCheckOutDate.textContent = selectedRange[1];
-
-        
-
-       
-
-
-        return date.inArray(bookedDates, '[)');
-    },
-    }
+hiddenContainer.addEventListener('click', function(e){
+    e.preventDefault();
+    hiddenContainer.classList.remove('showP');
+    hiddenContainer.classList.remove('placeAbove');
 });
-// =======Calendar function ====== //
-// =============================== //
-
 
 function formatCreditCard() {
     var x = document.getElementById("cardNumber");

@@ -17,9 +17,9 @@ ob_start();?>
 
 <body>
     <div class="creditCardForm">
-        <!-- <div class="heading">
+        <div class="heading">
             <h1>Reservation Payment</h1>
-        </div> -->
+        </div>
         <div class="payment">
             <form id="paymentForm" action="index.php" method="post">
                 
@@ -35,16 +35,91 @@ ob_start();?>
                             <span id="selectedCheckOutDate"></span>
                         </div>
                     </div>
+                    <div class="hiddenContainer">Select your dates</div>
                 </div>
-                <br>
-                <div class="calendarContainer">
-                    <input id="datepicker" placeholder="Select your dates"/>
-                    <input type="hidden" id="startDate" name="startDate">
-                    <input type="hidden" id="endDate" name="endDate">
-                </div>
-                <div id=dateBtn>Select dates to see prices</div><br><br>
                 
-                <br><br>
+                <div class="calendarContainer">
+                    <input id="datepicker" class="datepicker" placeholder="Select your dates"/>
+
+                    <!-- CALENDAR JS -->
+                    <script>
+                    const DateTime = easepick.DateTime;
+
+                    // const bookedDates = reservedList.map(d => {
+                    //     if (d instanceof Array) {
+                    //         const start = new DateTime(d[0], 'YYYY-MM-DD');
+                    //         const end = new DateTime(d[1], 'YYYY-MM-DD');
+
+                    //         return [start, end];
+                    //     }
+                        
+                    //     return new DateTime(d, 'YYYY-MM-DD');
+                    // });
+
+                    const bookedDates = [
+                        // '2022-07-02',
+                        // ['2022-07-06', '2022-07-11'],
+                        
+                    ].map(d => {
+                        if (d instanceof Array) {
+                            const start = new DateTime(d[0], 'YYYY-MM-DD');
+                            const end = new DateTime(d[1], 'YYYY-MM-DD');
+
+                            return [start, end];
+                        }
+                        
+                        return new DateTime(d, 'YYYY-MM-DD');
+                    });
+
+                    const picker = new easepick.create({
+                        element: document.getElementById('datepicker'),
+                        css: [
+                            'public/style/bookingCalendar.css',
+                        ],
+                        plugins: ['RangePlugin', 'LockPlugin'],
+                        RangePlugin: {
+                        tooltipNumber(num) {
+                            return num - 1;
+                        },
+                        locale: {
+                            one: 'night',
+                            other: 'nights',
+                        },
+                        },
+                        LockPlugin: {
+                        minDate: new Date(),
+                        minDays: 2,
+                        inseparable: true,
+                        filter(date, picked) {
+                            if (picked.length === 1) {
+                            const incl = date.isBefore(picked[0]) ? '[)' : '(]';
+                            return !picked[0].isSame(date, 'day') && date.inArray(bookedDates, incl);
+                            }
+
+                            let selectedRange = document.getElementById("datepicker").value.split(" - ")
+                            if (document.getElementById("datepicker").value) {
+                                document.getElementById("startDate").value = selectedRange[0];
+                                document.getElementById("endDate").value = selectedRange[1];
+                                dateDiff();
+                            }
+
+                            // to display dates inside check in & check out
+                            let selectedCheckInDate = document.querySelector('#selectedCheckInDate');
+                            let selectedCheckOutDate = document.querySelector('#selectedCheckOutDate');
+                            selectedCheckInDate.textContent = selectedRange[0];
+                            selectedCheckOutDate.textContent = selectedRange[1];
+
+                            return date.inArray(bookedDates, '[)');
+                        },
+                        }
+                    });
+                    </script>
+                    <!-- CALENDAR JS -->
+                    <input type="hidden" id="startDate" name="startDate"  value="<?php echo date('m-d-Y'); ?>">
+                    <input type="hidden" id="endDate" name="endDate"  value="<?php echo date('m-d-Y'); ?>">
+                </div><br>
+
+                <div id=dateBtn>Select dates to see prices</div><br><br><br>
                 <div class="creditCards">
                     <img id="creditCards"src="public/images/capture.JPG" alt="creditCards">
                 </div><br>
@@ -87,6 +162,7 @@ ob_start();?>
                     </select>
                 </div><br><br>
                     <div class="buttons">
+                        <!-- <img src="public/images/Credit-Card-Icons.jpg" id="visa"> -->
                         <button type="submit" class="btn btn-default" id="confirm-purchase">Confirm Payment</button>
                         <input type="hidden" value="addReservationInfo" name="action">
                         <button id="reset" type="reset">Reset the form</button>
@@ -96,25 +172,6 @@ ob_start();?>
                     </div>
 
                 </form>
-
-                <!-- <div class="confirmationPage">
-                    <div class="messageDisplay">
-                        <span>Request Sent</span>
-                        <span>This is not a confirmed booking - at least not yet. You'll get a response within 24 hours</span>
-                    </div>
-
-                    <div class="reservationInfo">
-                        <h2><?php 
-                            if($propDetails[0]['post_title']==''){
-                                echo $propDetails[0]['p_type'].' in '.$propDetails[0]['province_state'].', '.$propDetails[0]['city'];
-                            } else {
-                                echo $propDetails[0]['post_title'];
-                            };?>
-                        </h2>
-                        <h3><?=$propDetails[0]['r_type']?> in <?= $propDetails[0]['p_type'];?></h3>
-                    </div>
-                </div> -->
-            </form>
         </div>
     </div>
 
