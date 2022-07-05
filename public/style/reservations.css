@@ -181,19 +181,6 @@
     margin-left: 20px;
 }
 
-/* .creditCardForm #pay-now {
-    width: 100%;
-    margin-top: 25px;
-} */
-/* .creditCardForm .payment .btn, #reset {
-    width: 30%;
-    margin-top: 10px;
-    margin-left: 80px;
-    font-size: 14px;
-    background-color: #2ec4a5;
-    color: white;
-    display: flex;
-} */
 .creditCardForm .payment select {
     padding: 10px;
     margin-right: 15px;
