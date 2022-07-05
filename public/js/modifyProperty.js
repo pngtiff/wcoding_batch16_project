@@ -107,3 +107,111 @@ furniture.addEventListener('click', () => {
         bedField.classList.remove('slideDown');
     }
 })
+
+postPropertyForm.addEventListener('submit', (e)=> {
+    e.preventDefault();
+    if (checkTitle(title)&&
+        checkSelect(roomType) &&
+        checkNumber(roomNum) &&
+        checkNumber(bedNum) && 
+        checkNumber(bathNum) &&
+        checkPrice(price) &&
+        checkDescription(description) &&
+        checkBank(bankAccNum) &&
+        checkImg()) {
+            postPropertyForm.submit()
+        }
+    else {
+        let errorMsgs = document.querySelectorAll('#postPropertyForm span.hide');
+        for (i=0; i<errorMsgs.length; i++) {
+            errorMsgs[i].className = 'show'
+        }
+        let photos = document.querySelector(' #postImgInfo #newPropImg #photos');
+        photos.style.left = 55 + 'rem';
+        photos.style.top = 15 + 'rem';
+    }
+})
+
+title.addEventListener('change', (e) => {
+    let titleM = document.querySelector('#title').nextElementSibling;
+    e.target.classList.remove('red', 'green');
+    if(checkTitle(e.target)) {
+        e.target.classList.add('green');
+    } else {
+        e.target.classList.add('red');
+        titleM.className = 'show';
+    }
+})
+
+roomType.addEventListener('change', (e) => {
+    let roomTypeM = document.querySelector('#roomTypePost').nextElementSibling;
+    if(!checkSelect(e.target)) {
+        roomTypeM.className = 'show';
+    }
+})
+
+roomNum.addEventListener('change', (e) => {
+    let roomNumM = document.querySelector('#roomNum').nextElementSibling;
+    e.target.classList.remove('red', 'green');
+    if(checkNumber(e.target)) {
+        e.target.classList.add('green');
+    } else {
+        e.target.classList.add('red');
+        roomNumM.className = 'show';
+    }
+})
+
+bedNum.addEventListener('change', (e) => {
+    let bedNumM = document.querySelector('#bedNum').nextElementSibling;
+    e.target.classList.remove('red', 'green');
+    if(checkNumber(e.target)) {
+        e.target.classList.add('green');
+    } else {
+        e.target.classList.add('red');
+        bedNumM.className = 'show';
+    }
+})
+
+bathNum.addEventListener('change', (e) => {
+    let bathNumM = document.querySelector('#bathNum').nextElementSibling;
+    e.target.classList.remove('red', 'green');
+    if(checkNumber(e.target)) {
+        e.target.classList.add('green');
+    } else {
+        e.target.classList.add('red');
+        bathNumM.className = 'show';
+    }
+})
+
+price.addEventListener('change', (e) => {
+    let priceM = document.querySelector('#price').nextElementSibling;
+    e.target.classList.remove('red', 'green');
+    if(checkPrice(e.target)) {
+        e.target.classList.add('green');
+    } else {
+        e.target.classList.add('red');
+        priceM.className = 'show';
+    }
+});
+
+description.addEventListener('change', (e) => {
+    let descriptionM = document.querySelector('#description').nextElementSibling;
+    e.target.classList.remove('red', 'green');
+    if(checkDescription(e.target)) {
+        e.target.classList.add('green');
+    } else {
+        e.target.classList.add('red');
+        descriptionM.className = 'show';
+    }
+});
+
+bankAccNum.addEventListener('change', (e) => {
+    let bankM = document.querySelector('#bankAccNum').nextElementSibling;
+    e.target.classList.remove('red', 'green');
+    if(checkBank(e.target)) {
+        e.target.classList.add('green');
+    } else {
+        e.target.classList.add('red');
+        bankM.className = 'show';
+    }
+});

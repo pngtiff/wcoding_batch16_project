@@ -66,15 +66,15 @@ function getCities($province) {
             $province == 'Sejong' OR
             $province == 'Seoul'
         )
-            echo "<option selected disabled>Select a district</option>";
+            echo '<label><input type="radio" name="city" disabled value="-1">Select a district</label>';
         else
-            echo "<option selected disabled>Select a city</option>";
+            echo '<label><input type="radio" name="city" disabled value="-1">Select a city</label>';
         foreach($cities as $key=>$city) {
             $key+=1;
-            echo "<option value='{$key}'>$city</option>";
+            echo "<label><input type='radio' name='city' value='$key'>$city</label>";
         }
     } else {
-        echo '<option selected value="-1">No cities/districts in this area</option>';
+        echo '<label><input type="radio" name="city" selected value="-1">No city/district in this area</label>';
     }
 }
 
@@ -82,13 +82,13 @@ function getDistricts($city) {
     $propertyM = new PropertyManager();
     $districts = $propertyM->getDistricts($city);
     if ($districts) {
-        echo "<option selected disabled>Select a district</option>";
+        echo '<label><input type="radio" name="district" disabled value="-1">Select a district</label>';
         foreach($districts as $key=>$district) {
             $key+=1;
-            echo "<option value='$key'>$district</option>";
+            echo "<label><input type='radio' name='district' value='$key'>$district</label>";
         }
     } else {
-        echo '<option selected value="-1">No districts in this area</option>';
+        echo '<label><input type="radio" name="district" checked value="-1">No districts in this area</label>';
     }
 }
 

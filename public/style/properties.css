@@ -487,17 +487,10 @@ span.viewOn, span.detailedImgDots:hover {
         z-index: 1;
     }
 
-    /* .propDetails {
-        padding-top: 2rem;
-    } */
-
     .propResv {
         width: 80vw;
-        /* position: fixed; */
         left: 0;
         bottom: 0;
-        /* z-index: 1; */
-        /* flex-direction: row; */
         top: auto;
         height: 10rem;
         border-radius: 0.625rem 0.625rem 0 0;

@@ -106,10 +106,10 @@ years.addEventListener('change', () => {
     checkDays();
 })
 
-document.querySelector('.select-field').addEventListener('click', () => {
+document.querySelector('#language .select-field').addEventListener('click', () => {
     document.querySelector('#absolute').style.display='block';
-    document.querySelector('.list').classList.toggle('show');
-    document.querySelector('.down-arrow').classList.toggle('rotate180');
+    document.querySelector('#language .list').classList.toggle('show');
+    document.querySelector('#language .down-arrow').classList.toggle('rotate180');
 });
 
 for (i = 0; i < languages.length; i++) {
@@ -144,7 +144,6 @@ const display = function(element){
 // function to check the condition
 const countStr = function(phoneNum){
     let count = phoneNum.value.length; // add more condition
-    console.log(count);
     if(count < 11 || count >= 15){
         phoneNum.classList.remove("green");
         phoneNum.classList.add("red"); // display the input box in red color
@@ -164,9 +163,9 @@ inputBoxes[2].addEventListener('change', function(){
 window.addEventListener("click", (e) => {
     if (e.target == document.querySelector('#absolute')) {
         document.querySelector('#absolute').style.display='none';
-        if(document.querySelector('.list').classList.contains('show')) {
-            document.querySelector('.list').classList.remove('show');
-            document.querySelector('.down-arrow').classList.remove('rotate180');
+        if(document.querySelector('#language .list').classList.contains('show')) {
+            document.querySelector('#language .list').classList.remove('show');
+            document.querySelector('#language .down-arrow').classList.remove('rotate180');
         }
     }
 })
