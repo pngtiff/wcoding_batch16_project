@@ -93,8 +93,6 @@ cvv.addEventListener('keyup', checkCVV);
 // =================== //
 // reservation calendar//
 // =================== //
-// let dateOpenButton = document.querySelector('.stayingDuration');
-// let dateCloseButton = document.querySelector('.dateCloseButton');
 
 let datePicker = document.getElementById('datepicker');
 let calendarContainer = document.querySelector('.calendarContainer');
@@ -102,35 +100,77 @@ let checkIn = document.querySelector('.checkIn');
 let checkOut = document.querySelector('.checkOut');
 let dateSelection = document.querySelectorAll('.dateFilled');
 
-// when we first click the calendar button
-datePicker.addEventListener("click", function(e) { 
-    e.preventDefault();
-    // checkIn.classList.add('selectedFunction');
-    calendarContainer.classList.remove('calendarUp');
-    calendarContainer.classList.add('calendarExtension');
-});
+// =======Calendar function ====== //
+// =============================== //
+const DateTime = easepick.DateTime;
 
-// when we click the close button
-dateCloseButton.addEventListener("click", function(e) {
-    e.preventDefault();
-    // checkIn.classList.remove('selectedFunction');
-    // checkOut.classList.remove('selectedFunction');
-    calendarContainer.classList.remove('calendarExtension');
-    calendarContainer.classList.add('calendarUp');
-});
-
-
-// main operation //
-// for(let i = 0; i < dateSelection.length; i++){
+const bookedDates = [
+    // '2022-07-02',
+    // ['2022-07-06', '2022-07-11'],
     
-//     dateSelection[i].addEventListener("click", function(e){
-//         e.preventDefault();
-//         dateSelection[i].classList.add('dateSelection');
-//         checkIn.classList.remove('selectedFunction');
-//         checkOut.classList.add('selectedFunction');
-//         dateSelection[i].classList.add('dateSelection');
-//     });
-// };
+].map(d => {
+    if (d instanceof Array) {
+        const start = new DateTime(d[0], 'YYYY-MM-DD');
+        const end = new DateTime(d[1], 'YYYY-MM-DD');
+
+        return [start, end];
+    }
+    
+    return new DateTime(d, 'YYYY-MM-DD');
+});
+
+const picker = new easepick.create({
+    element: document.getElementById('datepicker'),
+
+    css: [
+    'public/style/bookingCalendar.css',
+    ],
+
+
+    plugins: ['RangePlugin', 'LockPlugin'],
+    RangePlugin: {
+    tooltipNumber(num) {
+        return num - 1;
+    },
+
+    locale: {
+        one: 'night',
+        other: 'nights',
+    },
+    },
+
+    LockPlugin: {
+    minDate: new Date(),
+    minDays: 2,
+    inseparable: true,
+    filter(date, picked) {
+        if (picked.length === 1) {
+        const incl = date.isBefore(picked[0]) ? '[)' : '(]';
+        return !picked[0].isSame(date, 'day') && date.inArray(bookedDates, incl);
+        }
+
+        let selectedRange = datePicker.value.split(" - ");
+        document.getElementById("startDate").value = selectedRange[0];
+        document.getElementById("endDate").value = selectedRange[1];
+        
+        // to display dates inside check in & check out
+        let selectedCheckInDate = document.querySelector('#selectedCheckInDate');
+        let selectedCheckOutDate = document.querySelector('#selectedCheckOutDate');
+        selectedCheckInDate.textContent = selectedRange[0];
+        selectedCheckOutDate.textContent = selectedRange[1];
+
+        
+
+       
+
+
+        return date.inArray(bookedDates, '[)');
+    },
+    }
+});
+// =======Calendar function ====== //
+// =============================== //
+
 
 function formatCreditCard() {
     var x = document.getElementById("cardNumber");

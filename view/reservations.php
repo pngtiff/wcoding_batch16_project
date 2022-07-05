@@ -17,86 +17,30 @@ ob_start();?>
 
 <body>
     <div class="creditCardForm">
-        <div class="heading">
+        <!-- <div class="heading">
             <h1>Reservation Payment</h1>
-        </div>
+        </div> -->
         <div class="payment">
             <form id="paymentForm" action="index.php" method="post">
-                <p id="available">How long do you wish to stay?</p><br>
                 
+                <div class="topContainer">
+                    <p id="available">How long do you wish to stay?</p><br>
+                    <div class="stayingDuration">
+                        <div class="checkIn">
+                            <span>Check In</span>
+                            <span id="selectedCheckInDate"></span> 
+                        </div>
+                        <div class="checkOut">
+                            <span>Check Out</span>
+                            <span id="selectedCheckOutDate"></span>
+                        </div>
+                    </div>
+                </div>
+                <br>
                 <div class="calendarContainer">
-                    <input id="datepicker" placeholder="Pick your dates" value=""/>
-                    <!-- <div id="datepicker" placeholder="Pick your dates" value="">
-
-                    </div> -->
-                    <!-- CALENDAR JS -->
-                    <script>
-                    const DateTime = easepick.DateTime;
-                    const bookedDates = [
-                        // '2022-07-02',
-                        // ['2022-07-06', '2022-07-11'],
-                        
-                    ].map(d => {
-                        if (d instanceof Array) {
-                            const start = new DateTime(d[0], 'YYYY-MM-DD');
-                            const end = new DateTime(d[1], 'YYYY-MM-DD');
-    
-                            return [start, end];
-                        }
-                        
-                        return new DateTime(d, 'YYYY-MM-DD');
-                    });
-
-                    const picker = new easepick.create({
-                        element: document.getElementById('datepicker'),
-                    
-                        css: [
-                        'public/style/bookingCalendar.css',
-                        ],
-
-
-                        plugins: ['RangePlugin', 'LockPlugin'],
-                        RangePlugin: {
-                        tooltipNumber(num) {
-                            return num - 1;
-                        },
-
-                        locale: {
-                            one: 'night',
-                            other: 'nights',
-                        },
-                        },
-
-                        LockPlugin: {
-                        minDate: new Date(),
-                        minDays: 2,
-                        inseparable: true,
-                        filter(date, picked) {
-                            if (picked.length === 1) {
-                            const incl = date.isBefore(picked[0]) ? '[)' : '(]';
-                            return !picked[0].isSame(date, 'day') && date.inArray(bookedDates, incl);
-                            }
-    
-                            let selectedRange = document.getElementById("datepicker").value.split(" - ");
-                            document.getElementById("startDate").value = selectedRange[0];
-                            document.getElementById("endDate").value = selectedRange[1];
-                            
-                            let selectedCheckInDate = document.querySelector('#selectedCheckInDate');
-                            let selectedCheckOutDate = document.querySelector('#selectedCheckOutDate');
-                            selectedCheckInDate.textContent = selectedRange[0];
-                            selectedCheckOutDate.textContent = selectedRange[1];
-    
-                            // console.log(selectedRange)
-                            return date.inArray(bookedDates, '[)');
-                        },
-                        }
-                    });
-                    </script>
-                    <!-- CALENDAR JS -->
-
+                    <input id="datepicker" placeholder="Select your dates"/>
                     <input type="hidden" id="startDate" name="startDate">
                     <input type="hidden" id="endDate" name="endDate">
-                    
                 </div>
                 <div id=dateBtn onclick="dateDiff()">Click here for the total cost</div>
 
