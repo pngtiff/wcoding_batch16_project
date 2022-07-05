@@ -1,21 +1,25 @@
-:root{
+:root {
     /* color */
     --white-color: white;
     --black-color: black;
     --gray-color: gray;
-    --profile-border-color: #29A376; 
+    --profile-border-color: #29A376;
     --red-color: red;
     --green-color: green;
 
     /* font size */
-   
+
 }
 
-#newProfile, #viewProfile, #modifyProfile {
+#newProfile,
+#viewProfile,
+#modifyProfile {
     margin-bottom: 5rem;
 }
 
-#userImgContainer, #profilePhoto, #profilePhoto div{
+#userImgContainer,
+#profilePhoto,
+#profilePhoto div {
     height: 10rem;
     width: 10rem;
     position: absolute;
@@ -27,18 +31,15 @@
     z-index: -1;
 }
 
-#userImgContainer img, #profilePhoto div img, #userImg, #photo{
+#userImgContainer img,
+#profilePhoto div img,
+#userImg,
+#photo {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
 }
-
-/* .profileFormsBorder {
-    border: 2px solid var(--profile-border-color);
-    border-radius: 1.25rem;
-    padding: 5rem 7rem;
-} */
 
 /* =============== */
 /* Create Profile  */
@@ -82,13 +83,15 @@
     margin-left: 0.2rem;
 }
 
-#createProfileDetails>div, #langDetails>div {
+#createProfileDetails>div,
+#langDetails>div {
     margin: 1.25rem 0;
     display: flex;
     flex-direction: column;
 }
 
-#phoneNum, #phoneNumber {
+#phoneNum,
+#phoneNumber {
     width: 15.5rem;
     padding: 0.25rem 0.5rem;
     font-size: 1rem;
@@ -102,11 +105,11 @@
     margin-right: 0.5rem;
 }
 
-.multi-selector{
+.multi-selector {
     width: 15.5rem;
 }
 
-.select-field{
+.select-field {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -116,19 +119,21 @@
     border-radius: 0.1rem;
 }
 
-.select-field,.lang,.list{
+.select-field,
+.lang,
+.list {
     background-color: white;
     padding: 0.25rem 0.5rem;
 }
 
 .list {
     width: 15.5rem;
-    box-shadow: 0 30px 60px rgb(0,0,0,0.2);
+    box-shadow: 0 30px 60px rgb(0, 0, 0, 0.2);
     display: none;
 }
 
 #langList {
-    z-index: 1000000;   
+    z-index: 1000000;
 }
 
 .down-arrow {
@@ -137,25 +142,28 @@
     transition: 0.2s linear;
 }
 
-.lang{
+.lang {
     display: block;
     padding-left: 0;
 }
 
-.lang span{
+.lang span {
     float: right;
     font-size: 0.6rem;
     padding-top: 0.375rem;
 }
-.lang:hover{
+
+.lang:hover {
     background-color: aliceblue;
 }
-.show{
+
+.show {
     display: block;
     position: absolute;
     z-index: 1;
 }
-.rotate180{
+
+.rotate180 {
     transform: rotate(-180deg);
 }
 
@@ -163,14 +171,16 @@
     color: red;
 }
 
-#bio, #userBio {
+#bio,
+#userBio {
     height: 4rem;
     width: 100%;
     padding: 0.25rem 0.5rem;
     font-size: 1rem;
 }
 
-#create, #save {
+#create,
+#save {
     width: 100%;
     font-size: 1.1rem;
 }
@@ -179,10 +189,10 @@
 /* PROFILE VIEW   */
 /* =============== */
 #homeButton:hover {
-    background-color: rgba(41,163,118, 0.90);
+    background-color: rgba(41, 163, 118, 0.90);
 }
 
-#profileContainer { 
+#profileContainer {
     justify-content: center;
 }
 
@@ -192,7 +202,6 @@
 
 #userInfo {
     width: 100%;
-    /* min-width: 34.375rem; */
     justify-content: center;
     border: 2px solid var(--profile-border-color);
     border-radius: 1.25rem;
@@ -224,41 +233,29 @@
     margin-right: 3rem;
 }
 
-/* #userInfo #userMain #userImgContainer {
-    right: 25%;
-} */
-
 #userMain>div:last-child {
     width: 75%;
-    /* min-width: 18.75rem; */
 }
 
 #userDetails {
     padding-top: 3rem;
     display: flex;
     flex-wrap: wrap;
-    /* justify-content: space-between; */
 }
 
-#userDetails div p:first-child{
+#userDetails div p:first-child {
     font-weight: bold;
 }
 
-#userDetails > *:not(:nth-child(3)) {
+#userDetails>*:not(:nth-child(3)) {
     margin-right: 20%;
     margin-bottom: 1rem;
 }
 
 #userDetails ul {
-    /* width: 30rem;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between; */
     column-count: 2;
     column-gap: 2rem;
     margin-left: 1rem;
-    /* display: grid;
-    grid-template-columns: repeat(3, 10.3rem); */
 }
 
 
@@ -271,7 +268,7 @@
     margin-top: 2rem;
 }
 
-#viewProfile > p {
+#viewProfile>p {
     text-align: center;
     padding-top: 5rem;
 }
@@ -314,7 +311,7 @@
 /*  profile photo  */
 /* =============== */
 
-#profilePhotoM{
+#profilePhotoM {
     height: 10rem;
     width: 10rem;
     border-radius: 50%;
@@ -326,18 +323,18 @@
     z-index: 1;
 }
 
-#photoM{
+#photoM {
     height: 100%;
     width: 100%;
     object-fit: cover;
     object-position: center;
 }
 
-#fileM{
+#fileM {
     display: none;
 }
 
-#uploadButtonM{
+#uploadButtonM {
     height: 2.5rem;
     width: 100%;
     position: absolute;
@@ -365,31 +362,31 @@
 }
 
 #phoneNumber {
-    margin:0.5rem 0 0 0.5rem;
+    margin: 0.5rem 0 0 0.5rem;
 }
 
 #userBio {
     margin-left: 0.5rem;
-    
+
 }
 
-.bottomContainerM{
+.bottomContainerM {
     width: 100%;
     height: fit-content;
     display: flex;
     justify-content: center;
 }
 
-#alertMesg{
+#alertMesg {
     color: var(--red-color);
     display: none;
 }
 
-.red{
+.red {
     border: 1px solid var(--red-color);
 }
 
-.green{
+.green {
     border: 1px solid var(--green-color);
 }
 
@@ -397,12 +394,9 @@
     display: flex;
     justify-content: left;
     width: 100%;
-    /* margin-left: 8%;  */
-     /* padding: 20px; */
-     margin-left: 3%; 
-     margin-top: 2%;
-     font-size: 1rem;
-     /* text-align: center; */
+    margin-left: 3%;
+    margin-top: 2%;
+    font-size: 1rem;
 }
 
 #cancelReservation {
@@ -417,6 +411,7 @@
 
 
 @media screen and (max-width: 650px) {
+
     /* Profile View Page */
     #editProfileButton span {
         display: none;
@@ -454,21 +449,19 @@
         padding: 0;
     }
 
-    #line1, #newProfile #profilePhoto, #newProfile .uploadPhoto {
+    #line1,
+    #newProfile #profilePhoto,
+    #newProfile .uploadPhoto {
         align-self: center;
     }
 
-    /* body {
-      background-color: lightblue;
-    } */
-  
     #reservationUpdate {
         display: flex;
         justify-content: flex-start;
         width: 70vw;
-        margin-left: 3%; 
+        margin-left: 3%;
         font-size: 0.8rem;
-  }
+    }
 
     #cancelReservation {
         border-radius: 1rem;
