@@ -18,8 +18,7 @@
 }
 
 #userImgContainer,
-#profilePhoto,
-#profilePhoto div {
+#profilePhoto {
     height: 10rem;
     width: 10rem;
     position: absolute;
@@ -32,7 +31,7 @@
 }
 
 #userImgContainer img,
-#profilePhoto div img,
+#profilePhoto img,
 #userImg,
 #photo {
     width: 100%;
@@ -45,7 +44,20 @@
 /* Create Profile  */
 /* =============== */
 
+#createProfile {
+    width: 47rem;
+}
+
+@media only screen and (max-width: 650px) {
+    #createProfile {
+        width: 100vw;
+    }
+}
+
 #newProfile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     border: 2px solid var(--profile-border-color);
     border-radius: 1.25rem;
     padding: 5rem 7rem;
@@ -58,7 +70,7 @@
 
 #profilePhoto {
     margin: 1.25rem 0;
-    z-index: -2;
+    z-index: 2;
 }
 
 #profilePhoto div {
@@ -75,24 +87,16 @@
     width: 14rem;
 }
 
-#newProfile label {
-    margin-bottom: 0.25rem;
-}
-
-.modifyLang div {
-    margin-left: 0.2rem;
-}
-
 #createProfileDetails>div,
 #langDetails>div {
-    margin: 1.25rem 0;
+    margin: 1rem 0;
     display: flex;
     flex-direction: column;
 }
 
 #phoneNum,
 #phoneNumber {
-    width: 15.5rem;
+    width: 18.5rem;
     padding: 0.25rem 0.5rem;
     font-size: 1rem;
     margin-top: 0.5rem;
@@ -114,7 +118,7 @@
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    width: 15.5rem;
+    width: 18.5rem;
     border: 1px solid rgb(128, 128, 128);
     border-radius: 0.1rem;
 }
@@ -127,7 +131,7 @@
 }
 
 .list {
-    width: 15.5rem;
+    width: 18.5rem;
     box-shadow: 0 30px 60px rgb(0, 0, 0, 0.2);
     display: none;
 }
@@ -174,14 +178,14 @@
 #bio,
 #userBio {
     height: 4rem;
-    width: 100%;
+    width: 18.5rem;
     padding: 0.25rem 0.5rem;
     font-size: 1rem;
 }
 
 #create,
 #save {
-    width: 100%;
+    width: 18.5rem;
     font-size: 1.1rem;
 }
 
@@ -280,7 +284,22 @@
 #modifyProfileSection {
     display: flex;
     justify-content: center;
-    width: 22rem;
+    width: 47rem;
+}
+
+@media only screen and (max-width: 650px) {
+    #modifyProfileSection {
+        width: 100vw;
+    }
+}
+
+#modifyFormM, #row1 {
+    display: flex;
+    flex-direction: column;
+}
+
+#modifyFormM > *, #row1 > * {
+    margin-bottom: 1.5rem;
 }
 
 .personalInformationContainer {
@@ -295,10 +314,6 @@
 
 .personalInformationContainer h2 {
     margin-top: 0.5rem;
-}
-
-#photoContainerM {
-    margin-left: 3rem;
 }
 
 .modifyList {
@@ -331,6 +346,11 @@
     z-index: 1;
 }
 
+#photoContainerM {
+    display: flex;
+    justify-content: center;
+}
+
 #photoM {
     height: 100%;
     width: 100%;
@@ -357,25 +377,6 @@
     cursor: pointer;
     display: none;
     pointer-events: auto;
-}
-
-#phoneBox {
-    margin: 1rem 0;
-    display: flex;
-    flex-direction: column;
-}
-
-#row1 {
-    width: 100%;
-}
-
-#phoneNumber {
-    margin: 0.5rem 0 0 0.5rem;
-}
-
-#userBio {
-    margin-left: 0.5rem;
-
 }
 
 .bottomContainerM {
@@ -449,7 +450,6 @@
         border: none;
         width: 100%;
     }
-
 
     /* Create Profile Page */
     #newProfile {

@@ -1,17 +1,16 @@
 <?php $title = "Create profile"; ?>
 
 <?php ob_start(); ?>
-<section>
+<section id="createProfile">
     <form action="index.php?action=checkProfile" method="POST" id="newProfile" enctype="multipart/form-data">
         <div id="line1">
             <h1>Let's create a profile for you</h1>
             <p></p>
         </div>
         <div id="profilePhoto">
-            <div></div>
-        </div>
-        <input type="file" id="file" name="uploadFile">
-        <label for="file" class="uploadPhoto primaryBtn primaryColor offsetFill">Choose Profile Photo</label>
+            <input type="file" id="fileM" name="uploadFile">
+            <label for="fileM" id="uploadButtonM">Choose Photo</label>
+            <input type="hidden" name="action" value="uploadImg">
         </div>
         <div class="flexRow">
             <div id="createProfileDetails">

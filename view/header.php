@@ -111,15 +111,16 @@
                 <div class="dropdown-content">
 
                     <?php
-                    echo '<a id="home" href="index.php">Go to Home Page</a>';
                     if (!empty($_SESSION['firstName'])) {
+                        echo '<a id="home" href="index.php">Go to Home Page</a>';
                         echo '<a href="index.php?action=profile&user=' . $_SESSION['uid'] . '">View My Profile</a>';
                         echo '<a href="index.php?action=modifyProfile&user=' . $_SESSION['uid'] . '">Edit My Profile</a>';
                         echo '<a href="index.php?action=viewPostProperty">Post a New Listing</a>';
                     }
                     ?>
-                    <?php echo (!empty($_SESSION['firstName'])) ? '' : '<button id="signUpButton" class="primaryBtn"><a href="#">Register</a></button>'; ?>
-                    <?php echo (!empty($_SESSION['firstName'])) ? '<a href="index.php?action=signOut">Sign Out</a>' : '<button id="signInButton" class="primaryBtn"><a href="#">Sign In</a></button>'; ?>
+                    <?php echo (!empty($_SESSION['firstName'])) ? '<a href="index.php?action=signOut">Sign Out</a>' : '<a id="signInButton" href="#">Sign In</a>'; ?>
+                    <?php echo (!empty($_SESSION['firstName'])) ? '' : '<a id="signUpButton" href="#">Register</a>'; ?>
+                    <?= '<a id="home" href="index.php">Go to Home Page</a>'; ?>
                 </div>
             </div>
         </div>

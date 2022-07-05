@@ -1,7 +1,38 @@
-// delcaration
+function checkDays() {
+    let days30 = [4, 6, 9, 11];
+    let days31 = [1, 3, 5, 7, 8, 10, 12];
+    let birthMonth = parseInt(months.value);
+    let daysInMonth;
+
+    days.innerHTML = "";
+
+    if (birthMonth === 2) {
+        if ((years.value % 100 === 0 && years.value % 400 === 0) || (years.value % 100 !== 0 && years.value % 4 === 0)) {
+            daysInMonth = 29;
+        } else {
+            daysInMonth = 28;
+        }
+    } else if (days30.includes(birthMonth)) {
+        daysInMonth = 30;
+    } else if (days31.includes(birthMonth)) {
+        daysInMonth = 31;
+    }
+
+    for (let i = 1; i <= daysInMonth; i++) {
+        let option = document.createElement("option");
+        option.value = i;
+        option.textContent = i;
+        days.appendChild(option);
+    }
+}
+
 
 const imgDiv = document.querySelector('#profilePhotoM');
 const img = document.querySelector('#photoM');
+const years = document.querySelector('#year');
+const months = document.querySelector('#month');
+const days = document.querySelector('#day');
+const gender = document.querySelector('input[name="gender"]:checked');
 const file = document.querySelector('#fileM');
 const uploadButton = document.querySelector('#uploadButtonM');
 const saveButton = document.querySelector('#save');
@@ -9,9 +40,26 @@ const phoneNumInput = document.querySelector('#phoneNumber');
 const inputBoxes = document.querySelectorAll('input');
 const alertMesg = document.querySelector('#alertMesg');
 
+// list of years for birthday
+let currentYear = new Date().getFullYear();
+for (let i = currentYear - 19; i >= currentYear - 120; i--) {
+    let option = document.createElement("option");
+    option.value = i;
+    option.textContent = i;
+    years.appendChild(option);
+}
+
+checkDays();
+
+months.addEventListener('change', () => {
+    checkDays();
+})
+
+years.addEventListener('change', () => {
+    checkDays();
+})
+
 // language selection
-// let languages = document.querySelector('#language');
-// let options = document.querySelectorAll('#language option');
 let languages = document.querySelectorAll('.list input[type="checkbox"]');
 let langArray = [];
 let userLang = document.querySelector('#userLang');
@@ -61,31 +109,15 @@ window.addEventListener('click', (e) => {
     }
 })
 
-for (i = 0; i < languages.length; i++) {
-    if(languages[i].checked) {
-        langArray.push(languages[i].value);
-    }
-    languages[i].addEventListener('change', (e) => {
-        if (e.target.checked) {
-            langArray.push(e.target.value);
-        } else if (!e.target.checked) {
-            langArray = langArray.filter(lang => lang != e.target.value);
+
+saveButton.addEventListener('submit', () => {
+    for (i = 0; i < languages.length; i++) {
+        if(languages[i].checked) {
+            langArray.push(languages[i].value);
         }
         userLang.value = langArray;
-    })
-}
-
-
-// languages.addEventListener('change', (e) => {
-//     for (i = 0; i < options.length; i++) {
-//         if(options[i].id === e.target.value) {
-//             options[i].setAttribute('disabled', 'disabled');
-//             langArray.push(e.target.value);
-//         }
-//     }
-//     userLang.value = langArray;
-// });
-
+    }
+})
 
 for (i = 0; i < languages.length; i++) {
     if(languages[i].checked) {
@@ -100,19 +132,6 @@ for (i = 0; i < languages.length; i++) {
         userLang.value = langArray;
     })
 }
-
-
-// languages.addEventListener('change', (e) => {
-//     for (i = 0; i < options.length; i++) {
-//         if(options[i].id === e.target.value) {
-//             options[i].setAttribute('disabled', 'disabled');
-//             langArray.push(e.target.value);
-//         }
-//     }
-//     userLang.value = langArray;
-// });
-
-
 
 // frontend checking for the phone number //
 // =======================================//
@@ -131,7 +150,7 @@ const countStr = function(phoneNum){
     if(count < 11 || count >= 15){
         phoneNum.classList.remove("green");
         phoneNum.classList.add("red"); // display the input box in red color
-    } else{
+    } else {
         phoneNum.classList.remove("red");
         phoneNum.classList.add("green");    
     }
@@ -142,9 +161,4 @@ const countStr = function(phoneNum){
 inputBoxes[3].addEventListener('change', function(){
     countStr(phoneNumInput);
 });
-
-// to check the before form submission
-// saveButton.addEventListener('click', function(e){
-//     countStr(phoneNumInput);
-// });
 
