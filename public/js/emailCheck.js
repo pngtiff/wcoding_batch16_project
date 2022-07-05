@@ -7,7 +7,6 @@ function verifyEmail(e){
     xhr.open('GET', `index.php?action=checkSignUp&email=${signUpForm.email.value}`);
     xhr.onload = function () {
         if (xhr.status == 200) {
-            console.log(xhr.responseText)
             if (xhr.responseText==1) {
                 signUpForm.submit();
             } else {
