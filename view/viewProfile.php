@@ -19,10 +19,11 @@
             <div id='userMain'>
                 <div>
                     <div id='userImgContainer'><img id='userImg' src="<?php if ($userImg = $user['profile_img']) {
-                                                                            echo './profile_images/' . $user['profile_img'];
-                                                                        } else {
-                                                                            echo './public/images/defaultProfile.jpg';
-                                                                        } ?>" alt="<?= $user['id'] . 'profile image'; ?>"></div>
+                            echo './profile_images/' . $user['profile_img'];
+                        } else {
+                            echo './public/images/defaultProfile.jpg';
+                        } ?>" alt="<?= $user['id'] . 'profile image'; ?>">
+                    </div>
                 </div>
                 <div>
                     <div>

@@ -19,13 +19,27 @@
             <div>End Date</div>
             <div>Total price</div>
         </div> -->
+        <p>Confirmed Reservations:</p>
     <?php foreach($reservations as $reservation){?>
         <form action="index.php" method="post">
             <div id="reservationUpdate">
-                <p>Reservation:<a href="index.php?action=property&propId=<?=$reservation['property_id']?>"><?= $reservation['reservation_num']?></a></p>
-                <p>Start:<span><?= str_replace('-', '/', $reservation['start_date'])?></span></p>
-                <p>End:<span><?= str_replace('-', '/', $reservation['end_date'])?></span></p>
-                <p>Total:<span><?= number_format($reservation['total_payment_won'])?>₩</span></p>
+                <div class="reservationNum">
+                    <p>Reservation Number: <?= $reservation['reservation_num']?></p>
+                    <div><img src="./public/images/property_images/<?=$reservation['pi_id'].'/'.$reservation['pi_img'];?>" alt=""></div>
+                    <p><a href="index.php?action=property&propId=<?=$reservation['property_id']?>"><?=$reservation['post_title']?></a></p>
+                </div>
+                <div>
+                    <div>
+                        <!-- <p>Address:</p> -->
+                        <p><span>Address: </span><?="{$reservation['address1']}, {$reservation['address2']}"?></p>
+                        <p><?="{$reservation['province_state']}, {$reservation['city']}, {$reservation['country']}"?></p>
+                    </div>
+                    <div>  
+                        <p><span>Start Date: </span><?= str_replace('-', '/', $reservation['start_date'])?></p>
+                        <p><span>End Date: </span><?= str_replace('-', '/', $reservation['end_date'])?></p>
+                        <p><span>Total Payment: </span><?= number_format($reservation['total_payment_won'])?>₩</p>
+                    </div>
+                </div>
                 <button id="cancelReservation">Cancel Reservation</button>
                 <input name="reservation_num" type="hidden" value="<?= $reservation['reservation_num']?>">
                 <input name="action" type="hidden" value="cancelReservation">

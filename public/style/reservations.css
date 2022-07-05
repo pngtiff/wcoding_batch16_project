@@ -4,13 +4,6 @@
     width: 100%;
 }
 
-.checkIn, .checkOut {
-    display: flex;
-    width: 345px;
-    margin-right: 20px;
-}
-
-
 #startDate, #endDate {
     width: 300px;
 }
@@ -20,11 +13,12 @@
     height: 25px;
 }
 
+
 .creditCardForm {
     max-width: 100%;
     background-color: #fff;
     margin: 100px auto;
-    overflow: hidden;
+    /* overflow: hidden; */
     padding: 25px;
     color: #4c4e56;
 }
@@ -45,13 +39,102 @@
     position: relative;
 }
 
+.topContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stayingDuration{
+    width: 350px;
+    height: 50px;
+    display: flex;
+    /* border: 1px solid black; */
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+}
+
+.checkIn, .checkOut {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: 0px;
+    padding: 2px;
+    border: 2px solid grey;
+}
+
+.checkIn{
+    border-radius: 10px 0px 0px 10px;
+    border-right: none;
+}
+
+.checkOut{
+    border-radius: 0px 10px 10px 0px;
+}
+
+.checkIn > :first-child,
+.checkOut > :first-child{
+    color: rgb(41, 163, 118);
+}
+
+
+/* ================ */
+/* Calendar section */
+/* ================= */
+
+.calendarContainer{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}    
+
+#datepicker{
+    width: 240px;
+    height: 45px;
+    border: 1px solid rgba(41,163,118, 0.90);
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    z-index: 2;
+    color: rgb(163, 158, 158);
+    font-size: 18px;
+}
+
+.hiddenContainer{
+    width: 240px;
+    height: 45px;
+    border: 1px solid rgba(41,163,118, 0.90);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 0;
+    color: lightgray;
+    font-size: 18px;
+    opacity: 0;
+    position: relative;
+    top: 65px;
+    background-color: white;
+}
+
+.showC{
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 3;
+}
+
+/* ==================== */
+/* ==================== */
+
+#dateBtn{
+    text-align: center;
+}
+
 #owner, #cardNumber {
     width: 80%;
 }
-
-/* #owner {
-    margin-left: 20px;
-} */
 
 
 #cvv {

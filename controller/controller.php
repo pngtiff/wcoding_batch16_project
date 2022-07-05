@@ -72,8 +72,9 @@ function getCities($province) {
             $province == 'Gwangju' OR
             $province == 'Incheon' OR
             $province == 'Jeju-do' OR
-            $province == 'Sejong' OR
+            $province == 'Sejong-si' OR
             $province == 'Seoul'
+
         )
             echo '<label><input type="radio" name="city" disabled value="-1">Select a district</label>';
         else
@@ -86,6 +87,7 @@ function getCities($province) {
         echo '<label><input type="radio" name="city" selected value="-1">No city/district in this area</label>';
     }
 }
+
 function getDistricts($city) {
     $propertyM = new PropertyManager();
     $districts = $propertyM->getDistricts($city);
@@ -107,6 +109,9 @@ function reservationView(){
     // $userData = $userM->viewUserData($userId); // from property manager, grab a required function
 
     // $propertyM = new PropertyManager($propId);
+    // $propDetails = $propertyM->getProperty($propId);
+    // $propOwner = $propertyM->getPropertyOwner($propId);
+    // $propertyM = new PropertyManager();
     // $propDetails = $propertyM->getProperty($propId);
     // $propOwner = $propertyM->getPropertyOwner($propId);
 
