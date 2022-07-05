@@ -86,8 +86,6 @@ function dateDiff(){
 owner.addEventListener('keyup', checkCardholder);
 number.addEventListener('keyup', checkCardNumber);
 cvv.addEventListener('keyup', checkCVV); 
-// signUpForm.addEventListener('submit', submitForm); 
-// reset.addEventListener('click', resetForm);
 
 
 // =================== //
@@ -149,9 +147,11 @@ const picker = new easepick.create({
         return !picked[0].isSame(date, 'day') && date.inArray(bookedDates, incl);
         }
 
-        let selectedRange = datePicker.value.split(" - ");
-        document.getElementById("startDate").value = selectedRange[0];
-        document.getElementById("endDate").value = selectedRange[1];
+        if(datePicker.value){
+            let selectedRange = datePicker.value.split(" - ");
+            document.getElementById("startDate").value = selectedRange[0];
+            document.getElementById("endDate").value = selectedRange[1];
+        }
         
         // to display dates inside check in & check out
         let selectedCheckInDate = document.querySelector('#selectedCheckInDate');

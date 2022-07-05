@@ -42,8 +42,8 @@ ob_start();?>
                     <input type="hidden" id="startDate" name="startDate">
                     <input type="hidden" id="endDate" name="endDate">
                 </div>
-                <div id=dateBtn onclick="dateDiff()">Click here for the total cost</div>
-
+                <div id=dateBtn>Select dates to see prices</div><br><br>
+                
                 <br><br>
                 <div class="creditCards">
                     <img id="creditCards"src="public/images/capture.JPG" alt="creditCards">
