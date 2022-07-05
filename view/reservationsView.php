@@ -22,10 +22,10 @@
     <?php foreach($reservations as $reservation){?>
         <form action="index.php" method="post">
             <div id="reservationUpdate">
-                <p>Reservation:<a href="index.php?action=property&propId=<?=$reservation['property_id']?>"><?= $reservation['reservation_num']?></a></p>
-                <p>Start:<span><?= str_replace('-', '/', $reservation['start_date'])?></span></p>
-                <p>End:<span><?= str_replace('-', '/', $reservation['end_date'])?></span></p>
-                <p>Total:<span><?= number_format($reservation['total_payment_won'])?>₩</span></p>
+                <p>Reservation: &nbsp<a href="index.php?action=property&propId=<?=$reservation['property_id']?>"><?= $reservation['reservation_num']?></a></p>
+                <p>&nbsp&nbsp Start: &nbsp<span><?= str_replace('-', '/', $reservation['start_date'])?></span></p>
+                <p>&nbsp&nbsp End: &nbsp<span><?= str_replace('-', '/', $reservation['end_date'])?></span></p>
+                <p>&nbsp&nbsp Total: &nbsp<span><?= number_format($reservation['total_payment_won'])?>₩</span></p>
                 <button id="cancelReservation">Cancel Reservation</button>
                 <input name="reservation_num" type="hidden" value="<?= $reservation['reservation_num']?>">
                 <input name="action" type="hidden" value="cancelReservation">

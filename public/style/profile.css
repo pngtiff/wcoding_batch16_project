@@ -467,16 +467,14 @@
         align-self: center;
     }
 
-    /* body {
-      background-color: lightblue;
-    } */
+
   
-    #reservationUpdate {
-        display: flex;
-        justify-content: flex-start;
-        width: 70vw;
-        margin-left: 3%; 
-        font-size: 0.8rem;
+    #cancellation {
+
+        /* width: 70%; */
+        font-size: 0.6rem;
+        /* margin-right: 0; */
+        /* padding: 0; */
   }
 
     #cancelReservation {
