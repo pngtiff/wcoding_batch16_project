@@ -41,16 +41,24 @@ function postProperty() {
         input.style.display = 'none';
         input.click();
     });
-    
-    let province = document.querySelector('#provincePost');
-    let city = document.querySelector('#cityPost');
 
     function checkTitle(e) {
         return (e.value.length >= 4 && e.value.length <= 50)
     }
 
     function checkSelect(e) {
-        return e.value >= -1
+        if (e = e.querySelector('input[type="radio"]:checked')) 
+            return e.value >= -1
+        else
+            return null
+    }
+
+    function checkCountry(e) {
+        let countries = ['KR']
+        if (e = e.querySelector('input[type="radio"]:checked'))
+            return countries.indexOf(e.value) >= 0
+        else
+            return null
     }
 
     function checkAddress(e) {
@@ -93,6 +101,12 @@ function postProperty() {
         return (e.value.length >= 12 && e.value.length <= 20)
     }
     let title = document.querySelector('#title');
+    let country = document.querySelector('#countryPostMenu');
+    let province = document.querySelector('#provincePostMenu');
+    let city = document.querySelector('#cityPostMenu');
+    let district = document.querySelector('#districtPostMenu');
+    let roomType = document.querySelector('#roomPostMenu');
+    let propertyType = document.querySelector('#propertyPostMenu');
     let address1 = document.querySelector('#address1');
     let zipcode = document.querySelector('#zipcode');
     let roomNum = document.querySelector('#roomNum');
@@ -105,14 +119,15 @@ function postProperty() {
     postPropertyForm.addEventListener('submit', (e)=> {
         e.preventDefault();
         if (checkTitle(title)&&
+            checkCountry(country) &&
             checkSelect(province) &&
             checkSelect(city) &&
-            checkAddress(address1) &&
-            checkZip(zipcode) &&
+            checkSelect(district) &&
             checkSelect(roomType) &&
             checkSelect(propertyType) &&
+            checkAddress(address1) &&
+            checkZip(zipcode) &&
             checkNumber(roomNum) &&
-            checkNumber(bedNum) && 
             checkNumber(bathNum) &&
             checkSize(size) && 
             checkPrice(price) &&
@@ -268,6 +283,7 @@ function postProperty() {
     for (let i=0; i<inputs.length; i++) {
         inputs[i].addEventListener('click', (e)=> {
             roomPostMenu.firstElementChild.textContent = e.target.nextSibling.textContent
+            roomPostMenu.parentElement.nextElementSibling.className = 'hide'
         })
     };
 
@@ -275,6 +291,7 @@ function postProperty() {
     for (let i=0; i<inputs.length; i++) {
         inputs[i].addEventListener('click', (e)=> {
             propertyPostMenu.firstElementChild.textContent = e.target.nextSibling.textContent
+            propertyPostMenu.parentElement.nextElementSibling.className = 'hide'
         })
     };
 
@@ -282,6 +299,8 @@ function postProperty() {
     for (let i=0; i<inputs.length; i++) {
         inputs[i].addEventListener('click', (e)=> {
             countryPostMenu.firstElementChild.textContent = e.target.nextSibling.textContent
+            countryPostMenu.parentElement.nextElementSibling.className = 'hide'
+
         })
     };
 
@@ -289,6 +308,7 @@ function postProperty() {
     for (let i=0; i<inputs.length; i++) {
         inputs[i].addEventListener('click', (e)=> {
             provincePostMenu.firstElementChild.textContent = e.target.nextSibling.textContent
+            provincePostMenu.parentElement.nextElementSibling.className = 'hide'
             let xhr = new XMLHttpRequest();
             xhr.open('GET', `index.php?action=getCities&province=${e.target.nextSibling.textContent}`);
             xhr.onload = function (e) {
@@ -301,6 +321,8 @@ function postProperty() {
                         })
                     };
                     cityPostMenu.firstElementChild.textContent = cityList.firstElementChild.lastChild.textContent
+                    cityPostMenu.parentElement.nextElementSibling.className = 'hide'
+
                     districtPostMenu.firstElementChild.textContent = '-=-=-'
                     let cities = cityList.querySelectorAll('input')
                     for (let i=0; i<cities.length; i++) {
@@ -318,6 +340,7 @@ function postProperty() {
                                         })
                                     };
                                     districtPostMenu.firstElementChild.textContent = districtList.firstElementChild.lastChild.textContent
+                                    districtPostMenu.parentElement.nextElementSibling.className = 'hide'
                                 }
                             }
                             xhr.send(null)
