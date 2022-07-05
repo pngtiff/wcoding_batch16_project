@@ -271,8 +271,9 @@
 }
 
 .innerContainer{
-    width: 800px;
+    width: 900px;
     margin-top: 3.75rem;
+    /* overflow-y: scroll; */
 }
 
 .imgGrid{
@@ -280,11 +281,12 @@
     display: grid;
     grid-template-rows:auto auto;
     grid-template-columns:1.2fr 1.2fr;
+    /* grid-template-columns:450px 450px; */
     grid-template-areas:
     "image-1 image-1"
     "image-2 image-3";
-    overflow:hidden;
-    grid-gap:1px;
+    overflow: hidden;
+    grid-gap:2px;
 }
 
 
@@ -337,12 +339,13 @@ div.showP{
     z-index: 1100;
     pointer-events: none;
     opacity: 0;
+    overflow-y: scroll;
 }
 
 /* Slideshow container */
 .slideContainer {
-    width: 80%;
-    height: 80%;
+    max-width: 100%;
+    height: 90%;
     position: relative;
     margin-top: 3.75rem;
     display: flex;
@@ -374,13 +377,25 @@ div.showP{
     transition: background-color 0.6s ease;
 }
 
-.detailedImgDotsActive, .detailedImgDots:hover {
-    background-color: #29A376;
-}
 
 .propertyGallery{
     width: 100%;
     height: 100%;
+}
+
+.detailedImgDots {
+    cursor: pointer;
+    height: 0.625rem;
+    width: 0.625rem;
+    margin: 0 0.125rem;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+span.viewOn, span.detailedImgDots:hover {
+    background-color: #29A376;
 }
 
 .detailedCloseButton{
@@ -394,6 +409,10 @@ div.showP{
     background-color: rgba(41,163,118, 0.90);
 }
 
+.detailedImgDotsActive, .detailedImgDots:hover {
+    background-color: #29A376;
+}
+
 .validatedBorder
 {
     color: white;
@@ -403,10 +422,7 @@ div.showP{
     border-radius: 10px 10px 0 0;
     position: absolute;
     top: -31px;
-
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-
-
     visibility: hidden;
 }
 
@@ -421,6 +437,9 @@ div.showP{
     height: 20px;
 }
 
+.disableScroll{
+    overflow-y: hidden;
+}
 
 /* animation */
 /* ========= */
@@ -519,10 +538,17 @@ div.showP{
     /* All photos view */
     .innerContainer{
         margin-top: 6rem;
+        width: 800px;
     }
 
+    .imgGrid{
+        grid-template-columns:1.2fr 1.2fr;
+        
+    }
+    
     .slideContainer {
         width: 100%;
         height: 75%;
     }
+    
 }

@@ -256,10 +256,14 @@ class UserManager extends Manager
         $req->execute(array($this->_user_id));
         $user = $req->fetch(\PDO::FETCH_ASSOC);
         $req->closeCursor();
-        $languages = explode(',', $user['languages'] ?? "");
+        if($user['languages']){
+            $languages = explode(',', $user['languages'] ?? "");
+        }
+
         foreach ($languages as &$language) {
             $language = $this->getLangauges($language);
         }
+
         $user['languages'] = $languages;
         return $user;
     }
@@ -335,8 +339,8 @@ class UserManager extends Manager
         !empty($_REQUEST['bio']) ? $bio = $_REQUEST['bio'] : $bio = null;
 
         // create a new row with the inherited and modified informaiton //
-        $status = 1;
         if($phoneNumber != null){
+            $status = 1;
             
             $reqInsert = $this->_connection->prepare("INSERT INTO users (uid, first_name, last_name, email, password, dob, gender, languages, bio, phone_number, profile_img, is_active, date_created)
             VALUES ( :inuid, :infirst, :inlast, :inemail, :inpassword, :indob, :ingender, :inlanguages, :inbio, :inphoneNumber, :inprofileImg, :inactiveStatus, '$dateCreated') ");
@@ -399,7 +403,7 @@ class UserManager extends Manager
     
     public function getReservationCost()
     {
-        $req = $this->_connection->prepare("SELECT * FROM properties WHERE property_id ='{$_SESSION['propId']}' AND is_active = 1");
+        $req = $this->_connection->prepare("SELECT * FROM properties WHERE property_id ='{$_REQUEST['propId']}' AND is_active = 1");
     }
 
     public function reservations()
@@ -419,7 +423,6 @@ class UserManager extends Manager
        // calculate the total price
        $total_pay = $monthlyPrice * $numDays / 30;
 
-
        $req = $this->_connection->prepare("INSERT INTO reservations (property_id, reservation_num, start_date, end_date, cardholder, credit_card_num, cvv, exp_month, exp_year, user_uid, total_payment_won, transaction_complete, is_active) 
        VALUES (:propertyId, :reservation_num, :startDate, :endDate, :cardOwner, :creditCardNum, :cvv, :expMonth, :expYear, :uid, :totalPay, :transactionStatus, :activeStatus)");
        
@@ -435,7 +438,6 @@ class UserManager extends Manager
        $uid = addslashes(htmlspecialchars(htmlentities(trim($_SESSION['uid']))));
        $transaction = 1;
        $activeStatus = 1;
-        
         
        $req->bindParam(":propertyId", $propertyId, \PDO::PARAM_INT);
        $req->bindParam("reservation_num", $reservation_num, \PDO::PARAM_STR);
