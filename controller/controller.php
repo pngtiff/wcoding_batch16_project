@@ -87,7 +87,7 @@ function getDistricts($city) {
             echo "<label><input type='radio' name='district' value='$key'>$district</label>";
         }
     } else {
-        echo '<label><input type="radio" name="district" selected value="-1">No districts in this area</label>';
+        echo '<label><input type="radio" name="district" checked value="-1">No districts in this area</label>';
     }
 }
 
@@ -100,6 +100,9 @@ function reservationView(){
     // $propertyM = new PropertyManager($propId);
     // $propDetails = $propertyM->getProperty($propId);
     // $propOwner = $propertyM->getPropertyOwner($propId);
+
+    $propertyM = new PropertyManager();
+    $reservations = $propertyM->getReservations();
 
     require('view/reservations.php'); // display the view of the reservation form
 }

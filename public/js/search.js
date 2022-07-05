@@ -1,9 +1,9 @@
 /////////// trigger search on icon click//////////////
-// Search Bar Carousel
+    // Search Bar Carousel
 function currentSearch(n) {
     showSearch(n);
 }
-    
+
 function showSearch(n) {
     let i;
     let slides = document.getElementsByClassName("searchBarSlides");
@@ -65,19 +65,19 @@ function instantiate (){
     //// CLICK ICON///////
 
     searchBar.addEventListener("submit", loadSearch)
-    let formContainer = document.querySelector("#formContainer"),
-        searchForm = document.querySelector('#searchForm')
-        regionSearch = document.querySelector("#regionSearch"),
-        priceSearch = regionSearch.nextElementSibling,
-        propertyTypeSearch = priceSearch.nextElementSibling,
-        propertySearchMenu = document.querySelector('.propertySearchBar'),
-        propertyList = propertySearchMenu.nextElementSibling,
-        roomSearchMenu = document.querySelector('.roomSearchBar'),
-        roomList = roomSearchMenu.nextElementSibling,
-        provinceSearchMenu = document.querySelector('.provinceSearchBar'),
-        provinceList = provinceSearchMenu.nextElementSibling,
-        citySearchMenu = document.querySelector('.citySearchBar');
-        cityList = citySearchMenu.nextElementSibling,
+    let formContainer = document.querySelector("#formContainer");
+    let searchForm = document.querySelector('#searchForm');
+    let regionSearch = document.querySelector("#regionSearch");
+    let priceSearch = regionSearch.nextElementSibling;
+    let propertyTypeSearch = priceSearch.nextElementSibling;
+    let propertySearchMenu = document.querySelector('.propertySearchBar');
+    let propertyList = propertySearchMenu.nextElementSibling;
+    let roomSearchMenu = document.querySelector('.roomSearchBar');
+    let roomList = roomSearchMenu.nextElementSibling;
+    let provinceSearchMenu = document.querySelector('.provinceSearchBar');
+    let provinceList = provinceSearchMenu.nextElementSibling;
+    let citySearchMenu = document.querySelector('.citySearchBar');
+    let cityList = citySearchMenu.nextElementSibling;
 
     regionSearch.addEventListener('click', e=> {
         currentSearch(1);

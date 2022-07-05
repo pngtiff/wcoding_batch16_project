@@ -9,33 +9,6 @@
         </div>
         <nav class="nav offsetColor">
 
-            <div class="dropdown2">
-                <button class="dropbtn2">Browse</button>
-                <div class="dropdown-content2">
-                    <a href="#propertiesContainer">Search Most Recent Listings</a>
-                    <a href="#propertiesContainer">Search All Listings</a>
-                    <a href="">Search for a renter</a>
-                    <a href="">Find a Roommate</a>
-                </div>
-            </div>
-
-            <div class="dropdown3">
-                <button class="dropbtn3">Post</button>
-                <div class="dropdown-content3">
-                    <a href="">Become a Host</a>
-                    <a href="index.php?action=viewPostProperty">Post a New Listing</a>
-                </div>
-            </div>
-
-            <div class="dropdown">
-                <button class="dropbtn">About Us</button>
-                <div class="dropdown-content">
-                    <a href="view/footer.php/.modal-content">Who are we?</a>
-                    <a href="">What do we do?</a>
-                    <a href="view/footer.php/.contact">Contact us</a>
-                </div>
-            </div>
-
             <form id="searchBarContainer" class="offsetFill" >
                 <div>
                     <span id="regionSearch">Anywhere</span>
@@ -56,11 +29,11 @@
                         <div class="searchBarSlides">
                             <div id="provinceSearchMenu" class="multi-selector">
                                 <div class="provinceSearchBar select-field">
-                                    <p class="choose">Any Province/Special City</p>
+                                    <p class="choose">Anywhere</p>
                                     <p class="down-arrow">&blacktriangledown;</p>
                                 </div>
                                 <div id="provinceSearchList" class="list modifyList">
-                                    <label><input type="radio" name="province" checked value="-1">Province/Special City</label>
+                                    <label><input type="radio" name="province" checked value="-1">Anywhere</label>
                                     <label><input type="radio" name="province" value="1">Busan</label>
                                     <label><input type="radio" name="province" value="2">Chungcheongbuk-do</label>
                                     <label><input type="radio" name="province" value="3">Chungcheongnam-do</label>
@@ -81,11 +54,11 @@
                             </div>
                             <div id="citySearchMenu" class="multi-selector">
                                 <div class="citySearchBar select-field">
-                                    <p class="choose">Any City/District</p>
+                                    <p class="choose">Any City</p>
                                     <p class="down-arrow">&blacktriangledown;</p>
                                 </div>
                                 <div id="citySearchList" class="list modifyList">
-                                    <label><input type="radio" value="-1" checked>Select Province/City First</label>
+                                    <label><input type="radio" value="-1" checked>Any City</label>
                                 </div>
                             </div>
                         </div>
@@ -128,20 +101,21 @@
 
         <div class="signInUp">
             <!-- Changing interface once signed in/signed out -->
-            <div class="dropdown4">
+            <div class="dropdown">
                 <?php if(empty($_SESSION['firstName'])): echo '<div id="noUser">'?>
-                    <button class="dropbtn4"><a href="<?= (isset($_SESSION['uid'])) ? "index.php?action=profile&user={$_SESSION['uid']}" : "#"; ?>"><img src="<?= (isset($_SESSION['profile_img'])) ? './profile_images/' . $_SESSION['profile_img'] : "./public/images/defaultProfile.jpg" ?>" alt="defaultPic"></a></button>
+                    <button class="dropbtn"><a href="<?= (isset($_SESSION['uid'])) ? "index.php?action=profile&user={$_SESSION['uid']}" : "#"; ?>"><img src="<?= (isset($_SESSION['profile_img'])) ? './profile_images/' . $_SESSION['profile_img'] : "./public/images/defaultProfile.jpg" ?>" alt="defaultPic"></a></button>
                     <?php echo '</div>'; endif; ?>
                 <?php if(!empty($_SESSION['firstName'])): ?> 
-                    <button class="dropbtn4"><a href="<?= (isset($_SESSION['uid'])) ? "index.php?action=profile&user={$_SESSION['uid']}" : "#"; ?>"><img src="<?= (isset($_SESSION['profile_img'])) ? './profile_images/' . $_SESSION['profile_img'] : "./public/images/defaultProfile.jpg" ?>" alt="defaultPic"></a></button>
+                    <button class="dropbtn"><a href="<?= (isset($_SESSION['uid'])) ? "index.php?action=profile&user={$_SESSION['uid']}" : "#"; ?>"><img src="<?= (isset($_SESSION['profile_img'])) ? './profile_images/' . $_SESSION['profile_img'] : "./public/images/defaultProfile.jpg" ?>" alt="defaultPic"></a></button>
                     <?php endif; ?>
-                <div class="dropdown-content4">
+                <div class="dropdown-content">
 
                     <?php
                     if (!empty($_SESSION['firstName'])) {
                         // echo '<img src="' . $_SESSION['profile_img']. '" width="500px" height="400px">';
                         echo '<a href="index.php?action=profile&user=' . $_SESSION['uid'] . '">View My Profile</a>';
                         echo '<a href="index.php?action=modifyProfile&user=' . $_SESSION['uid'] . '">Edit My Profile</a>';
+                        echo '<a href="index.php?action=viewPostProperty">Post a New Listing</a>';
                     }
                     ?>
                     <?php echo (!empty($_SESSION['firstName'])) ? '' : '<button id="signUpButton" class="primaryBtn"><a href="#">Register</a></button>'; ?>

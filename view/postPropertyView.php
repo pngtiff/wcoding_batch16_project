@@ -8,7 +8,7 @@ ob_start(); ?>
                 <label for="title">
                     <span>Title</span>
                     <input type="text" name="title" id="title">
-                    <span class='hide'>At least 6 charachters</span>
+                    <span class='hide'>At least 4 charachters</span>
                 </label>
                 <label for="country">
                     <span>Country</span>
@@ -17,7 +17,7 @@ ob_start(); ?>
                             <p class="choose">Select a country</p>
                             <p class="down-arrow">&blacktriangledown;</p>
                         </div>
-                        <div id="countryList" class="list">
+                        <div id="countryPostList" class="list modifyList">
                             <label><input type="radio" value="KR" name="country">South Korea</label>
                         </div>
                     </div>
@@ -27,11 +27,11 @@ ob_start(); ?>
                     <span>Province/Special City</span>
                     <div id="provincePostMenu" class="multi-selector">
                         <div class="provincePostBar select-field">
-                            <p class="choose">Select Province/Special City</p>
+                            <p class="choose">Province/Special City</p>
                             <p class="down-arrow">&blacktriangledown;</p>
                         </div>
-                        <div id="provincePostList" class="list">
-                            <label><input type="radio" name="province" checked value="-1">Province/Special City</label>
+                        <div id="provincePostList" class="list modifyList">
+                            <label><input type="radio" name="province">Province/Special City</label>
                             <label><input type="radio" name="province" value="1">Busan</label>
                             <label><input type="radio" name="province" value="2">Chungcheongbuk-do</label>
                             <label><input type="radio" name="province" value="3">Chungcheongnam-do</label>
@@ -59,7 +59,7 @@ ob_start(); ?>
                             <p class="choose">-=-=-</p>
                             <p class="down-arrow">&blacktriangledown;</p>
                         </div>
-                        <div id="cityPostList" class="list"></div>
+                        <div id="cityPostList" class="list modifyList"></div>
                     </div>
                     <span class="hide">Select one</span>
                 </label>
@@ -70,19 +70,18 @@ ob_start(); ?>
                             <p class="choose">-=-=-</p>
                             <p class="down-arrow">&blacktriangledown;</p>
                         </div>
-                        <div id="districtPostList" class="list"></div>
+                        <div id="districtPostList" class="list modifyList"></div>
                     </div>
                     <span class="hide">Select one</span>
                 </label>
                 <label for="address1">
                     <span>Address 1</span>
                     <input type="text" name="address1" id="address1">
-                    <span class='hide'>At least 6 charachters</span>
+                    <span class='hide'>At least 4 charachters</span>
                 </label>
                 <label for="address2">
                     <span>Address 2</span>
                     <input type="text" name="address2" id="address2">
-                    <span class='hide'>At least 6 charachters</span>
                 </label>
                 <label for="zipcode">
                     <span>Zipcode</span>
@@ -93,11 +92,10 @@ ob_start(); ?>
                     <span>Property Type</span>
                     <div id="propertyPostMenu" class="multi-selector">
                         <div class="propertyPostBar select-field">
-                            <p class="choose">Any Property Type</p>
+                            <p class="choose">Property Type</p>
                             <p class="down-arrow">&blacktriangledown;</p>
                         </div>
-                        <div id="propertyPostList" class="list">
-                            <label><input type="radio" name="propertyType" value="any" checked>Any Property Type</label>
+                        <div id="propertyPostList" class="list modifyList">
                             <label><input type="radio" name="propertyType" value="1">Apartment</label>
                             <label><input type="radio" name="propertyType" value="2">Officetel</label>
                             <label><input type="radio" name="propertyType" value="3">Villa</label>
@@ -112,11 +110,10 @@ ob_start(); ?>
                     <span>Room Type</span>
                     <div id="roomPostMenu" class="multi-selector">
                         <div class="roomPostBar select-field">
-                            <p class="choose">Any Room Type</p>
+                            <p class="choose">Room Type</p>
                             <p class="down-arrow">&blacktriangledown;</p>
                         </div>
-                        <div id="roomPostList" class="list">
-                            <label><input type="radio" name="roomType" value="any" checked>Any Room Type</label>
+                        <div id="roomPostList" class="list modifyList">
                             <label><input type="radio" name="roomType" value="1">Private Room</label>
                             <label><input type="radio" name="roomType" value="2">Shared Room</label>
                             <label><input type="radio" name="roomType" value="3">Entire Place</label>
@@ -136,8 +133,10 @@ ob_start(); ?>
                 </label>
                 <label for="furnished">
                     <span>Furnished</span>
-                    <input type="checkbox" name="furnished" id="furnished">
-                    <span class="hide">Check if furnished</span>
+                    <label class="switch">
+                        <input type="checkbox" name="furnished" id="furnished">
+                        <span class="slider"></span>
+                    </label>
                 </label>
                 <label for="bedNum" id="bedField">
                     <span>Number of beds</span>
@@ -159,7 +158,7 @@ ob_start(); ?>
                 <label for="description">
                     Description
                     <textarea name="description" id="description" cols="23" rows="12" charswidth="100" name="text_body"></textarea>
-                    <span class="hide">At least 6 charachters</span>
+                    <span class="hide">At least 4 charachters</span>
                 </label>
                 <label for="bankAccNum">
                     <span id="bank" class>Bank Account Number</span>
@@ -174,7 +173,7 @@ ob_start(); ?>
                 <label for="addImg" id="newPropImg">
                     <span>Add an Image</span>
                     <button id="addImg" class="primaryBtn primaryFill offsetColor">Add</button>
-                    <span class="hide">(At least 2, at most 20)</span>
+                    <span id="photos" class="hide">(At least 2, at most 20)</span>
                 </label>
                 <div id="photosPreview"></div>
                 <input type="hidden" name="action" value="postProperty">

@@ -1,7 +1,20 @@
 <?php
 $title = "Reserve this property";
 ob_start();?>
-<br>
+
+<!-- create an array of all reservations start and end date -->
+<?php 
+        ?> <script> const reservedList = []; </script> <?php
+        foreach ($reservations as $reservation) {
+
+            ?> <script> 
+                reservedList.push(["<?=($reservation['start_date']);?>", "<?=($reservation['end_date']);?>"])
+                console.log(reservedList)
+            </script>    
+        <?php }
+    ?>
+
+
 <body>
     <div class="creditCardForm">
         <div class="heading">
@@ -10,15 +23,72 @@ ob_start();?>
         <div class="payment">
             <form id="paymentForm" action="index.php" method="post">
                 <p id="available">How long do you wish to stay?</p><br>
-                <div class="checkIn">
-                <label for="startDate" id="start">Check-in date</label>
-                <input type="date" id="startDate" name="startDate" class="form-control" value="<?php echo date('m-d-Y'); ?>">
-                </div><br>
-                <div class="checkOut">
-                <label for="endDate" id="end">Check-out date</label>
-                <input type="date" id="endDate" name="endDate" class="form-control" value="<?php echo date('m-d-Y'); ?>">
-                </div>
-                <div id=dateBtn onclick="dateDiff()">Click here for the total cost</div><br><br>
+                
+                <input id="datepicker" placeholder="Pick your dates"/>
+                <br>
+
+                                <!-- CALENDAR JS -->
+
+                                <script>
+                    const DateTime = easepick.DateTime;
+                    const bookedDates = reservedList.map(d => {
+                        if (d instanceof Array) {
+                            const start = new DateTime(d[0], 'YYYY-MM-DD');
+                            const end = new DateTime(d[1], 'YYYY-MM-DD');
+
+                            return [start, end];
+                        }
+                        
+                        return new DateTime(d, 'YYYY-MM-DD');
+                    });
+                    const picker = new easepick.create({
+                        element: document.getElementById('datepicker'),
+                        css: [
+                        'https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.0/dist/index.css',
+                        'https://easepick.com/css/demo_hotelcal.css',
+                        ],
+                        plugins: ['RangePlugin', 'LockPlugin'],
+                        RangePlugin: {
+                        tooltipNumber(num) {
+                            return num - 1;
+                        },
+                        locale: {
+                            one: 'night',
+                            other: 'nights',
+                        },
+                        },
+                        LockPlugin: {
+                        minDate: new Date(),
+                        minDays: 2,
+                        inseparable: true,
+                        filter(date, picked) {
+                            if (picked.length === 1) {
+                            const incl = date.isBefore(picked[0]) ? '[)' : '(]';
+                            return !picked[0].isSame(date, 'day') && date.inArray(bookedDates, incl);
+                            }
+
+                            let selectedRange = document.getElementById("datepicker").value.split(" - ")
+                            if (document.getElementById("datepicker").value) {
+                                document.getElementById("startDate").value = selectedRange[0]
+                                document.getElementById("endDate").value = selectedRange[1]
+                                dateDiff()
+                            } 
+
+                            return date.inArray(bookedDates, '[)');
+                        },
+                        }
+                    });
+
+    
+                    </script>
+
+                <!-- CALENDAR JS -->
+
+             
+                <input type="hidden" id="startDate" name="startDate"  value="<?php echo date('m-d-Y'); ?>">
+                <input type="hidden" id="endDate" name="endDate"  value="<?php echo date('m-d-Y'); ?>">
+               
+                <div id=dateBtn>Select dates to see prices</div><br><br>
                 <?php 
                     // $date1 = date_create('startDate.value');
                     // $date2 = date_create('endDate.value');
@@ -44,19 +114,19 @@ ob_start();?>
                     <img id="creditCards"src="public/images/capture.JPG" alt="creditCards">
                 </div><br>
                 <label for="owner">Cardholder</label>
-                <input type="text" class="form-control" id="owner" name="owner" placeholder="Enter your name as shown on your credit card" required>
+                <input type="text" class="form-control" id="owner" name="owner" placeholder="Enter your name as shown on your credit card" pattern="^(?![\s.]+$)[A-Z\-a-z\s.]{2,}" required >
                 <div class="nameError"><em>Please enter your name as shown on your credit card (only letters)</em></div><br>
                 <label for="cardNumber" id="cardNum">Card #</label>
                 <!-- <input type="text" class="form-control" onkeyup="formatCreditCard()" placeholder="xxxx-xxxx-xxxx-xxxx" name="card-number" id="credit-card" value="" > -->                
                 
-                <input type="text" class="form-control" onkeyup="formatCreditCard()" id="cardNumber" name="cardNumber" placeholder="Enter credit card number with no spaces or dashes" required>
+                <input type="text" class="form-control" onkeyup="formatCreditCard()" id="cardNumber" name="cardNumber" placeholder="Enter a valid credit card number" required>
                 <div class="numError"><em>Please enter a correct card number</em></div><br>
                 <label for="cvv">CVV</label>
-                <input type="text" class="form-control" id="cvv" name="cvv" placeholder="Enter the 3 or 4 digit code on the back of your card" required>
+                <input type="text" class="form-control" id="cvv" name="cvv" placeholder="Enter the 3 or 4 digit code on the back of your card" pattern="^[0-9]{3,4}" required>
                 <div class="cvvError"><em>3 or 4 numbers only</em></div><br>
                 <div class="expiry">
                     <label>Expiry</label>
-                    <select name="month" id="month">
+                    <select name="month" id="month" required>
                         <option value="" selected disabled hidden>Select month</option>
                         <option value="01">January</option>
                         <option value="02">February </option>
@@ -71,7 +141,7 @@ ob_start();?>
                         <option value="11">November</option>
                         <option value="12">December</option>
                     </select>
-                    <select name="year" id="year">
+                    <select name="year" id="year" required>
                         <option value="" selected disabled hidden>Select year</option>
                         <option value="22"> 2022</option>
                         <option value="23"> 2023</option>
@@ -90,9 +160,13 @@ ob_start();?>
                         <input type="hidden" name="price" value="<?=$_REQUEST['price']?>">
                 
                     </div>
+
                 </form>
         </div>
     </div>
+
+
+
 </body>
 <script src="public/js/reservations.js"></script>
 
@@ -100,3 +174,4 @@ ob_start();?>
 $content = ob_get_clean();
 include('template.php');
 ?>
+
