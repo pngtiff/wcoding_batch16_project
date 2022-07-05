@@ -278,6 +278,13 @@ function postProperty() {
         })
     };
 
+    inputs = countryList.querySelectorAll('input')
+    for (let i=0; i<inputs.length; i++) {
+        inputs[i].addEventListener('click', (e)=> {
+            countryPostMenu.firstElementChild.textContent = e.target.nextSibling.textContent
+        })
+    };
+
     inputs = provinceList.querySelectorAll('input')
     for (let i=0; i<inputs.length; i++) {
         inputs[i].addEventListener('click', (e)=> {

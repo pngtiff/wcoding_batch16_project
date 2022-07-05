@@ -231,7 +231,9 @@ header {
     object-fit: cover;
 }
 
-#postPropertyForm .select-field, #postPropertyForm .multi-selector, #searchForm .select-field, #searchForm .multi-selector {
+#postPropertyForm .select-field, #postPropertyForm .multi-selector, 
+#searchForm .select-field, #searchForm .multi-selector, 
+#modifyPropertyForm .select-field, #modifyPropertyForm .multi-selector {
     height: 1.7rem;
     width: 12.5rem;
     white-space: nowrap;
