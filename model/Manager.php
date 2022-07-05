@@ -36,7 +36,7 @@ class Manager {
             'Jeju-do',
             'Jeollabuk-do',
             'Jeollanam-do',
-            'Sejong',
+            'Sejong-si',
             'Seoul')
         );
     const CITIES = array(
@@ -255,6 +255,7 @@ class Manager {
             'Jindo',
             'Gokseong',
             'Gurye',),
+
         'Seoul' => array(
             'Dobong-gu',
             'Dongdaemun-gu',
@@ -282,13 +283,7 @@ class Manager {
             'Yeongdeungpo-gu',
             'Yongsan-gu',
         ),
-        'Ulsan' => array(
-            'Buk-gu',
-            'Dong-gu',
-            'Jung-gu',
-            'Nam-gu',
-        ),
-        'Sejong' => array(
+        'Sejong-si' => array(
             'Hansol-dong',
             'Saerom-dong',
             'Dodam-dong',
@@ -301,7 +296,7 @@ class Manager {
             'Dajeong-dong',
             'Haemil-dong',
             'Bangok-dong',
-        )
+        ),
     );
 
     const DISTRICTS = array (
