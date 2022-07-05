@@ -43,23 +43,19 @@ file.addEventListener('change', function(){
     }
 });
 
-// multi language selection
-document.querySelector('#language .select-field').addEventListener('click', () => {
-    document.querySelector('#absolute').style.display='block';
-    document.querySelector('#language .list').classList.toggle('show');
-    document.querySelector('#language .down-arrow').classList.toggle('rotate180');
-});
-
 // closes languages list when clicking outside .select-field
-window.addEventListener('click', (e) => {
-    if (e.target == document.querySelector('#absolute')) {
-        document.querySelector('#absolute').style.display='none';
-        if(document.querySelector('#language .list').classList.contains('show')) {
-            document.querySelector('#language .list').classList.remove('show');
-            document.querySelector('#language .down-arrow').classList.remove('rotate180');
-        }
+window.addEventListener("click", (e) => {
+    let langMenu = document.querySelector('#language .select-field');
+    let langList = langMenu.nextElementSibling
+    if (e.target == langMenu || langMenu.contains(e.target)) {
+        document.querySelector('#language .list').classList.toggle('show');
+        document.querySelector('#language .down-arrow').classList.toggle('rotate180');
+    } else if (langList != e.target && !langList.contains(e.target)){
+        document.querySelector('#language .list').classList.remove('show');
+        document.querySelector('#language .down-arrow').classList.remove('rotate180');
     }
 })
+
 
 for (i = 0; i < languages.length; i++) {
     if(languages[i].checked) {
