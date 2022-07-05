@@ -43,7 +43,7 @@
         </div>
         <div class='propResv flexColumn'>
             <p class='price'>Price: <span><?= number_format($propDetails[0]['monthly_price_won']);?></span>₩/month</p>
-            <p>Owner information:</p>
+            <p>Property Owner: </p>
             <a href="index.php?action=profile&user=<?=$propOwner['uid'];?>">
                 <div class="propOwnerInfo flexColumn">
                     <p><?=$propOwner['first_name'];?></p>

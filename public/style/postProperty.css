@@ -122,10 +122,14 @@
 }
 
 #photosPreview > * {
-    height: 14rem;
+    height: 13.5rem;
     margin: 0;
     padding: 0;
     position: relative;
+<<<<<<< HEAD
+    border-radius: 4px;
+=======
+>>>>>>> master
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     border: 1px solid rgb(229, 229, 229);
     margin-left: 0.5rem;
