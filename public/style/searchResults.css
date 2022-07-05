@@ -12,10 +12,10 @@
 
 #propertiesSearchList
 {
-    display: flex;
+    /* display: flex;
     justify-content: flex-start;
-    flex-wrap: wrap;
-    width: 62%;
+    flex-wrap: wrap; */
+    width: 60%;
 }
 
 #propertiesSearchList .property {
