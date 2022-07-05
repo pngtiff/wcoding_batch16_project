@@ -1,3 +1,26 @@
+#postPropertyForm input, #postPropertyForm .select-field, #postPropertyForm textarea {
+    
+    border: 1px solid lightgray;
+    border-radius: 8px;
+
+
+    transition: 0.2s;
+}
+
+#postPropertyForm input:focus, #postPropertyForm textarea:focus{
+    box-shadow: 0.2rem 0.2rem lightgray;
+}
+
+#postPropertyForm input:focus.red, #postPropertyForm textarea:focus.red {
+    box-shadow: 0.2rem 0.2rem red;
+    border-color: red;
+}
+
+#postPropertyForm input:focus.green, #postPropertyForm textarea:focus.green {
+    box-shadow: 0.2rem 0.2rem rgb(41, 163, 118);
+    border-color: rgb(41, 163, 118);
+}
+
 #postPropertyForm, #modifyPropertyForm {
     display: flex;
     flex-direction: column;
