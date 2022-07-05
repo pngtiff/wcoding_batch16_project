@@ -63,8 +63,9 @@ function getCities($province) {
             $province == 'Gwangju' OR
             $province == 'Incheon' OR
             $province == 'Jeju-do' OR
-            $province == 'Sejong' OR
+            $province == 'Sejong-si' OR
             $province == 'Seoul'
+
         )
             echo '<label><input type="radio" name="city" disabled value="-1">Select a district</label>';
         else
