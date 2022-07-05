@@ -288,6 +288,20 @@ class Manager {
             'Jung-gu',
             'Nam-gu',
         ),
+        'Sejong' => array(
+            'Hansol-dong',
+            'Saerom-dong',
+            'Dodam-dong',
+            'Areum-dong',
+            'Jongchon-dong',
+            'Goun-dong',
+            'Boram-dong',
+            'Daepyeong-dong',
+            'Sodam-dong',
+            'Dajeong-dong',
+            'Haemil-dong',
+            'Bangok-dong',
+        )
     );
 
     const DISTRICTS = array (

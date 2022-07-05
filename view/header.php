@@ -111,8 +111,8 @@
                 <div class="dropdown-content">
 
                     <?php
+                    echo '<a id="home" href="index.php">Go to Home Page</a>';
                     if (!empty($_SESSION['firstName'])) {
-                        // echo '<img src="' . $_SESSION['profile_img']. '" width="500px" height="400px">';
                         echo '<a href="index.php?action=profile&user=' . $_SESSION['uid'] . '">View My Profile</a>';
                         echo '<a href="index.php?action=modifyProfile&user=' . $_SESSION['uid'] . '">Edit My Profile</a>';
                         echo '<a href="index.php?action=viewPostProperty">Post a New Listing</a>';
