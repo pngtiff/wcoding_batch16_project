@@ -105,7 +105,6 @@ function submitForm(e) {
         formData = new FormData(form);
         xhr.addEventListener('readystatechange', function() {
             if (xhr.readyState === 4) {
-                console.log(xhr.responseText); 
                 if (xhr.responseText == "1") //1 denotes if email is already in the database
                 {
                     alert("Email is already registered. Please use another email or sign in using an existing account."); 

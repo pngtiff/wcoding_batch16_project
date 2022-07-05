@@ -76,6 +76,13 @@
                 } else
                     break;
             }
+            if (empty($oldImgs)) {
+                $oldImgs = [];
+            }
+
+            if (empty($imgDescriptions)) {
+                $imgDescriptions = [];
+            }
     
             $propertyM->modifyProperty($params['propId'], $imgs, $imgDescriptions, $oldImgs);
     
