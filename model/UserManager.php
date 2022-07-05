@@ -382,9 +382,22 @@ class UserManager extends Manager
 
     public function getReservations() {
         if ($this->_user_id == $_SESSION['uid']) {
-            $req = $this->_connection->query("SELECT * FROM reservations WHERE user_uid='{$_SESSION['uid']}' AND is_active=1");
+            $req = $this->_connection->query("SELECT r.reservation_num, r.user_uid, r.property_id, r.start_date, r.end_date, r.total_payment_won, r.is_active, p.id, p.post_title, p.country, p.province_state, p.city, p.zipcode, p.address1, p.address2, pi.property_id AS pi_id, pi.img_url AS pi_img
+            FROM reservations r 
+            LEFT JOIN properties p
+            ON r.property_id = p.id
+            LEFT JOIN property_imgs pi
+            ON p.id = pi.property_id
+            WHERE r.user_uid='{$_SESSION['uid']}' AND r.is_active=1
+            GROUP BY r.reservation_num");
             $reservations = $req->fetchAll(\PDO::FETCH_ASSOC);
         } else $reservations = [];
+        
+        foreach($reservations as &$reservation) {
+            $reservation['country'] = $this::COUNTRIES['KR'];
+            $reservation['province_state'] = $this::PROVINCES['KR'][$reservation['province_state']];
+            $reservation['city'] = !empty($this::CITIES[$reservation['province_state']][$reservation['city']]) ? $this::CITIES[$reservation['province_state']][$reservation['city']] : '';
+        }
         return $reservations;
     }
     

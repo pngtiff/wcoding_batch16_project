@@ -89,14 +89,15 @@ let hiddenContainer = document.querySelector('.hiddenContainer');
 
 datePicker.addEventListener('click', function(e){
     e.preventDefault();
-    hiddenContainer.classList.add('showP');
-    hiddenContainer.classList.add('placeAbove');
+    hiddenContainer.classList.add('showC');
+    // hiddenContainer.classList.add('placeAbove');
 });
 
 hiddenContainer.addEventListener('click', function(e){
     e.preventDefault();
-    hiddenContainer.classList.remove('showP');
-    hiddenContainer.classList.remove('placeAbove');
+    hiddenContainer.classList.remove('showC');
+    // hiddenContainer.classList.remove('placeAbove');
+    datePicker.value = "";
 });
 
 function formatCreditCard() {

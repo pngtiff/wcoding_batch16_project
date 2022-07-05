@@ -45,22 +45,7 @@ ob_start();?>
                     <script>
                     const DateTime = easepick.DateTime;
 
-                    // const bookedDates = reservedList.map(d => {
-                    //     if (d instanceof Array) {
-                    //         const start = new DateTime(d[0], 'YYYY-MM-DD');
-                    //         const end = new DateTime(d[1], 'YYYY-MM-DD');
-
-                    //         return [start, end];
-                    //     }
-                        
-                    //     return new DateTime(d, 'YYYY-MM-DD');
-                    // });
-
-                    const bookedDates = [
-                        // '2022-07-02',
-                        // ['2022-07-06', '2022-07-11'],
-                        
-                    ].map(d => {
+                    const bookedDates = reservedList.map(d => {
                         if (d instanceof Array) {
                             const start = new DateTime(d[0], 'YYYY-MM-DD');
                             const end = new DateTime(d[1], 'YYYY-MM-DD');
@@ -106,8 +91,11 @@ ob_start();?>
                             // to display dates inside check in & check out
                             let selectedCheckInDate = document.querySelector('#selectedCheckInDate');
                             let selectedCheckOutDate = document.querySelector('#selectedCheckOutDate');
-                            selectedCheckInDate.textContent = selectedRange[0];
-                            selectedCheckOutDate.textContent = selectedRange[1];
+                            let checkInDate = selectedRange[0];
+                            let checkOutDate = selectedRange[1];
+                            selectedCheckInDate.textContent = checkInDate;
+                            selectedCheckOutDate.textContent = checkOutDate;
+                            
 
                             return date.inArray(bookedDates, '[)');
                         },
