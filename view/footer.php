@@ -4,15 +4,13 @@
             <p>23, SeonYu-Ro 49-gil, Suite 1101</p>
             <p>YeongDeungPo-Gu, Seoul, South Korea</p>
             <p>02-123-4567</p>
-            <a href="#" class="offsetColor"><p>info@room-ez.com</p></a>
+            <a href="mailto:info@room-ez.com" class="offsetColor"><p>info@room-ez.com</p></a>
             <div>
-                <a href="#"><i class="fa-brands fa-facebook-f offsetColor"></i></a>        
-                <a href="#"><i class="fa-brands fa-instagram-square offsetColor"></i></i></a>        
-                <a href="#"><i class="fa-brands fa-twitter offsetColor"></i></a> 
+                <a href="https://www.facebook.com/wcoding"><i class="fa-brands fa-facebook-f offsetColor"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
+                <a href="https://www.instagram.com/wcoding/"><i class="fa-brands fa-instagram-square offsetColor"></i></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       
+                <a href="https://twitter.com/wcoding1"><i class="fa-brands fa-twitter offsetColor"></i></a> 
             </div>
-        </div>
-
-        
+        </div>        
         <div class="footerRight">
             <div id="footerAboutUsModal" class="modal">
                 <!-- Modal content -->
