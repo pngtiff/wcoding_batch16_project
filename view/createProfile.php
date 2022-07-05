@@ -64,8 +64,7 @@
                             <p class="choose">Choose one or multiple</p>
                             <p class="down-arrow">&blacktriangledown;</p>
                         </div>
-                        <div id="absolute"></div>
-                        <div id="langList" class="list">
+                        <div id="langList" class="list modifyList">
                             <label for="HK" class="lang"><input type="checkbox" id="HK" name="HK" value="HK"> Cantonese</label>
                             <label for="ZH" class="lang"><input type="checkbox" id="ZH" name="ZH" value="ZH"> Chinese(Mandarin)</label>
                             <label for="NL" class="lang"><input type="checkbox" id="NL" name="NL" value="NL"> Dutch</label>

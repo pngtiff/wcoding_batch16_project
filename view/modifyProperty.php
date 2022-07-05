@@ -5,14 +5,19 @@ ob_start(); ?>
         <div id="allPropInfo">
             <div id="modifyTextInfo">
                 <label for="title">Title<input type="text" name="title" id="title" value="<?= $propDetails[0]['post_title']; ?>"></label>
-
-                <label for="roomType">Room Type
-                    <select name="roomType" id="roomType">
-                        <option value="1" <?php if ($propDetails[0]['room_type_id'] === 1) : ?> selected="selected" <?php endif; ?>>Private room</option>
-                        <option value="2" <?php if ($propDetails[0]['room_type_id'] === 2) : ?> selected="selected" <?php endif; ?>>Shared room</option>
-                        <option value="3" <?php if ($propDetails[0]['room_type_id'] === 3) : ?> selected="selected" <?php endif; ?>>Shared unit</option>
-                        <option value="4" <?php if ($propDetails[0]['room_type_id'] === 4) : ?> selected="selected" <?php endif; ?>>Entire place</option>
-                    </select>
+                <label for="roomTypeMod">
+                    <span>Room Type</span>
+                    <div id="roomModMenu" class="multi-selector">
+                        <div class="roomModBar select-field">
+                            <p class="choose">Room Type</p>
+                            <p class="down-arrow">&blacktriangledown;</p>
+                        </div>
+                        <div id="roomModList" class="list modifyList">
+                            <label><input type="radio" name="roomType" value="1" <?php if ($propDetails[0]['room_type_id'] === 1) : ?> checked <?php endif; ?>>Private Room</label>
+                            <label><input type="radio" name="roomType" value="2" <?php if ($propDetails[0]['room_type_id'] === 2) : ?> checked <?php endif; ?>>Shared Room</label>
+                            <label><input type="radio" name="roomType" value="3" <?php if ($propDetails[0]['room_type_id'] === 3) : ?> checked <?php endif; ?>>Entire Place</label>
+                        </div>
+                    </div>
                     <span class="hide">Select one</span>
                 </label>
                 <label for="bedroom">
@@ -26,8 +31,11 @@ ob_start(); ?>
                     <span class='hide'>Number between 1 and 100</span>
                 </label>
                 <label for="furnished">
-                    Furnished
-                    <input type="checkbox" name="furnished" id="furnished" <?php if ($propDetails[0]['is_furnished'] === 1) : ?>checked<?php endif; ?>>
+                    <span>Furnished</span>
+                    <label class="switch">
+                        <input type="checkbox" name="furnished" id="furnished">
+                        <span class="slider"></span>
+                    </label>
                 </label>
                 <label for="bed" id="bedField">
                     Number of beds
@@ -41,7 +49,7 @@ ob_start(); ?>
                 </label>
                 <label for="description">
                     Description<textarea name="description" id="description"><?= $propDetails[0]['description']; ?></textarea>
-                    <span class="hide">At least 6 charachters</span>
+                    <span class="hide">At least 4 charachters</span>
                 </label>
                 <label for="bankAccNum">
                     Bank Account Number

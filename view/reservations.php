@@ -22,15 +22,29 @@ ob_start();?>
         </div>
         <div class="payment">
             <form id="paymentForm" action="index.php" method="post">
-                <p id="available">How long do you wish to stay?</p><br>
                 
-                <input id="datepicker" placeholder="Pick your dates"/>
-                <br>
+                <div class="topContainer">
+                    <p id="available">How long do you wish to stay?</p><br>
+                    <div class="stayingDuration">
+                        <div class="checkIn">
+                            <span>Check In</span>
+                            <span id="selectedCheckInDate"></span> 
+                        </div>
+                        <div class="checkOut">
+                            <span>Check Out</span>
+                            <span id="selectedCheckOutDate"></span>
+                        </div>
+                    </div>
+                    <div class="hiddenContainer">Select your dates</div>
+                </div>
+                
+                <div class="calendarContainer">
+                    <input id="datepicker" class="datepicker" placeholder="Select your dates"/>
 
-                                <!-- CALENDAR JS -->
-
-                                <script>
+                    <!-- CALENDAR JS -->
+                    <script>
                     const DateTime = easepick.DateTime;
+
                     const bookedDates = reservedList.map(d => {
                         if (d instanceof Array) {
                             const start = new DateTime(d[0], 'YYYY-MM-DD');
@@ -41,11 +55,11 @@ ob_start();?>
                         
                         return new DateTime(d, 'YYYY-MM-DD');
                     });
+
                     const picker = new easepick.create({
                         element: document.getElementById('datepicker'),
                         css: [
-                        'https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.0/dist/index.css',
-                        'https://easepick.com/css/demo_hotelcal.css',
+                            'public/style/bookingCalendar.css',
                         ],
                         plugins: ['RangePlugin', 'LockPlugin'],
                         RangePlugin: {
@@ -69,47 +83,31 @@ ob_start();?>
 
                             let selectedRange = document.getElementById("datepicker").value.split(" - ")
                             if (document.getElementById("datepicker").value) {
-                                document.getElementById("startDate").value = selectedRange[0]
-                                document.getElementById("endDate").value = selectedRange[1]
-                                dateDiff()
-                            } 
+                                document.getElementById("startDate").value = selectedRange[0];
+                                document.getElementById("endDate").value = selectedRange[1];
+                                dateDiff();
+                            }
+
+                            // to display dates inside check in & check out
+                            let selectedCheckInDate = document.querySelector('#selectedCheckInDate');
+                            let selectedCheckOutDate = document.querySelector('#selectedCheckOutDate');
+                            let checkInDate = selectedRange[0];
+                            let checkOutDate = selectedRange[1];
+                            selectedCheckInDate.textContent = checkInDate;
+                            selectedCheckOutDate.textContent = checkOutDate;
+                            
 
                             return date.inArray(bookedDates, '[)');
                         },
                         }
                     });
-
-    
                     </script>
+                    <!-- CALENDAR JS -->
+                    <input type="hidden" id="startDate" name="startDate"  value="<?php echo date('m-d-Y'); ?>">
+                    <input type="hidden" id="endDate" name="endDate"  value="<?php echo date('m-d-Y'); ?>">
+                </div><br>
 
-                <!-- CALENDAR JS -->
-
-             
-                <input type="hidden" id="startDate" name="startDate"  value="<?php echo date('m-d-Y'); ?>">
-                <input type="hidden" id="endDate" name="endDate"  value="<?php echo date('m-d-Y'); ?>">
-               
-                <div id=dateBtn>Select dates to see prices</div><br><br>
-                <?php 
-                    // $date1 = date_create('startDate.value');
-                    // $date2 = date_create('endDate.value');
-                    // $diff = date_diff($date1, $date2);
-                    // echo $diff->format("%R%a days");
-                    // $date1 = strtotime($_POST['startDate']);
-                    // echo $date1; 
-                    // $diff=date_diff($date1, $date2);
-                    // echo $diff->format("%R%a days");
-                    // if ($stayLength >= 30) {
-                    //     $price = "<span onclick=alert({$property['monthly_price_won']})><strong>click to see the price</strong></span>";
-
-                    // }
-                    // elseif ($stayLength ){
-
-                    // }
-                    // else {
-                    //     $price = "Minimum stay is one month"; 
-                    // }
-
-                ?><br>
+                <div id=dateBtn>Select dates to see prices</div><br><br><br>
                 <div class="creditCards">
                     <img id="creditCards"src="public/images/capture.JPG" alt="creditCards">
                 </div><br>

@@ -41,7 +41,7 @@ class PropertyManager extends Manager
             ON p.id = pi.property_id
             WHERE p.is_active = 1
             GROUP BY pi.property_id
-            ORDER BY date_created DESC LIMIT 0,9");
+            ORDER BY date_created DESC LIMIT 0,8");
         }
         $properties = $req->fetchAll(\PDO::FETCH_ASSOC);
 
