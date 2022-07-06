@@ -22,7 +22,7 @@ document.querySelector("#cancellationModal .close").addEventListener("click", fu
 	opacity(0, cancellationModal);
 })
 
-document.querySelector("#cancellationModal .closeBttn").addEventListener("click", function() {
+document.querySelector("#cancellationModal .closeButton").addEventListener("click", function() {
 	cancellationModal.style.display = "none";
 	document.querySelector("body").style.overflowY = "visible";
 	opacity(0, cancellationModal);
