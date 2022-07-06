@@ -19,6 +19,7 @@
     <span class="errorText">Please try again</span>    
 </form>
 <?php include("view/googleLoginButton.php")?>
+<button id="registerNow" class="primaryBtn primaryFill offsetColor">Register</button>
 
 <script src="public/js/signInCheck.js"></script>
 

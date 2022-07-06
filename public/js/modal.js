@@ -50,6 +50,8 @@ if (modalBox = document.getElementById("modalBox")) {
     }
 
     let banner = document.querySelector('#banner-container');
+    let signInContainer = document.querySelector('#signIn-container');
+    let signUpContainer = document.querySelector('#signUp-container');
 
     //// open the modal on SignUp/Sign In button click
     document.getElementById("signUpButton").addEventListener("click", function(e) {
@@ -60,6 +62,11 @@ if (modalBox = document.getElementById("modalBox")) {
         showSignup();
         modalBox.style.display = "block";
         setTimeout(opacity, 50, 1, modalBox);
+        let x = window.matchMedia("(max-width: 1000px");
+        if(x.matches) {
+            signInContainer.style.display = 'none';
+            signUpContainer.style.display = 'block';
+        }
     })
 
     document.getElementById("signInButton").addEventListener("click", function(e) {
@@ -70,6 +77,31 @@ if (modalBox = document.getElementById("modalBox")) {
         showSignin();
         modalBox.style.display = "block";
         setTimeout(opacity, 50, 1, modalBox);
+        let x = window.matchMedia("(max-width: 1000px");
+        if(x.matches) {
+            signUpContainer.style.display = 'none';
+            signInContainer.style.display = 'block';
+        }
+    })
+
+    //switch to register modal view on click
+    document.querySelector('#registerNow').addEventListener('click', (e) => {
+        e.preventDefault();
+        signInContainer.style.display = 'none';
+        signUpContainer.style.display = 'block';
+    })
+
+    document.querySelector('#signInNow').addEventListener('click', (e) => {
+        e.preventDefault();
+        signInContainer.style.display = 'block';
+        signUpContainer.style.display = 'none';
+    })
+
+    window.addEventListener('resize', () => {
+        let x = window.matchMedia("(min-width: 1000px");
+        if(x.matches) {
+            signUpContainer.style.display = 'none';
+        }
     })
 
     // close the modal when click X
