@@ -87,7 +87,7 @@
             </div>
         </div>
         <div>
-            <textarea id="bio" name="bio" rows="4">Introduce yourself</textarea>
+            <textarea id="bio" name="bio" rows="4" placeholder="Introduce yourself"></textarea>
         </div>
         <input type="submit" id="create" name="create" class="primaryBtn primaryColor offsetFill" value="Create profile">
     </form>

@@ -102,14 +102,8 @@
         <div class="signInUp">
             <!-- Changing interface once signed in/signed out -->
             <div class="dropdown">
-                <?php if(empty($_SESSION['firstName'])): echo '<div id="noUser">'?>
-                    <button class="dropbtn"><a href="<?= (isset($_SESSION['uid'])) ? "index.php?action=profile&user={$_SESSION['uid']}" : "#"; ?>"><img src="<?= (isset($_SESSION['profile_img'])) ? './profile_images/' . $_SESSION['profile_img'] : "./public/images/defaultProfile.jpg" ?>" alt="defaultPic"></a></button>
-                    <?php echo '</div>'; endif; ?>
-                <?php if(!empty($_SESSION['firstName'])): ?> 
-                    <button class="dropbtn"><a href="<?= (isset($_SESSION['uid'])) ? "index.php?action=profile&user={$_SESSION['uid']}" : "#"; ?>"><img src="<?= (isset($_SESSION['profile_img'])) ? './profile_images/' . $_SESSION['profile_img'] : "./public/images/defaultProfile.jpg" ?>" alt="defaultPic"></a></button>
-                    <?php endif; ?>
+                <button class="dropbtn"><a href="#"><img src="<?= (isset($_SESSION['profile_img'])) ? './profile_images/' . $_SESSION['profile_img'] : "./public/images/defaultProfile.jpg" ?>" alt="defaultPic"></a></button>
                 <div class="dropdown-content">
-
                     <?= '<a id="home" href="index.php">Go to Home Page</a>'; ?>
                     <?php
                     if (!empty($_SESSION['firstName'])) {
