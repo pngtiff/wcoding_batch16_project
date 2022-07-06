@@ -111,18 +111,24 @@ ob_start();?>
                 <div class="creditCards">
                     <img id="creditCards"src="public/images/capture.JPG" alt="creditCards">
                 </div><br>
-                <label for="owner">Cardholder</label>
-                <input type="text" class="form-control" id="owner" name="owner" placeholder="Enter your name as shown on your credit card" pattern="^(?![\s.]+$)[A-Z\-a-z\s.]{2,}" required >
-                <div class="nameError"><em>Please enter your name as shown on your credit card (only letters)</em></div><br>
-                <label for="cardNumber" id="cardNum">Card #</label>
-                <!-- <input type="text" class="form-control" onkeyup="formatCreditCard()" placeholder="xxxx-xxxx-xxxx-xxxx" name="card-number" id="credit-card" value="" > -->                
                 
-                <input type="text" class="form-control" onkeyup="formatCreditCard()" id="cardNumber" name="cardNumber" placeholder="Enter a valid credit card number" required>
+                <div class="cardInfoContainer ownerC">
+                    <label for="owner">Cardholder</label>
+                    <input type="text" class="form-control" id="owner" name="owner" placeholder="Enter your name as shown on your credit card" pattern="^(?![\s.]+$)[A-Z\-a-z\s.]{2,}" required >
+                </div>
+                <div class="nameError"><em>Please enter your name as shown on your credit card (only letters)</em></div>
+                <br>
+                <div class="cardInfoContainer cardNumC">
+                    <label for="cardNumber" id="cardNum">Card #</label>
+                    <input type="text" class="form-control" onkeyup="formatCreditCard()" id="cardNumber" name="cardNumber" placeholder="Enter a valid credit card number" required>
+                </div>
                 <div class="numError"><em>Please enter a correct card number</em></div><br>
-                <label for="cvv">CVV</label>
-                <input type="text" class="form-control" id="cvv" name="cvv" placeholder="Enter the 3 or 4 digit code on the back of your card" pattern="^[0-9]{3,4}" required>
+                <div class="cardInfoContainer cvvC">
+                    <label for="cvv">CVV</label>
+                    <input type="text" class="form-control" id="cvv" name="cvv" placeholder="Enter the 3 or 4 digit code on the back of your card" pattern="^[0-9]{3,4}" required>
+                </div>
                 <div class="cvvError"><em>3 or 4 numbers only</em></div><br>
-                <div class="expiry">
+                <div class="cardInfoContainer">
                     <label>Expiry</label>
                     <select name="month" id="month" required>
                         <option value="" selected disabled hidden>Select month</option>
@@ -148,16 +154,17 @@ ob_start();?>
                         <option value="26"> 2026</option>
                         <option value="27"> 2027</option>
                     </select>
-                </div><br><br>
-                    <div class="buttons">
-                        <!-- <img src="public/images/Credit-Card-Icons.jpg" id="visa"> -->
-                        <button type="submit" class="btn btn-default" id="confirm-purchase">Confirm Payment</button>
-                        <input type="hidden" value="addReservationInfo" name="action">
-                        <button id="reset" type="reset">Reset the form</button>
-                        <input type="hidden" name="propId" value="<?=$_REQUEST['propId']?>">
-                        <input type="hidden" name="price" value="<?=$_REQUEST['price']?>">
-                
-                    </div>
+                </div>
+                <br><br>
+                <div class="buttons">
+                    <!-- <img src="public/images/Credit-Card-Icons.jpg" id="visa"> -->
+                    <button type="submit" class="btn btn-default" id="confirm-purchase">Confirm Payment</button>
+                    <input type="hidden" value="addReservationInfo" name="action">
+                    <button id="reset" type="reset">Reset the form</button>
+                    <input type="hidden" name="propId" value="<?=$_REQUEST['propId']?>">
+                    <input type="hidden" name="price" value="<?=$_REQUEST['price']?>">
+            
+                </div>
 
                 </form>
         </div>

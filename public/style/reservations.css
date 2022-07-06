@@ -49,9 +49,7 @@
     width: 350px;
     height: 50px;
     display: flex;
-    /* border: 1px solid black; */
     border-radius: 10px;
-    cursor: pointer;
     position: relative;
 }
 
@@ -130,6 +128,7 @@
 
 #dateBtn{
     text-align: center;
+    font-size: 20px;
 }
 
 #owner, #cardNumber {
@@ -139,24 +138,26 @@
 
 #cvv {
     width: 80%;
-    margin-left: 51px;
+    /* margin-left: 51px; */
 }
 
 #cardNum {
-    margin-right: 30px;
+    /* margin-right: 30px; */
 }
 
 #cardNumber, #cvv {
     display: flexbox; 
 }
 
-.expiry #month {
-    width: 175px;
-    margin-left: 31px;
+.cardInfoContainer #month {
+    width: 165px;
+    margin: 0;
+    margin-right: 10px;
 }
 
-.expiry #year {
-    width: 175px;
+.cardInfoContainer #year {
+    width: 165px;
+    margin: 0;
 }
 
 /* #month, #year {
@@ -189,9 +190,7 @@
 
 .expiry {
     display: flex;
-    width: 80%;
-    /* margin-left: 17px; */
-    margin-top: 5px;
+    align-items: center;
 }
 
 #dates, .creditCardForm #expiration-date {
@@ -255,10 +254,9 @@
     will-change: transform, opacity;
 }
 
-#reset:hover, #confirm-purchase:hover, #dateBtn:hover {
+#reset:hover, #confirm-purchase:hover {
     background-color: rgba(41,163,118, 0.90);
 }
-
 
 #reset {
     margin-left: 20px;
@@ -300,4 +298,13 @@ textarea:focus, input:focus{
     visibility: hidden;
 }
 
+.cardInfoContainer{
+    width: 430px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
+.cardInfoContainer > label{
+    width: 90px;
+}
