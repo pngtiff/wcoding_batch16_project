@@ -11,7 +11,6 @@
 //     xhr.send(null)
 // })
 
-
 ///////////SIGN OUT TOAST BUTTON//////////////
 document.addEventListener("DOMContentLoaded", function (e) {
     let msg = document.querySelector(".toast")

@@ -1,13 +1,13 @@
 <?php if (count($reservations)) { ?>
     <div id="cancellationModal" class="modal">
         <!-- Modal content -->
-        <div class="modal-content">
+        <div class="cancel-modal-content">
             <span class="close">&times;</span>
             <div class="cancellationContent">
-                Do you want to cancel ?
+                <h3 id="cancel">Do you wish to cancel this reservation?</h3>
                 <div>
-                    <button class="confirmButton">Yes</button>
-                    <button class="closeBttn">No</button>
+                    <button class="confirmButton">Yes</button>&nbsp;&nbsp;
+                    <button class="closeButton">No</button>
                 </div>
             </div>
         </div>
@@ -44,8 +44,6 @@
                 <input name="reservation_num" type="hidden" value="<?= $reservation['reservation_num']?>">
                 <input name="action" type="hidden" value="cancelReservation">
             </div>
-
-            <script>console.log("test")</script>
         </form>
         <?php }?>
     </div>

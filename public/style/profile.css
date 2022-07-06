@@ -44,10 +44,6 @@
 /* Create Profile  */
 /* =============== */
 
-#createProfile {
-    width: 47rem;
-}
-
 @media only screen and (max-width: 650px) {
     #createProfile {
         width: 100vw;
@@ -61,6 +57,8 @@
     border: 2px solid var(--profile-border-color);
     border-radius: 1.25rem;
     padding: 5rem 7rem;
+    margin: auto;
+    width: 30rem
 }
 
 #newProfile h1 {
@@ -280,13 +278,6 @@
 /* =============== */
 /* Modify Profile  */
 /* =============== */
-
-#modifyProfileSection {
-    display: flex;
-    justify-content: center;
-    width: 47rem;
-}
-
 @media only screen and (max-width: 650px) {
     #modifyProfileSection {
         width: 100vw;
@@ -303,7 +294,8 @@
 }
 
 .personalInformationContainer {
-    width: 100%;
+    width: 30rem;
+    margin: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;

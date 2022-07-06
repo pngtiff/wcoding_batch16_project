@@ -81,15 +81,6 @@ header {
     display: block;
 }
 
-/* #noUser {
-    width: 5rem;
-    height: 5rem;
-}
-
-.dropdown:hover #noUser {
-    display: none;
-} */
-
 .dropdown-content {
     position: absolute;
     right: 0.5rem;
@@ -308,7 +299,7 @@ header {
 
 }
 
-@media only screen and (min-width: 651px) {
+@media only screen and (min-width: 650px) {
     #home {
         display: none;
     }

@@ -27,6 +27,7 @@
     <button id="reset" type="reset" class="primaryBtn primaryColor">Reset the form</button>
 </form>
 <?php include ('view/googleLoginButton.php'); ?>
+<button id="signInNow" class="primaryBtn primaryFill offsetColor">Sign In</button>
 </div>
 
 <script src="public/js/signUp.js"></script>
