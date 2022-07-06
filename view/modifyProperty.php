@@ -71,7 +71,7 @@ ob_start(); ?>
                     for ($i = 0; $i < count($propDetails); $i++) {
                     ?>
                         <div>
-                            <input value="<?= $propDetails[$i]['image_description'] ?>" name="t-imgName-<?= $i ?>" type="text">
+                            <input value="<?= $propDetails[$i]['image_description'] ?>" name="t-imgName-<?= $i ?>" type="text" class="t-description">
                             <span class="closeBttn">&times;</span>
                             <img src="./public/images/property_images/<?= $propDetails[$i]['propId'] ?>/<?= $propDetails[$i]['p_img'] ?>" alt="">
                             <input value="<?= $propDetails[$i]['p_img'] ?>" name="imgName-<?= $i ?>" type="hidden">
@@ -84,6 +84,7 @@ ob_start(); ?>
                 <input type="hidden" name="action" value="modifyProperty">
             </div>
         </div>
+        <button type="submit" id="postPropertyButton2" class="primaryBtn primaryColor offsetFill">SUBMIT</button>
     </form>
 </section>
 <script src="./public/js/modifyProperty.js"></script>

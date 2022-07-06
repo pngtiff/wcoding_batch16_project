@@ -40,6 +40,12 @@ header {
     z-index: 10;
 }
 
+@media only screen and (max-width: 650px) {
+    .headerContainer {
+       width: 100vw;
+    }
+}
+
 .dropbtn {
     background: none;
     padding: 0.625rem;
