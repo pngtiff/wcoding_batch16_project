@@ -28,8 +28,8 @@ function checkDays() {
 }
 
 const imgDiv = document.querySelector('#profilePhoto');
-const file = document.querySelector('#file');
-const uploadButton = document.querySelector('#uploadButton');
+const file = document.querySelector('#fileM');
+const uploadButton = document.querySelector('#uploadButtonM');
 let profileForm = document.querySelector('#newProfile');
 let contact;
 let profilePic = document.querySelector('#file');
@@ -43,32 +43,49 @@ let languages = document.querySelectorAll('.list input[type="checkbox"]');
 let langArray = [];
 let userLang = document.querySelector('#userLang');
 let bio = document.querySelector('#bio');
-let imgContainer = document.querySelector('#profilePhoto div');
 let imgError = document.createElement('div');
 imgError.style.marginTop = '0.625rem';
 imgDiv.parentNode.appendChild(imgError);
 
 // change the photo by choosing the different files
+// file.addEventListener('change', function () {
+//     imgContainer.innerHTML = "";
+//     const chosenFile = this.files[0];
+//     let fileSize = chosenFile.size;
+//     let fileType = chosenFile.name.split('.').pop();
+
+//     let fileTypeReg = /(jpg|jpeg|png|webp)/i;
+//     let validFileType = fileTypeReg.test(fileType);
+
+//     imgError.textContent = "";
+//     if (fileSize > 500000 || (!validFileType && fileType !== "")) {
+//         if (fileSize > 500000) {
+//             return imgError.textContent = "Sorry, your file is too large";
+//         } else {
+//             return imgError.textContent = "Images must be in jpeg, jpg, png, or webp format";
+//         }
+//     }
+
+//     let img = document.createElement('img');
+
+//     if (chosenFile) {
+//         const reader = new FileReader();
+
+//         reader.addEventListener('load', function () {
+//             img.setAttribute('src', reader.result);
+//         });
+
+//         reader.readAsDataURL(chosenFile);
+//     }
+
+//     imgContainer.appendChild(img);
+// });
+
+// change the photo by choosing the different files
 file.addEventListener('change', function () {
-    imgContainer.innerHTML = "";
+    // refers to the file
+    const img = document.createElement('img');
     const chosenFile = this.files[0];
-    let fileSize = chosenFile.size;
-    let fileType = chosenFile.name.split('.').pop();
-
-    let fileTypeReg = /(jpg|jpeg|png|webp)/i;
-    let validFileType = fileTypeReg.test(fileType);
-
-    imgError.textContent = "";
-    if (fileSize > 500000 || (!validFileType && fileType !== "")) {
-        if (fileSize > 500000) {
-            return imgError.textContent = "Sorry, your file is too large";
-        } else {
-            return imgError.textContent = "Images must be in jpeg, jpg, png, or webp format";
-        }
-    }
-
-    let img = document.createElement('img');
-
     if (chosenFile) {
         const reader = new FileReader();
 
@@ -79,7 +96,16 @@ file.addEventListener('change', function () {
         reader.readAsDataURL(chosenFile);
     }
 
-    imgContainer.appendChild(img);
+    imgDiv.appendChild(img);
+});
+
+// if user hovers on the profile photo, displays the choose photo button
+imgDiv.addEventListener('mouseenter', function () {
+    uploadButton.style.display = "block";
+});
+
+imgDiv.addEventListener('mouseleave', function () {
+    uploadButton.style.display = "none";
 });
 
 
@@ -106,7 +132,6 @@ years.addEventListener('change', () => {
     checkDays();
 })
 
-
 for (i = 0; i < languages.length; i++) {
     languages[i].addEventListener('change', (e) => {
         if (e.target.checked) {
@@ -118,39 +143,39 @@ for (i = 0; i < languages.length; i++) {
     })
 }
 
-profileForm.addEventListener('submit', (e) => {
-    if (!(validNum || gender.value || userLang.value || bio.value)) {
-        e.preventDefault();
-        let alert = document.querySelector('#line1 p');
-        if (!alert.textContent) {
-            alert.textContent = "Please check that all fields were filled out correctly";
-        }
-    }
-})
+// profileForm.addEventListener('submit', (e) => {
+//     if (!(validNum || gender.value || userLang.value || bio.value)) {
+//         e.preventDefault();
+//         let alert = document.querySelector('#line1 p');
+//         if (!alert.textContent) {
+//             alert.textContent = "Please check that all fields were filled out correctly";
+//         }
+//     }
+// })
 
 // hide and show message
-const display = function(element){
+const display = function (element) {
     alertMesg.style.display = "none";
-    if(element.classList.contains("red")){
+    if (element.classList.contains("red")) {
         alertMesg.style.display = "block";
     }
 }
 
 // function to check the condition
-const countStr = function(phoneNum){
+const countStr = function (phoneNum) {
     let count = phoneNum.value.length; // add more condition
-    if(count < 11 || count >= 15){
+    if (count < 11 || count >= 15) {
         phoneNum.classList.remove("green");
         phoneNum.classList.add("red"); // display the input box in red color
-    } else{
+    } else {
         phoneNum.classList.remove("red");
-        phoneNum.classList.add("green");    
+        phoneNum.classList.add("green");
     }
     display(phoneNum); // display the alert message
 }
 
 // to alert the user while they type their phone number
-inputBoxes[2].addEventListener('change', function(){
+inputBoxes[2].addEventListener('change', function () {
     countStr(phoneNum);
 });
 

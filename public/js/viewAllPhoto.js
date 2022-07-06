@@ -33,11 +33,14 @@ function displaySlides(n) {
 viewOpenButton.addEventListener("click", function(e) { 
     e.preventDefault();
     photoModalContianer.classList.add("showP");
+    document.documentElement.classList.add("disableScroll");
+
 });
 
 viewCloseButton.addEventListener("click", function(e) {
     e.preventDefault();
     photoModalContianer.classList.remove("showP");
+    document.documentElement.classList.remove("disableScroll");
 });
 
 

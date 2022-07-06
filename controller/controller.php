@@ -48,6 +48,15 @@ function showUserInfo($action, $userId) {
 
 function search($params) {
     $propertyM = new PropertyManager();
+
+    $params['province'] = !empty($params['province']) ? strip_tags($params['province']) : 'any';
+    $params['province'] = $params['province'] == -1 ? 'any' : $params['province'];
+    $params['city'] = !empty($params['city']) ? strip_tags($params['city']) : 'any';
+    $params['city'] = $params['city'] == -1 ? 'any' : $params['city'];
+    $params['rangeMin'] = !empty($params['rangeMin']) ? strip_tags($params['rangeMin']) : 'any';
+    $params['rangeMax'] = !empty($params['rangeMax']) ? strip_tags($params['rangeMax']) : 'any';
+    $params['propertyType'] = !empty($params['propertyType']) ? strip_tags($params['propertyType']) : 'any';
+    $params['roomType'] = !empty($params['roomType']) ? strip_tags($params['roomType']) : 'any';
     $properties = $propertyM->searchProperties($params['province'], $params['city'], $params['rangeMin'], $params['rangeMax'], $params['propertyType'], $params['roomType']);
     require('./view/searchResultsCard.php');
 }
@@ -78,6 +87,7 @@ function getCities($province) {
         echo '<label><input type="radio" name="city" selected value="-1">No city/district in this area</label>';
     }
 }
+
 function getDistricts($city) {
     $propertyM = new PropertyManager();
     $districts = $propertyM->getDistricts($city);
@@ -99,6 +109,9 @@ function reservationView(){
     // $userData = $userM->viewUserData($userId); // from property manager, grab a required function
 
     // $propertyM = new PropertyManager($propId);
+    // $propDetails = $propertyM->getProperty($propId);
+    // $propOwner = $propertyM->getPropertyOwner($propId);
+    // $propertyM = new PropertyManager();
     // $propDetails = $propertyM->getProperty($propId);
     // $propOwner = $propertyM->getPropertyOwner($propId);
 
