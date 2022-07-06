@@ -1,4 +1,8 @@
 /*** CSS for listPropertiesView propertyCard & see all photo pages ***/
+.indexProperties {
+    margin-top: 350px;
+}
+
 #properties {
     width: 100%;
     padding-top: 1.25rem;
@@ -143,12 +147,13 @@
     top : 210px;
     right: 7%;
     background-color: #fff;
-    width: 21.875rem;
+    width: 20%;
     justify-content: center;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     border-radius: 0.625rem;
     padding: 1rem;
     color: black;
+    z-index: 1;
 }
 
 .propResv > * {
@@ -492,20 +497,26 @@ span.viewOn, span.detailedImgDots:hover {
     }
 
     .propResv {
-        width: 80vw;
+        width: 100%;
         left: 0;
         bottom: 0;
         top: auto;
         height: 10rem;
         border-radius: 0.625rem 0.625rem 0 0;
+        z-index: 1;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
     }
 
-    .propResv>p:nth-child(2) {
-        display: none;
+    .price {
+        width: 100%;
+        text-align: center;
     }
 
-    .propOwnerInfo {
-        display: none;
+    .propOwnerIcon {
+        width: 50px;
+        height: 50px;
     }
 
     .propResv > * {

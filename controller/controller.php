@@ -48,6 +48,15 @@ function showUserInfo($action, $userId) {
 
 function search($params) {
     $propertyM = new PropertyManager();
+
+    $params['province'] = !empty($params['province']) ? strip_tags($params['province']) : 'any';
+    $params['province'] = $params['province'] == -1 ? 'any' : $params['province'];
+    $params['city'] = !empty($params['city']) ? strip_tags($params['city']) : 'any';
+    $params['city'] = $params['city'] == -1 ? 'any' : $params['city'];
+    $params['rangeMin'] = !empty($params['rangeMin']) ? strip_tags($params['rangeMin']) : 'any';
+    $params['rangeMax'] = !empty($params['rangeMax']) ? strip_tags($params['rangeMax']) : 'any';
+    $params['propertyType'] = !empty($params['propertyType']) ? strip_tags($params['propertyType']) : 'any';
+    $params['roomType'] = !empty($params['roomType']) ? strip_tags($params['roomType']) : 'any';
     $properties = $propertyM->searchProperties($params['province'], $params['city'], $params['rangeMin'], $params['rangeMax'], $params['propertyType'], $params['roomType']);
     require('./view/searchResultsCard.php');
 }
@@ -63,8 +72,9 @@ function getCities($province) {
             $province == 'Gwangju' OR
             $province == 'Incheon' OR
             $province == 'Jeju-do' OR
-            $province == 'Sejong' OR
+            $province == 'Sejong-si' OR
             $province == 'Seoul'
+
         )
             echo '<label><input type="radio" name="city" disabled value="-1">Select a district</label>';
         else
