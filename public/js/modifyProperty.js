@@ -26,7 +26,7 @@ document.querySelector('form button#addImg').addEventListener('click', function 
         title.name = 't-' + evt.target.name;
         title.type = 'text';
         title.placeholder = "Write short description";
-        title.className = 'added'
+        title.className = 'added t-description';
         let closeBttn = document.createElement('span');
         closeBttn.innerHTML = '&times;';
         closeBttn.className = 'closeBttn';

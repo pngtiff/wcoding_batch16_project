@@ -179,6 +179,7 @@ ob_start(); ?>
                 <input type="hidden" name="action" value="postProperty">
             </div>
         </div>
+        <button type="submit" id="postPropertyButton2" class="primaryBtn primaryColor offsetFill">SUBMIT</button>
     </form>
 
 </section>

@@ -18,7 +18,7 @@ function postProperty() {
             let title = document.createElement('input');
             title.name = 't-' + evt.target.name;
             title.type = 'text';
-            // title.setAttribute('required', true);
+            title.className = 't-description';
             title.placeholder = "Write a short description";
             let closeBttn = document.createElement('span');
             closeBttn.innerHTML = '&times;';
