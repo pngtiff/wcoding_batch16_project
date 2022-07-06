@@ -1,17 +1,10 @@
 let owner = document.querySelector('#owner');
 let number = document.querySelector('#cardNumber');
-let cvv = document.querySelector('#cvv'); 
+let cvv = document.querySelector('#cvv');  
+let confirmButton = document.querySelector('#confirm-purchase');
 
-// let signUpForm = document.querySelector('#signUpForm'); 
-// let reset = document.querySelector('#reset'); 
 
-owner.addEventListener('keyup', checkCardholder);
-number.addEventListener('keyup', checkCardNumber);
-cvv.addEventListener('keyup', checkCVV); 
-// signUpForm.addEventListener('submit', submitForm); 
-// reset.addEventListener('click', resetForm); 
-
-function checkCardholder() {
+function checkCardholder(){
     let regex = /^(?![\s.]+$)[A-Z\-a-z\s.]{2,}$/;
     if (regex.test(owner.value)) {
         owner.classList.add('green');
@@ -25,9 +18,9 @@ function checkCardholder() {
         owner.nextElementSibling.classList.remove('nameError'); 
         return false; 
     }
-    }
+}
 
-function checkCardNumber() {
+function checkCardNumber(){
     let regex = /^4[0-9]{12}(?:[0-9]{3})?|(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}|3[47][0-9]{13}$/;
     if (regex.test(number.value.replace(/-/g, ''))) {
         number.classList.add('green');
@@ -41,9 +34,9 @@ function checkCardNumber() {
         number.nextElementSibling.classList.remove('numError'); 
         return false; 
     }
-    }
+}
 
-function checkCVV() {
+function checkCVV(){
     let regex = /^[0-9]{3,4}$/;
     if (regex.test(cvv.value)) {
         cvv.classList.add('green');
@@ -57,14 +50,14 @@ function checkCVV() {
         cvv.nextElementSibling.classList.remove('cvvError'); 
         return false; 
     }
-    }
+}
 
 
-function resetForm() {
+function resetForm(){
     document.getElementById('paymentForm').reset(); 
 }
 
-function dateDiff() {
+function dateDiff(){
     var d2 = document.getElementById("startDate").value;
     var d1 = document.getElementById("endDate").value;
   
@@ -86,6 +79,26 @@ function dateDiff() {
         document.getElementById("dateBtn").innerHTML = "Minimum stay is 30 days. Please enter new dates"; 
     }
 }
+
+owner.addEventListener('keyup', checkCardholder);
+number.addEventListener('keyup', checkCardNumber);
+cvv.addEventListener('keyup', checkCVV);
+
+let datePicker = document.getElementById('datepicker');
+let hiddenContainer = document.querySelector('.hiddenContainer');
+
+datePicker.addEventListener('click', function(e){
+    e.preventDefault();
+    hiddenContainer.classList.add('showC');
+    // hiddenContainer.classList.add('placeAbove');
+});
+
+hiddenContainer.addEventListener('click', function(e){
+    e.preventDefault();
+    hiddenContainer.classList.remove('showC');
+    // hiddenContainer.classList.remove('placeAbove');
+    datePicker.value = "";
+});
 
 function formatCreditCard() {
     var x = document.getElementById("cardNumber");

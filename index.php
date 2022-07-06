@@ -53,32 +53,27 @@ try {
                 signUp($_REQUEST);
             }
             break;
+        
         case 'createProfile':
             createProfile();
             break;
+
         case 'checkProfile':
             checkProfile();
             break;
-
-            // loads modifyProfileView
         case 'modifyProfile':
-            // displayDefaultInfo();
             modifyProfileView($_REQUEST['user']);
             break;
 
-            // trigger updating data - working without any issue at the moment
         case 'updateUserData':
             if (!empty($_REQUEST['language']) or !empty($_REQUEST['phone_number']) or !empty($_REQUEST['bio']) or !empty($_FILES["uploadFile"]["name"])) {
                 updateProfile();
             }
             break;
 
+
             //Search//
         case 'search':
-            $_REQUEST['province'] = !empty($_REQUEST['province']) ? strip_tags($_REQUEST['province']) : 'any';
-            $_REQUEST['province'] = $_REQUEST['province'] == -1 ? 'any' : $_REQUEST['province'];
-            $_REQUEST['city'] = !empty($_REQUEST['city']) ? strip_tags($_REQUEST['city']) : 'any';
-            $_REQUEST['city'] = $_REQUEST['city'] == -1 ? 'any' : $_REQUEST['city'];
             search($_REQUEST);
             break;
         case 'postProperty':
@@ -145,7 +140,7 @@ try {
             }
             break;
         case 'reservations':
-            reservationView(); // 'user' -> user uid
+            reservationView();
             break;
         case 'addReservationInfo':
             if (preg_match('/^(?![\s.]+$)[A-Z\-a-z\s.]{2,}$/', $_POST['owner']) and preg_match('/^4[0-9]{12}(?:[0-9]{3})?|(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}|3[47][0-9]{13}$/', str_replace('-','',$_POST['cardNumber'])) and preg_match('/^[0-9]{3,4}$/', $_POST['cvv']) and preg_match('/^([0][1-9])|([1][0-2])$/', $_POST['month']) and preg_match('/^([2][2-7])$/', $_POST['year'])){
