@@ -102,14 +102,8 @@
         <div class="signInUp">
             <!-- Changing interface once signed in/signed out -->
             <div class="dropdown">
-                <?php if(empty($_SESSION['firstName'])): echo '<div id="noUser">'?>
-                    <button class="dropbtn"><a href="<?= (isset($_SESSION['uid'])) ? "index.php?action=profile&user={$_SESSION['uid']}" : "#"; ?>"><img src="<?= (isset($_SESSION['profile_img'])) ? './profile_images/' . $_SESSION['profile_img'] : "./public/images/defaultProfile.jpg" ?>" alt="defaultPic"></a></button>
-                    <?php echo '</div>'; endif; ?>
-                <?php if(!empty($_SESSION['firstName'])): ?> 
-                    <button class="dropbtn"><a href="<?= (isset($_SESSION['uid'])) ? "index.php?action=profile&user={$_SESSION['uid']}" : "#"; ?>"><img src="<?= (isset($_SESSION['profile_img'])) ? './profile_images/' . $_SESSION['profile_img'] : "./public/images/defaultProfile.jpg" ?>" alt="defaultPic"></a></button>
-                    <?php endif; ?>
+                <button class="dropbtn"><a href="<?= (isset($_SESSION['uid'])) ? "index.php?action=profile&user={$_SESSION['uid']}" : "#"; ?>"><img src="<?= (isset($_SESSION['profile_img'])) ? './profile_images/' . $_SESSION['profile_img'] : "./public/images/defaultProfile.jpg" ?>" alt="defaultPic"></a></button>
                 <div class="dropdown-content">
-
                     <?php
                     echo '<a id="home" href="index.php">Go to Home Page</a>';
                     if (!empty($_SESSION['firstName'])) {
@@ -118,8 +112,8 @@
                         echo '<a href="index.php?action=viewPostProperty">Post a New Listing</a>';
                     }
                     ?>
-                    <?php echo (!empty($_SESSION['firstName'])) ? '' : '<button id="signUpButton" class="primaryBtn"><a href="#">Register</a></button>'; ?>
-                    <?php echo (!empty($_SESSION['firstName'])) ? '<a href="index.php?action=signOut">Sign Out</a>' : '<button id="signInButton" class="primaryBtn"><a href="#">Sign In</a></button>'; ?>
+                    <?php echo (!empty($_SESSION['firstName'])) ? '' : '<a id="signUpButton">Register</a>'; ?>
+                    <?php echo (!empty($_SESSION['firstName'])) ? '<a href="index.php?action=signOut">Sign Out</a>' : '<a id="signInButton">Sign In</a>'; ?>
                 </div>
             </div>
         </div>

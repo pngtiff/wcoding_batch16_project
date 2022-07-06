@@ -335,7 +335,7 @@ header {
     background-color: rgba(41,163,118, 0.8);
     color: #FFF;
 
-    z-index: 9999999;
+    z-index: 7;
 }
 
 .reserveToast {
