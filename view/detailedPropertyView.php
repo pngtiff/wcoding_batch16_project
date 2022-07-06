@@ -96,9 +96,9 @@
             <?php
             };
             ?>
-            <a class="prev" onclick="nextSlide(-1)">&#10094;</a>
-            <a class="next" onclick="nextSlide(1)">&#10095;</a>
         </div>
+        <a class="prevD" onclick="nextSlide(-1)">&#10094;</a>
+        <a class="nextD" onclick="nextSlide(1)">&#10095;</a>
         
         <div style="text-align:center">
             <?php if(count($propDetails)>1) {

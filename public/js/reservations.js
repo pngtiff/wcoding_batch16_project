@@ -2,20 +2,22 @@ let owner = document.querySelector('#owner');
 let number = document.querySelector('#cardNumber');
 let cvv = document.querySelector('#cvv');  
 let confirmButton = document.querySelector('#confirm-purchase');
-
+let ownerC = document.querySelector('.ownerC');
+let cardNumC = document.querySelector('.cardNumC');
+let cvvC = document.querySelector('.cvvC');
 
 function checkCardholder(){
     let regex = /^(?![\s.]+$)[A-Z\-a-z\s.]{2,}$/;
     if (regex.test(owner.value)) {
         owner.classList.add('green');
         owner.classList.remove('red'); 
-        owner.nextElementSibling.classList.add('nameError'); 
+        ownerC.nextElementSibling.classList.add('nameError'); 
         return true;
     }
     else {
         owner.classList.add('red');
         owner.classList.remove('green');
-        owner.nextElementSibling.classList.remove('nameError'); 
+        ownerC.nextElementSibling.classList.remove('nameError'); 
         return false; 
     }
 }
@@ -25,13 +27,13 @@ function checkCardNumber(){
     if (regex.test(number.value.replace(/-/g, ''))) {
         number.classList.add('green');
         number.classList.remove('red'); 
-        number.nextElementSibling.classList.add('numError'); 
+        cardNumC.nextElementSibling.classList.add('numError'); 
         return true;
     }
     else {
         number.classList.add('red');
         number.classList.remove('green');
-        number.nextElementSibling.classList.remove('numError'); 
+        cardNumC.nextElementSibling.classList.remove('numError'); 
         return false; 
     }
 }
@@ -41,13 +43,13 @@ function checkCVV(){
     if (regex.test(cvv.value)) {
         cvv.classList.add('green');
         cvv.classList.remove('red'); 
-        cvv.nextElementSibling.classList.add('cvvError'); 
+        cvvC.nextElementSibling.classList.add('cvvError'); 
         return true;
     }
     else {
         cvv.classList.add('red');
         cvv.classList.remove('green');
-        cvv.nextElementSibling.classList.remove('cvvError'); 
+        cvvC.nextElementSibling.classList.remove('cvvError'); 
         return false; 
     }
 }

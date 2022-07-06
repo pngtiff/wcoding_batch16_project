@@ -69,7 +69,6 @@
                                 <p class="choose">Choose one or multiple</p>
                                 <p class="down-arrow">&blacktriangledown;</p>
                             </div>
-                            <div id="absolute"></div>
                             <div class="list modifyList">
                                 <label for="HK" class="lang"><input type="checkbox" id="HK" name="HK" value="HK" <?php for ($i = 0; $i < count($data['languages']); $i++) {
                                                                                                                         if ($data['languages'][$i] == "HK")
