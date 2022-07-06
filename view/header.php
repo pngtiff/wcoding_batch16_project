@@ -102,7 +102,7 @@
         <div class="signInUp">
             <!-- Changing interface once signed in/signed out -->
             <div class="dropdown">
-                <button class="dropbtn"><a href="<?= (isset($_SESSION['uid'])) ? "index.php?action=profile&user={$_SESSION['uid']}" : "#"; ?>"><img src="<?= (isset($_SESSION['profile_img'])) ? './profile_images/' . $_SESSION['profile_img'] : "./public/images/defaultProfile.jpg" ?>" alt="defaultPic"></a></button>
+                <button class="dropbtn"><a href="#"><img src="<?= (isset($_SESSION['profile_img'])) ? './profile_images/' . $_SESSION['profile_img'] : "./public/images/defaultProfile.jpg" ?>" alt="defaultPic"></a></button>
                 <div class="dropdown-content">
                     <?php
                     if (!empty($_SESSION['firstName'])) {
