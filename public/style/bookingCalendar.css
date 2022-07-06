@@ -43,7 +43,7 @@ div.container{
     top: 45px !important;
     left: -350px !important;
     /* left: -50% !important; */
-    z-index: 10 !important;
+    z-index: 4 !important;
 }
 
 .container {
