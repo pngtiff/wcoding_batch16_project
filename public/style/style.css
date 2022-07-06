@@ -81,7 +81,7 @@ textarea {
   will-change: transform, opacity;
 }
 
-.primaryBtn:not(.resvbutton,.detailedCloseButton, #homeButton, #addImg):hover {
+.primaryBtn:not(.resvbutton,.detailedCloseButton, #homeButton, #addImg, #registerNow, #signInNow, #reset):hover {
   background: #F5F5F5;
 }
 
