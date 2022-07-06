@@ -53,10 +53,15 @@ try {
                 signUp($_REQUEST);
             }
             break;
+<<<<<<< HEAD
+
+=======
         
+>>>>>>> master
         case 'createProfile':
             createProfile();
             break;
+
         case 'checkProfile':
             checkProfile();
             break;
