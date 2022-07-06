@@ -74,6 +74,10 @@ try {
 
             //Search//
         case 'search':
+            $_REQUEST['province'] = !empty($_REQUEST['province']) ? strip_tags($_REQUEST['province']) : 'any';
+            $_REQUEST['province'] = $_REQUEST['province'] == -1 ? 'any' : $_REQUEST['province'];
+            $_REQUEST['city'] = !empty($_REQUEST['city']) ? strip_tags($_REQUEST['city']) : 'any';
+            $_REQUEST['city'] = $_REQUEST['city'] == -1 ? 'any' : $_REQUEST['city'];
             search($_REQUEST);
             break;
         case 'postProperty':

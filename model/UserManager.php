@@ -418,7 +418,7 @@ class UserManager extends Manager
 
     public function getReservations()
     {
-        if ($this->_user_id == $_SESSION['uid']) {
+        if (!empty($_SESSION['uid']) AND $this->_user_id == $_SESSION['uid']) {
             $req = $this->_connection->query("SELECT r.reservation_num, r.user_uid, r.property_id, r.start_date, r.end_date, r.total_payment_won, r.is_active, p.id, p.post_title, p.country, p.province_state, p.city, p.zipcode, p.address1, p.address2, pi.property_id AS pi_id, pi.img_url AS pi_img
             FROM reservations r 
             LEFT JOIN properties p
