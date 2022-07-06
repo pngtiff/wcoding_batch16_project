@@ -33,7 +33,7 @@
                         has led to the creation of ROOM-EZ.
                         <br>
                         <div>
-                            <img src="./public/images/team.png" alt="teamChart" width="600" height="380" id="teamChart">
+                            <img src="./public/images/teamChart.png" alt="teamChart" width="600" height="380" id="teamChart">
                         </div>
                       </div>
                     </div>
