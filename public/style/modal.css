@@ -21,11 +21,29 @@
     border-radius: 1.25rem;
 }
 
+@media only screen and (max-width: 1000px) {
+    .modal-content {
+        width: 100vw;
+        height: 80vh;
+    }
+}
+
 .form-container {
     display: flex;
     justify-content: space-between;
     padding-top: 5%;
 
+}
+
+@media only screen and (max-width: 1000px) {
+    .form-container {
+       width: 100%;
+       height: 100%;
+       justify-content: center;
+       align-items: center;
+       margin-left: 2.5rem;
+       padding-top: 0;
+    }
 }
 
 #banner-container {
@@ -41,6 +59,12 @@
     background-color: #29A376;
     z-index: 1;
     text-align: center;
+}
+
+@media only screen and (max-width: 1000px) {
+    #banner-container {
+        display: none;
+    }
 }
 
 .right {
@@ -60,10 +84,15 @@
     border: 2px white solid;
 }
 
-
 #signIn-container, #signUp-container {
     flex: 1;
     padding: 1.25rem;
+}
+
+@media only screen and (max-width: 1000px) {
+    #signIn-container, #signUp-container {
+        width: 100%;
+    }
 }
 
 .field {
@@ -73,6 +102,28 @@
 
 .password {
     height: 3.75rem;
+}
+
+#registerNow {
+    margin-left: 1rem;
+}
+
+#registerNow:hover, #signInNow:hover, #reset {
+    background-color: rgb(41, 163, 118, 0.9);
+}
+
+#registerNow, #signInNow {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    font-size: 11px;
+    margin-left: 20rem;
+}
+
+@media only screen and (min-width: 1000px) {
+    #registerNow, #signInNow {
+        display: none;
+    }
 }
 
 .close 
