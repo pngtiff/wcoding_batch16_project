@@ -25,6 +25,7 @@
     justify-content: space-between;
     align-items: center;
     padding-bottom: 0;
+    margin-bottom: 2.5rem;
 }
 
 #propertiesSearchList .price {
@@ -44,8 +45,27 @@
     overflow: hidden;
 }
 
+@media screen and (max-width: 850px) {
+    #searchMap {
+        display: none;
+    }
+    
+    #propertiesSearchList {
+        width: 100%;
+    }
+}
+
 @media screen and (max-width: 650px) {
     #searchMap {
         display: none;
+    }
+    
+    #propertiesSearchList {
+        width: 100%;
+    }
+
+    #propertiesSearchList .property {
+        flex-direction: column;
+        width: 100%;
     }
 }
