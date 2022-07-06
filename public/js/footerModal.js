@@ -3,13 +3,17 @@ let aboutUsModal = document.getElementById("footerAboutUsModal")
 document.getElementById("aboutUs").addEventListener("click", function(e) {
   e.preventDefault()
   aboutUsModal.style.display = "block";
+  document.body.style.overflow = "hidden";
+  document.body.style.height = "100%";
   setTimeout(opacity, 50, 1, aboutUsModal);
 })
 
 // close the modal when click X
 document.querySelector("#footerAboutUsModal .close").addEventListener("click", function() {
   aboutUsModal.style.display = "none";
-  document.querySelector("body").style.overflowY = "visible";
+  document.body.style.overflow = "auto";
+  document.body.style.height = "auto";
+
   opacity(0, aboutUsModal);
 })
 
@@ -17,7 +21,9 @@ document.querySelector("#footerAboutUsModal .close").addEventListener("click", f
 window.addEventListener("click", function(e) {
 if (e.target == aboutUsModal) {
   aboutUsModal.style.display = "none";
-  document.querySelector("body").style.overflowY = "visible";
+  document.body.style.overflow = "auto";
+  document.body.style.height = "auto";
+
   opacity(0, aboutUsModal);
 }
 })
