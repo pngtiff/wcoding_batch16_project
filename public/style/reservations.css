@@ -57,9 +57,7 @@
     width: 350px;
     height: 50px;
     display: flex;
-    /* border: 1px solid black; */
     border-radius: 10px;
-    cursor: pointer;
     position: relative;
 }
 
@@ -139,6 +137,7 @@
 #dateBtn{
     text-align: center;
     margin-top: 10px;
+    font-size: 20px;
 }
 
 #owner, #cardNumber, #cvv {
@@ -227,7 +226,6 @@
     background-color: rgba(41,163,118, 0.90);
 }
 
-
 #reset {
     margin-left: 20px;
 }
@@ -294,4 +292,10 @@ textarea:focus, input:focus{
         margin-right: 30px;
     }
 
+}
+
+@media screen and (max-width: 550px) {
+    #dateBtn{
+        font-size: 15px;
+    }
 }

@@ -102,6 +102,8 @@
     height: 28.125rem;
     position: relative;
     margin-top: 1rem;
+    border-radius: 1.25rem;
+    overflow: hidden;
 }
 
 .propImgSlides {
@@ -276,7 +278,7 @@
 
 .innerContainer{
     width: 900px;
-    margin-top: 3.75rem;
+    margin-top: 6rem;
     /* overflow-y: scroll; */
 }
 
@@ -349,7 +351,7 @@ div.showP{
 /* Slideshow container */
 .slideContainer {
     max-width: 100%;
-    height: 90%;
+    height: 80%;
     position: relative;
     margin-top: 3.75rem;
     display: flex;
@@ -381,6 +383,35 @@ div.showP{
     transition: background-color 0.6s ease;
 }
 
+.prevD, .nextD {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -1.375rem;
+    padding: 1rem;
+    color: white;
+    font-weight: bold;
+    font-size: 1.875rem;
+    transition: 0.6s ease;
+    border-radius: 0 0.19rem 0.19rem 0;
+    user-select: none;
+    text-shadow: 2px 2px 4px #717171;
+}
+
+.nextD {
+    right: 5px;
+    border-radius: 3px 0 0 3px;
+}
+
+.prevD {
+    left: 5px;
+    border-radius: 3px 0 0 3px;
+}
+
+.prevD:hover, .nextD:hover {
+    background-color: rgba(0,0,0,0.25);
+}
 
 .propertyGallery{
     width: 100%;
@@ -551,7 +582,7 @@ span.viewOn, span.detailedImgDots:hover {
     }
     
     .slideContainer {
-        width: 100%;
+        
         height: 75%;
     }
     
