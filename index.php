@@ -57,6 +57,7 @@ try {
         case 'createProfile':
             createProfile();
             break;
+
         case 'checkProfile':
             checkProfile();
             break;

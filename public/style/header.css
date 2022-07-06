@@ -81,14 +81,14 @@ header {
     display: block;
 }
 
-#noUser {
+/* #noUser {
     width: 5rem;
     height: 5rem;
 }
 
 .dropdown:hover #noUser {
     display: none;
-}
+} */
 
 .dropdown-content {
     position: absolute;

@@ -105,15 +105,16 @@
                 <button class="dropbtn"><a href="<?= (isset($_SESSION['uid'])) ? "index.php?action=profile&user={$_SESSION['uid']}" : "#"; ?>"><img src="<?= (isset($_SESSION['profile_img'])) ? './profile_images/' . $_SESSION['profile_img'] : "./public/images/defaultProfile.jpg" ?>" alt="defaultPic"></a></button>
                 <div class="dropdown-content">
                     <?php
-                    echo '<a id="home" href="index.php">Go to Home Page</a>';
                     if (!empty($_SESSION['firstName'])) {
+                        echo '<a id="home" href="index.php">Go to Home Page</a>';
                         echo '<a href="index.php?action=profile&user=' . $_SESSION['uid'] . '">View My Profile</a>';
                         echo '<a href="index.php?action=modifyProfile&user=' . $_SESSION['uid'] . '">Edit My Profile</a>';
                         echo '<a href="index.php?action=viewPostProperty">Post a New Listing</a>';
                     }
                     ?>
-                    <?php echo (!empty($_SESSION['firstName'])) ? '' : '<a id="signUpButton">Register</a>'; ?>
-                    <?php echo (!empty($_SESSION['firstName'])) ? '<a href="index.php?action=signOut">Sign Out</a>' : '<a id="signInButton">Sign In</a>'; ?>
+                    <?= '<a id="home" href="index.php">Go to Home Page</a>'; ?>
+                    <?php echo (!empty($_SESSION['firstName'])) ? '<a href="index.php?action=signOut">Sign Out</a>' : '<a id="signInButton" href="#">Sign In</a>'; ?>
+                    <?php echo (!empty($_SESSION['firstName'])) ? '' : '<a id="signUpButton" href="#">Register</a>'; ?>
                 </div>
             </div>
         </div>
