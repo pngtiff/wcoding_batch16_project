@@ -17,11 +17,23 @@
                 <div class="modal-content">
                     <span class="close">&times;</span>
                     <div class="aboutUsContent">
-                      <div>
-                        Room E-Z is a no-frills service linking hosts with housing or rooms to rent 
-                        and renters looking for a place in Korea anywhere from a month to a year.
-                        Whether you're a host or a renter, post your profile and look for potential matches
-                      </div>
+                        <div>
+                            Room E-Z is a no-frills service linking hosts with housing or rooms to rent 
+                            and renters looking for a place in Korea anywhere from a month to a year.
+                            Whether you're a host or a renter, post your profile and look for potential matches
+                            <br>
+                            Created and developed by 7 unique individuals, ROOM-EZ alleviates stress for our users 
+                            which allows them to focus solely on other aspects of their travels.
+                            <br>
+                            ROOM-EZ’s vast location of housing means we have what you are looking for, be it central, 
+                            in a quite neighborhood in a city or even in the provinces for you to enjoy the quiet and 
+                            the nature.
+                            <br>
+                            While all 7 individuals come from all corners of the world, the common passion for traveling (and coding) has led to the creation of ROOM-EZ. 
+                        </div>
+                        <div>
+                            <img src="./public/images/teamChart.png" alt="teamChart" id="teamChart" width="600" height="350">
+                        </div>
                     </div>
                 </div>
             </div>
